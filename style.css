@@ -1,1 +1,167 @@
+/* CSS Reset Setting
+Reference: https://meyerweb.com/eric/tools/css/reset/ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li, span,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Clear anchor tag properties */
+a:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+a:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+/* MAIN CODE START HERE */
+
+
+:root {
+    --c-background: #CEE5D0;
+    --c-board: transparent;
+    --c-main: #F3F0D7;
+    --c-navBar: #F3F0D7;
+
+    --c-navItemPrimary: #EED6C4;
+    --c-navItemSecondary: #483434;
+}
+
+body {
+    background-color: var(--c-background);
+}
+
+/* Main board Styling */
+.board {
+
+    /* Board dimensions */
+    width: 60vw;
+    height: 500px;
+
+    background-color: var(--c-board);
+
+    /* Centring the board*/
+    margin: 0 auto;
+    margin-top: 5vh;
+
+    /* SubClass Alignment */
+    display: flex;
+}
+
+.mainMenu {
+    /* main menu dimensions */
+    height: 100%;
+    width: 80%;
+
+    margin-right: 2px;
+
+    background-color: var(--c-main);
+}
+
+.navBar {
+
+    /* Navigation Bar dimensions */
+    height: 100%;
+    width: 20%;
+
+    background-color: var(--c-navBar);
+}
+
+.navItems {
+    /* List dimensions*/
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navItem {
+    /* Item dimensions */
+    width: 100%;
+    background-color: var(--c-navBar);
+}
+
+.navItems h3{
+    font-weight: bold;
+}
+
+.navItems .mainChat , .navItems .report, .navItems .shop{
+    height: 20%;
+}
+
+.navItems > :not(:last-child) {
+    border-bottom: 2px solid #CEE5D0;
+}
+
+.navItem {
+    /* Centring Items inside box */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--c-navItemSecondary);
+}
+
+.navItems .settings {
+    height: 40%;
+}
+
+.navItem:hover {
+    background-color: var(--c-navItemPrimary);
+}
+
+
+/* Resposive to Window */
+@media (min-width: 1100px) {
+
+   .board {
+        width: 660px;
+   }
+}
