@@ -250,7 +250,7 @@ body {
 
 .btn-group button {
     height: 80%;
-    width: 30%;
+    width: 32%;
     background-color: var(--c-button); 
     border-radius: 5px;
     color: var(--c-buttonText);
