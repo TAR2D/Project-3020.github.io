@@ -71,6 +71,9 @@ a:visited {
 
     --c-navItemHover: #EED6C4;
     --c-navItem: #483434;
+    --c-button:#F3F0D7; 
+    --c-buttonHover: #EED6C4;
+    --c-buttonText: #483434;
 }
 
 body {
@@ -172,6 +175,7 @@ body {
 /* Can hover all nav item except empty space */
 .navItem:hover:not(:nth-child(4)) {
     background-color: var(--c-navItemHover);
+    cursor: pointer; /* Pointer/hand icon */
 }
 
 /* Styling main menu */
@@ -233,6 +237,37 @@ body {
 .chatBox ,.buttonsBox, .timerBox, .companionBox {
     border: 1px dotted grey;
     border-radius: 5px;
+}
+
+/* Chat buttons */
+
+.btn-group {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-group button {
+    height: 80%;
+    width: 30%;
+    background-color: var(--c-button); 
+    border-radius: 5px;
+    color: var(--c-buttonText);
+    cursor: pointer; /* Pointer/hand icon */
+}
+    
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+content: "";
+clear: both;
+display: table;
+}
+  
+/* Add a background color on hover */
+.btn-group button:hover {
+background-color: var(--c-buttonHover);
 }
 
 /* Resposive to Window */
