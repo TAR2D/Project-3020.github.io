@@ -62,15 +62,15 @@ a:visited {
 
 /* MAIN CODE START HERE */
 
-
+/* variable declaration */
 :root {
     --c-background: #CEE5D0;
-    --c-board: transparent;
+    --c-board: rgba(56, 56, 24, 0.308);
     --c-main: #F3F0D7;
     --c-navBar: #F3F0D7;
 
-    --c-navItemPrimary: #EED6C4;
-    --c-navItemSecondary: #483434;
+    --c-navItemHover: #EED6C4;
+    --c-navItem: #483434;
 }
 
 body {
@@ -84,6 +84,9 @@ body {
     width: 60vw;
     height: 500px;
 
+    padding: 5px;
+    border-radius: 5px;
+
     background-color: var(--c-board);
 
     /* Centring the board*/
@@ -92,14 +95,16 @@ body {
 
     /* SubClass Alignment */
     display: flex;
+    justify-content: space-between;
+    
 }
 
-.mainMenu {
+.mainDisplay {
     /* main menu dimensions */
     height: 100%;
-    width: 80%;
+    width: 89%;
 
-    margin-right: 2px;
+    border-radius: 5px;
 
     background-color: var(--c-main);
 }
@@ -108,9 +113,7 @@ body {
 
     /* Navigation Bar dimensions */
     height: 100%;
-    width: 20%;
-
-    background-color: var(--c-navBar);
+    width: 10%;
 }
 
 .navItems {
@@ -120,6 +123,7 @@ body {
     
     display: flex;
     flex-wrap: wrap;
+    align-content: space-between;
 }
 
 .navItem {
@@ -132,31 +136,104 @@ body {
     font-weight: bold;
 }
 
-.navItems .mainChat , .navItems .report, .navItems .shop{
-    height: 20%;
-}
-
-.navItems > :not(:last-child) {
-    border-bottom: 2px solid #CEE5D0;
-}
-
 .navItem {
     /* Centring Items inside box */
     display: flex;
     align-items: center;
     justify-content: center;
 
+    border-radius: 5px;
+
     color: var(--c-navItemSecondary);
 }
 
-.navItems .settings {
-    height: 40%;
+
+/* Percentage of Area of chat, report and shop button over the navigation bar */
+.navItems .mainChatButton , .navItems .reportButton, .navItems .shopButton{
+    height: 10%;
 }
 
-.navItem:hover {
-    background-color: var(--c-navItemPrimary);
+/* Percentage of Area of empty space over the navigation bar */
+.navItems .emptySpace {
+    height: 56%;
 }
 
+
+/* Percentage of Area of setting button over the navigation bar */
+.navItems .settingsButton {
+    height: 10%;
+}
+
+/* size of icons */
+.navItem i {
+    font-size: 2em;
+}
+
+/* Can hover all nav item except empty space */
+.navItem:hover:not(:nth-child(4)) {
+    background-color: var(--c-navItemHover);
+}
+
+/* Styling main menu */
+
+/* main menu cover whole main display area */
+.mainMenu {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+}
+
+.mainMenu .rightBox ,.mainMenu .leftBox {
+    width: 50%;
+    height: 100%;
+
+    /* Aligning the elements on right and left side */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+    justify-content: space-evenly;
+}
+
+/* Main menu right side */
+
+/* Percentage of Area of chatBox Box over the right side */
+.chatBox {
+    width: 90%;
+    height: 80%;
+}
+
+/* Percentage of Area of button Box over the right side */
+.buttonsBox {
+    width: 90%;
+    height: 10%;
+}
+
+/* Main Menu left side */
+
+.timerBox {
+    /* Percentage of Area of timer Box over the left side */
+    width: 90%;
+    height: 30%;
+
+    /* Alignment of timer in centre */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Percentage of Area of Companion Box over the left side */
+.companionBox {
+    width: 90%;
+    height: 60%;
+}
+
+/* Border settings for all elements in main menu */
+
+.chatBox ,.buttonsBox, .timerBox, .companionBox {
+    border: 1px dotted grey;
+    border-radius: 5px;
+}
 
 /* Resposive to Window */
 @media (min-width: 1100px) {
@@ -164,4 +241,9 @@ body {
    .board {
         width: 660px;
    }
+}
+
+/* Temporary turned off*/
+.report , .shop, .settings{
+    display: none;
 }

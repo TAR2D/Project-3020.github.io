@@ -12,15 +12,40 @@
 </head>
 <body>
     <div class="board">
-        <main class="mainMenu">
-        <div class="timer"><h1>00:00</h1></div>
+        
+        <main class="mainDisplay">
+            <!-- MAIN MENU -->
+            <div class="mainMenu">
+                <div class="leftBox"> 
+                    <!-- TIMER AND COMPANION AREA -->
+                    <div class="timerBox">
+                        <div class="timer"><h1>00:00</h1></div>
+                    </div>
+                    <div class="companionBox"></div>
+                </div>
+                <div class="rightBox">
+                    <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
+                    <div class="chatBox"></div>
+                    <div class="buttonsBox"></div>
+                </div>
+            </div>
+            <!-- REPORT MENU -->
+            <div class="report"></div>
+            <!-- SHOP MENU -->
+            <div class="shop"></div>
+            <!-- SETTINGS MENU -->
+            <div class="settings"></div>
         </main>
+
+        <!-- Navigation Bar section -->
         <nav class="navBar">
             <ul class="navItems">
-                <li class="navItem mainChat"><h3>Message</h3></li>
-                <li class="navItem report"><h3>Report</h3></li>
-                <li class="navItem shop"><h3>Shop</h3></li>
-                <li class="navItem settings"><h3>Settings</h3></li>
+                <!-- All items of Navbar -->
+                <li class="navItem mainChatButton"><i class="fas fa-comments"></i></li>
+                <li class="navItem reportButton"><i class="fas fa-chart-bar"></i></li>
+                <li class="navItem shopButton"><i class="fas fa-store"></i></li>
+                <li class="navItem emptySpace"></li>
+                <li class="navItem settingsButton"><i class="fas fa-cog"></i></li>
             </ul>
         </nav>
     </div>
