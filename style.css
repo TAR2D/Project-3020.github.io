@@ -240,7 +240,6 @@ body {
 }
 
 /* Chat buttons */
-
 .btn-group {
     display: flex;
     justify-content: space-evenly;
