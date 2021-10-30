@@ -241,12 +241,6 @@ body {
 
 /* Chat buttons */
 
-.divider {
-    width:5px;
-    height:auto;
-    display:inline-block;
-}
-
 .btn-group {
     display: flex;
     width: 100%;
@@ -257,9 +251,10 @@ body {
     background-color: var(--c-button); 
     border-radius: 8px;
     color: var(--c-buttonText); 
-    padding: 5px 10px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
+    margin: 5px 2px;
+    width: 33.3%;
 }
     
 /* Clear floats (clearfix hack) */
