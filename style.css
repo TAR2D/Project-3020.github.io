@@ -84,7 +84,7 @@ body {
 .board {
 
     /* Board dimensions */
-    width: 95vw;
+    width: 98vw;
 
     border-radius: 5px;
 
@@ -283,8 +283,8 @@ background-color: var(--c-buttonHover);
 @media (min-width: 400px) {
 
    .board {
-        width: 95vmin;
-		height: 95vmin;
+        width: 98vmin;
+		height: 98vmin;
    }
 }
 
