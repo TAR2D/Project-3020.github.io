@@ -256,14 +256,18 @@ body {
     color: var(--c-buttonText);
     cursor: pointer; /* Pointer/hand icon */
 }
-    
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-content: "";
-clear: both;
-display: table;
+
+/* Tooltip on hover over navigation items */
+[navItem-name]:hover:after {
+    content: attr(navItem-name);
+    position: absolute;
+    background-color: var(--c-buttonHover);
+    color: var(--c-buttonText);
+    border-radius: 5px;
+    padding: 6px;
+    left: 72%;
 }
-  
+
 /* Add a background color on hover */
 .btn-group button:hover {
 background-color: var(--c-buttonHover);
