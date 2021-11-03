@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MainApplication</title>
-    <!-- Assets Resource -->
-    <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
-    <!-- Cascade Style Sheet -->
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="board">
-        
-        <main class="mainDisplay">
-            <!-- MAIN MENU -->
-            <div class="mainMenu">
-                <div class="leftBox"> 
+    <header>
+        <nav class="navBar">
+            <div class="navBar__sectionA"><h3>"WhatsMyName?"</h3></li></div>
+            <ul class="navBar__sectionB">
+                <li class="navBar__item navBar__item--report"><i class="fas fa-chart-bar"></i><h3>Report</h3></li>
+                <li class="navBar__item navBar__item--shop"><i class="fas fa-shopping-cart"></i><h3>Shop</h3></li>
+                <li class="navBar__item navBar__item--inventory"><i class="fas fa-tshirt"></i><h3>Inventory</h3></li>
+                <li class="navBar__item navBar__item--settings"><i class="fas fa-cog"></i><h3>Settings</h3></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="main__items">
+            <div class="main__item main__item--menu">
+                <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
                     <div class="timerBox">
                         <div id="timer" class="timer"><h1>00:00</h1></div>
@@ -39,26 +46,12 @@
                     </div>
                 </div>
             </div>
-            <!-- REPORT MENU -->
-            <div class="report"></div>
-            <!-- SHOP MENU -->
-            <div class="shop"></div>
-            <!-- SETTINGS MENU -->
-            <div class="settings"></div>
-        </main>
-
-        <!-- Navigation Bar section -->
-        <nav class="navBar">
-            <ul class="navItems">
-                <!-- All items of Navbar -->
-                <li class="navItem mainChatButton"><i class="fas fa-comments"></i></li>
-                <li class="navItem reportButton"><i class="fas fa-chart-bar"></i></li>
-                <li class="navItem shopButton"><i class="fas fa-store"></i></li>
-                <li class="navItem emptySpace"></li>
-                <li class="navItem settingsButton"><i class="fas fa-cog"></i></li>
-            </ul>
-        </nav>
-    </div>
-<script src="./script.js"></script>
+            <div class="main__item main__item--report"></div>
+            <div class="main__item main__item--shop"></div>
+            <div class="main__item main__item--inventory"></div>
+            <div class="main__item main__item--settings"></div>
+        </div>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -60,9 +60,6 @@ a:visited {
     color: inherit;
 }
 
-/* MAIN CODE START HERE */
-
-/* variable declaration */
 :root {
     --c-background: #CEE5D0;
     --c-board: rgba(56, 56, 24, 0.308);
@@ -77,139 +74,137 @@ a:visited {
 }
 
 body {
-    background-color: var(--c-background);
-}
-
-/* Main board Styling */
-.board {
-
-    /* Board dimensions */
-    width: 98vw;
-
-    border-radius: 5px;
-
-	position: relative;
-
-    background-color: var(--c-board);
-
-    /* Centring the board*/
+    /* Centring the elements */
+    max-width: 80%;
     margin: 0 auto;
-    margin-top: 1vh;
-
-    /* SubClass Alignment */
-    display: flex;
-    justify-content: space-between;
-    
-}
-
-.mainDisplay {
-    /* main menu dimensions */
-	width: 87%;
-	height: 98%;
-    border-radius: 5px;
-    background-color: var(--c-main);
-	position: relative;
-	top: 1vmin;
-	left: 1vmin;
-	bottom: 1vmin;
 }
 
 .navBar {
-    /* Navigation Bar dimensions */
-	position: relative;
-	width: 10%;
-	height: 98%;
-	top: 1vmin;
-	bottom: 1vmin;
-	right: 1vmin;
-}
+    /* maximum height of NavBar */
+    height:60px;
 
-.navItems {
-    /* List dimensions*/
-    width: 100%;
-    height: 100%;
-    
     display: flex;
-    flex-wrap: wrap;
-    align-content: space-between;
+    border-bottom: 4px solid grey;
 }
 
-.navItem {
-    /* Item dimensions */
-    width: 100%;
-    background-color: var(--c-navBar);
-}
-
-.navItems h3{
-    font-weight: bold;
-}
-
-.navItem {
-    /* Centring Items inside box */
+.navBar__sectionA {
+    /* Percentage of area cover by section in NavBar */
+    width: 35%;
+    height: 100%;
+    /* Centring the elements */
     display: flex;
     align-items: center;
+}
+
+
+.navBar__sectionB {
+    /* Percentage of area cover by section in NavBar */
+    width: 65%;
+    height: 100%;
+    /* Centring and moving elements to right side */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navBar__sectionA h3 , .navBar__item{
+    /* Adding Style to elements of NavBar*/
+    border: 1px solid grey;
+    padding:8px 10px;
+    border-radius: 4px;
+}
+
+.navBar__item:not(:last-child) {
+    /* Spacing on the right of the SectionB elements */
+    margin-right: 8px;
+}
+
+.navBar__item i {
+    /* Spacing between icon and text */
+    padding-right: 2px;
+}
+
+/* fixing row format for section B elements */
+.navBar__item--report {
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar__item--shop {
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar__item--inventory {
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar__item--settings {
+    display: flex;
+    flex-direction: row;
+}
+
+main {
+    /* maximum height of main */
+    height: 590px;
+}
+
+.main__items {
+    height: 98%;
+    width: 100%;
+
+    /* centring elements inside main items */
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.main__items >:not(:first-child) {
+    margin-top: 2%;
+}
+
+.main__item--menu {
+    height: 96%;
+    width: 100%;
 
     border-radius: 5px;
-
-    color: var(--c-navItemSecondary);
-}
-
-
-/* Percentage of Area of chat, report and shop button over the navigation bar */
-.navItems .mainChatButton , .navItems .reportButton, .navItems .shopButton{
-    height: 10%;
-}
-
-/* Percentage of Area of empty space over the navigation bar */
-.navItems .emptySpace {
-    height: 56%;
-}
-
-
-/* Percentage of Area of setting button over the navigation bar */
-.navItems .settingsButton {
-    height: 10%;
-}
-
-/* size of icons */
-.navItem i {
-    font-size: 2em;
-}
-
-/* Can hover all nav item except empty space */
-.navItem:hover:not(:nth-child(4)) {
-    background-color: var(--c-navItemHover);
-    cursor: pointer; /* Pointer/hand icon */
-}
-
-/* Styling main menu */
-
-/* main menu cover whole main display area */
-.mainMenu {
-    width: 100%;
-    height: 100%;
+    border: 1px dotted rgba(128, 128, 128, 0.4);
 
     display: flex;
 }
 
-.mainMenu .rightBox ,.mainMenu .leftBox {
+.main__item--menu .rightBox, .main__item--menu .leftBox {
     width: 50%;
     height: 100%;
 
-    /* Aligning the elements on right and left side */
     display: flex;
     flex-wrap: wrap;
-    align-content: space-evenly;
     justify-content: space-evenly;
+    align-content: space-evenly;
 }
 
-/* Main menu right side */
-
-/* Percentage of Area of chatBox Box over the right side */
+/* Right Box */
 .chatBox {
     width: 90%;
-    height: 80%;
+    height: 82.5%;
+
+    border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+.buttonsBox {
+    width: 90%;
+    height: 7.5%;
+
+    border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+.chatBox ,.buttonsBox {
+    margin-right: 2.5%;
+}
+
+.timerBox, .companionBox {
+    margin-left: 2.5%;
 }
 
 /* This is will appear inside the chatBox when clicking the button
@@ -224,38 +219,6 @@ body {
     background-color: #ee9458;
 }
 
-/* Percentage of Area of button Box over the right side */
-.buttonsBox {
-    width: 90%;
-    height: 10%;
-}
-
-/* Main Menu left side */
-
-.timerBox {
-    /* Percentage of Area of timer Box over the left side */
-    width: 90%;
-    height: 30%;
-
-    /* Alignment of timer in centre */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Percentage of Area of Companion Box over the left side */
-.companionBox {
-    width: 90%;
-    height: 60%;
-}
-
-/* Border settings for all elements in main menu */
-
-.chatBox ,.buttonsBox, .timerBox, .companionBox {
-    border: 1px dotted grey;
-    border-radius: 5px;
-}
-
 /* Chat buttons */
 .btn-group {
     display: flex;
@@ -264,6 +227,11 @@ body {
     width: 100%;
     height: 100%;
 }
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: var(--c-buttonHover);
+    }
 
 .btn-group button {
     height: 80%;
@@ -280,22 +248,100 @@ content: "";
 clear: both;
 display: table;
 }
-  
-/* Add a background color on hover */
-.btn-group button:hover {
-background-color: var(--c-buttonHover);
+
+/* left box */
+.timerBox {
+    width: 90%;
+    height: 20%;
+
+    /* Alignment of timer in centre */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px dotted rgba(128, 128, 128, 0.4);
 }
 
-/* Resposive to Window */
-@media (min-width: 400px) {
+.companionBox {
+    width: 90%;
+    height: 70%;
 
-   .board {
-        width: 98vmin;
-		height: 98vmin;
-   }
+    border: 1px dotted rgba(128, 128, 128, 0.4);
 }
 
-/* Temporary turned off*/
-.report , .shop, .settings{
+.main__item--report {
+    border: 1px dotted purple;
+}
+
+.main__item--shop {
+    border: 1px dotted green;
+}
+
+.main__item--inventory {
+    border: 1px dotted red;
+}
+
+.main__item--settings {
+    border: 1px dotted chocolate;
+}
+
+/* Display none for all child element excent main menu as default */
+.main__items >:not(:first-child) {
     display: none;
+    height: 98%;
+    width: 98%;
+
+    border-radius: 5px;
+}
+
+/* Maximum width of app will be 720px */
+@media (min-width: 900px) {
+    body {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        max-width: 90%;
+    }
+}
+
+/* Responsive to Small Window */
+@media (max-width: 720px) {
+
+    .navBar__item h3 {
+        display: none;
+    }
+
+    main {
+        height: 472px;
+    }
+
+    .rightBox .chatBox {
+        height: 70%;
+    }
+
+    .rightBox .buttonsBox {
+        height: 10%;
+    }
+
+    .leftBox .timerBox {
+        height: 20%;
+    }
+
+    .leftBox .companionBox {
+        height: 60%;
+    }
+}
+
+/* Responsive more smaller devices */
+@media (max-width: 325px) {
+    body {
+        max-width: 98%;
+    }
+
+    .navBar__item:not(:last-child) {
+        margin-right: 2px;
+    }
 }
