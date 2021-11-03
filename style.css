@@ -178,6 +178,12 @@ body {
     cursor: pointer; /* Pointer/hand icon */
 }
 
+/* Styling the timer */
+.timer { 
+    font-size: 250%;
+    font-family: 'Varela Round', sans-serif;
+}
+
 /* Styling main menu */
 
 /* main menu cover whole main display area */
@@ -224,6 +230,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 /* Percentage of Area of Companion Box over the left side */
