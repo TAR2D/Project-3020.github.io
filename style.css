@@ -273,7 +273,16 @@ display: table;
     width: 90%;
     height: 70%;
 
+    /* Alignment of timer in centre */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+.companion { 
+    width: 60%;
 }
 
 .main__item--report {
