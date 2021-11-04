@@ -190,7 +190,7 @@ main {
 }
 
 /* Styling the timer */
-.timer { 
+.timer {
     color: black;
     font-size: 250%;
     font-family: 'Varela Round', sans-serif;
@@ -314,7 +314,6 @@ display: table;
 .companion { 
     width: 60%;
 }
-
 /* .main__item--report {
 }
 
