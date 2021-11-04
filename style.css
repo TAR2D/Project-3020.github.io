@@ -61,22 +61,39 @@ a:visited {
 }
 
 :root {
-    --c-background: #CEE5D0;
-    --c-board: rgba(56, 56, 24, 0.308);
-    --c-main: #F3F0D7;
-    --c-navBar: #F3F0D7;
+    /* Color Setting Manual 
+        bg: Background
+        b: Border
+        c: Color
+        sectionA: include AppName/MainPage
+        sectionB: include Report, Shop, Inventory and Settings
+    */
+    --bg-background: rgba(0, 0, 0, 0.735);
+    --b-navigationBar: rgba(128, 128, 128, 0.434);
+    
+    --bg-sectionA:black;
+    --c-sectionA: white;
+    
+    --bg-sectionB: rgb(97, 97, 97);
+    --c-sectionB: white;
 
-    --c-navItemHover: #EED6C4;
-    --c-navItem: #483434;
-    --c-button:#F3F0D7; 
-    --c-buttonHover: #EED6C4;
-    --c-buttonText: #483434;
+    --bg-mainMenu: white;
+    --b-mainMenu: transparent;
+
+    --c-button: rgba(128, 128, 128, 0.5); 
+    --c-buttonHover: rgba(128, 128, 128, 0.7);
+    --c-buttonText: white;
+
+    --bg-SectionBDisplay: white;
+    --b-SectionBDisplay: transparent;
 }
 
 body {
     /* Centring the elements */
     max-width: 80%;
     margin: 0 auto;
+    color: white;
+    background-color: var(--bg-background);
 }
 
 .navBar {
@@ -84,13 +101,15 @@ body {
     height:60px;
 
     display: flex;
-    border-bottom: 4px solid grey;
+    border-bottom: 4px solid var(--b-navigationBar);
 }
 
 .navBar__sectionA {
     /* Percentage of area cover by section in NavBar */
     width: 35%;
     height: 100%;
+
+    color: var(--c-sectionA);
     /* Centring the elements */
     display: flex;
     align-items: center;
@@ -101,6 +120,8 @@ body {
     /* Percentage of area cover by section in NavBar */
     width: 65%;
     height: 100%;
+
+    color: var(--c-sectionB);
     /* Centring and moving elements to right side */
     display: flex;
     align-items: center;
@@ -109,9 +130,18 @@ body {
 
 .navBar__sectionA h3 , .navBar__item{
     /* Adding Style to elements of NavBar*/
-    border: 1px solid grey;
-    padding:8px 10px;
+    /* border: 1px solid grey; */
+    padding:10px 12px;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.navBar__sectionA h3 {
+    background-color: var(--bg-sectionA);
+}
+
+.navBar__item {
+    background-color: var(--bg-sectionB);
 }
 
 .navBar__item:not(:last-child) {
@@ -153,7 +183,6 @@ main {
 .main__items {
     height: 98%;
     width: 100%;
-
     /* centring elements inside main items */
     display: flex;
     justify-content: center;
@@ -161,22 +190,23 @@ main {
 }
 
 /* Styling the timer */
-.timer { 
+.timer {
+    color: black;
     font-size: 250%;
     font-family: 'Varela Round', sans-serif;
 }
 
 /* Styling main menu */
-.main__items >:not(:first-child) {
-    margin-top: 2%;
-}
 
 .main__item--menu {
+
+    background-color: var(--bg-mainMenu);
+
     height: 96%;
     width: 100%;
 
     border-radius: 5px;
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    border: 4px solid var(--b-mainMenu);
 
     display: flex;
 }
@@ -284,28 +314,26 @@ display: table;
 .companion { 
     width: 60%;
 }
-
-.main__item--report {
-    border: 1px dotted purple;
+/* .main__item--report {
 }
 
 .main__item--shop {
-    border: 1px dotted green;
 }
 
 .main__item--inventory {
-    border: 1px dotted red;
 }
 
 .main__item--settings {
-    border: 1px dotted chocolate;
-}
+} */
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
     display: none;
-    height: 98%;
-    width: 98%;
+    height: 96%;
+    width: 100%;
+
+    background-color: var(--bg-SectionBDisplay);
+    border: 4px solid var(--b-SectionBDisplay);
 
     border-radius: 5px;
 }
@@ -360,4 +388,10 @@ display: table;
     .navBar__item:not(:last-child) {
         margin-right: 2px;
     }
+}
+
+/* temporary code */
+.main__items h3 {
+    color: black;
+    font-size: 2em;
 }
