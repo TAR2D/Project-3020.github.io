@@ -308,18 +308,6 @@ main {
     cursor: pointer; /* Pointer/hand icon */
 }
 
-/* Tooltip on hover over navigation items */
-[navItem-name]:hover:after {
-    content: attr(navItem-name);
-    position: absolute;
-    text-align: center;
-    background-color: var(--c-buttonHover);
-    color: var(--c-buttonText);
-    border-radius: 5px;
-    padding: 6px;
-    left: 72%;
-}
-
 /* Add a background color on hover */
 .btn-group button:hover {
     background-color: var(--c-buttonHover);
