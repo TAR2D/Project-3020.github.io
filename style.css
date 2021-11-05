@@ -272,6 +272,9 @@ main {
 
 .goalTimeField{
     margin-bottom: 10%;
+}
+
+#timepicker-selectbox {
     width: 58%;
 }
 
