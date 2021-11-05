@@ -238,6 +238,7 @@ main {
 
 .chatBox ,.buttonsBox {
     margin-right: 2.5%;
+	overflow-y: scroll;
 }
 
 .timerBox, .companionBox {
@@ -248,12 +249,13 @@ main {
     (display: none; because it wont be showed initially.) */
 .createTask, .createGoal, .startBreak{
     display: none;
-    overflow-y: scroll;
-    width: 100%;
+    
+    width: 96%;
     height: 90%;
-    margin: auto;
-    margin-top: 5%;
-    background-color: #ee9458;
+    margin: 0.5em;
+    background-color: #000000;
+	align-items: bottom;
+	
 }
 
 /* Chat buttons */
