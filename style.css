@@ -256,6 +256,43 @@ main {
     background-color: #ee9458;
 }
 
+/* Goal input form */
+.createGoal {
+    display: none;         
+    padding: 10%;
+    justify-content: center;
+    align-content: center;
+    color: var(--c-buttonText);
+    background-color: #ee9458;
+    font-size: 90%;
+}
+
+.goalNameField, .goalTimeField {
+    margin-bottom: 10%;
+}
+
+#timepicker-selectbox, #gname {
+    margin-top: 1%;
+}
+
+#timepicker-selectbox {
+    width: 58%;
+}
+
+#gname {
+    width: 100%;
+}
+
+.createGoal button {
+    height: auto;
+    width: auto;
+    font-size: x-small;
+    background-color: var(--c-button); 
+    border-radius: 5px;
+    color: var(--c-buttonText);
+    cursor: pointer; /* Pointer/hand icon */
+}
+
 /* Chat buttons */
 .btn-group {
     display: flex;
@@ -268,7 +305,7 @@ main {
 /* Add a background color on hover */
 .btn-group button:hover {
     background-color: var(--c-buttonHover);
-    }
+}
 
 .btn-group button {
     height: 80%;
@@ -278,12 +315,10 @@ main {
     color: var(--c-buttonText);
     cursor: pointer; /* Pointer/hand icon */
 }
-    
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-content: "";
-clear: both;
-display: table;
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: var(--c-buttonHover);
 }
 
 /* left box */
