@@ -266,16 +266,20 @@ main {
     background-color: var(--c-button);
 }
 
-.goalNameField {
+.goalNameField, .goalTimeField {
     margin-bottom: 10%;
 }
 
-.goalTimeField{
-    margin-bottom: 10%;
+#timepicker-selectbox, #gname {
+    margin-top: 1%;
 }
 
 #timepicker-selectbox {
     width: 58%;
+}
+
+#gname {
+    width: 100%;
 }
 
 .createGoal button {
