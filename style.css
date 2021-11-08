@@ -263,7 +263,8 @@ main {
     justify-content: center;
     align-content: center;
     color: var(--c-buttonText);
-    background-color: var(--c-button);
+    background-color: #ee9458;
+    font-size: 90%;
 }
 
 .goalNameField, .goalTimeField {
