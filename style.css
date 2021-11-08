@@ -261,7 +261,6 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
     height: 100%;
 }
 
@@ -281,9 +280,9 @@ main {
     
 /* Clear floats (clearfix hack) */
 .btn-group:after {
-content: "";
-clear: both;
-display: table;
+    content: "";
+    clear: both;
+    display: table;
 }
 
 /* left box */
@@ -316,10 +315,73 @@ display: table;
     max-height:100%;
     overflow: hidden;
 }
-/* .main__item--report {
+
+/* Stying the Trends page */ 
+.main__item .main__item--report {
+    vertical-align: top;
+    text-align: left;
+    color: black;
+    padding: 10px;
+    position: relative;
+
+    display: flex;
 }
 
-.main__item--shop {
+.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+    width: 75%; 
+}
+
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+    margin: auto;
+}
+
+.trends__chart, .trends__summaryBox {
+    border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+.trends__chart {
+    height: 60%; 
+}
+
+.trendsBar {
+    display: flex;
+    justify-content: right;
+}
+
+.trendsBar__items {
+    color: var(--c-sectionA);
+
+    /* Centring the elements */
+    display: flex;
+    align-items: center;
+}
+
+.trendsBar__item {
+    padding:10px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0 0 5px; 
+    background-color: var(--bg-sectionB);
+}
+
+.trends__dateNavBar {
+    height: 7.5%;
+    display: flex;
+    justify-content: right;
+}
+
+.trends__currDate {
+    margin: 5px 5px; 
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.trends__summaryBox { 
+    height: 15%; 
+}
+
+/* .main__item--shop {
 }
 
 .main__item--inventory {
