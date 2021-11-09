@@ -189,13 +189,6 @@ main {
     align-items: center;
 }
 
-/* Styling the timer */
-.timer {
-    color: black;
-    font-size: 250%;
-    font-family: 'Varela Round', sans-serif;
-}
-
 /* Styling main menu */
 
 .main__item--menu {
@@ -338,6 +331,14 @@ main {
     justify-content: center;
 
     border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+/* Styling the timer */
+.timer {
+    color: black;
+    font-size: 250%;
+    font-family: 'Varela Round', sans-serif;
+    
 }
 
 .companionBox {
