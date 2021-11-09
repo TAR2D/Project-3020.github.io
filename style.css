@@ -305,6 +305,7 @@ main {
 }
 
 .btn-group button {
+    cursor: pointer;
     height: 80%;
     width: 32%;
     background-color: var(--c-button); 
