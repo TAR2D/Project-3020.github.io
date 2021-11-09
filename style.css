@@ -86,6 +86,8 @@ a:visited {
 
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
+
+	--c-chatBubble: rgb(165, 206, 230);
 }
 
 body {
@@ -211,6 +213,7 @@ main {
     display: flex;
 }
 
+/* left and right box */
 .main__item--menu .rightBox, .main__item--menu .leftBox {
     width: 50%;
     height: 100%;
@@ -221,41 +224,60 @@ main {
     align-content: space-evenly;
 }
 
-/* Right Box */
+/* chat box (within right box) */
 .chatBox {
     width: 90%;
     height: 82.5%;
-
+	display: flex;
+	flex-direction: column;
     border: 1px dotted rgba(128, 128, 128, 0.4);
+	margin-right: 2.5%;
+	overflow-y: scroll;
+	justify-content: flex-end;
+	align-items: flex-start;
 }
 
 .buttonsBox {
     width: 90%;
     height: 7.5%;
-
+	margin-right: 2.5%;
     border: 1px dotted rgba(128, 128, 128, 0.4);
-}
-
-.chatBox ,.buttonsBox {
-    margin-right: 2.5%;
-	overflow-y: scroll;
 }
 
 .timerBox, .companionBox {
     margin-left: 2.5%;
 }
 
-/* This is will appear inside the chatBox when clicking the button
+/* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
 .createTask, .createGoal, .startBreak{
-    display: none;
-    
-    width: 96%;
-    height: 90%;
-    margin: 0.5em;
-    background-color: #000000;
-	align-items: bottom;
-	
+    display: block;
+	position: relative;
+	font-family: 'Varela Round';
+    color: black;
+    margin: 2%;
+    background-color: var(--c-chatBubble);
+	border: 2px solid var(--c-chatBubble);
+	border-radius: 15px;
+	padding: 15px;
+	text-align: center;
+	margin-left: 15px;
+}
+
+/* Little arrow for the chat bubble styling */
+.chatBubblePointer:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border-left: 0.7em solid transparent;
+	border-right: 0.7em solid var(--c-chatBubble);
+	border-top: 0.7em solid transparent;
+	border-bottom: 0.7em solid transparent;
+	margin-top: -0.7em;
+	margin-left: -24px;
 }
 
 /* Chat buttons */
