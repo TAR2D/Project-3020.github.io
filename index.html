@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <!-- Time picker -->
     <link rel="stylesheet" href="tui-time-picker.css">
     <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
@@ -34,10 +37,20 @@
                 <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
                     <div class="timerBox">
-                        <div id="timer" class="timer" contenteditable="true" onblur="updateTime()"><h1>20:00</h1></div>
-                        <button id="startStop" onclick="startStop()">Start</button>
-                        <button id="skip" onclick="skipTime()">Skip</button>
-                    </div>
+                        <div id="timer" contenteditable="true" onclick="updateTime()"><h1>20:00</h1></div>
+                        <div class="timerBtngrp">
+                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                        </div><!-- Closing TimerBtn Group -->
+                        <div class="timerContent">
+                            <div class="currentGoal">
+                                <h4>Current Goal:</h4>
+                            </div>
+                            <div class="currentTask">
+                                <h4>Current Task:</h4>
+                            </div>
+                        </div>
+                    </div> <!-- Closing TimerBox -->
                     <div class="companionBox">
                         <img class="companion" id="companion" src="images/waving-fullsize.gif"/>
                     </div>
