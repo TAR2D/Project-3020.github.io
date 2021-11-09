@@ -86,6 +86,9 @@ a:visited {
 
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
+
+    --ff-TimerFont : 'Roboto', sans-serif;
+    --b-TimerBox: transparent;
 }
 
 body {
@@ -189,13 +192,6 @@ main {
     align-items: center;
 }
 
-/* Styling the timer */
-.timer {
-    color: black;
-    font-size: 250%;
-    font-family: 'Varela Round', sans-serif;
-}
-
 /* Styling main menu */
 
 .main__item--menu {
@@ -243,6 +239,8 @@ main {
 .timerBox, .companionBox {
     margin-left: 2.5%;
 }
+
+
 
 /* This is will appear inside the chatBox when clicking the button
     (display: none; because it wont be showed initially.) */
@@ -298,7 +296,6 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
     height: 100%;
 }
 
@@ -314,6 +311,13 @@ main {
     border-radius: 5px;
     color: var(--c-buttonText);
     cursor: pointer; /* Pointer/hand icon */
+}
+    
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
 /* Add a background color on hover */
@@ -331,19 +335,76 @@ main {
 /* left box */
 .timerBox {
     width: 90%;
-    height: 20%;
+    height: 35%;
 
     /* Alignment of timer in centre */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
 
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    border: 1px dotted var(--b-TimerBox);
+}
+
+/* Styling the timer */
+
+#timer {
+    color: black;
+    width: 79%;
+    height: 56%;
+    margin: 1% 0;
+    margin-left: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: var(--ff-TimerFont);
+    font-size: 5.6em;
+    font-weight: bold;
+    background-color: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
+}
+
+.timerBtngrp {
+    width: 20%;
+    height: 60%;
+}
+
+.timerBtngrp #startStop, .timerBtngrp #skip {
+    width: 90%;
+    margin-left: 5%;
+    height: 45%;
+    margin-top: 5%;
+    font-size: 2em;
+    border: transparent;
+}
+
+#startStop:hover , #skip:hover{
+    background-color: var(--c-buttonHover);
+}
+
+.timerContent {
+    width: 98%;
+    height: 38%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    background-color: rgba(128, 128, 128, 0.26);
+    border-radius: 4px;
+}
+
+.timerContent h4 {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+}
+
+.currentGoal, .currentTask {
+    margin-top: 1%;
+    margin-left: 2%;
 }
 
 .companionBox {
     width: 90%;
-    height: 70%;
+    height: 55%;
 
     /* Alignment of companion in centre */
     display: flex;
@@ -358,10 +419,71 @@ main {
     max-height:100%;
     overflow: hidden;
 }
-/* .main__item--report {
+
+/* Stying the Trends page */ 
+.main__item .main__item--report {
+    vertical-align: top;
+    text-align: left;
+    color: black;
+    padding: 10px;
+    position: relative;
+
+    display: flex;
 }
 
-.main__item--shop {
+.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+    width: 75%; 
+}
+
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+    margin: auto;
+}
+
+.trends__chart, .trends__summaryBox {
+    border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+.trends__chart {
+    height: 60%; 
+}
+
+.trendsBar {
+    display: flex;
+    justify-content: right;
+}
+
+.trendsBar__items {
+    color: var(--c-sectionA);
+    display: flex;
+    align-items: center;
+}
+
+.trendsBar__item {
+    padding:10px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0 0 5px; 
+    background-color: var(--bg-sectionB);
+}
+
+.trends__dateNavBar {
+    height: 7.5%;
+    display: flex;
+    justify-content: right;
+}
+
+.trends__currDate {
+    margin: 5px 5px; 
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.trends__summaryBox { 
+    height: 15%; 
+}
+
+/* .main__item--shop {
 }
 
 .main__item--inventory {
@@ -395,6 +517,19 @@ main {
     }
 }
 
+
+@media (max-width: 825px) {
+    #timer {
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 750px) {
+    #timer {
+        font-size: 4.5em;
+    }
+}
+
 /* Responsive to Small Window */
 @media (max-width: 720px) {
 
@@ -415,11 +550,26 @@ main {
     }
 
     .leftBox .timerBox {
-        height: 20%;
+        height: 30%;
     }
 
     .leftBox .companionBox {
-        height: 60%;
+        height: 50%;
+    }
+
+
+    .timerBtngrp i {
+        font-size: 0.8em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    #timer {
+        font-size: 3.5em;
     }
 }
 
@@ -431,6 +581,10 @@ main {
 
     .navBar__item:not(:last-child) {
         margin-right: 2px;
+    }
+
+    #timer {
+        font-size: 2em;
     }
 }
 
