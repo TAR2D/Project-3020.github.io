@@ -321,6 +321,13 @@ main {
     background-color: var(--c-buttonHover);
 }
 
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 /* left box */
 .timerBox {
     width: 90%;
