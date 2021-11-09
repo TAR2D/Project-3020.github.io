@@ -61,22 +61,39 @@ a:visited {
 }
 
 :root {
-    --c-background: #CEE5D0;
-    --c-board: rgba(56, 56, 24, 0.308);
-    --c-main: #F3F0D7;
-    --c-navBar: #F3F0D7;
+    /* Color Setting Manual 
+        bg: Background
+        b: Border
+        c: Color
+        sectionA: include AppName/MainPage
+        sectionB: include Report, Shop, Inventory and Settings
+    */
+    --bg-background: rgba(0, 0, 0, 0.735);
+    --b-navigationBar: rgba(128, 128, 128, 0.434);
+    
+    --bg-sectionA:black;
+    --c-sectionA: white;
+    
+    --bg-sectionB: rgb(97, 97, 97);
+    --c-sectionB: white;
 
-    --c-navItemHover: #EED6C4;
-    --c-navItem: #483434;
-    --c-button:#F3F0D7; 
-    --c-buttonHover: #EED6C4;
-    --c-buttonText: #483434;
+    --bg-mainMenu: white;
+    --b-mainMenu: transparent;
+
+    --c-button: rgba(128, 128, 128, 0.5); 
+    --c-buttonHover: rgba(128, 128, 128, 0.7);
+    --c-buttonText: white;
+
+    --bg-SectionBDisplay: white;
+    --b-SectionBDisplay: transparent;
 }
 
 body {
     /* Centring the elements */
     max-width: 80%;
     margin: 0 auto;
+    color: white;
+    background-color: var(--bg-background);
 }
 
 .navBar {
@@ -84,13 +101,15 @@ body {
     height:60px;
 
     display: flex;
-    border-bottom: 4px solid grey;
+    border-bottom: 4px solid var(--b-navigationBar);
 }
 
 .navBar__sectionA {
     /* Percentage of area cover by section in NavBar */
     width: 35%;
     height: 100%;
+
+    color: var(--c-sectionA);
     /* Centring the elements */
     display: flex;
     align-items: center;
@@ -101,6 +120,8 @@ body {
     /* Percentage of area cover by section in NavBar */
     width: 65%;
     height: 100%;
+
+    color: var(--c-sectionB);
     /* Centring and moving elements to right side */
     display: flex;
     align-items: center;
@@ -109,9 +130,18 @@ body {
 
 .navBar__sectionA h3 , .navBar__item{
     /* Adding Style to elements of NavBar*/
-    border: 1px solid grey;
-    padding:8px 10px;
+    /* border: 1px solid grey; */
+    padding:10px 12px;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.navBar__sectionA h3 {
+    background-color: var(--bg-sectionA);
+}
+
+.navBar__item {
+    background-color: var(--bg-sectionB);
 }
 
 .navBar__item:not(:last-child) {
@@ -153,30 +183,23 @@ main {
 .main__items {
     height: 98%;
     width: 100%;
-
     /* centring elements inside main items */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Styling the timer */
-.timer { 
-    font-size: 250%;
-    font-family: 'Varela Round', sans-serif;
-}
-
 /* Styling main menu */
-.main__items >:not(:first-child) {
-    margin-top: 2%;
-}
 
 .main__item--menu {
+
+    background-color: var(--bg-mainMenu);
+
     height: 96%;
     width: 100%;
 
     border-radius: 5px;
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    border: 4px solid var(--b-mainMenu);
 
     display: flex;
 }
@@ -226,19 +249,55 @@ main {
     background-color: #ee9458;
 }
 
+/* Goal input form */
+.createGoal {
+    display: none;         
+    padding: 10%;
+    justify-content: center;
+    align-content: center;
+    color: var(--c-buttonText);
+    background-color: #ee9458;
+    font-size: 90%;
+}
+
+.goalNameField, .goalTimeField {
+    margin-bottom: 10%;
+}
+
+#timepicker-selectbox, #gname {
+    margin-top: 1%;
+}
+
+#timepicker-selectbox {
+    width: 58%;
+}
+
+#gname {
+    width: 100%;
+}
+
+.createGoal button {
+    height: auto;
+    width: auto;
+    font-size: x-small;
+    background-color: var(--c-button); 
+    border-radius: 5px;
+    color: var(--c-buttonText);
+    cursor: pointer; /* Pointer/hand icon */
+}
+
 /* Chat buttons */
 .btn-group {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
     height: 100%;
 }
 
 /* Add a background color on hover */
 .btn-group button:hover {
     background-color: var(--c-buttonHover);
-    }
+}
 
 .btn-group button {
     height: 80%;
@@ -251,9 +310,14 @@ main {
     
 /* Clear floats (clearfix hack) */
 .btn-group:after {
-content: "";
-clear: both;
-display: table;
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: var(--c-buttonHover);
 }
 
 /* left box */
@@ -269,43 +333,112 @@ display: table;
     border: 1px dotted rgba(128, 128, 128, 0.4);
 }
 
+/* Styling the timer */
+.timer {
+    color: black;
+    font-size: 250%;
+    font-family: 'Varela Round', sans-serif;
+    
+}
+
 .companionBox {
     width: 90%;
     height: 70%;
 
-    /* Alignment of timer in centre */
+    /* Alignment of companion in centre */
     display: flex;
     align-items: center;
     justify-content: center;
+    object-fit: contain;
 
     border: 1px dotted rgba(128, 128, 128, 0.4);
 }
 
-.companion { 
-    width: 60%;
+.companion {
+    max-height:100%;
+    overflow: hidden;
 }
 
-.main__item--report {
-    border: 1px dotted purple;
+/* Stying the Trends page */ 
+.main__item .main__item--report {
+    vertical-align: top;
+    text-align: left;
+    color: black;
+    padding: 10px;
+    position: relative;
+
+    display: flex;
 }
 
-.main__item--shop {
-    border: 1px dotted green;
+.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+    width: 75%; 
+}
+
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+    margin: auto;
+}
+
+.trends__chart, .trends__summaryBox {
+    border: 1px dotted rgba(128, 128, 128, 0.4);
+}
+
+.trends__chart {
+    height: 60%; 
+}
+
+.trendsBar {
+    display: flex;
+    justify-content: right;
+}
+
+.trendsBar__items {
+    color: var(--c-sectionA);
+    display: flex;
+    align-items: center;
+}
+
+.trendsBar__item {
+    padding:10px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0 0 5px; 
+    background-color: var(--bg-sectionB);
+}
+
+.trends__dateNavBar {
+    height: 7.5%;
+    display: flex;
+    justify-content: right;
+}
+
+.trends__currDate {
+    margin: 5px 5px; 
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.trends__summaryBox { 
+    height: 15%; 
+}
+
+/* .main__item--shop {
 }
 
 .main__item--inventory {
-    border: 1px dotted red;
 }
 
 .main__item--settings {
-    border: 1px dotted chocolate;
-}
+} */
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
     display: none;
-    height: 98%;
-    width: 98%;
+    height: 96%;
+    width: 100%;
+
+    background-color: var(--bg-SectionBDisplay);
+    border: 4px solid var(--b-SectionBDisplay);
 
     border-radius: 5px;
 }
@@ -360,4 +493,10 @@ display: table;
     .navBar__item:not(:last-child) {
         margin-right: 2px;
     }
+}
+
+/* temporary code */
+.main__items h3 {
+    color: black;
+    font-size: 2em;
 }
