@@ -333,7 +333,7 @@ main {
     display: flex;
     flex-wrap: wrap;
 
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    border: 1px dotted transparent;
 }
 
 /* Styling the timer */
