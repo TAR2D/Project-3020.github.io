@@ -26,42 +26,42 @@ appName.onclick = function() {
 }
 
 reportButton.onclick = function () {
-    if(state !== 1000) {
+    if(state !== 01000) {
         reportDisplay.style.display = "block";
         reportButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(1);
-        state = 1000;
+        state = 01000;
     }
 };
 
 shopButton.onclick = function () {
-    if(state !== 100) {
+    if(state !== 00100) {
         shopDisplay.style.display = "block";
         shopButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(2);
-        state = 100;
+        state = 00100;
     }
 };
 
 inventoryButton.onclick = function () {
-    if(state !== 10) {
+    if(state !== 00010) {
         inventoryDisplay.style.display = "block";
         inventoryButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(3);
-        state = 10;
+        state = 00010;
     }
 };
 
 settingsButton.onclick = function () {
-    if(state !== 1) {
+    if(state !== 00001) {
         settingsDisplay.style.display = "block";
         settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(4);
-        state = 1;
+        state = 00001;
     }
 };
 
