@@ -88,6 +88,7 @@ a:visited {
     --b-SectionBDisplay: transparent;
 
     --ff-TimerFont : 'Roboto', sans-serif;
+    --b-TimerBox: transparent;
 }
 
 body {
@@ -333,7 +334,7 @@ main {
     display: flex;
     flex-wrap: wrap;
 
-    border: 1px dotted transparent;
+    border: 1px dotted var(--b-TimerBox);
 }
 
 /* Styling the timer */
