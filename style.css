@@ -376,7 +376,6 @@ main {
 .timerContent {
     width: 100%;
     height: 40%;
-    border: 1px solid red;
 }
 
 .timerContent h4 {
