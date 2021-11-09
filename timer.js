@@ -37,12 +37,12 @@ function startStop(){
   if(statusTimer === "stopped"){
     //Start the timer (by calling the setInterval() function)
     interval = window.setInterval(startTimer, 1000);
-    document.getElementById("startStop").innerHTML = "Stop";
+    document.querySelector("#startStop i").className = "fas fa-pause";
     statusTimer = "started";
     timer.contentEditable = "false";
   } else {
     window.clearInterval(interval);
-    document.getElementById("startStop").innerHTML = "Start";
+    document.querySelector("#startStop i").className = "fas fa-play";
     statusTimer = "stopped";
   }
 }
