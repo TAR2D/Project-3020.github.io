@@ -21,7 +21,7 @@ appName.onclick = function() {
         appName.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(0);
-        state = 1000;
+        state = 10000;
     }
 }
 
