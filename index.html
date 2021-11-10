@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <!-- Time picker -->
     <link rel="stylesheet" href="tui-time-picker.css">
     <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
@@ -34,8 +37,20 @@
                 <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
                     <div class="timerBox">
-                        <div id="timer" class="timer"><h1>00:00</h1></div>
-                    </div>
+                        <div id="timer" contenteditable="true" onblur="updateTimeEntered()"><h1>20:00</h1></div>
+                        <div class="timerBtngrp">
+                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                        </div><!-- Closing TimerBtn Group -->
+                        <div class="timerContent">
+                            <div class="currentGoal">
+                                <h4 id="currGoal">Current Goal:</h4>
+                            </div>
+                            <div class="currentTask">
+                                <h4 id="currentTask">Current Task:</h4>
+                            </div>
+                        </div>
+                    </div> <!-- Closing TimerBox -->
                     <div class="companionBox">
                         <img class="companion" id="companion" src="images/waving-fullsize.gif"/>
                     </div>
@@ -51,15 +66,15 @@
                             <div class="goalTimeField">Duration of goal(in hours and minutes):
                                 <div id="timepicker-selectbox"></div>
                             </div>
-                            <button id="createGoalButton">Create Goal</button>
+                            <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
                         </div>
                         <div class="startBreak chatBubblePointer" id="startBreak"> Time for a break!</div>
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
-                            <button id="goalButton" onclick="createGoal()">New Goal</button>
-                            <button id="taskButton" onclick="createTask()">New Task</button>
-                            <button id="breakButton"onclick="startBreak()">Start a Break</button>
+                            <button id="goalButton">New Goal</button>
+                            <button id="taskButton">New Task</button>
+                            <button id="breakButton">Start a Break</button>
                         </div>
                     </div>
                 </div>
@@ -104,7 +119,7 @@
             </div>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script src="timer.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
     <script src="timepicker.js"></script>
