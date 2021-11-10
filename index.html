@@ -44,10 +44,10 @@
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
-                                <h4>Current Goal:</h4>
+                                <h4 id="currGoal">Current Goal:</h4>
                             </div>
                             <div class="currentTask">
-                                <h4>Current Task:</h4>
+                                <h4 id="currentTask">Current Task:</h4>
                             </div>
                         </div>
                     </div> <!-- Closing TimerBox -->
@@ -58,17 +58,13 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="createTask" id="createTask"> Hello! Let's create a new Task!</div>
-                        <div class="createGoal" id="createGoal">
-                            <div class="goalNameField">What is the name of your new goal?
-                                <input type="goalname" id="gname" placeholder="Goal name...">
-                            </div>
-                            <div class="goalTimeField">Duration of goal(in hours and minutes):
-                                <div id="timepicker-selectbox"></div>
-                            </div>
-                            <button id="createGoalButton">Create Goal</button>
+                        <div class="goalNameField">What is the name of your new goal?
+                            <input type="goalname" id="gname" placeholder="Goal name...">
                         </div>
-                        <div class="startBreak" id="startBreak"> Time for a break!</div>
+                        <div class="goalTimeField">Duration of goal(in hours and minutes):
+                            <div id="timepicker-selectbox"></div>
+                        </div>
+                        <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
@@ -119,7 +115,6 @@
             </div>
         </div>
     </main>
-    <script src="script.js"></script>
     <script src="timer.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>

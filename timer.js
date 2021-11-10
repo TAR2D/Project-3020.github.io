@@ -1,6 +1,6 @@
 const timer = document.getElementById("timer");
 
-let initialSec = 5;   //intially at 20 min.
+let initialSec = 20*60;   //intially at 20 min.
 let breakSecond = 5*60;   //initially at 5 min.
 let seconds = initialSec; //take same initial 20 seconds.
 let statusTimer = "stopped";  //initially it will be paused
