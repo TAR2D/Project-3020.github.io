@@ -87,7 +87,10 @@ a:visited {
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
 
+
+	  --c-chatBubble: rgb(165, 206, 230);
     --ff-TimerFont : 'Roboto', sans-serif;
+    --b-TimerBox: transparent;
 }
 
 body {
@@ -206,6 +209,7 @@ main {
     display: flex;
 }
 
+/* left and right box */
 .main__item--menu .rightBox, .main__item--menu .leftBox {
     width: 50%;
     height: 100%;
@@ -216,52 +220,60 @@ main {
     align-content: space-evenly;
 }
 
-/* Right Box */
+/* chat box (within right box) */
 .chatBox {
     width: 90%;
     height: 82.5%;
-
+	display: flex;
+	flex-direction: column;
     border: 1px dotted rgba(128, 128, 128, 0.4);
+	margin-right: 2.5%;
+	overflow-y: scroll;
+	justify-content: flex-end;
+	align-items: flex-start;
 }
 
 .buttonsBox {
     width: 90%;
     height: 7.5%;
-
+	margin-right: 2.5%;
     border: 1px dotted rgba(128, 128, 128, 0.4);
-}
-
-.chatBox ,.buttonsBox {
-    margin-right: 2.5%;
 }
 
 .timerBox, .companionBox {
     margin-left: 2.5%;
 }
 
-
-
-/* This is will appear inside the chatBox when clicking the button
+/* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
 .createTask, .createGoal, .startBreak{
-    display: none;
-    overflow-y: scroll;
-    width: 100%;
-    height: 90%;
-    margin: auto;
-    margin-top: 5%;
-    background-color: #ee9458;
+    display: block;
+	position: relative;
+	font-family: 'Varela Round';
+    color: black;
+    margin: 2%;
+    background-color: var(--c-chatBubble);
+	border: 2px solid var(--c-chatBubble);
+	border-radius: 15px;
+	padding: 15px;
+	text-align: center;
+	margin-left: 15px;
 }
 
-/* Goal input form */
-.createGoal {
-    display: none;         
-    padding: 10%;
-    justify-content: center;
-    align-content: center;
-    color: var(--c-buttonText);
-    background-color: #ee9458;
-    font-size: 90%;
+/* Little arrow for the chat bubble styling */
+.chatBubblePointer:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border-left: 0.7em solid transparent;
+	border-right: 0.7em solid var(--c-chatBubble);
+	border-top: 0.7em solid transparent;
+	border-bottom: 0.7em solid transparent;
+	margin-top: -0.7em;
+	margin-left: -24px;
 }
 
 .goalNameField, .goalTimeField {
@@ -304,6 +316,7 @@ main {
 }
 
 .btn-group button {
+    cursor: pointer;
     height: 80%;
     width: 32%;
     background-color: var(--c-button); 
@@ -333,6 +346,7 @@ main {
     display: flex;
     flex-wrap: wrap;
 
+   /* border: 1px dotted var(--b-TimerBox);*/
     border: 1px dotted transparent;
 }
 
@@ -374,8 +388,12 @@ main {
 }
 
 .timerContent {
-    width: 100%;
-    height: 40%;
+    width: 98%;
+    height: 38%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    background-color: rgba(128, 128, 128, 0.26);
+    border-radius: 4px;
 }
 
 .timerContent h4 {
@@ -383,6 +401,11 @@ main {
     font-size: 1.2em;
     font-weight: bold;
     font-family: var(--ff-TimerFont);
+}
+
+.currentGoal, .currentTask {
+    margin-top: 1%;
+    margin-left: 2%;
 }
 
 .companionBox {

@@ -1,13 +1,16 @@
 const timer = document.getElementById("timer");
 
-let timeMinutes = 20;   //get the minutes
-let timeSecond = timeMinutes*60;  //calculate seconds
-let interval = null;
-let statusTimer = "stopped";
-displayTime(timeSecond);
+let initialSec = 20*60;   //intially at 20 min.
+let breakSecond = 5*60;   //initially at 5 min.
+let seconds = initialSec; //take same initial 20 seconds.
+let statusTimer = "stopped";  //initially it will be paused
+let isOnBreak = false;        //it will be on task when first opened.
 
-// In this function we will update the time.
-function updateTime(){
+let interval = null;
+displayTime(seconds);
+
+// In this function we will update the time when the user clicks on the timer.
+function updateTimeEntered(){
   let str = timer.innerHTML;
   let newMin = parseInt(str.substr(0, str.indexOf(":")));
   let newSec = parseInt(str.substr(str.indexOf(":")+1));
@@ -17,24 +20,24 @@ function updateTime(){
   } else if (newMin < 0 || newSec < 0 || newMin > 60 || newSec > 60){
     alert("The numbers should be from 0 to 60.");
   } else {
-    timeMinutes = newMin;   //get the minutes
-    timeSecond = timeMinutes*60 + newSec;  //calculate seconds
+    seconds = newMin*60 + newSec;  //calculate seconds
+    isOnBreak ? breakSecond = seconds : initialSec = seconds;
   }
-  displayTime(timeSecond);
+  displayTime(seconds);
 }
 
-//Function will be called when the button start is clicked.
+//Function will be called repeatedly until a pause or skip button is pressed or time is 0.
 function startTimer(){
-  timeSecond--;
-  displayTime(timeSecond);
-  if (timeSecond == 0 || timeSecond < 1) {  //time runs out
-    statusTimer = "started";
-    startStop();
+  seconds--;
+  displayTime(seconds);
+  if (seconds == 0 || seconds < 1) {  //time runs out
+    skipTime();
   }
 }
 
 function startStop(){
   if(statusTimer === "stopped"){
+    
     //Start the timer (by calling the setInterval() function)
     interval = window.setInterval(startTimer, 1000);
     document.querySelector("#startStop i").className = "fas fa-pause";
@@ -48,7 +51,10 @@ function startStop(){
 }
 
 function skipTime(){
-  displayTime(timeMinutes*60);
+  isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
+  isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
+  breakTime();
+  displayTime(seconds);
   statusTimer = "started";
   startStop();
   timer.contentEditable = "true";
@@ -61,4 +67,11 @@ function displayTime(second) {
   timer.innerHTML = `
   ${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}
   `;
+}
+
+
+function breakTime() {
+  //change what is on the screen.
+  // so he user knows he is on a break 
+  // using the isOnBreak boolean variable.
 }
