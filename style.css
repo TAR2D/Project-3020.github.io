@@ -250,8 +250,8 @@ main {
 
 /* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
-.createTask, .createGoal, .startBreak{
-    display: block;
+.createTask, .createGoal, .startBreak {
+    display: none;
 	position: relative;
 	font-family: 'Varela Round';
     color: black;
@@ -278,17 +278,6 @@ main {
 	border-bottom: 0.7em solid transparent;
 	margin-top: -0.7em;
 	margin-left: -24px;
-}
-
-/* Goal input form */
-.createGoal {
-    display: none;         
-    padding: 10%;
-    justify-content: center;
-    align-content: center;
-    color: var(--c-buttonText);
-    background-color: #ee9458;
-    font-size: 90%;
 }
 
 .goalNameField, .goalTimeField {
