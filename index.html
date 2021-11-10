@@ -37,7 +37,7 @@
                 <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
                     <div class="timerBox">
-                        <div id="timer" contenteditable="true" onclick="updateTime()"><h1>20:00</h1></div>
+                        <div id="timer" contenteditable="true" onblur="updateTimeEntered()"><h1>20:00</h1></div>
                         <div class="timerBtngrp">
                             <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
                             <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
@@ -72,9 +72,9 @@
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
-                            <button id="goalButton" onclick="createGoal()">New Goal</button>
-                            <button id="taskButton" onclick="createTask()">New Task</button>
-                            <button id="breakButton"onclick="startBreak()">Start a Break</button>
+                            <button id="goalButton">New Goal</button>
+                            <button id="taskButton">New Task</button>
+                            <button id="breakButton">Start a Break</button>
                         </div>
                     </div>
                 </div>
