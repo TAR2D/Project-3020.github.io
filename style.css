@@ -87,7 +87,10 @@ a:visited {
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
 
-	--c-chatBubble: rgb(165, 206, 230);
+
+	  --c-chatBubble: rgb(165, 206, 230);
+    --ff-TimerFont : 'Roboto', sans-serif;
+    --b-TimerBox: transparent;
 }
 
 body {
@@ -191,13 +194,6 @@ main {
     align-items: center;
 }
 
-/* Styling the timer */
-.timer {
-    color: black;
-    font-size: 250%;
-    font-family: 'Varela Round', sans-serif;
-}
-
 /* Styling main menu */
 
 .main__item--menu {
@@ -280,17 +276,6 @@ main {
 	margin-left: -24px;
 }
 
-/* Goal input form */
-.createGoal {
-    display: none;         
-    padding: 10%;
-    justify-content: center;
-    align-content: center;
-    color: var(--c-buttonText);
-    background-color: #ee9458;
-    font-size: 90%;
-}
-
 .goalNameField, .goalTimeField {
     margin-bottom: 10%;
 }
@@ -331,6 +316,7 @@ main {
 }
 
 .btn-group button {
+    cursor: pointer;
     height: 80%;
     width: 32%;
     background-color: var(--c-button); 
@@ -354,19 +340,76 @@ main {
 /* left box */
 .timerBox {
     width: 90%;
-    height: 20%;
+    height: 35%;
 
     /* Alignment of timer in centre */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
 
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    border: 1px dotted var(--b-TimerBox);
+}
+
+/* Styling the timer */
+
+#timer {
+    color: black;
+    width: 79%;
+    height: 56%;
+    margin: 1% 0;
+    margin-left: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: var(--ff-TimerFont);
+    font-size: 5.6em;
+    font-weight: bold;
+    background-color: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
+}
+
+.timerBtngrp {
+    width: 20%;
+    height: 60%;
+}
+
+.timerBtngrp #startStop, .timerBtngrp #skip {
+    width: 90%;
+    margin-left: 5%;
+    height: 45%;
+    margin-top: 5%;
+    font-size: 2em;
+    border: transparent;
+}
+
+#startStop:hover , #skip:hover{
+    background-color: var(--c-buttonHover);
+}
+
+.timerContent {
+    width: 98%;
+    height: 38%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    background-color: rgba(128, 128, 128, 0.26);
+    border-radius: 4px;
+}
+
+.timerContent h4 {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+}
+
+.currentGoal, .currentTask {
+    margin-top: 1%;
+    margin-left: 2%;
 }
 
 .companionBox {
     width: 90%;
-    height: 70%;
+    height: 55%;
 
     /* Alignment of companion in centre */
     display: flex;
@@ -479,6 +522,19 @@ main {
     }
 }
 
+
+@media (max-width: 825px) {
+    #timer {
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 750px) {
+    #timer {
+        font-size: 4.5em;
+    }
+}
+
 /* Responsive to Small Window */
 @media (max-width: 720px) {
 
@@ -499,11 +555,26 @@ main {
     }
 
     .leftBox .timerBox {
-        height: 20%;
+        height: 30%;
     }
 
     .leftBox .companionBox {
-        height: 60%;
+        height: 50%;
+    }
+
+
+    .timerBtngrp i {
+        font-size: 0.8em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    #timer {
+        font-size: 3.5em;
     }
 }
 
@@ -515,6 +586,10 @@ main {
 
     .navBar__item:not(:last-child) {
         margin-right: 2px;
+    }
+
+    #timer {
+        font-size: 2em;
     }
 }
 
