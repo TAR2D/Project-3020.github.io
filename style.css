@@ -87,8 +87,13 @@ a:visited {
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
 
+<<<<<<< HEAD
 	--c-chatBubble: rgb(165, 206, 230);
 	
+=======
+
+	  --c-chatBubble: rgb(165, 206, 230);
+>>>>>>> 50a6b4ae8cc08a76957ccdc0a243cfdff26dc921
     --ff-TimerFont : 'Roboto', sans-serif;
     --b-TimerBox: transparent;
 }
@@ -346,7 +351,8 @@ main {
     display: flex;
     flex-wrap: wrap;
 
-    border: 1px dotted var(--b-TimerBox);
+   /* border: 1px dotted var(--b-TimerBox);*/
+    border: 1px dotted transparent;
 }
 
 /* Styling the timer */
