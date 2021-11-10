@@ -346,7 +346,8 @@ main {
     display: flex;
     flex-wrap: wrap;
 
-    border: 1px dotted var(--b-TimerBox);
+   /* border: 1px dotted var(--b-TimerBox);*/
+    border: 1px dotted transparent;
 }
 
 /* Styling the timer */
