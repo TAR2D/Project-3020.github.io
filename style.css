@@ -66,7 +66,7 @@ a:visited {
         b: Border
         c: Color
         sectionA: include AppName/MainPage
-        sectionB: include Report, Shop, Inventory and Settings
+        sectionB: include Goals, Report, Shop, Inventory and Settings
     */
     --bg-background: rgba(0, 0, 0, 0.735);
     --b-navigationBar: rgba(128, 128, 128, 0.434);
@@ -117,7 +117,6 @@ body {
     display: flex;
     align-items: center;
 }
-
 
 .navBar__sectionB {
     /* Percentage of area cover by section in NavBar */
@@ -174,6 +173,11 @@ body {
 }
 
 .navBar__item--settings {
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar__item--goals {
     display: flex;
     flex-direction: row;
 }
@@ -239,7 +243,6 @@ main {
 .timerBox, .companionBox {
     margin-left: 2.5%;
 }
-
 
 
 /* This is will appear inside the chatBox when clicking the button
