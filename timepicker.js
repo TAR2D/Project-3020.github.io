@@ -1,3 +1,4 @@
+// this is for time picker for goal input form
 const TimePicker = tui.TimePicker;
 
 var tpSpinbox = new tui.TimePicker('#timepicker-selectbox', {
