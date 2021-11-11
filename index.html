@@ -37,7 +37,23 @@
                 <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
                     <div class="timerBox">
-                        <div id="timer" contenteditable="true" onblur="updateTimeEntered()"><h1>20:00</h1></div>
+                        <div id="timer">
+                            <h1 contenteditable="true" onblur="updateTimeEntered()">20:00</h1>
+                            <div class="currentState">
+                                <div class="timerSessionState">
+
+                                    <div class="TSSoverlay"></div>
+
+                                    <div class="TBBtext"><h2>Session</h2></div>
+                                </div>
+                                <div class="timerBreakState">
+
+                                    <div class="TBSoverlay"></div>
+                                    <div class="TBStext">
+                                    <h2>Break</h2></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="timerBtngrp">
                             <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
                             <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
