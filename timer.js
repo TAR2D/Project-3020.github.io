@@ -1,5 +1,8 @@
-const timer = document.getElementById("timer");
-
+const timer = document.querySelector("#timer h1");
+let timerSessionState = document.querySelector('.timerSessionState h2');
+let timerBreakState = document.querySelector('.timerBreakState h2');
+let TSSoverlayEffect = document.querySelector('.TSSoverlay');
+let TBSoverlayEffect = document.querySelector('.TBSoverlay');
 let initialSec = 20*60;   //intially at 20 min.
 let breakSecond = 5*60;   //initially at 5 min.
 let seconds = initialSec; //take same initial 20 seconds.
@@ -26,8 +29,18 @@ function updateTimeEntered(){
   displayTime(seconds);
 }
 
+function scale (number, inMin, inMax, outMin, outMax) {
+  return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
 //Function will be called repeatedly until a pause or skip button is pressed or time is 0.
 function startTimer(){
+  if(!isOnBreak) {
+    let widthRange = scale(initialSec - seconds, 0, initialSec, 0, 100);
+    TSSoverlayEffect.style.width = widthRange + "%";
+  } else {
+    TBSoverlayEffect.style.width = scale(breakSecond - seconds, 0, breakSecond, 0, 100) + "%";
+  }
   seconds--;
   displayTime(seconds);
   if (seconds == 0 || seconds < 1) {  //time runs out
@@ -51,9 +64,19 @@ function startStop(){
 }
 
 function skipTime(){
+  TSSoverlayEffect.style.width = "0%";
   isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
   isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
   breakTime();
+  if (isOnBreak) {
+    timerBreakState.style.color = 'black';
+    timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
+    TSSoverlayEffect.style.width = "0%";
+  } else {
+    timerBreakState.style.color = 'rgba(128, 128, 128, 0.434)';
+    timerSessionState.style.color = 'black';
+    TBSoverlayEffect.style.width = "0%";
+  }
   displayTime(seconds);
   statusTimer = "started";
   startStop();
