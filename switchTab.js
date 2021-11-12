@@ -25,52 +25,52 @@ appName.onclick = function() {
         hideTabsExcept(0);
         state = 100000;
     }
-}
+};
 
-reportButton.onclick = function () {
+goalsButton.onclick = function () {
     if(state !== 010000) {
-        reportDisplay.style.display = "block";
-        reportButton.style.backgroundColor = "black";
+        goalsDisplay.style.display = "block";
+        goalsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(1);
         state = 010000;
     }
 };
 
-shopButton.onclick = function () {
+reportButton.onclick = function () {
     if(state !== 001000) {
-        shopDisplay.style.display = "block";
-        shopButton.style.backgroundColor = "black";
+        reportDisplay.style.display = "block";
+        reportButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(2);
         state = 001000;
     }
 };
 
-inventoryButton.onclick = function () {
+shopButton.onclick = function () {
     if(state !== 000100) {
-        inventoryDisplay.style.display = "block";
-        inventoryButton.style.backgroundColor = "black";
+        shopDisplay.style.display = "block";
+        shopButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(3);
         state = 000100;
     }
 };
 
-settingsButton.onclick = function () {
+inventoryButton.onclick = function () {
     if(state !== 000010) {
-        settingsDisplay.style.display = "block";
-        settingsButton.style.backgroundColor = "black";
+        inventoryDisplay.style.display = "block";
+        inventoryButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(4);
         state = 000010;
     }
 };
 
-goalsButton.onclick = function () {
+settingsButton.onclick = function () {
     if(state !== 000000) {
-        goalsDisplay.style.display = "block";
-        goalsButton.style.backgroundColor = "black";
+        settingsDisplay.style.display = "block";
+        settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(5);
         state = 000000;
