@@ -1,5 +1,4 @@
-// this is for time picker for goal input form
-const TimePicker = tui.TimePicker;
+// this is for time picker for input forms
 
 // for goals input form
 var tpSpinboxGoals = new tui.TimePicker('#timepicker-selectbox-goals', {   // this is a time picker with drop downs
