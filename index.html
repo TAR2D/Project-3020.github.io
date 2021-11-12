@@ -75,8 +75,8 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="createTask" id="createTask"> Hello! Let's create a new Task!</div>
-                        <div class="createGoal" id="createGoal">
+                        <div class="createTask chatBubblePointer" id="createTask"> Hello! Let's create a new Task!</div>
+                        <div class="createGoal chatBubblePointer" id="createGoal">
                             <div class="goalNameField">What is the name of your new goal?
                                 <input type="goalname" id="gname" placeholder="Goal name...">
                             </div>
@@ -96,9 +96,9 @@
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
-                            <button id="goalButton">New Goal</button>
-                            <button id="taskButton">New Task</button>
-                            <button id="breakButton">Start a Break</button>
+                            <button id="goalButton" onclick="createGoal()">New Goal</button>
+                            <button id="taskButton" onclick="createTask()">New Task</button>
+                            <button id="breakButton"onclick="startBreak()">Start a Break</button>
                         </div>
                     </div>
                 </div>
