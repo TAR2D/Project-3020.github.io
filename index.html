@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="tui-time-picker.css">
     <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
     <!-- More documentation for time picker: https://nhn.github.io/tui.time-picker/latest/TimePicker -->
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
 <body>
     <header>
@@ -69,13 +73,15 @@
                 <h3>Trends</h3>
                 <!-- DAILY, WEEKLY, MONTHLY BUTTONS -->
                 <nav class="trendsBar">
-                    <ul class="trendsBar__items">
-                        <li id="dailyTrend" class="trendsBar__item"><p>Daily</p></li>
-                        <li id="weeklyTrend" class="trendsBar__item"><p>Weekly</p></li>
-                        <li id="monthlyTrend" class="trendsBar__item"><p>Monthly</p></li>
+                    <ul id="trendsBarTabs" class="trendsBar__items">
+                        <li id="dailyTab" class="trendsBar__item--daily"><p>Daily</p></li>
+                        <li id="weeklyTab" class="trendsBar__item--weekly"><p>Weekly</p></li>
+                        <li id="monthlyTab" class="trendsBar__item--monthly"><p>Monthly</p></li>
                     </ul>
                 </nav>
-                <div class="trends__chart"></div> 
+                <div id="trendsCharts" class="trends__chart">
+                    <canvas id="weeklyChart" class="trends__chart--curr" ></canvas>
+                </div> 
                 <!-- CHART DATE NAV BUTTONS -->
                 <div class="trends__dateNavBar">
                     <div class="btn-group">
@@ -108,5 +114,7 @@
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
     <script src="timepicker.js"></script>
+    <script src="switchChart.js"></script>
+    
 </body>
 </html>
