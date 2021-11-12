@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <!-- Time picker -->
     <link rel="stylesheet" href="tui-time-picker.css">
     <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
@@ -24,6 +27,7 @@
         <nav class="navBar">
             <div class="navBar__sectionA"><h3>"WhatsMyName?"</h3></li></div>
             <ul class="navBar__sectionB">
+                <li class="navBar__item navBar__item--goals"><i class="fas fa-bullseye"></i><h3>Goals</h3></li>
                 <li class="navBar__item navBar__item--report"><i class="fas fa-chart-bar"></i><h3>Trends</h3></li>
                 <li class="navBar__item navBar__item--shop"><i class="fas fa-shopping-cart"></i><h3>Shop</h3></li>
                 <li class="navBar__item navBar__item--inventory"><i class="fas fa-tshirt"></i><h3>Inventory</h3></li>
@@ -37,8 +41,36 @@
                 <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
                     <div class="timerBox">
-                        <div id="timer" class="timer"><h1>00:00</h1></div>
-                    </div>
+                        <div id="timer">
+                            <h1 contenteditable="true" onblur="updateTimeEntered()">20:00</h1>
+                            <div class="currentState">
+                                <div class="timerSessionState">
+
+                                    <div class="TSSoverlay"></div>
+
+                                    <div class="TBBtext"><h2>Session</h2></div>
+                                </div>
+                                <div class="timerBreakState">
+
+                                    <div class="TBSoverlay"></div>
+                                    <div class="TBStext">
+                                    <h2>Break</h2></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timerBtngrp">
+                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                        </div><!-- Closing TimerBtn Group -->
+                        <div class="timerContent">
+                            <div class="currentGoal">
+                                <h4 id="currGoal">Current Goal:</h4>
+                            </div>
+                            <div class="currentTask">
+                                <h4 id="currentTask">Current Task:</h4>
+                            </div>
+                        </div>
+                    </div> <!-- Closing TimerBox -->
                     <div class="companionBox">
                         <img class="companion" id="companion" src="images/waving-fullsize.gif"/>
                     </div>
@@ -46,17 +78,24 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="createTask" id="createTask"> Hello! Let's create a new Task!</div>
-                        <div class="createGoal" id="createGoal">
+                        <div class="createTask chatBubblePointer" id="createTask"> Hello! Let's create a new Task!</div>
+                        <div class="createGoal chatBubblePointer" id="createGoal">
                             <div class="goalNameField">What is the name of your new goal?
                                 <input type="goalname" id="gname" placeholder="Goal name...">
                             </div>
                             <div class="goalTimeField">Duration of goal(in hours and minutes):
-                                <div id="timepicker-selectbox"></div>
+                                <div id="timepicker-selectbox-goals"></div>
                             </div>
-                            <button id="createGoalButton">Create Goal</button>
+                            <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
+                            <button id="cancelGoalButton">Cancel</button>
                         </div>
-                        <div class="startBreak" id="startBreak"> Time for a break!</div>
+                        <div class="startBreak chatBubblePointer" id="startBreak"> Ready to go on a break?
+                            <div class="breakDurationField">Break duration(in hours and minutes):
+                                <div id="timepicker-selectbox-break"></div>
+                            </div>
+                            <button id="startBreakButton">Start a break</button>
+                            <button id="cancelBreakButton">Cancel</button>
+                        </div>
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
@@ -66,6 +105,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- GOALS PAGE -->
+            <div class="main__item main__item--goals">
+                <!-- Temporary (you can remove h3) -->
+                <h3>"goals"</h3>
+                <!-- Temporary  -->
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">
@@ -107,9 +152,11 @@
                 <h3>"settings"</h3>
                 <!-- Temporary  -->
             </div>
+            
         </div>
     </main>
-    <script src="script.js"></script>
+    <script src="timer.js"></script>
+	<script src="chat.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
     <script src="timepicker.js"></script>

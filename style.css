@@ -66,7 +66,7 @@ a:visited {
         b: Border
         c: Color
         sectionA: include AppName/MainPage
-        sectionB: include Report, Shop, Inventory and Settings
+        sectionB: include Goals, Report, Shop, Inventory and Settings
     */
     --bg-background: rgba(0, 0, 0, 0.735);
     --b-navigationBar: rgba(128, 128, 128, 0.434);
@@ -86,6 +86,11 @@ a:visited {
 
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
+
+	--c-chatBubble: rgb(165, 206, 230);
+	
+    --ff-TimerFont : 'Roboto', sans-serif;
+    --b-TimerBox: transparent;
 }
 
 body {
@@ -114,7 +119,6 @@ body {
     display: flex;
     align-items: center;
 }
-
 
 .navBar__sectionB {
     /* Percentage of area cover by section in NavBar */
@@ -175,6 +179,11 @@ body {
     flex-direction: row;
 }
 
+.navBar__item--goals {
+    display: flex;
+    flex-direction: row;
+}
+
 main {
     /* maximum height of main */
     height: 590px;
@@ -187,13 +196,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* Styling the timer */
-.timer {
-    color: black;
-    font-size: 250%;
-    font-family: 'Varela Round', sans-serif;
 }
 
 /* Styling main menu */
@@ -211,6 +213,7 @@ main {
     display: flex;
 }
 
+/* left and right box */
 .main__item--menu .rightBox, .main__item--menu .leftBox {
     width: 50%;
     height: 100%;
@@ -221,61 +224,71 @@ main {
     align-content: space-evenly;
 }
 
-/* Right Box */
+/* chat box (within right box) */
 .chatBox {
     width: 90%;
     height: 82.5%;
-
+	display: flex;
+	flex-direction: column;
     border: 1px dotted rgba(128, 128, 128, 0.4);
+	margin-right: 2.5%;
+	overflow-y: scroll;
+	justify-content: flex-end;
+	align-items: flex-start;
 }
 
 .buttonsBox {
     width: 90%;
     height: 7.5%;
-
+	margin-right: 2.5%;
     border: 1px dotted rgba(128, 128, 128, 0.4);
-}
-
-.chatBox ,.buttonsBox {
-    margin-right: 2.5%;
 }
 
 .timerBox, .companionBox {
     margin-left: 2.5%;
 }
 
-/* This is will appear inside the chatBox when clicking the button
+/* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
-.createTask, .createGoal, .startBreak{
+.createTask, .createGoal, .startBreak {
     display: none;
-    overflow-y: scroll;
-    width: 100%;
-    height: 90%;
-    margin: auto;
-    margin-top: 5%;
-    background-color: #ee9458;
+	position: relative;
+	font-family: 'Varela Round';
+    color: black;
+    margin: 2%;
+    background-color: var(--c-chatBubble);
+	border: 2px solid var(--c-chatBubble);
+	border-radius: 15px;
+	padding: 15px;
+	text-align: center;
+	margin-left: 15px;
 }
 
-/* Goal input form */
-.createGoal {
-    display: none;         
-    padding: 10%;
-    justify-content: center;
-    align-content: center;
-    color: var(--c-buttonText);
-    background-color: #ee9458;
-    font-size: 90%;
+/* Little arrow for the chat bubble styling */
+.chatBubblePointer:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border-left: 0.7em solid transparent;
+	border-right: 0.7em solid var(--c-chatBubble);
+	border-top: 0.7em solid transparent;
+	border-bottom: 0.7em solid transparent;
+	margin-top: -0.7em;
+	margin-left: -24px;
 }
 
 .goalNameField, .goalTimeField {
     margin-bottom: 10%;
 }
 
-#timepicker-selectbox, #gname {
+#timepicker-selectbox-goals, #gname {
     margin-top: 1%;
 }
 
-#timepicker-selectbox {
+#timepicker-selectbox-goals {
     width: 58%;
 }
 
@@ -284,6 +297,25 @@ main {
 }
 
 .createGoal button {
+    height: auto;
+    width: auto;
+    font-size: x-small;
+    background-color: var(--c-button); 
+    border-radius: 5px;
+    color: var(--c-buttonText);
+    cursor: pointer; /* Pointer/hand icon */
+}
+
+.breakDurationField, .startBreak button{
+    margin-top: 5%;
+}
+
+#timepicker-selectbox-break{
+    margin-top: 1%;
+    width: 58%;
+}
+
+.startBreak button {
     height: auto;
     width: auto;
     font-size: x-small;
@@ -307,6 +339,7 @@ main {
 }
 
 .btn-group button {
+    cursor: pointer;
     height: 80%;
     width: 32%;
     background-color: var(--c-button); 
@@ -327,22 +360,142 @@ main {
     background-color: var(--c-buttonHover);
 }
 
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 /* left box */
 .timerBox {
     width: 90%;
-    height: 20%;
+    height: 35%;
 
     /* Alignment of timer in centre */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
 
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+   /* border: 1px dotted var(--b-TimerBox);*/
+    border: 1px dotted transparent;
+}
+
+/* Styling the timer */
+
+#timer {
+    color: black;
+    width: 80%;
+    height: 57%;
+    margin-top: 1%;
+    background-color: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
+}
+
+#timer h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 75%;
+
+    font-family: var(--ff-TimerFont);
+    font-size: 5.6em;
+    font-weight: bold;
+}
+
+.currentState {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 25%;
+}
+
+.currentState .timerBreakState, .currentState .timerSessionState {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    height: 80%;
+
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+    border-radius: 3px;
+    border: 2px solid white;
+    background-color: white;
+}
+.TBBtext, .TBStext {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+}
+
+.TSSoverlay, .TBSoverlay {
+    width:0%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.466);
+}
+
+.timerSessionState h2{
+
+    font-size: 1em;
+    color: black;
+}
+
+.timerBreakState h2 {
+    font-size: 1em;
+    color: var(--b-navigationBar);
+}
+
+.timerBtngrp {
+    width: 20%;
+    height: 60%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.timerBtngrp #startStop, .timerBtngrp #skip {
+    width: 90%;
+    height: 45%;
+    font-size: 2em;
+    border-radius: 3px;
+    border: transparent;
+}
+
+#startStop:hover , #skip:hover{
+    background-color: var(--c-buttonHover);
+}
+
+.timerContent {
+    width: 99%;
+    height: 38%;
+    margin-bottom: 2%;
+    background-color: rgba(128, 128, 128, 0.26);
+    border-radius: 4px;
+}
+
+.timerContent h4 {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+}
+
+.currentGoal, .currentTask {
+    margin-top: 1%;
+    margin-left: 2%;
 }
 
 .companionBox {
     width: 90%;
-    height: 70%;
+    height: 55%;
 
     /* Alignment of companion in centre */
     display: flex;
@@ -493,6 +646,19 @@ main {
     }
 }
 
+
+@media (max-width: 825px) {
+    #timer h1{
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 750px) {
+    #timer h1{
+        font-size: 4.5em;
+    }
+}
+
 /* Responsive to Small Window */
 @media (max-width: 720px) {
 
@@ -513,11 +679,26 @@ main {
     }
 
     .leftBox .timerBox {
-        height: 20%;
+        height: 30%;
     }
 
     .leftBox .companionBox {
-        height: 60%;
+        height: 50%;
+    }
+
+
+    .timerBtngrp i {
+        font-size: 0.8em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    #timer h1{
+        font-size: 3.5em;
     }
 }
 
@@ -529,6 +710,10 @@ main {
 
     .navBar__item:not(:last-child) {
         margin-right: 2px;
+    }
+
+    #timer h1{
+        font-size: 2em;
     }
 }
 
