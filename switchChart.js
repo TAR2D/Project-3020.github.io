@@ -36,17 +36,21 @@ nextButton.addEventListener("click", clickNext);
 
 //Show weekly chart
 function showWeeklyChart(){
+    //update styling
     currChart.id = "weeklyChart";
     changeActiveTab(1);
     weeklyTab.style.backgroundColor = "black";
     
+    //set the current week to today's week
     currWeek.setDate(today.getDate() - 6);
     currWeek.setFullYear(today.getFullYear());
     currWeek.setMonth(today.getMonth());
     updateDateText(currWeek);
 
+    //get array of the past 7 days 
     var daysOfWeek = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDay());
 
+    //destroy and rerender the chart
     if(myChart) {
         myChart.destroy();
     }
@@ -56,13 +60,16 @@ function showWeeklyChart(){
 
 //Show daily chart
 function showDailyChart(){
+    //update styling
     currChart.id = "dailyChart";
     changeActiveTab(0);
     dailyTab.style.backgroundColor = "black";
+
+    //set the current date to today's date
     updateDateText(today);
     currDate.setDate(today.getDate());
 
-    //destroy old chart
+    //destroy and rerender the chart
     if(myChart) {
         myChart.destroy();
     }
@@ -72,18 +79,19 @@ function showDailyChart(){
 
 //Show monthly chart
 function showMonthlyChart(){
+    //update styling
     currChart.id = "monthlyChart";
     changeActiveTab(2);
     monthlyTab.style.backgroundColor = "black";
-    currMonth.setMonth(today.getMonth());
 
+    //set the current month to today's month
+    currMonth.setMonth(today.getMonth());
     updateDateText(today);
 
-
-    var startDate = moment().subtract(1, 'months').format('YYYY-MM-DD');
-    var endDate = moment().format('YYYY-MM-DD');
+    //get array of the every day in the month
     var daysOfMonth = getDaysInMonth(today.getFullYear(), today.getMonth());
 
+    //destroy and rerender the chart
     if(myChart) {
         myChart.destroy();
     }
@@ -135,20 +143,21 @@ function clickPrev() {
     var dateLabels; 
     
     if(currChart.id === "weeklyChart") {
-        currWeek.setDate(currWeek.getDate() - 6); 
+        currWeek.setDate(currWeek.getDate() - 7); 
         dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
         updateDateText(currWeek);
   
         myChart.data.labels = dateLabels; 
         myChart.update();
+
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() - 1);
         dateLabels = getDaysInMonth(currMonth.getFullYear(), currMonth.getMonth());
-        
+        updateDateText(currMonth);
+
         myChart.data.labels = dateLabels; 
         myChart.update();
 
-        updateDateText(currMonth);
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() - 1); 
         updateDateText(currDate);
@@ -160,54 +169,66 @@ function clickNext() {
     var dateLabels; 
     
     if(currChart.id === "weeklyChart") {
-        currWeek.setDate(currWeek.getDate() + 6); 
+        currWeek.setDate(currWeek.getDate() + 7); 
         dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
         updateDateText(currWeek);
   
         myChart.data.labels = dateLabels; 
         myChart.update();
+
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() + 1);
         dateLabels = getDaysInMonth(currMonth.getFullYear(), currMonth.getMonth());
-        
+        updateDateText(currMonth);
+
         myChart.data.labels = dateLabels; 
         myChart.update();
 
-        updateDateText(currMonth);
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() + 1); 
         updateDateText(currDate);
     }
 }
 
+//update date text between prev and next buttons
 function updateDateText(givenDate) {
     if(currChart.id === "weeklyChart") {
-        var d2 = givenDate.toString().substr(4, 11); 
-        var d3 = d2.slice(0, 3) + '/' + d2.slice(3, 6) + '/' + d2.slice(6);
+        //parse into MMM/DD/YYYY format 
+        var parsedEndDate = parseFullDate(givenDate);
         
-        //show date range of past 7 days 
+        //get the given date + 6 days 
         var startD = new Date(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate()); 
         startD.setDate(startD.getDate()+6); 
-        var startD2 = startD.toString().substr(4, 11); 
-        var startD3 = startD2.slice(0, 3) + '/' + startD2.slice(3, 6) + '/' + startD2.slice(6);
-        date.textContent = d3.toString() + " - " + startD3.toString(); 
+
+        //parse into MMM/DD/YYYY format 
+        var parsedStartDate = parseFullDate(startD); 
+        date.textContent = parsedEndDate.toString() + " - " + parsedStartDate.toString(); 
 
     } else if (currChart.id === "dailyChart") {
-        var d2 = givenDate.toString().substr(4, 11); 
-        var d3 = d2.slice(0, 3) + '/' + d2.slice(3, 6) + '/' + d2.slice(6);
-        date.textContent = d3.toString(); 
+        //parse into MMM/DD/YYYY format 
+        var parsedDate = parseFullDate(givenDate);
+        date.textContent = parsedDate.toString(); 
 
     } else if (currChart.id === "monthlyChart") { 
+        //parse into MMM/YYYY format 
         var d2 = givenDate.toString().substr(4, 11); 
         var d3 = d2.slice(0, 3) + '/' + d2.slice(6);
         date.textContent = d3.toString();
     }
 }
 
+//parse into MMM/DD/YYYY format 
+function parseFullDate(givenDate) {
+  var d2 = givenDate.toString().substr(4, 11); 
+  var d3 = d2.slice(0, 3) + '/' + d2.slice(3, 6) + '/' + d2.slice(6);
 
-//--------------
+  return d3;
+}
 
 
+/* -----CHARTS------- */
+
+/* -----WEEKLY CHART------- */
 function renderWeeklyChart(daysOfWeek) {
     return new Chart(currChart, {
         type: 'bar',
@@ -272,7 +293,7 @@ function renderWeeklyChart(daysOfWeek) {
       });
 }
 
-
+/* -----DAILY CHART------- */
 function renderDailyChart() {
     return new Chart(currChart, {
         type: 'bar',
@@ -338,6 +359,7 @@ function renderDailyChart() {
       });
 }
 
+/* -----MONTHLY CHART------- */
 function renderMonthlyChart(daysOfMonth) {
     return new Chart(currChart, {
         type: 'bar',
