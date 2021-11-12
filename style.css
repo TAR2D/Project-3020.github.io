@@ -306,17 +306,6 @@ main {
     cursor: pointer; /* Pointer/hand icon */
 }
 
-/* Start a break */
-.startBreak {
-    display: none;         
-    padding: 10%;
-    justify-content: center;
-    align-content: center;
-    color: var(--c-buttonText);
-    background-color: #ee9458;
-    font-size: 90%;
-}
-
 .breakDurationField, .startBreak button{
     margin-top: 5%;
 }
