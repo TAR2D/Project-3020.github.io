@@ -67,7 +67,6 @@ function skipTime(){
   TSSoverlayEffect.style.width = "0%";
   isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
   isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
-  breakTime();
   if (isOnBreak) {
     timerBreakState.style.color = 'black';
     timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
@@ -90,11 +89,4 @@ function displayTime(second) {
   timer.innerHTML = `
   ${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}
   `;
-}
-
-
-function breakTime() {
-  //change what is on the screen.
-  // so he user knows he is on a break 
-  // using the isOnBreak boolean variable.
 }
