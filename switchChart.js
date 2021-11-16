@@ -40,11 +40,10 @@ function showWeeklyChart(){
     currChart.id = "weeklyChart";
     changeActiveTab(1);
     weeklyTab.style.backgroundColor = "black";
+    nextButton.disabled = true; 
     
     //set the current week to today's week
-    currWeek.setDate(today.getDate() - 6);
-    currWeek.setFullYear(today.getFullYear());
-    currWeek.setMonth(today.getMonth());
+    setDate(currWeek, today.getDate() - 6, today.getMonth(), today.getFullYear());
     updateDateText(currWeek);
 
     //get array of the past 7 days 
@@ -64,10 +63,11 @@ function showDailyChart(){
     currChart.id = "dailyChart";
     changeActiveTab(0);
     dailyTab.style.backgroundColor = "black";
+    nextButton.disabled = true; 
 
     //set the current date to today's date
     updateDateText(today);
-    currDate.setDate(today.getDate());
+    setDate(currDate, today.getDate(), today.getMonth(), today.getFullYear());
 
     //destroy and rerender the chart
     if(myChart) {
@@ -83,9 +83,10 @@ function showMonthlyChart(){
     currChart.id = "monthlyChart";
     changeActiveTab(2);
     monthlyTab.style.backgroundColor = "black";
+    nextButton.disabled = true; 
 
     //set the current month to today's month
-    currMonth.setMonth(today.getMonth());
+    setDate(currMonth, today.getDate(), today.getMonth(), today.getFullYear());
     updateDateText(today);
 
     //get array of the every day in the month
@@ -97,6 +98,13 @@ function showMonthlyChart(){
     }
 
     myChart = renderMonthlyChart(daysOfMonth); 
+}
+
+//set a given date object with the given month, date, and year
+function setDate(dateObj, date, month, year) {
+  dateObj.setDate(date); 
+  dateObj.setMonth(month);
+  dateObj.setFullYear(year);
 }
 
 //change colour of inactive tabs 
@@ -142,6 +150,9 @@ function getDaysInWeek(year, month, day) {
 function clickPrev() {
     var dateLabels; 
     
+    //re-enable next button
+    nextButton.disabled = false; 
+
     if(currChart.id === "weeklyChart") {
         currWeek.setDate(currWeek.getDate() - 7); 
         dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
@@ -176,6 +187,13 @@ function clickNext() {
         myChart.data.labels = dateLabels; 
         myChart.update();
 
+        var tempDate = new Date();
+        tempDate.setDate(tempDate.getDate()-7);
+
+        if(currWeek >= tempDate) {
+          nextButton.disabled = true; 
+        }
+
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() + 1);
         dateLabels = getDaysInMonth(currMonth.getFullYear(), currMonth.getMonth());
@@ -184,9 +202,17 @@ function clickNext() {
         myChart.data.labels = dateLabels; 
         myChart.update();
 
+        if(currMonth >= today) {
+          nextButton.disabled = true; 
+        }
+
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() + 1); 
         updateDateText(currDate);
+
+        if(currDate >= today) {
+          nextButton.disabled = true; 
+        }
     }
 }
 
