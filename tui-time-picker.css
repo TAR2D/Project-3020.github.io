@@ -53,7 +53,7 @@
  
  .tui-timepicker {
      position: relative;
-     padding: 5px;
+     padding: 4%;
      font-weight: bold;
      background: white;
      text-align: center;
@@ -101,7 +101,7 @@
  }
  
  .tui-timepicker-btn:hover, .tui-timepicker-btn:focus, .tui-timepicker-btn:active {
-     background-color: #f4f4f4;
+     background-color: transparent;
  }
  
  .tui-timepicker-btn-up {

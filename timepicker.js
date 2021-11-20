@@ -8,12 +8,16 @@ var tpSpinboxGoals = new tui.TimePicker('#timepicker-selectbox-goals', {   // th
     showMeridiem: false         // this enables a.m. and p.m.
 });
 
+// tpSpinboxGoals.getMinute(); <- how to get minutes
+// tpSpinboxGoals.getHour(); <- how to get hour
+
 // for start a break input form
 var tpSpinboxBreak = new tui.TimePicker('#timepicker-selectbox-break', {
     initialHour: 0,
     initialMinute: 5,
     inputType: 'selectbox',
-    showMeridiem: false        
+    showMeridiem: false,
+    language: "testing"
 });
 
 //Add goal name to left box.

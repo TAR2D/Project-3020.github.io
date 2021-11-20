@@ -101,16 +101,15 @@
                         <div class="btn-group">
                             <button id="goalButton" onclick="createGoal()">New Goal</button>
                             <button id="taskButton" onclick="createTask()">New Task</button>
-                            <button id="breakButton"onclick="startBreak()">Start a Break</button>
+                            <button id="breakButton" onclick="startBreak()">Start a Break</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- GOALS PAGE -->
             <div class="main__item main__item--goals">
-                <!-- Temporary (you can remove h3) -->
-                <h3>"goals"</h3>
-                <!-- Temporary  -->
+                <div id="goalsHeader"><h3>Goals</h3></div>
+                <div id="goalsContent"></div>
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">
@@ -161,6 +160,6 @@
     <script src="switchTab.js"></script>
     <script src="timepicker.js"></script>
     <script src="switchChart.js"></script>
-    
+    <script src="goals.js"></script>
 </body>
 </html>

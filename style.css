@@ -611,6 +611,103 @@ main {
     display: none;
 }
 
+/* Styling for Goals */
+
+#goalsHeader, #goalsContent {
+    font-family: 'Varela Round';
+    padding: 2%;
+}
+
+/* for body of goals page */
+#goalsContent {
+    width: 98%;
+    height: 85%;
+    color: black;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+#goalsContent .goal {
+    margin-bottom: 2%;
+    border-color: black;
+    border-style: dotted;
+}
+
+/* for goal button which includes goal name and down arrow on goals page*/
+#goalsContent button {
+    font-family: inherit;
+    font-size: large;
+    width: 100%;
+    padding: 2%;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.goal-button {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2%;
+    padding: 1%;
+}
+
+/* for entire list of tasks for a goal on goals page*/
+#goalsContent ul {
+    display: none;
+    width: 90%;
+    background-color: var(--c-chatBubble);
+    padding: 2% 2%;
+    margin-left: 2%;
+    outline-color: black;
+    outline-width: 2px;
+    outline-style: inset;
+    border-radius: 0 0 5px 5px;
+}
+
+/* for individual task rows on goals page*/
+#goalsContent li {
+    display: flex;
+    font-size: medium;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.goalduration {
+    direction: rtl; /* pushes task duration to the right hand side of task row */
+}
+
+#goalsContent button:focus ~ ul{
+    display: block;
+}
+
+.progressbar {
+    display: flex;
+    background-color: var(--c-chatBubble);
+    height: 100%;
+    border-radius: 5px;
+    z-index: 2; /* bring to front */
+}
+
+.progressbar-container {
+    width: 90%;
+    margin-left: 2%;
+    outline-style: inset;
+    outline-color: black;
+    outline-width: 2px;
+    border-radius: 5px;
+    background-color: rgb(95, 95, 95);
+    display: relative;
+    z-index: 1;
+}
+
+.progress-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! TO-DO: center percentages to center
 
 /* .main__item--shop {
 }

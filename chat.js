@@ -6,12 +6,12 @@ function createTask(){
 	makeVisible("createTask", ["createGoal", "startBreak"]);
 }
   
-  //Show createGoal and hide createTask and startBreak
+//Show createGoal and hide createTask and startBreak
 function createGoal(){
 	makeVisible("createGoal", ["createTask", "startBreak"]);
 }
   
-  //Show startBreak and hide createGoal and createTask
+//Show startBreak and hide createGoal and createTask
 function startBreak(){
 	makeVisible("startBreak", ["createTask", "createGoal"]);
 }
