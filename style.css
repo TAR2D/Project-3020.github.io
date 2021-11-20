@@ -280,20 +280,21 @@ main {
 	margin-left: -24px;
 }
 
-/* Stylizing Input forms */
-.goalNameField, .goalTimeField, .breakDurationField, .taskNameField, .taskTimeField {
+/* STYLIZING INPUT FORMS */
+.goalNameField, .goalTimeField, .breakDurationField, .taskNameField, .taskTimeField, .goalForTaskField {
     margin-bottom: 10%;
 }
-
+/* Time-picker input elements */
 #timepicker-selectbox-goals, #timepicker-selectbox-break, #timepicker-selectbox-task {
     width: 100%;
-	margin-top: 1%;
+	margin-top: 2%;
 }
-
-#gname, #tname {
+/* other input elements */
+#gname, #tname, #goalForTaskDropdown {
     width: 100%;
+	margin-top: 2%;
 }
-
+/* Confirm/cancel buttons within input form message */
 .createGoal button, .startBreak button, .createTask button {
     height: auto;
     width: auto;

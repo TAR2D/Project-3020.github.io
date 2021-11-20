@@ -78,6 +78,7 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
+						<!-- CREATE TASK INPUT FORM -->
                         <div class="createTask chatBubblePointer" id="createTask">
 							<div class="taskNameField">What are you working on?
 								<input type="taskname" id="tname" placeholder="Task name...">
@@ -85,10 +86,18 @@
 							<div class="taskTimeField">Duration (hours and minutes):
 								<div id="timepicker-selectbox-task"></div>
 							</div>
-							<button id="createTaskButton" onclick="updateTask()">Create Task</button>
+							<div class="goalForTaskField">Is this part of a goal?
+								<select id="goalForTaskDropdown">
+									<option>Optional - no goal selected</option>
+									<option>Testing</option>
+									<option>With</option>
+									<option>Placeholders</option>
+								</select>
+							</div>
+							<button id="createTaskButton" onclick="updateTask()">Begin Session</button>
 							<button id="cancelTaskButton">Cancel</button>
 						</div>
-
+						<!-- CREATE GOAL INPUT FORM -->		
                         <div class="createGoal chatBubblePointer" id="createGoal">
                             <div class="goalNameField">What is your goal?
                                 <input type="goalname" id="gname" placeholder="Goal name...">
@@ -99,7 +108,7 @@
                             <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
                             <button id="cancelGoalButton">Cancel</button>
                         </div>
-
+						<!-- START BREAK INPUT FORM -->
                         <div class="startBreak chatBubblePointer" id="startBreak"> Ready to go on a break?
                             <div class="breakDurationField">Duration (hours and minutes):
                                 <div id="timepicker-selectbox-break"></div>
@@ -111,7 +120,7 @@
                     <div class="buttonsBox">
                         <div class="btn-group">
                             <button id="goalButton" onclick="createGoal()">New Goal</button>
-                            <button id="taskButton" onclick="createTask()">New Task</button>
+                            <button id="taskButton" onclick="createTask()">Study Session</button>
                             <button id="breakButton"onclick="startBreak()">Start a Break</button>
                         </div>
                     </div>
