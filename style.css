@@ -621,6 +621,11 @@ button:disabled {
 	overflow-y: scroll;
 }
 
+/* for body of goals page */
+.goalsBody .goal{
+    margin-bottom: 4%;
+}
+
 /* for individual goal headers which includes the goal name and arrow down symbol */
 .goalsBody label {
     display: flex;
@@ -628,24 +633,25 @@ button:disabled {
     font-size: large;
     width: 100%;
     cursor: pointer;
-    padding: 2%;
+    padding: 0 2% 1% 2%;
 }
 
 /* for entire list of tasks for a goal on goals page*/
 .goalsBody ul {
     display: none;
     width: 90%;
+    justify-content:center;
     background-color: var(--c-chatBubble);
-    padding: 2% 2%;
+    padding: 2%;
     margin-left: 2%;
     outline-color: black;
     outline-width: 2px;
     outline-style: inset;
     font-size: medium;
-    border-radius: 0 0 5px 5px;
+    border-radius: 1px 1px 5px 5px;
 }
 
-/* for individual task rows on goals page*/
+/* for individual task rows for a goal's task list*/
 .goalsBody li {
     display: flex;
     font-size: medium;
@@ -653,7 +659,7 @@ button:disabled {
     width: 100%;
 }
 
-.taskduration {
+.timeval {
     direction: rtl; /* pushes task duration to the right hand side of task row */
 }
 
@@ -687,11 +693,19 @@ button:disabled {
     z-index: 1;
 }
  
-/* for the progress bar and the progress percentag*/
+/* for the progress bar and the progress percentage*/
 .progress-container {
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+
+/* adds dashed line in task lists */
+.timeSpentonGoal {
+    border-top: 2px;
+    border-style: dashed;
+    padding-top: 2%;
+    margin-top: 2%;
 }
 
 /* .main__item--shop {
