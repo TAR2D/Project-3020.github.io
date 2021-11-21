@@ -280,23 +280,22 @@ main {
 	margin-left: -24px;
 }
 
-.goalNameField, .goalTimeField {
-    margin-bottom: 8%;
+/* STYLIZING INPUT FORMS */
+.goalNameField, .goalTimeField, .breakDurationField, .taskNameField, .taskTimeField, .goalForTaskField {
+    margin-bottom: 10%;
 }
-
-#timepicker-selectbox-goals, #gname {
-    margin-top: 1%;
+/* Time-picker input elements */
+#timepicker-selectbox-goals, #timepicker-selectbox-break, #timepicker-selectbox-task {
+    width: 60%;
+	margin-top: 2%;
 }
-
-#timepicker-selectbox-goals {
-    width: 58%;
-}
-
-#gname {
+/* other input elements */
+#gname, #tname, #goalForTaskDropdown {
     width: 100%;
+	margin-top: 2%;
 }
-
-.createGoal button {
+/* Confirm/cancel buttons within input form message */
+.createGoal button, .startBreak button, .createTask button {
     height: auto;
     width: auto;
     font-size: x-small;
@@ -306,23 +305,8 @@ main {
     cursor: pointer; /* Pointer/hand icon */
 }
 
-.breakDurationField, .startBreak button{
-    margin-top: 8%;
-}
-
-#timepicker-selectbox-break{
-    margin-top: 1%;
-    width: 58%;
-}
-
-.startBreak button {
-    height: auto;
-    width: auto;
-    font-size: x-small;
-    background-color: var(--c-button); 
-    border-radius: 5px;
-    color: var(--c-buttonText);
-    cursor: pointer; /* Pointer/hand icon */
+.breakDurationField {
+    margin-top: 10%;
 }
 
 /* Chat buttons */
@@ -365,6 +349,16 @@ main {
     content: "";
     clear: both;
     display: table;
+}
+
+/* Disabled button */ 
+button:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 /* left box */
@@ -611,15 +605,15 @@ main {
     display: none;
 }
 
-/* Styling for Goals */
+/* Styling for Goals page*/
 
-#goalsHeader, #goalsContent {
+.goalsHeader, .goalsBody {
     font-family: 'Varela Round';
     padding: 2%;
 }
 
 /* for body of goals page */
-#goalsContent {
+.goalsBody {
     width: 98%;
     height: 85%;
     color: black;
@@ -627,33 +621,18 @@ main {
 	overflow-y: scroll;
 }
 
-#goalsContent .goal {
-    margin-bottom: 2%;
-    border-color: black;
-    border-style: dotted;
-}
-
-/* for goal button which includes goal name and down arrow on goals page*/
-#goalsContent button {
-    font-family: inherit;
-    font-size: large;
-    width: 100%;
-    padding: 2%;
-    border: none;
-    position: relative;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.goal-button {
+/* for individual goal headers which includes the goal name and arrow down symbol */
+.goalsBody label {
     display: flex;
     justify-content: space-between;
-    margin-right: 2%;
-    padding: 1%;
+    font-size: large;
+    width: 100%;
+    cursor: pointer;
+    padding: 2%;
 }
 
 /* for entire list of tasks for a goal on goals page*/
-#goalsContent ul {
+.goalsBody ul {
     display: none;
     width: 90%;
     background-color: var(--c-chatBubble);
@@ -662,25 +641,31 @@ main {
     outline-color: black;
     outline-width: 2px;
     outline-style: inset;
+    font-size: medium;
     border-radius: 0 0 5px 5px;
 }
 
 /* for individual task rows on goals page*/
-#goalsContent li {
+.goalsBody li {
     display: flex;
     font-size: medium;
     justify-content: space-between;
     width: 100%;
 }
 
-.goalduration {
+.taskduration {
     direction: rtl; /* pushes task duration to the right hand side of task row */
 }
 
-#goalsContent button:focus ~ ul{
-    display: block;
+.goalsBody input:checked ~ ul{
+    display: block; /* shows task list when goal header is clicked */
 }
 
+.goalsBody input {
+    display: none; /* gets rid of checkbox for input element*/
+}
+
+/* the bar that represents the actual progress (lighter block) */
 .progressbar {
     display: flex;
     background-color: var(--c-chatBubble);
@@ -689,6 +674,7 @@ main {
     z-index: 2; /* bring to front */
 }
 
+/* outline of the progress bar (darker block) */
 .progressbar-container {
     width: 90%;
     margin-left: 2%;
@@ -700,14 +686,13 @@ main {
     display: relative;
     z-index: 1;
 }
-
+ 
+/* for the progress bar and the progress percentag*/
 .progress-container {
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
-
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! TO-DO: center percentages to center
 
 /* .main__item--shop {
 }

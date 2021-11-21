@@ -78,38 +78,58 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="createTask chatBubblePointer" id="createTask"> Hello! Let's create a new Task!</div>
+						<!-- CREATE TASK INPUT FORM -->
+                        <div class="createTask chatBubblePointer" id="createTask">
+							<div class="taskNameField">What are you working on?
+								<input type="taskname" id="tname" placeholder="Task name...">
+							</div>
+							<div class="taskTimeField">Duration (hours and minutes):
+								<div id="timepicker-selectbox-task"></div>
+							</div>
+							<div class="goalForTaskField">Is this part of a goal?
+								<select id="goalForTaskDropdown">
+									<option>Optional - no goal selected</option>
+									<option>Testing</option>
+									<option>With</option>
+									<option>Placeholders</option>
+								</select>
+							</div>
+							<button id="createTaskButton" onclick="updateTask()">Begin Session</button>
+							<button id="cancelTaskButton">Cancel</button>
+						</div>
+						<!-- CREATE GOAL INPUT FORM -->		
                         <div class="createGoal chatBubblePointer" id="createGoal">
-                            <div class="goalNameField">What is the name of your new goal?
+                            <div class="goalNameField">What is your goal?
                                 <input type="goalname" id="gname" placeholder="Goal name...">
                             </div>
-                            <div class="goalTimeField">Duration of goal(in hours and minutes):
+                            <div class="goalTimeField">Duration (hours and minutes):
                                 <div id="timepicker-selectbox-goals"></div>
                             </div>
                             <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
                             <button id="cancelGoalButton" onclick="createGoal()">Cancel</button>
                         </div>
+						<!-- START BREAK INPUT FORM -->
                         <div class="startBreak chatBubblePointer" id="startBreak"> Ready to go on a break?
-                                <div class="breakDurationField">Break duration(in hours and minutes):
-                                    <div id="timepicker-selectbox-break"></div>
-                                </div>
-                                <button id="startBreakButton">Start a break</button>
-                                <button id="cancelBreakButton" onclick="startBreak()">Cancel</button>
+                            <div class="breakDurationField">Duration (hours and minutes):
+                                <div id="timepicker-selectbox-break"></div>
+                            </div>
+                            <button id="startBreakButton">Start Break</button>
+                            <button id="cancelBreakButton" onclick="startBreak()">Cancel</button>
                         </div>
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
                             <button id="goalButton" onclick="createGoal()">New Goal</button>
-                            <button id="taskButton" onclick="createTask()">New Task</button>
-                            <button id="breakButton" onclick="startBreak()">Start a Break</button>
+                            <button id="taskButton" onclick="createTask()">Study Session</button>
+                            <button id="breakButton"onclick="startBreak()">Start a Break</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- GOALS PAGE -->
             <div class="main__item main__item--goals">
-                <div id="goalsHeader"><h3>Goals</h3></div>
-                <div id="goalsContent"></div>
+                <div class="goalsHeader"><h3>Goals</h3></div>
+                <div class="goalsBody"></div>
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">

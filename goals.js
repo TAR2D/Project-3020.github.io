@@ -18,7 +18,7 @@ var taskDuration = [['13/25', '14/20', '15/15'],
                         ['0/300']];
 
 var goalsNavButton = document.querySelector(".navBar__item--goals");
-var goalsContent = document.getElementById("goalsContent");
+var goalsContent = document.querySelector(".goalsBody");
 var createGoalButton = document.getElementById("createGoalButton");
 
 goalsNavButton.addEventListener("click", setUpGoals);
@@ -36,7 +36,7 @@ function addNewGoal() {
 
 // builds the list of goals (keep this logic to be used when "backend" is finished)
 function setUpGoals() {
-    var div, button, ul, progress, progressVal;
+    var div, ul, progress, progressVal;
 
     for(let i = 0; i < goals.length; i++) {
         div = document.getElementById('goal' + i);      // grab div representing a goal on goals page
@@ -45,24 +45,27 @@ function setUpGoals() {
             div = document.createElement("div");        // create new div element to represent that goal
             div.className = 'goal';
             div.id = 'goal' + i;                        // give goal a unique id
-            button = document.createElement("div");  // create button element 
-            button.innerHTML = '<button class="goal-button"><p id = "goalname">'+ goals[i] + '</p>' + '<p id="goalarrowdown">' + arrowDownSymbol + '</p></button>';  // store goal name with arrow
-            // div.appendChild(button);                    // store button in div
+            
+            div.innerHTML = '<input class="goal-button" id="' + 'goalbutton' + i + '" type="checkbox"></input>';  // store goal name with arrow
+            div.innerHTML += '<label for="' + 'goalbutton' + i + '"><p id="goalname">'
+                + goals[i] + '</p>' + '<p id="goalarrowdown">' + arrowDownSymbol + '</p></label>';
+            
             
             progress = document.createElement("div");
             progress.className = 'progress-container';
             progressVal = getGoalProgress(taskDuration[i]);
+
             if(!progressVal)
                 progressVal = 0;
-            console.log(progressVal);
+
             progress.innerHTML += '<div class="progressbar-container"><div class="progressbar" style="width:' + 
-                                    progressVal + '%"></div></div><p class="progress-percentage">' + progressVal + '%</p>';
-            button.append(progress);
+                progressVal + '%"></div></div><p class="progress-percentage">' + progressVal + '%</p>';
+            div.appendChild(progress);
 
             ul = document.createElement("ul");          // create unordered list to store tasks
+            ul.className = 'tasklist';
             ul.id = 'goal' + i + 'tasks';               // give unordered list unique id
-            button.appendChild(ul);
-            div.appendChild(button);
+            div.appendChild(ul);
             goalsContent.appendChild(div);              
         }
 
@@ -89,8 +92,8 @@ function updateTaskList(currGoalIndex, ul) {
             li = document.createElement("li");                     // create list item
             // li.className = 'goaltasks';   // give each task a unique id
             li.id = 'goal' + currGoalIndex + 'task' + taskIndex;
-            li.innerHTML = '<li>' + tasks[taskIndex] + '</li>';
-            li.innerHTML += '<li class="goalduration">' + convertToTimeFormat(taskDurations[taskIndex]) + '</li>';  // store name and duration of task in list
+            li.innerHTML = '<li class="taskname">' + tasks[taskIndex] + '</li>';
+            li.innerHTML += '<li class="taskduration">' + convertToTimeFormat(taskDurations[taskIndex]) + '</li>';  // store name and duration of task in list
             ul.appendChild(li);                                    // store list item in unordered list
         }
         // console.log(ul);
