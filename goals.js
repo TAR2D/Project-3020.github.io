@@ -35,8 +35,9 @@ var entireGoalDuration = 0;     // entire duration of a goal (all task durations
 function addNewGoal() {
     let newGoalName = document.getElementById("gname").value;   // grab string from goal name input field
     goals.push(newGoalName);                                    // add it to list of goals
-    tasksForGoals.push(tpSpinboxGoals.getMinute());                                     // new goal has no tasks associated with it at the start
-    taskDuration.push([]);
+    tasksForGoals.push([]);                                     // new goal has no tasks associated with it at the start
+    taskDuration.push(['0/' + tpSpinboxGoals.getMinute()]);
+    console.log(taskDuration);
 }
 
 // builds the list of goals (keep this logic to be used when "backend" is finished)
@@ -104,7 +105,7 @@ function updateTaskList(currGoalIndex, ul) {
         }
     }
 
-
+    /* TO-DO: fix multiple instances */
     li = document.createElement("li");              // add list item for time spent on goal
     li.className = "goalSummary timeSpentonGoal";
     li.innerHTML = '<li>Time spent on goal:</li>';
