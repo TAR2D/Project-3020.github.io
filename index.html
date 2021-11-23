@@ -15,17 +15,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <!-- Time picker -->
-    <link rel="stylesheet" href="tui-time-picker.css">
-    <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
+    <!-- <link rel="stylesheet" href="tui-time-picker.css"> -->
+    <!-- <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script> -->
     <!-- More documentation for time picker: https://nhn.github.io/tui.time-picker/latest/TimePicker -->
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 </head>
 <body>
     <header>
         <nav class="navBar">
             <div class="navBar__sectionA"><h3>"WhatsMyName?"</h3></li></div>
             <ul class="navBar__sectionB">
+                <li class="navBar__item navBar__item--goals"><i class="fas fa-bullseye"></i><h3>Goals</h3></li>
                 <li class="navBar__item navBar__item--report"><i class="fas fa-chart-bar"></i><h3>Trends</h3></li>
-                <li class="navBar__item navBar__item--shop"><i class="fas fa-shopping-cart"></i><h3>Shop</h3></li>
                 <li class="navBar__item navBar__item--inventory"><i class="fas fa-tshirt"></i><h3>Inventory</h3></li>
                 <li class="navBar__item navBar__item--settings"><i class="fas fa-cog"></i><h3>Settings</h3></li>
             </ul>
@@ -74,35 +77,88 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="goalNameField">What is the name of your new goal?
-                            <input type="goalname" id="gname" placeholder="Goal name...">
+                        <div class="chatBox__createGoal">
+                            <form action="" method="get">
+                                <div class="goalFormTitle">
+                                    <label for="goalTitle">Goal:</label>
+                                    <input type="text" placeholder="Type here.." name="goalTitle" value="Default *">
+                                </div>
+                                <div class="goalFormDuration">
+                                    <div class="goalDurationH">
+                                        <label for="goalDuration">Hour:</label>
+                                        <input type="number" name="goalDHours" value="10">
+                                    </div>
+                                    <div class="goalDurationM">
+                                        <label for="goalDMinutes">Minutes:</label>
+                                        <input type="number" name="goalDMinutes" value="0">
+                                    </div>
+                                </div>
+                                <div class="createGoalBtngrp">
+                                <input type="submit" value="Add" id="goalFormSubmit">
+                                <button type="button"><i class="fas fa-times"></i></button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="goalTimeField">Duration of goal(in hours and minutes):
-                            <div id="timepicker-selectbox"></div>
+                        <div class="chatBox__startSession">
+                            <form action="" method="get">
+                                <div class="sessionFormTimer">
+                                        <label for="sessionFTimer">Minutes:</label>
+                                        <input type="number" name="goalRSession" value="10">
+                                </div>
+                                <div class="goalRelatedSession">
+                                    <label for="goalRSession">Goal:</label>
+                                    <select name="" id="" for= "sessionFTimer">
+                                        <option value="default">Default *</option>
+                                    </select>
+                                </div>
+                                <div class="startSessionBtnGrp">
+                                <input type="submit" value="Add" id="sessionFormSubmit">
+                                <button type="button"><i class="fas fa-times"></i></button>
+                                </div>
+                            </form>
                         </div>
-                        <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
+                        <div class="chatBox__break">
+                            <form action="" method="get">
+                                <div class="breakFormTimer">
+                                        <label for="breakFTimer">Minutes:</label>
+                                        <input type="number" name="breakFTimer" value="5">
+                                </div>
+                                <div class="breakBtnGrp">
+                                <input type="submit" value="Start" id="breakFormSubmit">
+                                <button type="button"><i class="fas fa-times"></i></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
-                            <button id="goalButton">New Goal</button>
-                            <button id="taskButton">New Task</button>
+                            <button id="goalButton">Goal</button>
+                            <button id="taskButton">Session</button>
                             <button id="breakButton">Start a Break</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- GOALS PAGE -->
+            <div class="main__item main__item--goals">
+                <!-- Temporary (you can remove h3) -->
+                <h3>"goals"</h3>
+                <!-- Temporary  -->
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">
                 <h3>Trends</h3>
                 <!-- DAILY, WEEKLY, MONTHLY BUTTONS -->
                 <nav class="trendsBar">
-                    <ul class="trendsBar__items">
-                        <li id="dailyTrend" class="trendsBar__item"><p>Daily</p></li>
-                        <li id="weeklyTrend" class="trendsBar__item"><p>Weekly</p></li>
-                        <li id="monthlyTrend" class="trendsBar__item"><p>Monthly</p></li>
+                    <ul id="trendsBarTabs" class="trendsBar__items">
+                        <li id="dailyTab" class="trendsBar__item--daily"><p>Daily</p></li>
+                        <li id="weeklyTab" class="trendsBar__item--weekly"><p>Weekly</p></li>
+                        <li id="monthlyTab" class="trendsBar__item--monthly"><p>Monthly</p></li>
                     </ul>
                 </nav>
-                <div class="trends__chart"></div> 
+                <div id="trendsCharts" class="trends__chart">
+                    <canvas id="weeklyChart" class="trends__chart--curr" ></canvas>
+                </div> 
                 <!-- CHART DATE NAV BUTTONS -->
                 <div class="trends__dateNavBar">
                     <div class="btn-group">
@@ -114,11 +170,6 @@
                 <div class="main__item--report trends__summaryBox">Summary: </div> 
                 
             </div>
-            <div class="main__item main__item--shop">
-                <!-- Temporary (you can remove h3) -->
-                <h3>"Shop"</h3>
-                <!-- Temporary  -->
-            </div>
             <div class="main__item main__item--inventory">
                 <!-- Temporary (you can remove h3) -->
                 <h3>"inventory"</h3>
@@ -129,11 +180,16 @@
                 <h3>"settings"</h3>
                 <!-- Temporary  -->
             </div>
+            
         </div>
     </main>
     <script src="timer.js"></script>
+	<!-- <script src="chat.js"></script> -->
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
-    <script src="timepicker.js"></script>
+    <!-- <script src="timepicker.js"></script> -->
+    <script src="switchChart.js"></script>
+    <script src="InputForm.js"></script>
+    
 </body>
 </html>
