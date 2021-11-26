@@ -88,13 +88,10 @@
 							</div>
 							<div class="goalForTaskField">Is this part of a goal?
 								<select id="goalForTaskDropdown">
-									<option>Optional - no goal selected</option>
-									<option>Testing</option>
-									<option>With</option>
-									<option>Placeholders</option>
+									<option>None</option>
 								</select>
 							</div>
-							<button id="createTaskButton" onclick="updateTask()">Begin Session</button>
+							<button id="createTaskButton">Begin Session</button>
 							<button id="cancelTaskButton" onclick="createTask()">Cancel</button>
 						</div>
 						<!-- CREATE GOAL INPUT FORM -->		
@@ -105,7 +102,7 @@
                             <div class="goalTimeField">Duration (hours and minutes):
                                 <div id="timepicker-selectbox-goals"></div>
                             </div>
-                            <button id="createGoalButton" onclick="updateGoal()">Create Goal</button>
+                            <button id="createGoalButton" >Create Goal</button>
                             <button id="cancelGoalButton" onclick="createGoal()">Cancel</button>
                         </div>
 						<!-- START BREAK INPUT FORM -->
@@ -181,5 +178,6 @@
     <script src="timepicker.js"></script>
     <script src="switchChart.js"></script>
     <script src="goalspage.js"></script>
+    <script type="module" src="handleInput.js"></script>
 </body>
 </html>
