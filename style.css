@@ -223,14 +223,20 @@ main {
 .chatBox {
     width: 90%;
     height: 82.5%;
-	display: flex;
-	flex-direction: column;
     border: 1px dotted rgba(128, 128, 128, 0.4);
 	margin-right: 2.5%;
 	overflow-y: scroll;
-	justify-content: flex-end;
     padding: 2%;
-	/* align-items: center; */
+}
+
+.chatBox__msgBox {
+    float: right;
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-bottom: 4px;
 }
 /* 
 .goalForm {
@@ -740,7 +746,7 @@ h5 {
 }
 
 .chatBox__createGoal {
-    height: 35%;
+    height: 180px;
 }
 
 .chatBox__createGoal, .chatBox__startSession, .chatBox__break{
@@ -768,7 +774,7 @@ h5 {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.goalFormTitle {
+.goalFormTitle .sessionFormTitle{
     display: flex;
     width: 100%;
     height: 28.5%;
@@ -791,13 +797,13 @@ h5 {
     align-items: center;
 }
 
-.goalFormTitle input {
+.goalFormTitle input , .sessionFormTitle input{
     border: 1px solid rgba(128, 128, 128, 0.5);
     border-radius: 4px;
     height: 100%;
 }
 
-.goalFormTitle input {
+.goalFormTitle input , .goalFormTitle input{
     font-family: var(--ff-TimerFont);
     font-weight: bold;
     color: rgba(0, 0, 0, 0.6);
@@ -853,7 +859,7 @@ h5 {
 }
 
 .chatBox__startSession{
-    height: 35%;
+    height: 200px;
 }
 
 .sessionFormTimer {
@@ -932,4 +938,24 @@ h5 {
 
 .chatBox__createGoal, .chatBox__startSession, .chatBox__break {
     display: none;
+}
+
+.chatBox p {
+    margin: 4px 0;
+    background-color: rgba(128, 128, 128, 0.4);;
+    width: fit-content;
+    padding: 8px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    color: black;
+    font-family: var(--ff-TimerFont);
+    float: right;
+}
+
+.sessionFormTitle {
+    height: 30%;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
 }
