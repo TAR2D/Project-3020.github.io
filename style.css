@@ -505,6 +505,30 @@ button:disabled {
     overflow: hidden;
 }
 
+/* Page Header for each page (includes title and back button) */
+.page__header {
+	height: 8%;
+	align-items: center;
+	display: flex;
+	color: black;
+	font-family: var(--ff-TimerFont);
+	padding: 5px;
+}
+.page__header__title {
+	font-weight: 700;
+	font-size: 30px;
+	margin: auto;
+}
+.page__backButton {
+	display:flex;
+	flex-direction: row;
+	font-size: 36px;
+	background-color: var(--bg-mainMenu);
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
+}
+
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
