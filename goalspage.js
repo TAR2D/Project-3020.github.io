@@ -43,14 +43,6 @@ function addNewGoal() {
     taskDuration.push(['0/' + (tpSpinboxGoals.getMinute() + tpSpinboxGoals.getHour()*60)]);
 }
 
-// adds new goal to user's list of goals
-function addNewTaskToGoal() {
-    let newGoalName = document.getElementById("gname").value;   // grab string from goal name input field
-    goals.push(newGoalName);                                    // add it to list of goals
-    tasksForGoals.push([]);                                     // new goal has no tasks associated with it at the start
-    taskDuration.push(['0/' + (tpSpinboxGoals.getMinute() + tpSpinboxGoals.getHour()*60)]);
-}
-
 // builds the list of goals
 function setUpGoals() {
     var goalDiv, taskList, progress, progressVal;
@@ -102,8 +94,8 @@ function updateTaskList(currGoalIndex, ul) {
 
         if(!currTask) {                         // only create new task if it hasn't been created
             li = document.createElement("li");  // create list item for new task
-            // store name and duration of task in list
-            li.innerHTML = '<li class="taskname">' + tasks[taskIndex] + '</li>';
+            li.id = 'goal' + currGoalIndex + 'task' + taskIndex;
+            li.innerHTML = '<li class="taskname">' + tasks[taskIndex] + '</li>';    // store name and duration of task in list
             li.innerHTML += '<li class="timeval" id="timespent' + taskIndex + '">' + convertToTimeFormat(taskDurations[taskIndex]) + '</li>'; 
             ul.appendChild(li);                             // store list item in unordered list
         }
