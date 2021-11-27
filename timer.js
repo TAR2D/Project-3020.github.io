@@ -58,6 +58,9 @@ function startTimer(){
   seconds--;
   displayTime(seconds);
   if (seconds == 0 || seconds < 1) {  //time runs out
+    let alarmSound = new Audio('alarm.mp3');  // play alarm
+    alarmSound.load();
+    alarmSound.play();
     skipTime();
   }
 }
