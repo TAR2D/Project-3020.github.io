@@ -58,7 +58,7 @@ function startTimer(){
   seconds--;
   displayTime(seconds);
   if (seconds == 0 || seconds < 1) {  //time runs out
-    let alarmSound = new Audio('alarm.mp3');  // play alarm
+    let alarmSound = new Audio('alarm.mp3');  // play alarm (source: https://freesound.org/people/kwahmah_02/sounds/250629/)
     alarmSound.load();
     alarmSound.play();
     skipTime();

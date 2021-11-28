@@ -152,13 +152,13 @@ function getGoalProgress(tasksDurationArray) {
 // takes a string representing time associated with a task in the form '16/25' and 
 // turns it into '0:16:00/0:25:00'
 function convertToTimeFormat(time) {
-    var strArray = time.split('/');
+    let strArray = time.split('/');
     return convertMinToFormat(strArray[0]) + '/' + convertMinToFormat(strArray[1]);
 }
 
-// takes minutes and converts it to right format (ex: 16 becomes 0:16:00)
+// takes minutes and converts it to right format (ex: 16 becomes 00:16:00)
 function convertMinToFormat(origTimeInMinutes) {
-    var hours, mins;
+    let hours, mins;
 
     hours = Math.floor(origTimeInMinutes/60);
 
