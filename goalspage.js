@@ -25,7 +25,7 @@ var taskDuration = [['13/25', '14/20', '15/15'],
 
 var goalsNavButton = document.querySelector(".navBar__item--goals");
 var goalsBody = document.querySelector(".goalsBody");
-var createGoalButton = document.getElementById("createGoalButton");
+var createGoalButton = document.getElementById("goalButton");
 
 goalsNavButton.addEventListener("click", setUpGoals);
 createGoalButton.addEventListener("click", addNewGoal);
