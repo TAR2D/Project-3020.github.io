@@ -263,19 +263,19 @@ function renderWeeklyChart(daysOfWeek) {
           datasets: [{
             label: 'Goal 1',
             backgroundColor: "#caf270",
-            data: [1, 0, 5, 3, 2,2, 1],
+            data: [1, 0, 1, 1, 2,2, 1],
           }, {
             label: 'Goal 2',
             backgroundColor: "#45c490",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [2, 2, 3, 1, 2,1, 3],
           }, {
             label: 'Goal 3',
             backgroundColor: "#008d93",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [0, 2, 1, 3, 4,2, 2],
           }, {
             label: 'Goal 4',
             backgroundColor: "#2e5468",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [2, 2, 0, 2, 0,2, 0],
           }],
         },
       options: {
@@ -328,19 +328,19 @@ function renderDailyChart() {
           datasets: [{
             label: 'Goal 1',
             backgroundColor: "#caf270",
-            data: [1, 0, 5, 3, 2,2, 1],
+            data: [null, null, null, null, null, null, null, null, null, null, 30, 50, null, 10,null,  40, 10,0, 0],
           }, {
             label: 'Goal 2',
             backgroundColor: "#45c490",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [null, null, null, null, null, null, null, null, null, null,20, 10, 15, 15, 30,20, 10],
           }, {
             label: 'Goal 3',
             backgroundColor: "#008d93",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [null, null, null, null, null, null, null, null, null, null,0, 0, 15, 0, 10,20, 10],
           }, {
             label: 'Goal 4',
             backgroundColor: "#2e5468",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [null, null, null, null, null, null, null, null, null, null,0, 0, 0, 0, 10,20, 15],
           }],
         },
       options: {
@@ -394,19 +394,19 @@ function renderMonthlyChart(daysOfMonth) {
           datasets: [{
             label: 'Goal 1',
             backgroundColor: "#caf270",
-            data: [1, 0, 5, 3, 2,2, 1],
+            data: [1, 0, 1, 1, 2,2, 1],
           }, {
             label: 'Goal 2',
             backgroundColor: "#45c490",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [2, 2, 3, 1, 2,1, 3],
           }, {
             label: 'Goal 3',
             backgroundColor: "#008d93",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [0, 2, 1, 3, 4,2, 2],
           }, {
             label: 'Goal 4',
             backgroundColor: "#2e5468",
-            data: [2, 2, 5, 5, 3,2, 1],
+            data: [2, 2, 0, 2, 0,2, 0],
           }],
         },
       options: {
