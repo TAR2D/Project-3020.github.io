@@ -1,6 +1,8 @@
 // chat.js
 // contains all the chat functionalities
 
+let welcomeBubble = document.getElementById("welcome");
+
 //Show createTask and hide createGoal and startBreak
 function createTask(){
 	makeVisible("createTask", ["createGoal", "startBreak"]);
