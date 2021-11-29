@@ -18,7 +18,7 @@ var tpSpinboxBreak = new tui.TimePicker('#timepicker-selectbox-break', {
 });
 
 // starting a task input form
-var tpSpinboxBreak = new tui.TimePicker('#timepicker-selectbox-task', {
+var tpSpinboxTask = new tui.TimePicker('#timepicker-selectbox-task', {
     initialHour: 0,
     initialMinute: 25,
     inputType: 'selectbox',

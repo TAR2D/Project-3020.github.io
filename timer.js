@@ -31,6 +31,20 @@ function updateTimeEntered(){
   displayTime(seconds);
 }
 
+function updateTimeTaskButton(){
+  isOnBreak = false;
+  seconds = tpSpinboxTask.getMinute()*60 + tpSpinboxTask.getHour()*60*60;
+  initialSec = seconds;
+  displayTime(seconds);
+}
+
+function updateTimeTaskButton(){
+  isOnBreak = true;
+  seconds = tpSpinboxBreak.getMinute()*60 + tpSpinboxBreak.getHour()*60*60;
+  breakSecond = seconds;
+  displayTime(seconds);
+}
+
 function scale (number, inMin, inMax, outMin, outMax) {
   return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }

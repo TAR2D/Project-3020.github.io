@@ -287,20 +287,21 @@ main {
 	margin-left: -24px;
 }
 
-/* Stylizing Input forms */
-.goalNameField, .goalTimeField, .breakDurationField, .taskNameField, .taskTimeField {
+/* STYLIZING INPUT FORMS */
+.goalNameField, .goalTimeField, .breakDurationField, .taskNameField, .taskTimeField, .goalForTaskField {
     margin-bottom: 10%;
 }
-
+/* Time-picker input elements */
 #timepicker-selectbox-goals, #timepicker-selectbox-break, #timepicker-selectbox-task {
     width: 100%;
-	margin-top: 1%;
+	margin-top: 2%;
 }
-
-#gname, #tname {
+/* other input elements */
+#gname, #tname, #goalForTaskDropdown {
     width: 100%;
+	margin-top: 2%;
 }
-
+/* Confirm/cancel buttons within input form message */
 .createGoal button, .startBreak button, .createTask button {
     height: auto;
     width: auto;
@@ -515,6 +516,30 @@ button:disabled {
     position: relative;
 
     top: 65px;
+}
+
+/* Page Header for each page (includes title and back button) */
+.page__header {
+	height: 8%;
+	align-items: center;
+	display: flex;
+	color: black;
+	font-family: var(--ff-TimerFont);
+	padding: 5px;
+}
+.page__header__title {
+	font-weight: 700;
+	font-size: 30px;
+	margin: auto;
+}
+.page__backButton {
+	display:flex;
+	flex-direction: row;
+	font-size: 36px;
+	background-color: var(--bg-mainMenu);
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
 }
 
 /* Stying the Trends page */ 

@@ -48,23 +48,3 @@ function getStyle(el, name) {
 		return el.currentStyle[name];
 	return null;
 }
-
-//Add goal name to left box.
-function updateGoal(){
-    let gName = document.getElementById("gname").value;
-    document.getElementById("currGoal").innerHTML = "Current Goal: " + gName;
-}
-
-//Add task name to left box.
-function updateTask(){
-    let tName = document.getElementById("tname").value;
-    document.getElementById("currentTask").innerHTML = "Current Task: " + tName;
-	if(skipButton.disabled) {
-		skipButton.disabled = false; 
-		startButton.disabled = false; 
-	}
-}
-
-function welcomeMessage() {
-	welcomeBubble.style.display = "block"; 
-}
