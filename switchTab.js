@@ -3,7 +3,6 @@ let shopButton = document.querySelector(".navBar__item--shop");
 let inventoryButton = document.querySelector(".navBar__item--inventory");
 let settingsButton = document.querySelector(".navBar__item--settings");
 let goalsButton = document.querySelector(".navBar__item--goals");
-let backButton = document.querySelector(".page__backButton");
 
 let mainMenuDisplay = document.querySelector(".main__item--menu");
 let reportDisplay = document.querySelector(".main__item--report");
@@ -33,9 +32,10 @@ appName.onclick = function() {
     returnHome();
 };
 
-backButton.onclick = function() {
+// selecting every page__backButton element and giving it the returnHome onclick functionality.
+document.querySelectorAll(".page__backButton").forEach(item => item.addEventListener("click", () => {
 	returnHome();
-};
+}));
 
 goalsButton.onclick = function () {
     if(state !== 010000) {
