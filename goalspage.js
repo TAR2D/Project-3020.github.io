@@ -1,159 +1,151 @@
-// NOTE: have to update entire file to use objects
+import {getChatBox} from './inputForm.js';
 
-// import {data} from './handleInput.js'; 
-// let goals = data();
-
-// arrays below are filled with random data; feel free to add or change
-var goals = ["COMP 3380", "COMP 3020", "MATH 1700", "COMP 3020", "MATH 1300"]; // list of user's goals
-
-// tasks associated with each goal.
-// i've set this up so that tasksForGoals[0] is associated with goals[0]
-var tasksForGoals = [["Assignment 1", "Test 1", "Assignment 2"], 
-                     ["Test 1", "Quiz 2"], 
-                     ["Assignment 1", "Assignment 2"],
-                     ["Work on web application :)"],
-                     ["Test 1"]];
-
-
-// time spent on task and total task duration of a goal,
-// where taskDuration[0] are the duration of tasks for goals[0]
-var taskDuration = [['13/25', '14/20', '15/15'],   
-                    ['160/160', '50/70'],
-                    ['5/5', '0/60'],
-                    ['100/100'],
-                    ['0/300']];
+let cb = getChatBox();
+let goals = cb.goalsList;               // list of Goal objects
 
 var goalsNavButton = document.querySelector(".navBar__item--goals");
-var goalsBody = document.querySelector(".goalsBody");
-var createGoalButton = document.getElementById("goalButton");
+var goalsPage = document.querySelector(".goalsBody");
 
 goalsNavButton.addEventListener("click", setUpGoals);
-createGoalButton.addEventListener("click", addNewGoal);
 
 const arrowDownSymbol = '<i class="fas fa-arrow-down"></i>';
 
-var progressTowardGoalTime = 0; // time spent towards a goal
-var entireGoalDuration = 0;     // entire duration of a goal (all task durations for that goal summed up)
+// creates some data to show on goal page. feel free to add or change anything.
+function createRandomData(){
+    let randomGoalNames = ["COMP 3380", "COMP 2080", "MATH 1700", "COMP 3020", "MATH 1300"];
+    let randomSessionNames = [["Assignment 1", "Test 1", "Assignment 2"], ["Test 1", "Quiz 2"], 
+        ["Assignment 1", "Assignment 2"], ["Work on web application :)"], ["Test 1"]];
+    let randomSessionDurations = [[25, 20, 15], [160, 70], [5, 60], [100], [300]];
+    let randomSessionElapsedTime = [[13, 14, 15], [160, 50], [5, 0], [100], [0]];
+    let numGoals = 5, numSessions = 0;
+    let newGoal, newSession;
 
-// adds new goal to user's list of goals
-function addNewGoal() {
-    let newGoalName = document.getElementById("gname").value;   // grab string from goal name input field
-    goals.push(newGoalName);                                    // add it to list of goals
-    tasksForGoals.push([]);                                     // new goal has no tasks associated with it at the start
-    taskDuration.push(['0/' + (tpSpinboxGoals.getMinute() + tpSpinboxGoals.getHour()*60)]);
+    for(let i = 0; i < numGoals; i++) {
+        newGoal = new Goal(randomGoalNames[i]);
+        
+        numSessions = randomSessionNames[i].length; // num sessions for curr goal
+        for(let j = 0; j < numSessions; j++) {
+            newSession = new Session(randomSessionNames[i][j], randomSessionDurations[i][j], newGoal);
+            newSession.updateSession(randomSessionElapsedTime[i][j]);
+            newGoal.addSession(newSession);
+        }
+
+        goals.push(newGoal);
+    }
 }
+createRandomData(); // insert random data
 
 // builds the list of goals
 function setUpGoals() {
-    var goalDiv, taskList, progress, progressVal;
+    let goalDiv, sessionList, progress, progressVal, currGoal;
+    let goalID, goalButtonID, sessionID;
 
     for(let i = 0; i < goals.length; i++) {
-        goalDiv = document.getElementById('goal' + i);      // grab div representing a goal on goals page
+        
+        goalID = 'goal' + i;
+        goalDiv = document.getElementById(goalID);          // find div representing a goal on goals page
+        currGoal = goals[i];
+        
         if(!goalDiv) {                                      // only create goal if we haven't created it yet
             goalDiv = document.createElement("div");        // create new div element to represent that goal
             goalDiv.className = 'goal';
-            goalDiv.id = 'goal' + i;                        
+            goalDiv.id = goalID;                        
             
             // store goal name with arrow
-            goalDiv.innerHTML = '<input class="goal-button" id="' + 'goalbutton' + i + '" type="checkbox"></input>'; 
-            goalDiv.innerHTML += '<label for="' + 'goalbutton' + i + '"><p id="goalname">'
-                + goals[i] + '</p>' + '<p id="goalarrowdown">' + arrowDownSymbol + '</p></label>';
+            goalButtonID = 'goalbutton' + i;
+            goalDiv.innerHTML = '<input class="goal-button" id="' + goalButtonID + '" type="checkbox"></input>'; 
+            goalDiv.innerHTML += '<label for="' + goalButtonID + '"><p id="goalname">'
+                + currGoal.title + '</p><p class="goalarrowdown">' + arrowDownSymbol + '</p></label>';
             
-            // create div that holds all the progress items
+            // create div that holds the progress bar and progress percentage
             progress = document.createElement("div");
             progress.className = 'progress-container';
-            progressVal = getGoalProgress(taskDuration[i]); // calcualte progress of that goal
-
+            progressVal = getGoalProgress(currGoal); // calcualte progress of that goal
             // create the progress bar and progress percentage
             progress.innerHTML += '<div class="progressbar-container"><div class="progressbar" style="width:' + 
                 progressVal + '%"></div></div><div class="progress-percentage"><p>' + progressVal + '%</p></div>';
             goalDiv.appendChild(progress);
 
-            taskList = document.createElement("ul");       // create unordered list to store tasks
-            taskList.className = 'tasklist';
-            taskList.id = 'goal' + i + 'tasks';
-            goalDiv.appendChild(taskList);
-            goalsBody.appendChild(goalDiv);              
+            sessionList = document.createElement("ul");    // create unordered list to store sessions
+            sessionList.className = 'sessionlist';
+            sessionID = 'goal' + i + 'sessions';
+            sessionList.id = sessionID;
+            goalDiv.appendChild(sessionList);             // add list to goal div
+            goalsPage.appendChild(goalDiv);               // add goal div to goals page
         }
 
-        // check if list of tasks for each goal needs to be updated with new values
-        taskList = document.getElementById('goal' + i + 'tasks');   // get list of tasks for current goal
-        updateTaskList(i, taskList);                                
+        // check if list of sessions for each goal needs to be updated with new values
+        sessionList = document.getElementById(sessionID);   // get list of sessions for current goal
+        updateTaskList(currGoal, i, sessionList);                                
     }
 }
 
-// 'ul' is an unordered list representing tasks for current goal
-function updateTaskList(currGoalIndex, ul) {
-    var li, currTask;
+// 'ul' is an unordered list representing sessions for current goal
+function updateTaskList(currGoal, currGoalIndex, ul) {
+    let li, currSession;
 
-    var tasks = tasksForGoals[currGoalIndex];          // grab array of tasks associated with current goal
-    var taskDurations = taskDuration[currGoalIndex];   // grab array of time associated with those tasks for the current goal
+    let goalSessions = currGoal.getListOfSessions();      // grab array of sessions associated with current goal
+    // let taskDurations = taskDuration[currGoalIndex];   // grab array of time associated with those sessions for the current goal
 
-    for(let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {   // go through array of tasks
-        currTask = document.getElementById('goal' + currGoalIndex + 'task' + taskIndex);
+    for(let i = 0; i < goalSessions.length; i++) {  // go through array of sessions
+        currSession = document.getElementById('goal' + currGoalIndex + 'session' + i);
 
-        if(!currTask) {                         // only create new task if it hasn't been created
-            li = document.createElement("li");  // create list item for new task
-            li.id = 'goal' + currGoalIndex + 'task' + taskIndex;
-            li.innerHTML = '<li class="taskname">' + tasks[taskIndex] + '</li>';    // store name and duration of task in list
-            li.innerHTML += '<li class="timeval" id="timespent' + taskIndex + '">' + convertToTimeFormat(taskDurations[taskIndex]) + '</li>'; 
+        if(!currSession) {                          // only create new task if it hasn't been created
+            currSession = goalSessions[i];
+            li = document.createElement("li");      // create list item for new task
+            li.id = 'goal' + currGoalIndex + 'session' + i;
+            li.innerHTML = '<li class="taskname">' + currSession.title + '</li>';    // store name and duration of task in list
+            li.innerHTML += '<li class="timeval" id="timespent' + i + '">' + 
+                convertToTimeFormat(currSession.elapsedTime, currSession.duration) + '</li>'; 
             ul.appendChild(li);                             // store list item in unordered list
         }
     }
 
+    let timeToDisplay = convertMinToFormat(currGoal.calculateElapsedTime());
     li = document.getElementById('goaltimespent' + currGoalIndex);
     if(!li){    // create list item for goal time spent if it doesn't exist
         li = document.createElement("li");              // add list item for time spent on goal
         li.className = "goalSummary timeSpentonGoal";
         li.innerHTML = '<li>Time spent on goal:</li>';
-        li.innerHTML += '<li class="timeval" id="goaltimespent' + currGoalIndex + '">' + convertMinToFormat(progressTowardGoalTime) + '</li>';
+        li.innerHTML += '<li class="timeval" id="goaltimespent' + currGoalIndex + '">' + timeToDisplay + '</li>';
         ul.appendChild(li);
     }
     else    // if it exists, update the value
-        document.getElementById('goaltimespent' + currGoalIndex).innerHTML = convertMinToFormat(progressTowardGoalTime);
+        document.getElementById('goaltimespent' + currGoalIndex).innerHTML = timeToDisplay;
 
     li = document.getElementById('goaltimeleft' + currGoalIndex);
+    timeToDisplay = convertMinToFormat(currGoal.calculateTimeRemaining());
     if(!li){
         li = document.createElement("li");              // add list item for time left for goal
         li.className = "goalSummary timeLeft";
         li.innerHTML = '<li>Time remaining:</li>';
-        li.innerHTML += '<li class="timeval" id="goaltimeleft' + currGoalIndex + '">' + convertMinToFormat(entireGoalDuration - progressTowardGoalTime) + '</li>';
+        li.innerHTML += '<li class="timeval" id="goaltimeleft' + currGoalIndex + '">' + timeToDisplay + '</li>';
         ul.appendChild(li);
     }
     else
-        document.getElementById('goaltimeleft' + currGoalIndex).innerHTML = convertMinToFormat(entireGoalDuration - progressTowardGoalTime);
+        document.getElementById('goaltimeleft' + currGoalIndex).innerHTML = timeToDisplay;
 
     li = document.getElementById('goaltotaltime' + currGoalIndex);
+    timeToDisplay = convertMinToFormat(currGoal.duration);
     if(!li){
         li = document.createElement("li");              // add list item for total time for goal
         li.className = "goalSummary totalGoalDuration";
         li.innerHTML = '<li>Goal duration:</li>';
-        li.innerHTML += '<li class="timeval" id="goaltotaltime' + currGoalIndex + '">' + convertMinToFormat(entireGoalDuration) + '</li>';
+        li.innerHTML += '<li class="timeval" id="goaltotaltime' + currGoalIndex + '">' + timeToDisplay + '</li>';
         ul.appendChild(li);
     }
     else
-        document.getElementById('goaltotaltime' + currGoalIndex).innerHTML = convertMinToFormat(entireGoalDuration);
+        document.getElementById('goaltotaltime' + currGoalIndex).innerHTML = timeToDisplay;
 }
 
-function getGoalProgress(tasksDurationArray) {
-    var taskDetails;
-    progressTowardGoalTime = 0;    // reset values
-    entireGoalDuration = 0;
-
-    // go through array representing duration of tasks for a specific goal
-    for(let i = 0; i < tasksDurationArray.length; i++) {
-        taskDetails = tasksDurationArray[i].split('/'); // taskDetails[0] = time spent on that task, taskDetails[1] = total task duration
-        progressTowardGoalTime += Number(taskDetails[0]);   // sum up time spent on all tasks
-        entireGoalDuration += Number(taskDetails[1]);       // sum up all task durations
-    }
-    return Math.floor(progressTowardGoalTime/entireGoalDuration * 100); // return int that represents the progress percentage
+function getGoalProgress(goal) {
+    return Math.floor((goal.calculateElapsedTime()/goal.duration)*100);
 }
 
 // takes a string representing time associated with a task in the form '16/25' and 
 // turns it into '0:16:00/0:25:00'
-function convertToTimeFormat(time) {
-    let strArray = time.split('/');
-    return convertMinToFormat(strArray[0]) + '/' + convertMinToFormat(strArray[1]);
+function convertToTimeFormat(elapsedTime, totalTime) {
+    return convertMinToFormat(elapsedTime) + '/' + convertMinToFormat(totalTime);
 }
 
 // takes minutes and converts it to right format (ex: 16 becomes 00:16:00)
@@ -172,7 +164,7 @@ function convertMinToFormat(origTimeInMinutes) {
         mins = addZero(origTimeInMinutes);
     }
 
-    return hours + ':' + mins + ':' + '00';
+    return hours + ':' + mins + ':' + '00'; // TO-DO: implement specifying seconds
 }
 
 // adds extra zero to val if val < 10 (ex: '7' turns into '07')

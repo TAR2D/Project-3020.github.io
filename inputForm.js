@@ -23,9 +23,9 @@ class chatBox {
         this.sessionList = [];
         this.messageList = [];
 
-        // Add Defualt Goal and session
-        this.goalsList.push(new Goal());
-        this.sessionList.push(this.goalsList[0]);
+        // Add default goals and session
+        // this.goalsList.push(new Goal());
+        // this.sessionList.push(this.goalsList[0]);
     }
 
     display() {
@@ -75,12 +75,11 @@ class chatBox {
 
             let goalFormInfo = $('.chatBox__createGoal form').serializeArray();
             let goalTitle = goalFormInfo[0].value;
-            let goalDurationH = goalFormInfo[1].value;
-            let goalDurationM = goalFormInfo[2].value;
-
+            let goalDurationH = Number(goalFormInfo[1].value);
+            let goalDurationM = Number(goalFormInfo[2].value);
+            
             this.createMessage("New Goal: " + goalTitle + " Created. Duration: " + 
             goalDurationH + " H and " + goalDurationM + " M");
-
             let newGoal = new Goal(goalTitle, goalDurationH*60 + goalDurationM);
             this.eventList.push(newGoal);
             this.goalsList.push(newGoal);
@@ -105,7 +104,8 @@ class chatBox {
                 " M. Relative Goal: " + sessionGoal.title
             );
 
-            let newSession = new Session(sessionTitle, sessionDuration, sessionGoal)
+            let newSession = new Session(sessionTitle, sessionDuration, sessionGoal);
+            sessionGoal.addSession(newSession);
             this.eventList.push(newSession);
             this.sessionList.push(newSession);
 
@@ -160,6 +160,9 @@ class chatBox {
 const cb = new chatBox();
 cb.display();
 
+export function getChatBox() {
+    return cb;
+};
 
 // Prevent Submitting Form
 $(".chatBox__createGoal form").submit(function(e) {
