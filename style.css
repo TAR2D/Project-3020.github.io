@@ -250,8 +250,7 @@ main {
 
 /* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
-.createTask, .createGoal, .startBreak {
-    display: none;
+.welcome, .createTask, .createGoal, .startBreak {
 	position: relative;
 	font-family: 'Varela Round';
     color: black;
@@ -262,6 +261,14 @@ main {
 	padding: 15px;
 	text-align: center;
 	margin-left: 15px;
+}
+
+.welcome {
+    display: block;
+}
+
+.createTask, .createGoal, .startBreak {
+    display: none;
 }
 
 /* Little arrow for the chat bubble styling */
@@ -309,7 +316,7 @@ main {
 }
 
 /* Chat buttons */
-.btn-group {
+.chat-btn-group {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -497,29 +504,32 @@ button:disabled {
     object-fit: contain;
 
     border: 1px dotted rgba(128, 128, 128, 0.4);
+    background-image: url(images/companion-bg.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 .companion {
     max-height:100%;
     overflow: hidden;
+    position: relative;
+
+    top: 65px;
 }
 
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
-    text-align: left;
-    color: black;
-    padding: 10px;
     position: relative;
 
     display: flex;
 }
 
-.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+.trends__chart, .trends__summaryTitle, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
     width: 75%; 
 }
 
-.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryTitle, .trends__summaryBox {
     margin: auto;
 }
 
@@ -542,7 +552,7 @@ button:disabled {
     align-items: center;
 }
 
-.trendsBar__item--daily, .trendsBar__item--monthly {
+.trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
     display: flex;
     padding:10px 12px;
     border-radius: 4px;
@@ -551,52 +561,66 @@ button:disabled {
     background-color: var(--bg-sectionB);
 }
 
-.trendsBar__item--weekly {
-    display: flex;
-    padding:10px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px 0 0 5px; 
-    background-color: black;
+.trendsBar__item--daily, .trendsBar__item--monthly {
+    background-color: var(--bg-sectionB);
 }
 
+.trendsBar__item--weekly {
+    background-color: black;
+}
 
 .trends__dateNavBar {
     height: 7.5%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .trends__currDate {
     margin: 5px 5px; 
     color: black;
-    text-align: center;
     white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .trends__summaryBox { 
     height: 15%; 
+    Overflow-y:scroll;
 }
 
-.trends__chart--weekly {
+.trends__summaryTitle { 
+    font-size: 120%;
+    background-color: #546a76;
+    color: white;
+    padding-left: 8px;
+}
+
+.trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
     width:100%;
     height:100%;
     display: flex;
-    
 }
 
-.trends__chart--daily {
-    width:100%;
-    height:100%;
-    display: none;
+#summaryBox { 
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+}
+
+#summaryBox td, #summaryBox th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
   
-}
+#summaryBox tr:nth-child(even){background-color: #f2f2f2;}
+  
+#summaryBox tr:hover {background-color: #ddd;}
 
-.trends__chart--monthly {
-    width:100%;
-    height:100%;
-    display: none;
-    
+#prevButton, #nextButton{
+    width: 15%;
 }
 
 /* Display none for all child element excent main menu as default */

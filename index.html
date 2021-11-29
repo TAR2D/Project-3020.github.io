@@ -59,8 +59,8 @@
                             </div>
                         </div>
                         <div class="timerBtngrp">
-                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                            <button id="startStop" onclick="startStop();" disabled><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();" disabled><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
@@ -78,6 +78,8 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
+                        <div class="welcome chatBubblePointer" id="welcome"> Welcome! To get started, please create a new study session.</div>
+
                         <div class="createTask chatBubblePointer" id="createTask">
 							<div class="taskNameField">What are you working on?
 								<input type="taskname" id="tname" placeholder="Task name...">
@@ -109,7 +111,7 @@
                         </div>
                     </div>
                     <div class="buttonsBox">
-                        <div class="btn-group">
+                        <div class="chat-btn-group btn-group">
                             <button id="goalButton" onclick="createGoal()">New Goal</button>
                             <button id="taskButton" onclick="createTask()">New Task</button>
                             <button id="breakButton"onclick="startBreak()">Start a Break</button>
@@ -134,18 +136,30 @@
                         <li id="monthlyTab" class="trendsBar__item--monthly"><p>Monthly</p></li>
                     </ul>
                 </nav>
+                <!-- CHART DATE NAV BUTTONS -->
+                <div class="trends__dateNavBar btn-group">
+                    <button id="prevButton"><p>Prev</p></button>
+                    <p id="date" class="trends__currDate">"Insert Date Here"</p>
+                    <button id="nextButton"><p>Next</p></button>
+                </div>
+                <!-- CHART -->
                 <div id="trendsCharts" class="trends__chart">
                     <canvas id="weeklyChart" class="trends__chart--curr" ></canvas>
                 </div> 
-                <!-- CHART DATE NAV BUTTONS -->
-                <div class="trends__dateNavBar">
-                    <div class="btn-group">
-                        <button id="prevButton"><p>Prev</p></button>
-                        <p id="date" class="trends__currDate">"Insert Date Here"</p>
-                        <button id="nextButton"><p>Next</p></button>
-                    </div>
-                </div>
-                <div class="main__item--report trends__summaryBox">Summary: </div> 
+                <!-- CHART SUMMARY TABLE -->
+                <div class="main__item--report trends__summaryTitle">Summary: </p> </div>
+                <div class="main__item--report trends__summaryBox"> 
+                    <table id="summaryBox">
+                        <tr>
+                          <td>Total Study Time:</td>
+                          <td>44 hours</td>
+                        </tr>
+                        <tr>
+                            <td>Average Daily Study Time: </td>
+                            <td>6.3 hours</td>
+                        </tr>
+                      </table>
+                </div> 
                 
             </div>
             <div class="main__item main__item--shop">

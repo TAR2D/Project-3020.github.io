@@ -1,6 +1,9 @@
 // chat.js
 // contains all the chat functionalities
 
+let startButton = document.getElementById("startStop");
+let welcomeBubble = document.getElementById("welcome");
+
 //Show createTask and hide createGoal and startBreak
 function createTask(){
 	makeVisible("createTask", ["createGoal", "startBreak"]);
@@ -56,4 +59,12 @@ function updateGoal(){
 function updateTask(){
     let tName = document.getElementById("tname").value;
     document.getElementById("currentTask").innerHTML = "Current Task: " + tName;
+	if(skipButton.disabled) {
+		skipButton.disabled = false; 
+		startButton.disabled = false; 
+	}
+}
+
+function welcomeMessage() {
+	welcomeBubble.style.display = "block"; 
 }
