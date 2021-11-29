@@ -3,6 +3,7 @@ let shopButton = document.querySelector(".navBar__item--shop");
 let inventoryButton = document.querySelector(".navBar__item--inventory");
 let settingsButton = document.querySelector(".navBar__item--settings");
 let goalsButton = document.querySelector(".navBar__item--goals");
+let backButton = document.querySelector(".page__backButton");
 
 let mainMenuDisplay = document.querySelector(".main__item--menu");
 let reportDisplay = document.querySelector(".main__item--report");
@@ -17,14 +18,23 @@ let mainMenu = document.querySelector(".main__items");
 let sectionB = document.querySelector(".navBar__sectionB");
 var state = 100000;
 
-appName.onclick = function() {
-    if(state !== 100000) {
+// used by the appName and backButton buttons
+function returnHome() {
+	if(state !== 100000) {
         mainMenuDisplay.style.display = "flex";
         appName.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(0);
         state = 100000;
     }
+};
+
+appName.onclick = function() {
+    returnHome();
+};
+
+backButton.onclick = function() {
+	returnHome();
 };
 
 goalsButton.onclick = function () {
