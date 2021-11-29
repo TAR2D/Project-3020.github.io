@@ -612,7 +612,7 @@ button:disabled {
 }
 
 .trends__summaryBox { 
-    height: 15%; 
+    height: 12.5%; 
     Overflow-y:scroll;
 }
 

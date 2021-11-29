@@ -9,8 +9,6 @@ let seconds = initialSec; //take same initial 20 seconds.
 let statusTimer = "stopped";  //initially it will be paused
 let isOnBreak = false;        //it will be on task when first opened.
 
-let skipButton = document.getElementById("skip");
-
 let interval = null;
 displayTime(seconds);
 
