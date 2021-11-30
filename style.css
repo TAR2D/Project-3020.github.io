@@ -736,7 +736,7 @@ button:disabled {
 }
 
 /* adds dashed line in task lists */
-.timeSpentonGoal {
+.goaltimespent {
     border-top: 2px;
     border-style: dashed;
     padding-top: 2%;

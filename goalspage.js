@@ -1,7 +1,8 @@
 import {getChatBox} from './inputForm.js';
 
 let cb = getChatBox();
-let goals = cb.goalsList;               // list of Goal objects
+let goals = cb.goalsList;  // list of Goal objects
+let events = cb.eventList;
 
 var goalsNavButton = document.querySelector(".navBar__item--goals");
 var goalsPage = document.querySelector(".goalsBody");
@@ -17,13 +18,13 @@ function createRandomData(){
         ["Assignment 1", "Assignment 2"], ["Work on web application :)"], ["Test 1"]];
     let randomSessionDurations = [[25, 20, 15], [160, 70], [5, 60], [100], [300]];
     let randomSessionElapsedTime = [[13, 14, 15], [160, 50], [5, 0], [100], [0]];
-    let numGoals = 5, numSessions = 0;
+    let numGoals = 5, numSessions;
     let newGoal, newSession;
 
     for(let i = 0; i < numGoals; i++) {
         newGoal = new Goal(randomGoalNames[i]);
         
-        numSessions = randomSessionNames[i].length; // num sessions for curr goal
+        numSessions = randomSessionNames[i].length;
         for(let j = 0; j < numSessions; j++) {
             newSession = new Session(randomSessionNames[i][j], randomSessionDurations[i][j], newGoal);
             newSession.updateSession(randomSessionElapsedTime[i][j]);
@@ -31,6 +32,7 @@ function createRandomData(){
         }
 
         goals.push(newGoal);
+        events.push(newGoal);
     }
 }
 createRandomData(); // insert random data
@@ -80,9 +82,8 @@ function setUpGoals() {
     }
 }
 
-// 'ul' is an unordered list representing sessions for current goal
-function updateTaskList(currGoal, currGoalIndex, ul) {
-    let li, currSession;
+function updateTaskList(currGoal, currGoalIndex, sessionList) {
+    let listItem, currSession;
 
     let goalSessions = currGoal.getListOfSessions();      // grab array of sessions associated with current goal
     // let taskDurations = taskDuration[currGoalIndex];   // grab array of time associated with those sessions for the current goal
@@ -92,50 +93,32 @@ function updateTaskList(currGoal, currGoalIndex, ul) {
 
         if(!currSession) {                          // only create new task if it hasn't been created
             currSession = goalSessions[i];
-            li = document.createElement("li");      // create list item for new task
-            li.id = 'goal' + currGoalIndex + 'session' + i;
-            li.innerHTML = '<li class="taskname">' + currSession.title + '</li>';    // store name and duration of task in list
-            li.innerHTML += '<li class="timeval" id="timespent' + i + '">' + 
+            listItem = document.createElement("li");      // create list item for new task
+            listItem.id = 'goal' + currGoalIndex + 'session' + i;
+             // store name and duration of task in list
+            listItem.innerHTML = '<li class="taskname">' + currSession.title + '</li><li class="timeval">' + 
                 convertToTimeFormat(currSession.elapsedTime, currSession.duration) + '</li>'; 
-            ul.appendChild(li);                             // store list item in unordered list
+            sessionList.appendChild(listItem);                             // store list item in unordered list
         }
     }
+    setUpSummary('goaltimespent', 'Time spent on goal:', currGoalIndex, currGoal.calculateElapsedTime(), sessionList);
+    setUpSummary('goaltimeleft', 'Time remaining:', currGoalIndex, currGoal.calculateTimeRemaining(), sessionList);
+    setUpSummary('goaltotaltime', 'Goal duration:', currGoalIndex, currGoal.duration, sessionList);
+}
 
-    let timeToDisplay = convertMinToFormat(currGoal.calculateElapsedTime());
-    li = document.getElementById('goaltimespent' + currGoalIndex);
-    if(!li){    // create list item for goal time spent if it doesn't exist
-        li = document.createElement("li");              // add list item for time spent on goal
-        li.className = "goalSummary timeSpentonGoal";
-        li.innerHTML = '<li>Time spent on goal:</li>';
-        li.innerHTML += '<li class="timeval" id="goaltimespent' + currGoalIndex + '">' + timeToDisplay + '</li>';
-        ul.appendChild(li);
-    }
-    else    // if it exists, update the value
-        document.getElementById('goaltimespent' + currGoalIndex).innerHTML = timeToDisplay;
+function setUpSummary(summaryType, message, currGoalIndex, time, dropDownList) {
+    let timeToDisplay = convertMinToFormat(time);
+    let listItem = document.getElementById(summaryType + currGoalIndex);
 
-    li = document.getElementById('goaltimeleft' + currGoalIndex);
-    timeToDisplay = convertMinToFormat(currGoal.calculateTimeRemaining());
-    if(!li){
-        li = document.createElement("li");              // add list item for time left for goal
-        li.className = "goalSummary timeLeft";
-        li.innerHTML = '<li>Time remaining:</li>';
-        li.innerHTML += '<li class="timeval" id="goaltimeleft' + currGoalIndex + '">' + timeToDisplay + '</li>';
-        ul.appendChild(li);
+    if(!listItem){    // create list item if it doesn't exist
+        listItem = document.createElement("li");
+        listItem.className = 'goalSummary ' + summaryType;  // leave space between
+        listItem.innerHTML = '<li>' + message + '</li><li class="timeval" id="' + summaryType + currGoalIndex + '">' + timeToDisplay + '</li>';
+        dropDownList.appendChild(listItem);
     }
-    else
-        document.getElementById('goaltimeleft' + currGoalIndex).innerHTML = timeToDisplay;
-
-    li = document.getElementById('goaltotaltime' + currGoalIndex);
-    timeToDisplay = convertMinToFormat(currGoal.duration);
-    if(!li){
-        li = document.createElement("li");              // add list item for total time for goal
-        li.className = "goalSummary totalGoalDuration";
-        li.innerHTML = '<li>Goal duration:</li>';
-        li.innerHTML += '<li class="timeval" id="goaltotaltime' + currGoalIndex + '">' + timeToDisplay + '</li>';
-        ul.appendChild(li);
+    else{    // if element exists, update the time value
+        document.getElementById(summaryType + currGoalIndex).innerHTML = timeToDisplay;
     }
-    else
-        document.getElementById('goaltotaltime' + currGoalIndex).innerHTML = timeToDisplay;
 }
 
 function getGoalProgress(goal) {
