@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Google Material Icons -->
     <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
@@ -56,8 +57,8 @@
                             </div>
                         </div>
                         <div class="timerBtngrp">
-                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                            <button id="startStop" onclick="startStop();" disabled><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();" disabled><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
@@ -146,13 +147,25 @@
             </div>
             <!-- GOALS PAGE -->
             <div class="main__item main__item--goals">
-                <!-- Temporary (you can remove h3) -->
-                <h3>"goals"</h3>
-                <!-- Temporary  -->
+                <!-- Header (title and back button) -->
+                <div class="page__header">
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">arrow_back</span>
+					</button>
+					<div class="page__header__title">Goals</div>
+					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+				</div>
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">
-                <h3>Trends</h3>
+				<!-- Header (title and back button) -->
+                <div class="page__header">
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">arrow_back</span>
+					</button>
+					<div class="page__header__title">Trends</div>
+					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+				</div>
                 <!-- DAILY, WEEKLY, MONTHLY BUTTONS -->
                 <nav class="trendsBar">
                     <ul id="trendsBarTabs" class="trendsBar__items">
@@ -161,29 +174,66 @@
                         <li id="monthlyTab" class="trendsBar__item--monthly"><p>Monthly</p></li>
                     </ul>
                 </nav>
+                <!-- CHART DATE NAV BUTTONS -->
+                <div class="trends__dateNavBar btn-group">
+                    <button id="prevButton"><p>Prev</p></button>
+                    <p id="date" class="trends__currDate">"Insert Date Here"</p>
+                    <button id="nextButton"><p>Next</p></button>
+                </div>
+                <!-- CHART -->
                 <div id="trendsCharts" class="trends__chart">
                     <canvas id="weeklyChart" class="trends__chart--curr" ></canvas>
                 </div> 
-                <!-- CHART DATE NAV BUTTONS -->
-                <div class="trends__dateNavBar">
-                    <div class="btn-group">
-                        <button id="prevButton"><p>Prev</p></button>
-                        <p id="date" class="trends__currDate">"Insert Date Here"</p>
-                        <button id="nextButton"><p>Next</p></button>
-                    </div>
-                </div>
-                <div class="main__item--report trends__summaryBox">Summary: </div> 
-                
+                <!-- CHART SUMMARY TABLE -->
+                <div class="main__item--report trends__summaryTitle">Summary: </p> </div>
+                <div class="main__item--report trends__summaryBox"> 
+                    <table id="summaryBox">
+                        <tr>
+                          <td>Total Study Time:</td>
+                          <td>44 hours</td>
+                        </tr>
+                        <tr>
+                            <td>Average Daily Study Time: </td>
+                            <td>6.3 hours</td>
+                        </tr>
+                      </table>
+                </div> 
             </div>
+			<!-- SHOP PAGE -->
+            <div class="main__item main__item--shop">
+                <!-- Header (title and back button) -->
+                <div class="page__header">
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">arrow_back</span>
+					</button>
+					<div class="page__header__title">Shop</div>
+					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+				</div>
+                <!-- Rest of page below here  -->
+            </div>
+			<!-- INVENTORY PAGE -->
             <div class="main__item main__item--inventory">
-                <!-- Temporary (you can remove h3) -->
-                <h3>"inventory"</h3>
-                <!-- Temporary  -->
+                <!-- Header (title and back button) -->
+                <div class="page__header">
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">arrow_back</span>
+					</button>
+					<div class="page__header__title">Inventory</div>
+					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+				</div>
+                <!-- Rest of page below here  -->
             </div>
+			<!-- SETTINGS PAGE -->
             <div class="main__item main__item--settings">
-                <!-- Temporary (you can remove h3) -->
-                <h3>"settings"</h3>
-                <!-- Temporary  -->
+                <!-- Header (title and back button) -->
+                <div class="page__header">
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">arrow_back</span>
+					</button>
+					<div class="page__header__title">Settings</div>
+					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+				</div>
+                <!-- Rest of page below here  -->
             </div>
             
         </div>

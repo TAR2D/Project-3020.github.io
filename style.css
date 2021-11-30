@@ -179,6 +179,11 @@ body {
     flex-direction: row;
 }
 
+.navBar__item--goals {
+    display: flex;
+    flex-direction: row;
+}
+
 main {
     /* maximum height of main */
     height: 590px;
@@ -291,6 +296,14 @@ main {
 	margin-left: 15px;
 } */
 
+.welcome {
+    display: block;
+}
+
+.createTask, .createGoal, .startBreak {
+    display: none;
+}
+
 /* Little arrow for the chat bubble styling */
 .chatBubblePointer:before {
 	content: '';
@@ -319,6 +332,7 @@ main {
 
 #gname, #tname {
     width: 100%;
+	margin-top: 2%;
 }
 
 /* .createGoal button, .startBreak button, .createTask button {
@@ -335,8 +349,12 @@ main {
     margin-top: 10%;
 }
 
+.breakDurationField {
+    margin-top: 10%;
+}
+
 /* Chat buttons */
-.btn-group {
+.chat-btn-group {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -524,29 +542,56 @@ button:disabled {
     object-fit: contain;
 
     border: 1px dotted rgba(128, 128, 128, 0.4);
+    background-image: url(images/companion-bg.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 .companion {
     max-height:100%;
     overflow: hidden;
+    position: relative;
+
+    top: 65px;
+}
+
+/* Page Header for each page (includes title and back button) */
+.page__header {
+	height: 8%;
+	align-items: center;
+	display: flex;
+	color: black;
+	font-family: var(--ff-TimerFont);
+	padding: 5px;
+}
+.page__header__title {
+	font-weight: 700;
+	font-size: 30px;
+	margin: auto;
+}
+.page__backButton {
+	display:flex;
+	flex-direction: row;
+	font-size: 36px;
+	background-color: var(--bg-mainMenu);
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
 }
 
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
-    text-align: left;
-    color: black;
-    padding: 10px;
     position: relative;
 
     display: flex;
 }
 
-.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+.trends__chart, .trends__summaryTitle, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
     width: 75%; 
 }
 
-.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryTitle, .trends__summaryBox {
     margin: auto;
 }
 
@@ -569,7 +614,7 @@ button:disabled {
     align-items: center;
 }
 
-.trendsBar__item--daily, .trendsBar__item--monthly {
+.trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
     display: flex;
     padding:10px 12px;
     border-radius: 4px;
@@ -578,38 +623,75 @@ button:disabled {
     background-color: var(--bg-sectionB);
 }
 
-.trendsBar__item--weekly {
-    display: flex;
-    padding:10px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px 0 0 5px; 
-    background-color: black;
+.trendsBar__item--daily, .trendsBar__item--monthly {
+    background-color: var(--bg-sectionB);
 }
 
+.trendsBar__item--weekly {
+    background-color: black;
+}
 
 .trends__dateNavBar {
     height: 7.5%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .trends__currDate {
     margin: 5px 5px; 
     color: black;
-    text-align: center;
     white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .trends__summaryBox { 
-    height: 15%; 
+    height: 12.5%; 
+    Overflow-y:scroll;
 }
 
-.trends__chart--weekly {
+.trends__summaryTitle { 
+    font-size: 120%;
+    background-color: #546a76;
+    color: white;
+    padding-left: 8px;
+}
+
+.trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
     width:100%;
     height:100%;
     display: flex;
-    
+}
+
+#summaryBox { 
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+}
+
+#summaryBox td, #summaryBox th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#summaryBox tr:nth-child(even){background-color: #f2f2f2;}
+  
+#summaryBox tr:hover {background-color: #ddd;}
+
+#prevButton, #nextButton{
+    width: 15%;
+}
+
+/* Display none for all child element excent main menu as default */
+.trends__chart >:not(:first-child) {
+    display: none;
+}
+
+
+/* .main__item--shop {
 }
 
 .trends__chart--daily {

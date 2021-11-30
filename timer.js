@@ -29,6 +29,20 @@ function updateTimeEntered(){
   displayTime(seconds);
 }
 
+function updateTimeTaskButton(){
+  isOnBreak = false;
+  seconds = tpSpinboxTask.getMinute()*60 + tpSpinboxTask.getHour()*60*60;
+  initialSec = seconds;
+  displayTime(seconds);
+}
+
+function updateTimeTaskButton(){
+  isOnBreak = true;
+  seconds = tpSpinboxBreak.getMinute()*60 + tpSpinboxBreak.getHour()*60*60;
+  breakSecond = seconds;
+  displayTime(seconds);
+}
+
 function scale (number, inMin, inMax, outMin, outMax) {
   return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
@@ -65,22 +79,23 @@ function startStop(){
 
 function skipTime(){
   TSSoverlayEffect.style.width = "0%";
-  isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
-  isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
-  breakTime();
-  if (isOnBreak) {
-    timerBreakState.style.color = 'black';
-    timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
-    TSSoverlayEffect.style.width = "0%";
-  } else {
-    timerBreakState.style.color = 'rgba(128, 128, 128, 0.434)';
-    timerSessionState.style.color = 'black';
-    TBSoverlayEffect.style.width = "0%";
+  if(confirmSkip()) {
+    isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
+    isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
+    if (isOnBreak) {
+      timerBreakState.style.color = 'black';
+      timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
+      TSSoverlayEffect.style.width = "0%";
+    } else {
+      timerBreakState.style.color = 'rgba(128, 128, 128, 0.434)';
+      timerSessionState.style.color = 'black';
+      TBSoverlayEffect.style.width = "0%";
+    }
+    displayTime(seconds);
+    statusTimer = "started";
+    startStop();
+    timer.contentEditable = "true";
   }
-  displayTime(seconds);
-  statusTimer = "started";
-  startStop();
-  timer.contentEditable = "true";
 }
 
 // Function to display the time
@@ -92,9 +107,6 @@ function displayTime(second) {
   `;
 }
 
-
-function breakTime() {
-  //change what is on the screen.
-  // so he user knows he is on a break 
-  // using the isOnBreak boolean variable.
+function confirmSkip() {
+  return confirm("Are you sure you want to skip?"); 
 }
