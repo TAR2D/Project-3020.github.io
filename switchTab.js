@@ -51,7 +51,7 @@ reportButton.onclick = function () {
         reportButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(2);
-        state = 000100;
+        state = 00100;
     }
 };
 
@@ -66,12 +66,12 @@ inventoryButton.onclick = function () {
 };
 
 settingsButton.onclick = function () {
-    if(state !== 00000) {
+    if(state !== 00001) {
         settingsDisplay.style.display = "block";
         settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(4);
-        state = 00000;
+        state = 00001;
     }
 };
 
