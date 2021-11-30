@@ -138,8 +138,8 @@
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
-                            <button id="goalButton">AddGoal</button>
-                            <button id="taskButton">AddSession</button>
+                            <button id="goalButton">Add Goal</button>
+                            <button id="taskButton">Add Session</button>
                             <button id="breakButton">Start a Break</button>
                         </div>
                     </div>
@@ -155,6 +155,7 @@
 					<div class="page__header__title">Goals</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
 				</div>
+                <div class="goalsBody"></div>
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">
@@ -199,18 +200,6 @@
                       </table>
                 </div> 
             </div>
-			<!-- SHOP PAGE -->
-            <div class="main__item main__item--shop">
-                <!-- Header (title and back button) -->
-                <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
-					</button>
-					<div class="page__header__title">Shop</div>
-					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
-				</div>
-                <!-- Rest of page below here  -->
-            </div>
 			<!-- INVENTORY PAGE -->
             <div class="main__item main__item--inventory">
                 <!-- Header (title and back button) -->
@@ -223,27 +212,70 @@
 				</div>
                 <!-- Rest of page below here  -->
             </div>
-			<!-- SETTINGS PAGE -->
+            <!-- SETTINGS PAGE -->
             <div class="main__item main__item--settings">
-                <!-- Header (title and back button) -->
                 <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
-					</button>
-					<div class="page__header__title">Settings</div>
-					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
-				</div>
-                <!-- Rest of page below here  -->
-            </div>
-            
+                    <button class="page__backButton">
+                        <span class="material-icons" style="color:black;">arrow_back</span>
+                    </button>
+                    <div class="page__header__title">Settings</div>
+                    <div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+                </div>
+                <div class="settings__item">
+                    <!-- ACCOUNT SETTINGS -->
+                    <div class="settings__item settings__item--account">
+                        <p id="account">Account</p>
+                        <i class="fas fa-user-circle fa-4x"></i>
+                        <div class="account__settings account__settings--profile">
+                            <p id="username">"User name"</p> 
+                            <h1 id="change__user">Not you? Change user</h1>
+                        </div>
+                    </div>
+                    <!-- NOTIFICATION SETTINGS -->
+                    <div class="settings__item settings__item--notification">
+                        <p id="notification">Notification</p> 
+                        <div class="notification__settings notification__settings--sound">
+                            <p id="sound">Sound</p> 
+                            <div class="switchWraper"> 
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="notification__settings notification__settings--volume">
+                            <p id="volume">Volume</p> 
+                            <i class="fa fa-volume-down"></i>
+                            <i class="fa fa-volume-up"></i>
+                        </div>
+                    </div> 
+                    <!-- ADVANCE SETTINGS -->
+                    <div class="settings__item settings__item--advance">
+                        <p id="advance">Advance</p> 
+                        <div class="advance__settings advance__settings--dark__mode">
+                            <p id="dark__mode">Dark Mode</p> 
+                            <div class="switchWraper"> 
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="advance__settings advance__settings--about">
+                            <p id="about">About</p> 
+                            <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div>    
+                </div>
+            </div> 
         </div>
     </main>
     <script src="timer.js"></script>
-    <script src="Event.js"></script>
+	<script src="chat.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
     <script src="switchChart.js"></script>
+    <script src="Event.js"></script>
     <script src="InputForm.js"></script>
-    
 </body>
 </html>

@@ -62,7 +62,7 @@ inventoryButton.onclick = function () {
         inventoryDisplay.style.display = "block";
         inventoryButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(4);
+        hideTabsExcept(3);
         state = 00010;
     }
 };
@@ -72,7 +72,7 @@ settingsButton.onclick = function () {
         settingsDisplay.style.display = "block";
         settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(5);
+        hideTabsExcept(4);
         state = 00001;
     }
 };

@@ -292,7 +292,7 @@ main {
 	border: 2px solid var(--c-chatBubble);
 	border-radius: 15px;
 	padding: 15px;
-	text-align: center;
+	text-align: left;
 	margin-left: 15px;
 } */
 
@@ -685,11 +685,248 @@ button:disabled {
     width: 15%;
 }
 
+/* Stying the Trends page */ 
+
+.settings__item {
+    height: 90%;
+    width: 80%;
+
+    margin: auto;
+    display: relative;
+    justify-content: left;
+    /* align-items: center; */
+
+    border-radius: 25px;
+    background-color:rgb(187, 187, 187);
+}
+
+.settings__item--account, .settings__item--notification, .settings__item--advance {
+    height: 30%;
+    width: 75%;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    display: relative;
+    justify-content: center;
+
+}
+
+#account, #notification, #advance{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    text-decoration: underline grey;
+    display: flex;
+    position: relative;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.account__settings, .notification__settings, .advance__settings {
+    height: 30%;
+    width: 70%;
+    margin-top: 5px;
+    margin: auto;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    position: relative;
+}
+
+
+#sound, #volume, #dark__mode, #about{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.fa-info-circle{
+    position: relative;
+    margin-left: 80%;
+    margin-bottom: 200px;
+}
+
+.switchWraper {
+    position: relative; 
+    left: 70%;
+    transform: translateY(-25%);
+    width: 30%;
+}
+
+
+/* Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  /* Finish styling of Settings */
+
 /* Display none for all child element excent main menu as default */
 .trends__chart >:not(:first-child) {
     display: none;
 }
 
+/* Styling for Goals page*/
+.goalsBody {
+    font-family: 'Varela Round';
+    padding: 2%;
+}
+
+/* for body of goals page */
+.goalsBody {
+    width: 98%;
+    height: 85%;
+    color: black;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+/* for body of goals page */
+.goalsBody .goal{
+    margin-bottom: 4%;
+}
+
+/* for individual goal headers which includes the goal name and arrow down symbol */
+.goalsBody label {
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+    width: 100%;
+    cursor: pointer;
+    padding: 0 2% 1% 2%;
+}
+
+/* for entire list of tasks for a goal on goals page*/
+.goalsBody ul {
+    display: none;
+    width: 90%;
+    justify-content:center;
+    background-color: var(--c-chatBubble);
+    padding: 2%;
+    margin-left: 2%;
+    outline-color: black;
+    outline-width: 2px;
+    outline-style: inset;
+    font-size: medium;
+    border-radius: 1px 1px 5px 5px;
+}
+
+/* for individual task rows for a goal's task list*/
+.goalsBody li {
+    display: flex;
+    font-size: medium;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.timeval {
+    direction: rtl; /* pushes task duration to the right hand side of task row */
+}
+
+.goalsBody input:checked ~ ul{
+    display: block; /* shows task list when goal header is clicked */
+}
+
+.goalsBody input {
+    display: none; /* gets rid of checkbox for input element*/
+}
+
+/* the bar that represents the actual progress (lighter block) */
+.progressbar {
+    display: flex;
+    background-color: var(--c-chatBubble);
+    height: 100%;
+    border-radius: 5px;
+    z-index: 2; /* bring to front */
+}
+
+/* outline of the progress bar (darker block) */
+.progressbar-container {
+    width: 90%;
+    margin-left: 2%;
+    outline-style: inset;
+    outline-color: black;
+    outline-width: 2px;
+    border-radius: 5px;
+    background-color: rgb(95, 95, 95);
+    display: relative;
+    z-index: 1;
+}
+ 
+/* for the progress bar and the progress percentage*/
+.progress-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* adds dashed line in task lists */
+.goaltimespent {
+    border-top: 2px;
+    border-style: dashed;
+    padding-top: 2%;
+    margin-top: 2%;
+}
 
 /* .main__item--shop {
 }
