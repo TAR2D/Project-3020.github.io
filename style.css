@@ -629,6 +629,7 @@ button:disabled {
 /* Stying the Trends page */ 
 .centerBox {
     background-size: 100% auto;
+	color: #505050;
 	margin-left: 10%;
 	margin-right: 10%;
 	padding-top: 35px;
