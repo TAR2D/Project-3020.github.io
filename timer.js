@@ -82,21 +82,23 @@ function startStop(){
 
 function skipTime(){
   TSSoverlayEffect.style.width = "0%";
-  isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
-  isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
-  if (isOnBreak) {
-    timerBreakState.style.color = 'black';
-    timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
-    TSSoverlayEffect.style.width = "0%";
-  } else {
-    timerBreakState.style.color = 'rgba(128, 128, 128, 0.434)';
-    timerSessionState.style.color = 'black';
-    TBSoverlayEffect.style.width = "0%";
+  if(confirmSkip()) {
+    isOnBreak ? isOnBreak=false : isOnBreak=true; //checks if it comes another task or another break.
+    isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
+    if (isOnBreak) {
+      timerBreakState.style.color = 'black';
+      timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
+      TSSoverlayEffect.style.width = "0%";
+    } else {
+      timerBreakState.style.color = 'rgba(128, 128, 128, 0.434)';
+      timerSessionState.style.color = 'black';
+      TBSoverlayEffect.style.width = "0%";
+    }
+    displayTime(seconds);
+    statusTimer = "started";
+    startStop();
+    timer.contentEditable = "true";
   }
-  displayTime(seconds);
-  statusTimer = "started";
-  startStop();
-  timer.contentEditable = "true";
 }
 
 // Function to display the time
@@ -106,4 +108,8 @@ function displayTime(second) {
   timer.innerHTML = `
   ${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}
   `;
+}
+
+function confirmSkip() {
+  return confirm("Are you sure you want to skip?"); 
 }

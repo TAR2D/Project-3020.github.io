@@ -6,6 +6,9 @@ document.getElementById('createTaskButton').addEventListener("click", newStudySe
 const dropDown = document.getElementById('goalForTaskDropdown');
 const newGoals = new allGoals();
 
+const startButton = document.getElementById("startStop");
+const skipButton = document.getElementById("skip");
+
 //When Create goal is clicked.
 function newGoalCreated(){
     //get name
@@ -43,6 +46,11 @@ function newStudySessionCreated(){
 
         //Prints every study session of that goal(testing).
         //console.log("-> " +newGoals.getGoal(gName).allStudySessions());   
+    }
+
+    if(skipButton.disabled) {
+        skipButton.disabled = false; 
+        startButton.disabled = false; 
     }
 }
 

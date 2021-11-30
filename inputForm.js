@@ -35,6 +35,10 @@ class chatBox {
             ,goalCancelBtn, sessionCancelBtn, breakCancelBtn, 
             goalAddBtn, sessionAddBtn, breakAddBtn} = this.args;
 
+        window.addEventListener('load', () => {
+            this.createMessage("Welcome! To get started, please create a new study session.");
+        })
+
         goalButton.addEventListener('click', () => { 
             this.changeState(goalForm);
             goalButton.disabled = true;
@@ -111,6 +115,14 @@ class chatBox {
 
             sessionButton.disabled = false;
             this.hideAll();
+
+            const startButton = document.getElementById("startStop");
+            const skipButton = document.getElementById("skip");
+
+            if(skipButton.disabled) {
+                skipButton.disabled = false; 
+                startButton.disabled = false; 
+            }
         });
 
         breakAddBtn.addEventListener('click', () => {
