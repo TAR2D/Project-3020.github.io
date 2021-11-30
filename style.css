@@ -66,7 +66,7 @@ a:visited {
         b: Border
         c: Color
         sectionA: include AppName/MainPage
-        sectionB: include Report, Shop, Inventory and Settings
+        sectionB: include Goals, Report, Shop, Inventory and Settings
     */
     --bg-background: rgba(0, 0, 0, 0.735);
     --b-navigationBar: rgba(128, 128, 128, 0.434);
@@ -86,6 +86,11 @@ a:visited {
 
     --bg-SectionBDisplay: white;
     --b-SectionBDisplay: transparent;
+
+	--c-chatBubble: rgb(165, 206, 230);
+	
+    --ff-TimerFont : 'Roboto', sans-serif;
+    --b-TimerBox: transparent;
 }
 
 body {
@@ -114,7 +119,6 @@ body {
     display: flex;
     align-items: center;
 }
-
 
 .navBar__sectionB {
     /* Percentage of area cover by section in NavBar */
@@ -160,17 +164,22 @@ body {
     flex-direction: row;
 }
 
-.navBar__item--shop {
-    display: flex;
-    flex-direction: row;
-}
-
 .navBar__item--inventory {
     display: flex;
     flex-direction: row;
 }
 
 .navBar__item--settings {
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar__item--goals {
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar__item--goals {
     display: flex;
     flex-direction: row;
 }
@@ -189,13 +198,6 @@ main {
     align-items: center;
 }
 
-/* Styling the timer */
-.timer {
-    color: black;
-    font-size: 250%;
-    font-family: 'Varela Round', sans-serif;
-}
-
 /* Styling main menu */
 
 .main__item--menu {
@@ -211,6 +213,7 @@ main {
     display: flex;
 }
 
+/* left and right box */
 .main__item--menu .rightBox, .main__item--menu .leftBox {
     width: 50%;
     height: 100%;
@@ -221,80 +224,137 @@ main {
     align-content: space-evenly;
 }
 
-/* Right Box */
+/* chat box (within right box) */
 .chatBox {
     width: 90%;
     height: 82.5%;
-
     border: 1px dotted rgba(128, 128, 128, 0.4);
+	margin-right: 2.5%;
+	overflow-y: scroll;
+    padding: 2%;
 }
+
+.chatBox__msgBox {
+    float: right;
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+}
+/* 
+.goalForm {
+    border: 1px solid red;
+    color: black;
+    width: 80%;
+    height: 30%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goalFormTimer {
+    width: 15%;
+    height: 20%;
+}
+
+.goalForm label{
+    margin-top: 5px;
+}
+
+.submitFormButton {
+    margin-top: 5px;
+} */
+
 
 .buttonsBox {
     width: 90%;
     height: 7.5%;
-
+	margin-right: 2.5%;
     border: 1px dotted rgba(128, 128, 128, 0.4);
-}
-
-.chatBox ,.buttonsBox {
-    margin-right: 2.5%;
 }
 
 .timerBox, .companionBox {
     margin-left: 2.5%;
 }
 
-/* This is will appear inside the chatBox when clicking the button
+/* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
-.createTask, .createGoal, .startBreak{
+/* .createTask, .createGoal, .startBreak {
     display: none;
-    overflow-y: scroll;
-    width: 100%;
-    height: 90%;
-    margin: auto;
-    margin-top: 5%;
-    background-color: #ee9458;
+	position: relative;
+	font-family: 'Varela Round';
+    color: black;
+    margin: 2%;
+    background-color: var(--c-chatBubble);
+	border: 2px solid var(--c-chatBubble);
+	border-radius: 15px;
+	padding: 15px;
+	text-align: left;
+	margin-left: 15px;
+} */
+
+.welcome {
+    display: block;
 }
 
-/* Goal input form */
-.createGoal {
-    display: none;         
-    padding: 10%;
-    justify-content: center;
-    align-content: center;
-    color: var(--c-buttonText);
-    background-color: #ee9458;
-    font-size: 90%;
+.createTask, .createGoal, .startBreak {
+    display: none;
 }
 
-.goalNameField, .goalTimeField {
+/* Little arrow for the chat bubble styling */
+.chatBubblePointer:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border-left: 0.7em solid transparent;
+	border-right: 0.7em solid var(--c-chatBubble);
+	border-top: 0.7em solid transparent;
+	border-bottom: 0.7em solid transparent;
+	margin-top: -0.7em;
+	margin-left: -24px;
+}
+
+/* Stylizing Input forms */
+.goalNameField, .goalTimeField, .breakDurationField, .taskNameField, .taskTimeField {
     margin-bottom: 10%;
 }
 
-#timepicker-selectbox, #gname {
-    margin-top: 1%;
-}
-
-#timepicker-selectbox {
-    width: 58%;
-}
-
-#gname {
+#timepicker-selectbox-goals, #timepicker-selectbox-break, #timepicker-selectbox-task {
     width: 100%;
+	margin-top: 1%;
 }
 
-.createGoal button {
+#gname, #tname {
+    width: 100%;
+	margin-top: 2%;
+}
+
+/* .createGoal button, .startBreak button, .createTask button {
     height: auto;
     width: auto;
     font-size: x-small;
     background-color: var(--c-button); 
     border-radius: 5px;
     color: var(--c-buttonText);
-    cursor: pointer; /* Pointer/hand icon */
+    cursor: pointer; /* Pointer/hand icon
+} */
+
+.breakDurationField {
+    margin-top: 10%;
+}
+
+.breakDurationField {
+    margin-top: 10%;
 }
 
 /* Chat buttons */
-.btn-group {
+.chat-btn-group {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -307,6 +367,7 @@ main {
 }
 
 .btn-group button {
+    cursor: pointer;
     height: 80%;
     width: 32%;
     background-color: var(--c-button); 
@@ -327,22 +388,152 @@ main {
     background-color: var(--c-buttonHover);
 }
 
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Disabled button */ 
+button:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 /* left box */
 .timerBox {
     width: 90%;
-    height: 20%;
+    height: 35%;
 
     /* Alignment of timer in centre */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
 
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+   /* border: 1px dotted var(--b-TimerBox);*/
+    border: 1px dotted transparent;
+}
+
+/* Styling the timer */
+
+#timer {
+    color: black;
+    width: 80%;
+    height: 57%;
+    margin-top: 1%;
+    background-color: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
+}
+
+#timer h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 75%;
+
+    font-family: var(--ff-TimerFont);
+    font-size: 5.6em;
+    font-weight: bold;
+}
+
+.currentState {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 25%;
+}
+
+.currentState .timerBreakState, .currentState .timerSessionState {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    height: 80%;
+
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+    border-radius: 3px;
+    border: 2px solid white;
+    background-color: white;
+}
+.TBBtext, .TBStext {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+}
+
+.TSSoverlay, .TBSoverlay {
+    width:0%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.466);
+}
+
+.timerSessionState h2{
+
+    font-size: 1em;
+    color: black;
+}
+
+.timerBreakState h2 {
+    font-size: 1em;
+    color: var(--b-navigationBar);
+}
+
+.timerBtngrp {
+    width: 20%;
+    height: 60%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.timerBtngrp #startStop, .timerBtngrp #skip {
+    width: 90%;
+    height: 45%;
+    font-size: 2em;
+    border-radius: 3px;
+    border: transparent;
+}
+
+#startStop:hover , #skip:hover{
+    background-color: var(--c-buttonHover);
+}
+
+.timerContent {
+    width: 99%;
+    height: 38%;
+    margin-bottom: 2%;
+    background-color: rgba(128, 128, 128, 0.26);
+    border-radius: 4px;
+}
+
+.timerContent h4 {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+}
+
+.currentGoal, .currentTask {
+    margin-top: 1%;
+    margin-left: 2%;
 }
 
 .companionBox {
     width: 90%;
-    height: 70%;
+    height: 55%;
 
     /* Alignment of companion in centre */
     display: flex;
@@ -351,29 +542,56 @@ main {
     object-fit: contain;
 
     border: 1px dotted rgba(128, 128, 128, 0.4);
+    background-image: url(images/companion-bg.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 .companion {
     max-height:100%;
     overflow: hidden;
+    position: relative;
+
+    top: 65px;
+}
+
+/* Page Header for each page (includes title and back button) */
+.page__header {
+	height: 8%;
+	align-items: center;
+	display: flex;
+	color: black;
+	font-family: var(--ff-TimerFont);
+	padding: 5px;
+}
+.page__header__title {
+	font-weight: 700;
+	font-size: 30px;
+	margin: auto;
+}
+.page__backButton {
+	display:flex;
+	flex-direction: row;
+	font-size: 36px;
+	background-color: var(--bg-mainMenu);
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
 }
 
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
-    text-align: left;
-    color: black;
-    padding: 10px;
     position: relative;
 
     display: flex;
 }
 
-.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+.trends__chart, .trends__summaryTitle, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
     width: 75%; 
 }
 
-.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryTitle, .trends__summaryBox {
     margin: auto;
 }
 
@@ -396,7 +614,8 @@ main {
     align-items: center;
 }
 
-.trendsBar__item {
+.trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
+    display: flex;
     padding:10px 12px;
     border-radius: 4px;
     cursor: pointer;
@@ -404,31 +623,332 @@ main {
     background-color: var(--bg-sectionB);
 }
 
+.trendsBar__item--daily, .trendsBar__item--monthly {
+    background-color: var(--bg-sectionB);
+}
+
+.trendsBar__item--weekly {
+    background-color: black;
+}
+
 .trends__dateNavBar {
     height: 7.5%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .trends__currDate {
     margin: 5px 5px; 
     color: black;
-    text-align: center;
     white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .trends__summaryBox { 
-    height: 15%; 
+    height: 12.5%; 
+    Overflow-y:scroll;
+}
+
+.trends__summaryTitle { 
+    font-size: 120%;
+    background-color: #546a76;
+    color: white;
+    padding-left: 8px;
+}
+
+.trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
+    width:100%;
+    height:100%;
+    display: flex;
+}
+
+#summaryBox { 
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+}
+
+#summaryBox td, #summaryBox th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#summaryBox tr:nth-child(even){background-color: #f2f2f2;}
+  
+#summaryBox tr:hover {background-color: #ddd;}
+
+#prevButton, #nextButton{
+    width: 15%;
+}
+
+/* Stying the Trends page */ 
+
+.settings__item {
+    height: 90%;
+    width: 80%;
+
+    margin: auto;
+    display: relative;
+    justify-content: left;
+    /* align-items: center; */
+
+    border-radius: 25px;
+    background-color:rgb(187, 187, 187);
+}
+
+.settings__item--account, .settings__item--notification, .settings__item--advance {
+    height: 30%;
+    width: 75%;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    display: relative;
+    justify-content: center;
+
+}
+
+#account, #notification, #advance{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    text-decoration: underline grey;
+    display: flex;
+    position: relative;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.account__settings, .notification__settings, .advance__settings {
+    height: 30%;
+    width: 70%;
+    margin-top: 5px;
+    margin: auto;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    position: relative;
+}
+
+
+#sound, #volume, #dark__mode, #about{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.fa-info-circle{
+    position: relative;
+    margin-left: 80%;
+    margin-bottom: 200px;
+}
+
+.switchWraper {
+    position: relative; 
+    left: 70%;
+    transform: translateY(-25%);
+    width: 30%;
+}
+
+
+/* Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  /* Finish styling of Settings */
+
+/* Display none for all child element excent main menu as default */
+.trends__chart >:not(:first-child) {
+    display: none;
+}
+
+/* Styling for Goals page*/
+.goalsBody {
+    font-family: 'Varela Round';
+    padding: 2%;
+}
+
+/* for body of goals page */
+.goalsBody {
+    width: 98%;
+    height: 85%;
+    color: black;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+/* for body of goals page */
+.goalsBody .goal{
+    margin-bottom: 4%;
+}
+
+/* for individual goal headers which includes the goal name and arrow down symbol */
+.goalsBody label {
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+    width: 100%;
+    cursor: pointer;
+    padding: 0 2% 1% 2%;
+}
+
+/* for entire list of tasks for a goal on goals page*/
+.goalsBody ul {
+    display: none;
+    width: 90%;
+    justify-content:center;
+    background-color: var(--c-chatBubble);
+    padding: 2%;
+    margin-left: 2%;
+    outline-color: black;
+    outline-width: 2px;
+    outline-style: inset;
+    font-size: medium;
+    border-radius: 1px 1px 5px 5px;
+}
+
+/* for individual task rows for a goal's task list*/
+.goalsBody li {
+    display: flex;
+    font-size: medium;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.timeval {
+    direction: rtl; /* pushes task duration to the right hand side of task row */
+}
+
+.goalsBody input:checked ~ ul{
+    display: block; /* shows task list when goal header is clicked */
+}
+
+.goalsBody input {
+    display: none; /* gets rid of checkbox for input element*/
+}
+
+/* the bar that represents the actual progress (lighter block) */
+.progressbar {
+    display: flex;
+    background-color: var(--c-chatBubble);
+    height: 100%;
+    border-radius: 5px;
+    z-index: 2; /* bring to front */
+}
+
+/* outline of the progress bar (darker block) */
+.progressbar-container {
+    width: 90%;
+    margin-left: 2%;
+    outline-style: inset;
+    outline-color: black;
+    outline-width: 2px;
+    border-radius: 5px;
+    background-color: rgb(95, 95, 95);
+    display: relative;
+    z-index: 1;
+}
+ 
+/* for the progress bar and the progress percentage*/
+.progress-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* adds dashed line in task lists */
+.goaltimespent {
+    border-top: 2px;
+    border-style: dashed;
+    padding-top: 2%;
+    margin-top: 2%;
 }
 
 /* .main__item--shop {
 }
 
-.main__item--inventory {
+.trends__chart--daily {
+    width:100%;
+    height:100%;
+    display: none;
+  
 }
 
-.main__item--settings {
-} */
+.trends__chart--monthly {
+    width:100%;
+    height:100%;
+    display: none;
+    
+}
+
+/* Display none for all child element excent main menu as default */
+.trends__chart >:not(:first-child) {
+    display: none;
+}
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
@@ -455,6 +975,19 @@ main {
     }
 }
 
+
+@media (max-width: 825px) {
+    #timer h1{
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 750px) {
+    #timer h1{
+        font-size: 4.5em;
+    }
+}
+
 /* Responsive to Small Window */
 @media (max-width: 720px) {
 
@@ -475,11 +1008,26 @@ main {
     }
 
     .leftBox .timerBox {
-        height: 20%;
+        height: 30%;
     }
 
     .leftBox .companionBox {
-        height: 60%;
+        height: 50%;
+    }
+
+
+    .timerBtngrp i {
+        font-size: 0.8em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    #timer h1{
+        font-size: 3.5em;
     }
 }
 
@@ -492,10 +1040,241 @@ main {
     .navBar__item:not(:last-child) {
         margin-right: 2px;
     }
+
+    #timer h1{
+        font-size: 2em;
+    }
 }
 
 /* temporary code */
 .main__items h3 {
     color: black;
     font-size: 2em;
+}
+
+h5 {
+    color: black;
+}
+
+.chatBox__createGoal, .chatBox__startSession, .chatBox__break{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    border:1px solid rgba(128, 128, 128, 0.5);
+    padding: 2%;
+}
+
+.chatBox__createGoal {
+    height: 180px;
+}
+
+.chatBox__createGoal, .chatBox__startSession, .chatBox__break{
+    color: black;
+}
+
+.chatBox__createGoal form, .chatBox__startSession form, .chatBox__break form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.chatBox__createGoal , .chatBox__startSession, .chatBox__break{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: rgba(128, 128, 128, 0.2);
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+}
+
+.chatBox__createGoal label, .chatBox__startSession label, .chatBox__break label{
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.goalFormTitle .sessionFormTitle{
+    display: flex;
+    width: 100%;
+    height: 28.5%;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    padding-bottom: 8px;
+}
+
+.goalFormDuration {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    padding-bottom: 10px;
+}
+.goalDurationH , .goalDurationM{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goalFormTitle input , .sessionFormTitle input{
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 4px;
+    height: 100%;
+}
+
+.goalFormTitle input , .goalFormTitle input{
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.goalDurationH input, .goalDurationH label, .sessionFormTimer input, .sessionFormTimer label{
+    width: 60%;
+}
+
+.goalDurationH input, .goalDurationM input, .sessionFormTimer input, .breakFormTimer input{
+    height: 60%;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+}
+
+.goalDurationH {
+    border-right: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.goalDurationM input, .goalDurationM label{
+    width: 60%;
+}
+
+.createGoalBtngrp input, .createGoalBtngrp button, .startSessionBtnGrp input, .startSessionBtnGrp button {
+    width: 40%;
+}
+
+.createGoalBtngrp, .startSessionBtnGrp, .breakBtnGrp {
+    width: 60%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.createGoalBtngrp button, .startSessionBtnGrp button, .breakBtnGrp button {
+    color: red;
+}
+
+.createGoalBtngrp button, .createGoalBtngrp input , .startSessionBtnGrp input, .startSessionBtnGrp button , .goalRelatedSession select, .breakBtnGrp button, .breakBtnGrp input{
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    background-color: white;
+    height: 100%;
+    border-radius: 5px;
+}
+
+
+.createGoalBtngrp button:hover, .createGoalBtngrp input:hover, .startSessionBtnGrp input:hover, .startSessionBtnGrp button:hover , .breakBtnGrp input:hover, .breakBtnGrp button:hover {
+    background-color: whitesmoke;
+}
+
+.chatBox__startSession{
+    height: 200px;
+}
+
+.sessionFormTimer {
+    height: 35%;
+}
+
+.startSessionBtnGrp {
+    height: 35%;
+}
+
+#goalFormSubmit ,#sessionFormSubmit, #breakFormSubmit{
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+    color: rgba(0, 0, 0, 0.7);
+}
+.sessionFormTimer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.sessionFormTimer label {
+    width: 40%;
+}
+
+.goalRelatedSession {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    height: 35%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.goalRelatedSession select {
+    width: 70%;
+    height: 60%;
+}
+
+.goalRelatedSession label {
+    width: 20%;
+}
+
+.startSessionBtnGrp {
+    padding-top: 10px;
+    padding-bottom: 6px;
+}
+
+.chatBox__break {
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.breakFormTimer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50%;
+    width: 90%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.breakBtnGrp {
+    padding-top: 5px;
+    padding-bottom: 2px;
+    height: 40%;
+}
+
+.breakBtnGrp button, .breakBtnGrp input {
+    width: 40%;
+}
+
+
+.chatBox__createGoal, .chatBox__startSession, .chatBox__break {
+    display: none;
+}
+
+.chatBox p {
+    margin: 4px 0;
+    background-color: rgba(128, 128, 128, 0.4);;
+    width: fit-content;
+    padding: 8px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    color: black;
+    font-family: var(--ff-TimerFont);
+    float: right;
+}
+
+.sessionFormTitle {
+    height: 30%;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
 }
