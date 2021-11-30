@@ -1,12 +1,10 @@
 let reportButton = document.querySelector(".navBar__item--report");
-let shopButton = document.querySelector(".navBar__item--shop");
 let inventoryButton = document.querySelector(".navBar__item--inventory");
 let settingsButton = document.querySelector(".navBar__item--settings");
 let goalsButton = document.querySelector(".navBar__item--goals");
 
 let mainMenuDisplay = document.querySelector(".main__item--menu");
 let reportDisplay = document.querySelector(".main__item--report");
-let shopDisplay = document.querySelector(".main__item--shop");
 let inventoryDisplay = document.querySelector(".main__item--inventory");
 let settingsDisplay = document.querySelector(".main__item--settings");
 let goalsDisplay = document.querySelector(".main__item--goals");
@@ -47,20 +45,20 @@ goalsButton.onclick = function () {
     }
 };
 
-reportButton.onclick = function () {
-    if(state !== 001000) {
-        reportDisplay.style.display = "block";
-        reportButton.style.backgroundColor = "black";
+goalsButton.onclick = function () {
+    if(state !== 01000) {
+        goalsDisplay.style.display = "block";
+        goalsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(2);
         state = 001000;
     }
 };
 
-shopButton.onclick = function () {
-    if(state !== 000100) {
-        shopDisplay.style.display = "block";
-        shopButton.style.backgroundColor = "black";
+reportButton.onclick = function () {
+    if(state !== 00100) {
+        reportDisplay.style.display = "block";
+        reportButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(3);
         state = 000100;
