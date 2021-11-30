@@ -15,10 +15,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Time picker -->
-    <link rel="stylesheet" href="tui-time-picker.css">
-    <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
-    <!-- More documentation for time picker: https://nhn.github.io/tui.time-picker/latest/TimePicker -->
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
@@ -79,44 +75,7 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="welcome chatBubblePointer" id="welcome"> Welcome! To get started, please create a new study session.</div>
-
-						<!-- CREATE TASK INPUT FORM -->
-                        <div class="createTask chatBubblePointer" id="createTask">
-							<div class="taskNameField">What are you working on?
-								<input type="taskname" id="tname" placeholder="Task name...">
-							</div>
-							<div class="taskTimeField">Duration (hours and minutes):
-								<div id="timepicker-selectbox-task"></div>
-							</div>
-							<div class="goalForTaskField">Is this part of a goal?
-								<select id="goalForTaskDropdown">
-									<option>None</option>
-								</select>
-							</div>
-							<button id="createTaskButton">Begin Session</button>
-							<button id="cancelTaskButton" onclick="createTask()">Cancel</button>
-						</div>
-						<!-- CREATE GOAL INPUT FORM -->		
-                        <div class="createGoal chatBubblePointer" id="createGoal">
-                            <div class="goalNameField">What is your goal?
-                                <input type="goalname" id="gname" placeholder="Goal name...">
-                            </div>
-                            <div class="goalTimeField">Duration (hours and minutes):
-                                <div id="timepicker-selectbox-goals"></div>
-                            </div>
-                            <button id="createGoalButton" >Create Goal</button>
-                            <button id="cancelGoalButton" onclick="createGoal()">Cancel</button>
-                        </div>
-						<!-- START BREAK INPUT FORM -->
-                        <div class="startBreak chatBubblePointer" id="startBreak"> Ready to go on a break?
-                            <div class="breakDurationField">Duration (hours and minutes):
-                                <div id="timepicker-selectbox-break"></div>
-                            </div>
-                            <button id="startBreakButton">Start Break</button>
-                            <button id="cancelBreakButton" onclick="startBreak()">Cancel</button>
-                        </div>
-                    </div>
+			    </div>
                     <div class="buttonsBox">
                         <div class="chat-btn-group btn-group">
                             <button id="goalButton" onclick="createGoal()">New Goal</button>
@@ -223,7 +182,6 @@
 	<script src="chat.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
-    <script src="timepicker.js"></script>
     <script src="switchChart.js"></script>
     <script type="module" src="handleInput.js"></script>
     
