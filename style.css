@@ -694,7 +694,7 @@ button:disabled {
     margin: auto;
     display: relative;
     justify-content: left;
-    /* align-items: center; */
+    align-items: center;
 
     border-radius: 25px;
     background-color:rgb(187, 187, 187);
@@ -728,8 +728,34 @@ button:disabled {
     margin-top: 5px;
     margin: auto;
     margin-top: 5px;
-    border: 2px solid rgb(0, 0, 0);
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.account__settings--profile{height: 30%;
+    width: 90%;
+    height: 60%;
+}
+
+.account__text{
+    height: 90%;
+    width: 70%;
+    margin: auto;
+    padding: 2%;
+}
+
+#username{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+}
+
+#change__user{
+    font-size: 1em;
+    margin-top: 2%;
+    margin-left: 5%;
+    color: #ffffff;
 }
 
 
@@ -744,16 +770,17 @@ button:disabled {
 }
 
 .fa-info-circle{
-    position: relative;
-    margin-left: 80%;
-    margin-bottom: 200px;
+    position: absolute;
+    margin-left: 63%;  }
+
+.switchWraper, .slideContainer {
+    position: absolute;
+    margin-left: 58%;    
 }
 
-.switchWraper {
-    position: relative; 
-    left: 70%;
-    transform: translateY(-25%);
-    width: 30%;
+.slideContainer{
+    position: absolute;
+    margin-left: 40%; 
 }
 
 
@@ -817,8 +844,7 @@ button:disabled {
   .slider.round:before {
     border-radius: 50%;
   }
-
-
+  
   /* Finish styling of Settings */
 
 /* Display none for all child element excent main menu as default */
