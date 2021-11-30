@@ -627,28 +627,76 @@ button:disabled {
 }
 
 /* Stying the Trends page */ 
-.centerBox {
-    background-size: 100% auto;
-	color: #505050;
-	margin-left: 10%;
-	margin-right: 10%;
-	padding-top: 35px;
-	padding-bottom: 35px;
-	position: relative;
+.settings__item {
+    height: 100%;
+    width: 80%;
+
+    margin: auto;
+    display: relative;
+    justify-content: left;
+    /* align-items: center; */
+
+    border-radius: 25px;
+    background-color:rgb(187, 187, 187);
 }
 
-.centerBox__items {
-    position: relative; 
+#settings__header {
+    font-size: 2em;
+    font-weight: bold;
+    color: #141516;
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
 }
 
-.centerBox__items__text {
-    position: relative;
-    left: 10%;
-    transform: translateY(50%);
-    color: black;
+.settings__item--account, .settings__item--notification, .settings__item--advance {
+    height: 30%;
+    width: 75%;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    display: relative;
+    justify-content: center;
+
+}
+
+#account, #notification, #advance{
     font-size: 1.5em;
     font-weight: bold;
-    font-family: var(--ff-TimerFont);
+    color: #141516;
+    text-decoration: underline grey;
+    display: flex;
+    position: relative;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.account__settings, .notification__settings, .advance__settings {
+    height: 30%;
+    width: 70%;
+    margin-top: 5px;
+    margin: auto;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    position: relative;
+}
+
+
+#sound, #volume, #dark__mode, #about{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.fa-info-circle{
+    position: relative;
+    margin-left: 80%;
+    margin-bottom: 200px;
 }
 
 .switchWraper {
@@ -658,25 +706,6 @@ button:disabled {
     width: 30%;
 }
 
-/* Slider*/
-#player {
-	width: 350px;
-	height: 50px;
-	position: relative;
-	margin: 0 auto;
-	top: 80px;
-}
-
-#volume {
-	position: absolute;
-	left: 24px;
-	margin: 0 auto;
-	height: 5px;
-	width: 300px;
-	background: #555;
-	border-radius: 15px;
-
-}
 
 /* Switch */
 .switch {
@@ -738,6 +767,9 @@ button:disabled {
   .slider.round:before {
     border-radius: 50%;
   }
+
+
+  /* Finish styling of Settings */
 
 /* Display none for all child element excent main menu as default */
 .trends__chart >:not(:first-child) {

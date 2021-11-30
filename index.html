@@ -180,30 +180,65 @@
                 <h3>"inventory"</h3>
                 <!-- Temporary  -->
             </div>
+            <!-- SETTINGS PAGE -->
             <div class="main__item main__item--settings">
-                <!-- Temporary (you can remove h3) -->
-                <div class="centerBox">
-                    <div class="centerBox__items">
-                        <p class="centerBox__items__text darkMode">Dark Mode</p>
-                        <div class="switchWraper"> 
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
+                <div class="settings__item">
+                    <p id="settings__header">Settings</p>
+
+                    <!-- ACCOUNT SETTINGS -->
+                    <div class="settings__item settings__item--account">
+                        <p id="account">Account</p>
+                        <i class="fas fa-user-circle fa-4x"></i>
+                        <div class="account__settings account__settings--profile">
+                            <p id="username">"User name"</p> 
+                            <h1 id="change__user">Not you? Change user</h1> 
+
                         </div>
-                        <p class="centerBox__items__text volume">Volume</p>
-                        <div class="volumeSlider"> 
-                            <div id="player">
-                                <i class="fa fa-volume-down"></i>
-                                <div id="volume"></div>
-                                <i class="fa fa-volume-up"></i>
-                            </div>
-                        </div>
-                        
                     </div>
 
-                </div>
+                    <!-- NOTIFICATION SETTINGS -->
+                    <div class="settings__item settings__item--notification">
+                        <p id="notification">Notification</p> 
+                        <div class="notification__settings notification__settings--sound">
+                            <p id="sound">Sound</p> 
+                            <div class="switchWraper"> 
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
 
+                        <div class="notification__settings notification__settings--volume">
+                            <p id="volume">Volume</p> 
+                            <i class="fa fa-volume-down"></i>
+                            <i class="fa fa-volume-up"></i>
+                        </div>
+                    </div> 
+
+                    <!-- ADVANCE SETTINGS -->
+                    <div class="settings__item settings__item--advance">
+                        <p id="advance">Advance</p> 
+                        <div class="advance__settings advance__settings--dark__mode">
+                            <p id="dark__mode">Dark Mode</p> 
+                                <div class="switchWraper"> 
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                        </div>
+                        <div class="advance__settings advance__settings--about">
+                            <p id="about">About</p> 
+                            <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                        
+
+                    </div>    
+
+                                     
+
+                </div>
                 <!-- Temporary  -->
             </div>
             
