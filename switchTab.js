@@ -1,10 +1,12 @@
 let reportButton = document.querySelector(".navBar__item--report");
+let shopButton = document.querySelector(".navBar__item--shop");
 let inventoryButton = document.querySelector(".navBar__item--inventory");
 let settingsButton = document.querySelector(".navBar__item--settings");
 let goalsButton = document.querySelector(".navBar__item--goals");
 
 let mainMenuDisplay = document.querySelector(".main__item--menu");
 let reportDisplay = document.querySelector(".main__item--report");
+let shopDisplay = document.querySelector(".main__item--shop");
 let inventoryDisplay = document.querySelector(".main__item--inventory");
 let settingsDisplay = document.querySelector(".main__item--settings");
 let goalsDisplay = document.querySelector(".main__item--goals");
@@ -60,7 +62,7 @@ inventoryButton.onclick = function () {
         inventoryDisplay.style.display = "block";
         inventoryButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(3);
+        hideTabsExcept(4);
         state = 00010;
     }
 };
@@ -70,7 +72,7 @@ settingsButton.onclick = function () {
         settingsDisplay.style.display = "block";
         settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(4);
+        hideTabsExcept(5);
         state = 00001;
     }
 };
