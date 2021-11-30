@@ -178,6 +178,7 @@ $(".chatBox__break form").submit(function(e) {
     e.preventDefault();
 });
 
+// ---- Start of Goal Page Code ---- //
 
 let goals = cb.goalsList;  // list of Goal objects
 let events = cb.eventList;
