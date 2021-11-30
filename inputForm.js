@@ -24,7 +24,9 @@ class chatBox {
         this.messageList = [];
 
         // Add default goals and session
-        // this.goalsList.push(new Goal());
+        // let defaultGoal = new Goal();
+        // this.goalsList.push(defaultGoal);
+        // this.updateGoalSelection(defaultGoal);
         // this.sessionList.push(this.goalsList[0]);
     }
 
@@ -88,7 +90,7 @@ class chatBox {
             this.eventList.push(newGoal);
             this.goalsList.push(newGoal);
 
-            this.updateGoalSelection(newGoal);  // why is it adding it twice?
+            this.updateGoalSelection(newGoal);
             
             goalButton.disabled = false;
             //hide form after
@@ -140,7 +142,6 @@ class chatBox {
     updateGoalSelection(goal) {
         let goalSelection = document.querySelector(".goalRelatedSession select");
         let newOption = document.createElement("option");
-        console.log("goallist length: " + this.goalsList.length);
         newOption.id = this.goalsList.length - 1;
         newOption.value = goal.title;
         newOption.innerHTML = goal.title;
@@ -224,13 +225,14 @@ function createRandomData(){
 
         goals.push(newGoal);
         events.push(newGoal);
+        cb.updateGoalSelection(newGoal);
     }
 }
 createRandomData(); // insert random data
 
 // builds the list of goals
 function setUpGoals() {
-    let goalDiv, sessionList, progress, progressVal, currGoal;
+    let goalDiv, sessionsList, progress, progressVal, currGoal;
     let goalID, goalButtonID, sessionID;
 
     for(let i = 0; i < goals.length; i++) {
@@ -259,23 +261,22 @@ function setUpGoals() {
                 progressVal + '%"></div></div><div class="progress-percentage"><p>' + progressVal + '%</p></div>';
             goalDiv.appendChild(progress);
 
-            sessionList = document.createElement("ul");    // create unordered list to store sessions
-            sessionList.className = 'sessionlist';
+            sessionsList = document.createElement("ul");    // create unordered list to store sessions
+            sessionsList.className = 'sessionlist';
             sessionID = 'goal' + i + 'sessions';
-            sessionList.id = sessionID;
-            goalDiv.appendChild(sessionList);             // add list to goal div
+            sessionsList.id = sessionID;
+            goalDiv.appendChild(sessionsList);             // add list to goal div
             goalsPage.appendChild(goalDiv);               // add goal div to goals page
         }
-
+        console.log(currGoal.listOfSession);
         // check if list of sessions for each goal needs to be updated with new values
-        sessionList = document.getElementById(sessionID);   // get list of sessions for current goal
-        updateTaskList(currGoal, i, sessionList);                                
+        sessionsList = document.getElementById(sessionID);   // get list of sessions for current goal
+        updateTaskList(currGoal, i, sessionsList);                                
     }
 }
 
-function updateTaskList(currGoal, currGoalIndex, sessionList) {
+function updateTaskList(currGoal, currGoalIndex, sessionsList) {
     let listItem, currSession;
-
     let goalSessions = currGoal.getListOfSessions();      // grab array of sessions associated with current goal
     // let taskDurations = taskDuration[currGoalIndex];   // grab array of time associated with those sessions for the current goal
 
@@ -289,12 +290,12 @@ function updateTaskList(currGoal, currGoalIndex, sessionList) {
              // store name and duration of task in list
             listItem.innerHTML = '<li class="taskname">' + currSession.title + '</li><li class="timeval">' + 
                 convertToTimeFormat(currSession.elapsedTime, currSession.duration) + '</li>'; 
-            sessionList.appendChild(listItem);                             // store list item in unordered list
+            sessionsList.prepend(listItem);                            // store list item in unordered list
         }
     }
-    setUpSummary('goaltimespent', 'Time spent on goal:', currGoalIndex, currGoal.calculateElapsedTime(), sessionList);
-    setUpSummary('goaltimeleft', 'Time remaining:', currGoalIndex, currGoal.calculateTimeRemaining(), sessionList);
-    setUpSummary('goaltotaltime', 'Goal duration:', currGoalIndex, currGoal.duration, sessionList);
+    setUpSummary('goaltimespent', 'Time spent on goal:', currGoalIndex, Number(currGoal.calculateElapsedTime()), sessionsList);
+    setUpSummary('goaltimeleft', 'Time remaining:', currGoalIndex, Number(currGoal.calculateTimeRemaining()), sessionsList);
+    setUpSummary('goaltotaltime', 'Goal duration:', currGoalIndex, Number(currGoal.duration), sessionsList);
 }
 
 function setUpSummary(summaryType, message, currGoalIndex, time, dropDownList) {
