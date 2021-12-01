@@ -161,9 +161,10 @@ class chatBox {
                 this.hideAll();
 
                 //update time
-                skipTime();
-                updateTimeBreak(breakDuration);
-                startStop();
+                if (confirmSkip()){
+                    updateTimeBreak(breakDuration);
+                    startStop();
+                }
             }
         });
     }
@@ -333,6 +334,10 @@ function displayTime(second) {
 function confirmSkip() {
     if (confirm("Are you sure you want to skip?")) {
         skipTime();
+        return true;
+    } else {
+        //Uncomment this if you want to pause after canceling skip.
+        // startStop();
     }
 }
 
