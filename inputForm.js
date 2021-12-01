@@ -84,17 +84,23 @@ class chatBox {
             let goalDurationH = Number(goalFormInfo[1].value);
             let goalDurationM = Number(goalFormInfo[2].value);
 
-            this.createMessage("New Goal: " + goalTitle + " Created. Duration: " +
-                goalDurationH + " H and " + goalDurationM + " M");
-            let newGoal = new Goal(goalTitle, goalDurationH * 60 + goalDurationM);
-            this.eventList.push(newGoal);
-            this.goalsList.push(newGoal);
+            if (goalDurationH < 0 || goalDurationM < 0) {
+                alert("Time input should be greater than 0.");
+            } else if(goalDurationM>=60) {
+                alert("Minutes should be less than 60.");
+            } else {
+                this.createMessage("New Goal: " + goalTitle + " Created. Duration: " +
+                    goalDurationH + " H and " + goalDurationM + " M");
+                let newGoal = new Goal(goalTitle, goalDurationH * 60 + goalDurationM);
+                this.eventList.push(newGoal);
+                this.goalsList.push(newGoal);
 
-            this.updateGoalSelection(newGoal);
+                this.updateGoalSelection(newGoal);
 
-            goalButton.disabled = false;
-            //hide form after
-            this.hideAll();
+                goalButton.disabled = false;
+                //hide form after
+                this.hideAll();
+            }
         });
 
         sessionAddBtn.addEventListener('click', () => {
@@ -105,53 +111,60 @@ class chatBox {
             let sessionDuration = sessionFormInfo[1].value;
             let sessionGoal = this.goalsList[sessionGoalElement[sessionGoalElement.selectedIndex].id];
 
-            this.createMessage(
-                "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
-                " min. Relative Goal: " + sessionGoal.title
-            );
+            if (sessionDuration < 0 || sessionDuration>60) {
+                alert("Sessions can only be between 0 and 60 minutes long.");
+            } else {
+                this.createMessage(
+                    "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
+                    " min. Relative Goal: " + sessionGoal.title
+                );
 
-            let newSession = new Session(sessionTitle, sessionDuration, sessionGoal);
-            sessionGoal.addSession(newSession);
-            this.eventList.push(newSession);
-            this.sessionList.push(newSession);
+                let newSession = new Session(sessionTitle, sessionDuration, sessionGoal);
+                sessionGoal.addSession(newSession);
+                this.eventList.push(newSession);
+                this.sessionList.push(newSession);
 
-            sessionButton.disabled = false;
-            this.hideAll();
+                sessionButton.disabled = false;
+                this.hideAll();
 
-            const startButton = document.getElementById("startStop");
-            const skipButton = document.getElementById("skip");
+                const startButton = document.getElementById("startStop");
+                const skipButton = document.getElementById("skip");
 
-            if (skipButton.disabled) {
-                skipButton.disabled = false;
-                startButton.disabled = false;
+                if (skipButton.disabled) {
+                    skipButton.disabled = false;
+                    startButton.disabled = false;
+                }
+
+                //update timer
+                skipTime();
+                updateTimeSession(sessionDuration);
+                startStop();
+
+                //update left box
+                document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
+                document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
             }
-
-            //update timer
-            skipTime();
-            updateTimeSession(sessionDuration);
-            startStop();
-
-            //update left box
-            document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
-            document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
-
         });
 
         breakAddBtn.addEventListener('click', () => {
             let breakFormInfo = $('.chatBox__break form').serializeArray();
 
             let breakDuration = breakFormInfo[0].value;
-            this.createMessage(
-                "Break Time set to " + breakDuration
-            );
-            breakButton.disabled = false;
-            this.hideAll();
 
-            //update time
-            skipTime();
-            updateTimeBreak(breakDuration);
-            startStop();
+            if (breakDuration < 0) {
+                alert("Time input should be greater than 0.");
+            } else {
+                this.createMessage(
+                    "Break Time set to " + breakDuration
+                );
+                breakButton.disabled = false;
+                this.hideAll();
 
+                //update time
+                skipTime();
+                updateTimeBreak(breakDuration);
+                startStop();
+            }
         });
     }
 
