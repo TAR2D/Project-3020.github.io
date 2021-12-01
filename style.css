@@ -573,6 +573,7 @@ button:disabled {
 	display:flex;
 	flex-direction: row;
 	font-size: 36px;
+	color: black;
 	background-color: var(--bg-mainMenu);
 	cursor: pointer;
 	text-align: center;
