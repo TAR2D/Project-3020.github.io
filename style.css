@@ -588,7 +588,8 @@ button:disabled {
 }
 
 .trends__chart, .trends__summaryTitle, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
-    width: 75%; 
+    font-family: var(--ff-TimerFont);
+    width: 93%; 
 }
 
 .trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryTitle, .trends__summaryBox {
@@ -600,7 +601,7 @@ button:disabled {
 }
 
 .trends__chart {
-    height: 60%; 
+    height: 55%; 
 }
 
 .trendsBar {
@@ -619,7 +620,7 @@ button:disabled {
     padding:10px 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 5px 0 0 5px; 
+    margin: 5px 0 0 7px; 
     background-color: var(--bg-sectionB);
 }
 
@@ -636,6 +637,7 @@ button:disabled {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
 }
 
 .trends__currDate {
@@ -657,7 +659,7 @@ button:disabled {
     font-size: 120%;
     background-color: #546a76;
     color: white;
-    padding-left: 8px;
+    padding: 5px 0px 5px 8px;
 }
 
 .trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
