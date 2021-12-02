@@ -871,7 +871,7 @@ button:disabled {
 /* for body of goals page */
 .goalsBody {
     width: 98%;
-    height: 85%;
+    height: 88%;
     color: black;
 	flex-direction: column;
 	overflow-y: scroll;
@@ -879,70 +879,54 @@ button:disabled {
 
 /* for body of goals page */
 .goalsBody .goal{
+    height: auto;
+    width: 100%;
+    margin: 1%;
     margin-bottom: 4%;
 }
 
 /* for individual goal headers which includes the goal name and arrow down symbol */
 .goal-label  {
     display: flex;
+    width: 98%;
     font-size: large;
-    width: auto;
-    /* for goal name and menu symbol far apart, uncomment line below */
     justify-content: space-between; 
-    padding: 0 2% 1% 2%;
-}
-
-.name-and-progress {
-    display: flex;
-    width: 94%;
-    justify-content: space-between;
-}
-
-.goalprogress h1{
-    color: black;
-    vertical-align: middle;
-    align-content: center;
-    display: inline-block;
-    font-size: large;
-}
-
-.dropdown-symbol {
+    padding: 1%;
+    margin-bottom: 1%;
     cursor: pointer;
     border: 2px solid black;
-    border-top-color: rgb(143, 143, 143);
-    border-left-color: rgb(143, 143, 143);
-    padding: 3px;
+    border-top-color: rgb(95, 94, 94);
+    border-left-color: rgb(95, 94, 94);
     border-radius: 5px;
 }
 
-.dropdown-symbol:focus {
-    border-bottom-color: rgb(192, 192, 192);
-    border-right-color: rgb(192, 192, 192);
+/* change colour when hovering and clicking on goal label */
+.goal-label:hover {
+    background-color:rgb(209, 209, 209);
 }
 
-/* for 1.
-.name-and-progress {
+.goalsBody input:checked ~ label {
+    background-color: rgb(209, 209, 209);
+}
+
+/* for goal progress and goal percentage in goal label */
+.goalprogress {
     display: flex;
-}
-
-.goalprogress h1{
-    color: rgb(32, 31, 31);
+    color: black;
     vertical-align: middle;
-    display: inline-block;
-    font-size: smaller;
-} */
+    font-size: medium;
+}
 
 /* for entire list of tasks for a goal on goals page*/
 .goalsBody ul {
     display: none;
-    width: 90%;
-    justify-content:center;
+    width: 98%;
+    justify-content: center;
     background-color: var(--c-chatBubble);
     padding: 2%;
-    margin-left: 2%;
-    outline-color: black;
-    outline-width: 2px;
-    outline-style: inset;
+    margin-top: 0px;
+    border: 2px solid black;
+    border-top: 0px;
     font-size: medium;
     border-radius: 1px 1px 5px 5px;
 }
@@ -960,7 +944,7 @@ button:disabled {
 }
 
 .goalsBody input:checked ~ ul{
-    display: block; /* shows task list when goal header is clicked */
+    display: block; /* shows task list when goal label is clicked */
 }
 
 .goalsBody input {
@@ -973,27 +957,19 @@ button:disabled {
     background-color: var(--c-chatBubble);
     height: 100%;
     border-radius: 5px;
-    z-index: 2; /* bring to front */
 }
 
 /* outline of the progress bar (darker block) */
 .progressbar-container {
-    width: 90%;
-    margin-left: 2%;
-    outline-style: inset;
+    display: block;
+    justify-self: center;
+    width: 98%;
+    height: 18px;
+    outline-style: solid;
     outline-color: black;
     outline-width: 2px;
     border-radius: 5px;
     background-color: rgb(95, 95, 95);
-    display: relative;
-    z-index: 1;
-}
- 
-/* for the progress bar and the progress percentage*/
-.progress-container {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
 }
 
 /* adds dashed line in task lists */
