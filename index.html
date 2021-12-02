@@ -25,8 +25,15 @@
 
 <body>
     <header>
+        <!-- 
+            NAVIGATION BAR
+         -->
         <nav class="navBar">
+
+            <!-- App Name -->
             <div class="navBar__sectionA"><h3>"WhatsMyName?"</h3></li></div>
+
+            <!-- Navigation Bar Items -->
             <ul class="navBar__sectionB">
                 <li class="navBar__item navBar__item--goals"><i class="fas fa-bullseye"></i><h3>Goals</h3></li>
                 <li class="navBar__item navBar__item--report"><i class="fas fa-chart-bar"></i><h3>Trends</h3></li>
@@ -34,9 +41,13 @@
                 <li class="navBar__item navBar__item--settings"><i class="fas fa-cog"></i><h3>Settings</h3></li>
             </ul>
         </nav>
+
     </header>
     <main>
         <div class="main__items">
+            <!-- 
+                MAIN MENU
+             -->
             <div class="main__item main__item--menu">
                 <div class="leftBox">
                     <!-- TIMER AND COMPANION AREA -->
@@ -78,8 +89,13 @@
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
                     <div class="chatBox" >
-                        <div class="chatBox__msgBox">
-                        </div>
+                        <!-- Message Box -->
+                        <div class="chatBox__msgBox"></div>
+
+                        <!-- 
+                            Chat Box Forms 
+                        -->
+                        <!-- Create Goal Form -->
                         <div class="chatBox__createGoal">
                             <form action="" method="get">
                                 <div class="goalFormTitle">
@@ -102,6 +118,8 @@
                                 </div>
                             </form>
                         </div>
+
+                        <!-- Start Session Form -->
                         <div class="chatBox__startSession">
                             <form action="" method="get">
                                 <div class="sessionFormTitle">
@@ -123,6 +141,8 @@
                                 </div>
                             </form>
                         </div>
+
+                        <!-- Start Break Form -->
                         <div class="chatBox__break">
                             <form action="" method="get">
                                 <div class="breakFormTimer">
@@ -136,6 +156,8 @@
                             </form>
                         </div>
                     </div>
+
+                    <!-- Button for Chat box -->
                     <div class="buttonsBox">
                         <div class="btn-group">
                             <button id="goalButton">Add Goal</button>
@@ -143,9 +165,13 @@
                             <button id="breakButton">Start a Break</button>
                         </div>
                     </div>
+
                 </div>
             </div>
-            <!-- GOALS PAGE -->
+
+            <!-- 
+                GOALS PAGE 
+            -->
             <div class="main__item main__item--goals">
                 <!-- Header (title and back button) -->
                 <div class="page__header">
@@ -157,8 +183,12 @@
 				</div>
                 <div class="goalsBody"></div>
             </div>
-            <!-- TRENDS PAGE -->
+            
+            <!-- 
+                TRENDS PAGE
+             -->
             <div class="main__item main__item--report">
+
 				<!-- Header (title and back button) -->
                 <div class="page__header">
 					<button class="page__backButton">
@@ -167,6 +197,7 @@
 					<div class="page__header__title">Trends</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
 				</div>
+
                 <!-- DAILY, WEEKLY, MONTHLY BUTTONS -->
                 <nav class="trendsBar">
                     <ul id="trendsBarTabs" class="trendsBar__items">
@@ -175,16 +206,19 @@
                         <li id="monthlyTab" class="trendsBar__item--monthly"><p>Monthly</p></li>
                     </ul>
                 </nav>
+
                 <!-- CHART DATE NAV BUTTONS -->
                 <div class="trends__dateNavBar btn-group">
                     <button id="prevButton"><p>Prev</p></button>
                     <p id="date" class="trends__currDate">"Insert Date Here"</p>
                     <button id="nextButton"><p>Next</p></button>
                 </div>
+
                 <!-- CHART -->
                 <div id="trendsCharts" class="trends__chart">
                     <canvas id="weeklyChart" class="trends__chart--curr" ></canvas>
                 </div> 
+                
                 <!-- CHART SUMMARY TABLE -->
                 <div class="main__item--report trends__summaryTitle">Summary: </p> </div>
                 <div class="main__item--report trends__summaryBox"> 
@@ -200,7 +234,10 @@
                       </table>
                 </div> 
             </div>
-			<!-- INVENTORY PAGE -->
+
+			<!-- 
+                INVENTORY PAGE
+            -->
             <div class="main__item main__item--inventory">
                 <!-- Header (title and back button) -->
                 <div class="page__header">
@@ -235,7 +272,9 @@
 					</div>
 				</div>
             </div>
-            <!-- SETTINGS PAGE -->
+            <!-- 
+                SETTINGS PAGE
+            -->
             <div class="main__item main__item--settings">
                 <div class="page__header">
                     <button class="page__backButton">
