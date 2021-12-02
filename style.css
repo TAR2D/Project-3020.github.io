@@ -88,6 +88,10 @@ a:visited {
     --b-SectionBDisplay: transparent;
 
 	--c-chatBubble: rgb(165, 206, 230);
+
+	--inventoryBoxes: rgb(141, 141, 141);
+
+	--accentColor-first: rgb(255, 255, 255);
 	
     --ff-TimerFont : 'Roboto', sans-serif;
     --b-TimerBox: transparent;
@@ -138,6 +142,7 @@ body {
     padding:10px 12px;
     border-radius: 4px;
     cursor: pointer;
+	font-family: var(--ff-TimerFont);
 }
 
 .navBar__sectionA h3 {
@@ -563,6 +568,8 @@ button:disabled {
 	color: black;
 	font-family: var(--ff-TimerFont);
 	padding: 5px;
+	border-radius: 5px;
+	background-color: var(--accentColor-first);
 }
 .page__header__title {
 	font-weight: 700;
@@ -688,7 +695,7 @@ button:disabled {
     width: 15%;
 }
 
-/* Stying the Trends page */ 
+/* Stying the Settings page */ 
 
 .settings__item {
     height: 90%;
@@ -978,6 +985,89 @@ button:disabled {
 .trends__chart >:not(:first-child) {
     display: none;
 }
+
+/* --------------- STYLING THE INVENTORY PAGE ------------------ */
+.inventory__page {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 92%;
+	padding: 5px;
+	background-color: var(--bg-mainMenu);
+	font-weight: 500;
+}
+
+.inventory__headline {
+	width: 100%;
+	height: 3%;
+	font-family: var(--ff-TimerFont);
+	font-size: large;
+	margin-left: 10px;
+	color: black;
+	margin-top: 2px;
+}
+
+.inventory__featureBar {
+	height: 45%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+	justify-content: space-between;
+}
+
+.inventory__featureItem {
+	width: 49%;
+	height: 100%;
+	border-style: solid;
+	border-width: 5px;
+	border-color: var(--inventoryBoxes);
+	border-radius: 5px;
+}
+
+.inventory__categoryTitle {
+	height: 3%;
+	width: 100%;
+	font-family: var(--ff-TimerFont);
+	font-size: large;
+	margin-left: 10px;
+	color: black;
+	font-size: 14px;
+}
+
+.inventory__categories {
+	height: 55%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 5px;
+	background-color: var(--bg-mainMenu);
+	justify-content: space-between;
+}
+
+.inventory__list {
+	height: 43%;
+	justify-items: left;
+	background-color: var(--bg-mainMenu);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
+.inventory__item {
+	height: 100%;
+	width: 32%;
+	background-color: var(--bg-mainMenu);
+	border-style: solid;
+	border-width: 5px;
+	border-color: var(--inventoryBoxes);
+	border-radius: 5px;
+
+}
+
+
+
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
