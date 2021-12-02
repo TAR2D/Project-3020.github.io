@@ -8,18 +8,18 @@ function createTask(){
 	makeVisible("createTask", ["createGoal", "startBreak"]);
 }
   
-  //Show createGoal and hide createTask and startBreak
+//Show createGoal and hide createTask and startBreak
 function createGoal(){
 	makeVisible("createGoal", ["createTask", "startBreak"]);
 }
   
-  //Show startBreak and hide createGoal and createTask
+//Show startBreak and hide createGoal and createTask
 function startBreak(){
 	makeVisible("startBreak", ["createTask", "createGoal"]);
 }
   
 //Will make an element visible. Parameter:(Id of the element)
-function makeVisible( name, list){
+function makeVisible(name, list){
 	//hide every element given in the list
 	let temp;
 	for (var i = 0; i < list.length; i++){ 
@@ -35,7 +35,7 @@ function makeVisible( name, list){
 	  	el.style.display = "none";
 }
 
-  // getStyle will test the style that's active on an element 'el'.
+// getStyle will test the style that's active on an element 'el'.
 function getStyle(el, name) {
 	if ( document.defaultView && document.defaultView.getComputedStyle )
 	{

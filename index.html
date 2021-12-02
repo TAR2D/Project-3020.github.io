@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -14,13 +15,14 @@
     <script src="https://kit.fontawesome.com/2e56d7ac38.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
     <script src="https://malsup.github.io/jquery.form.js"></script> 
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
-</head>
+</head >
+
 <body>
     <header>
         <nav class="navBar">
@@ -58,14 +60,14 @@
                         </div>
                         <div class="timerBtngrp">
                             <button id="startStop" onclick="startStop();" disabled><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="skipTime();" disabled><i class="fas fa-step-forward"></i></button>
+                            <button id="skip" onclick="confirmSkip();" disabled><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
                                 <h4 id="currGoal">Current Goal:</h4>
                             </div>
                             <div class="currentTask">
-                                <h4 id="currentTask">Current Task:</h4>
+                                <h4 id="currSession">Current Session:</h4>
                             </div>
                         </div>
                     </div> <!-- Closing TimerBox -->
@@ -138,8 +140,8 @@
                     </div>
                     <div class="buttonsBox">
                         <div class="btn-group">
-                            <button id="goalButton">AddGoal</button>
-                            <button id="taskButton">AddSession</button>
+                            <button id="goalButton">Add Goal</button>
+                            <button id="taskButton">Add Session</button>
                             <button id="breakButton">Start a Break</button>
                         </div>
                     </div>
@@ -150,18 +152,19 @@
                 <!-- Header (title and back button) -->
                 <div class="page__header">
 					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
+						<span class="material-icons" style="color:black;">home</span>
 					</button>
 					<div class="page__header__title">Goals</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
 				</div>
+                <div class="goalsBody"></div>
             </div>
             <!-- TRENDS PAGE -->
             <div class="main__item main__item--report">
 				<!-- Header (title and back button) -->
                 <div class="page__header">
 					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
+						<span class="material-icons" style="color:black;">home</span>
 					</button>
 					<div class="page__header__title">Trends</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
@@ -199,51 +202,111 @@
                       </table>
                 </div> 
             </div>
-			<!-- SHOP PAGE -->
-            <div class="main__item main__item--shop">
-                <!-- Header (title and back button) -->
-                <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
-					</button>
-					<div class="page__header__title">Shop</div>
-					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
-				</div>
-                <!-- Rest of page below here  -->
-            </div>
 			<!-- INVENTORY PAGE -->
             <div class="main__item main__item--inventory">
                 <!-- Header (title and back button) -->
                 <div class="page__header">
 					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
+						<span class="material-icons" style="color:black;">home</span>
 					</button>
 					<div class="page__header__title">Inventory</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
 				</div>
-                <!-- Rest of page below here  -->
-            </div>
-			<!-- SETTINGS PAGE -->
-            <div class="main__item main__item--settings">
-                <!-- Header (title and back button) -->
-                <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">arrow_back</span>
-					</button>
-					<div class="page__header__title">Settings</div>
-					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+                <!-- Rest of page  -->
+				<div class="inventory__page">
+					<!-- first row of featured items (environments) -->
+					<div class = "inventory__headline">Environments</div>
+					<div class="inventory__featureBar">
+						<div class = "inventory__featureItem"></div>
+						<div class = "inventory__featureItem"></div>
+					</div>
+					<!-- subsequent rows of normal items we care less about -->
+					<div class="inventory__categories">
+						<div class="inventory__categoryTitle">Clothing</div>
+						<div class="inventory__list">
+							<div class="inventory__item"></div>
+							<div class="inventory__item"></div>
+							<div class="inventory__item"></div>
+						</div>
+						<div class="inventory__categoryTitle">Gear</div>
+						<div class="inventory__list">
+							<div class="inventory__item"></div>
+							<div class="inventory__item"></div>
+							<div class="inventory__item"></div>
+						</div>
+					</div>
 				</div>
-                <!-- Rest of page below here  -->
             </div>
-            
+            <!-- SETTINGS PAGE -->
+            <div class="main__item main__item--settings">
+                <div class="page__header">
+                    <button class="page__backButton">
+                        <span class="material-icons" style="color:black;">home</span>
+                    </button>
+                    <div class="page__header__title">Settings</div>
+                    <div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+                </div>
+                <div class="settings__item">
+                    <!-- ACCOUNT SETTINGS -->
+                    <div class="settings__item settings__item--account">
+                        <p id="account">Account</p>
+                        <div class="account__settings account__settings--profile">
+                            <i class="fas fa-user-circle fa-5x"></i>
+                            <div class="account__text">
+                                <h1 id="username">"User name"</h1> 
+                                <h2 id="change__user">Not you? Change user</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- NOTIFICATION SETTINGS -->
+                    <div class="settings__item settings__item--notification">
+                        <p id="notification">Notification</p> 
+                        <div class="notification__settings notification__settings--sound">
+                            <p id="sound">Sound</p> 
+                            <div class="switchWraper"> 
+                                <label class="switch">
+                                    <input id="toggleSound" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="notification__settings notification__settings--volume">
+                            <p id="volume">Volume</p> 
+                            <div class="slideContainer">
+                                <i class="fa fa-volume-down fa-1x"></i>
+                                <input type="range" min="1" max="100" value="50" id="volumeSlider">
+                                <i class="fa fa-volume-up fa-1x"></i>
+                            </div>
+
+                        </div>
+                    </div> 
+                    <!-- ADVANCE SETTINGS -->
+                    <div class="settings__item settings__item--advance">
+                        <p id="advance">Advance</p> 
+                        <div class="advance__settings advance__settings--dark__mode">
+                            <p id="dark__mode">Dark Mode</p> 
+                            <div class="switchWraper"> 
+                                <label class="switch">
+                                    <input id="toggleDarkMode" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="advance__settings advance__settings--about">
+                            <p id="about">About</p> 
+                            <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div>    
+                </div>
+            </div> 
         </div>
     </main>
     <script src="timer.js"></script>
-    <script src="Event.js"></script>
+	<script src="chat.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
     <script src="switchChart.js"></script>
+    <script src="Event.js"></script>
     <script src="InputForm.js"></script>
-    
 </body>
 </html>
