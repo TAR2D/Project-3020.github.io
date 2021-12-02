@@ -174,10 +174,6 @@ class chatBox {
 const cb = new chatBox();
 cb.display();
 
-// export function getChatBox() {
-//     return cb;
-// };
-
 // Prevent Submitting Form
 $(".chatBox__createGoal form").submit(function(e) {
     e.preventDefault();
@@ -202,6 +198,8 @@ var goalsPage = document.querySelector(".goalsBody");
 goalsNavButton.addEventListener("click", setUpGoals);
 
 const arrowDownSymbol = '<i class="fas fa-arrow-down"></i>';
+const menuSymbolCircles= '<i class="fas fa-ellipsis-v"></i>';
+const menuSymbolBars = '<i class="fas fa-bars"></i>';
 
 // creates some data to show on goal page. feel free to add or change anything.
 function createRandomData(){
@@ -249,13 +247,20 @@ function setUpGoals() {
             // store goal name with arrow
             goalButtonID = 'goalbutton' + i;
             goalDiv.innerHTML = '<input class="goal-button" id="' + goalButtonID + '" type="checkbox"></input>'; 
-            goalDiv.innerHTML += '<label for="' + goalButtonID + '"><p id="goalname">'
-                + currGoal.title + '</p><p class="goalarrowdown">' + arrowDownSymbol + '</p></label>';
+
+            // ver: symbol and title far apart
+            goalDiv.innerHTML += '<label class="goal-label" for="' + goalButtonID + '"><div class="name-and-progress"><p class="goalname">'
+                + currGoal.title + '&nbsp</p><div class="goalprogress"><h1>' + convertToTimeFormat(currGoal.calculateElapsedTime(), currGoal.duration) + 
+                '</h1></div></div><div class="dropdown-symbol">' + menuSymbolBars  + '</div></label>';
+
+            // // ver: symbol near title
+            // goalDiv.innerHTML += '<label class="goal-label" for="' + goalButtonID + '"><p id="goalname">'
+            //     + currGoal.title + '<p>&nbsp;</p><p>' + menuSymbolBars  + '</p></p></label>';
             
             // create div that holds the progress bar and progress percentage
             progress = document.createElement("div");
             progress.className = 'progress-container';
-            progressVal = getGoalProgress(currGoal); // calcualte progress of that goal
+            progressVal = getGoalProgress(currGoal); // calculate progress of that goal
             // create the progress bar and progress percentage
             progress.innerHTML += '<div class="progressbar-container"><div class="progressbar" style="width:' + 
                 progressVal + '%"></div></div><div class="progress-percentage"><p>' + progressVal + '%</p></div>';
@@ -266,9 +271,8 @@ function setUpGoals() {
             sessionID = 'goal' + i + 'sessions';
             sessionsList.id = sessionID;
             goalDiv.appendChild(sessionsList);             // add list to goal div
-            goalsPage.appendChild(goalDiv);               // add goal div to goals page
+            goalsPage.appendChild(goalDiv);                // add goal div to goals page
         }
-        console.log(currGoal.listOfSession);
         // check if list of sessions for each goal needs to be updated with new values
         sessionsList = document.getElementById(sessionID);   // get list of sessions for current goal
         updateTaskList(currGoal, i, sessionsList);                                
@@ -278,7 +282,6 @@ function setUpGoals() {
 function updateTaskList(currGoal, currGoalIndex, sessionsList) {
     let listItem, currSession;
     let goalSessions = currGoal.getListOfSessions();      // grab array of sessions associated with current goal
-    // let taskDurations = taskDuration[currGoalIndex];   // grab array of time associated with those sessions for the current goal
 
     for(let i = 0; i < goalSessions.length; i++) {  // go through array of sessions
         currSession = document.getElementById('goal' + currGoalIndex + 'session' + i);
@@ -317,8 +320,7 @@ function getGoalProgress(goal) {
     return Math.floor((goal.calculateElapsedTime()/goal.duration)*100);
 }
 
-// takes a string representing time associated with a task in the form '16/25' and 
-// turns it into '0:16:00/0:25:00'
+// takes two time given in minutes and turns it into '0:16:00/0:25:00'
 function convertToTimeFormat(elapsedTime, totalTime) {
     return convertMinToFormat(elapsedTime) + '/' + convertMinToFormat(totalTime);
 }

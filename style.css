@@ -847,14 +847,54 @@ button:disabled {
 }
 
 /* for individual goal headers which includes the goal name and arrow down symbol */
-.goalsBody label {
+.goal-label  {
     display: flex;
-    justify-content: space-between;
     font-size: large;
-    width: 100%;
-    cursor: pointer;
+    width: auto;
+    /* for goal name and menu symbol far apart, uncomment line below */
+    justify-content: space-between; 
     padding: 0 2% 1% 2%;
 }
+
+.name-and-progress {
+    display: flex;
+    width: 94%;
+    justify-content: space-between;
+}
+
+.goalprogress h1{
+    color: black;
+    vertical-align: middle;
+    align-content: center;
+    display: inline-block;
+    font-size: large;
+}
+
+.dropdown-symbol {
+    cursor: pointer;
+    border: 2px solid black;
+    border-top-color: rgb(143, 143, 143);
+    border-left-color: rgb(143, 143, 143);
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.dropdown-symbol:focus {
+    border-bottom-color: rgb(192, 192, 192);
+    border-right-color: rgb(192, 192, 192);
+}
+
+/* for 1.
+.name-and-progress {
+    display: flex;
+}
+
+.goalprogress h1{
+    color: rgb(32, 31, 31);
+    vertical-align: middle;
+    display: inline-block;
+    font-size: smaller;
+} */
 
 /* for entire list of tasks for a goal on goals page*/
 .goalsBody ul {
