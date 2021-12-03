@@ -28,9 +28,14 @@ class chatBox {
         this.goalsList.push(defaultGoal);
         this.updateGoalSelection(defaultGoal);
         this.sessionList.push(this.goalsList[0]);
+
+        this.breakState = 0; 
     }
 
     display() {
+        const startButton = document.getElementById("startStop");
+        const skipButton = document.getElementById("skip");
+        
         const { goalButton, goalForm,
             sessionButton, sessionForm,
             breakButton, breakForm
@@ -38,7 +43,8 @@ class chatBox {
             goalAddBtn, sessionAddBtn, breakAddBtn } = this.args;
 
         window.addEventListener('load', () => {
-            this.createMessage("Welcome! To get started, please create a new study session.");
+            this.addMessageTime();
+            this.createMessage("Welcome! To get started, please set your first session. You can do that by clicking the <b>Set Session</b> button below!");
         })
 
         goalButton.addEventListener('click', () => {
@@ -89,8 +95,13 @@ class chatBox {
             } else if(goalDurationM>=60) {
                 alert("Minutes should be less than 60.");
             } else {
-                this.createMessage("New Goal: " + goalTitle + " Created. Duration: " +
-                    goalDurationH + " H and " + goalDurationM + " M");
+                companionTalking(); 
+                this.addMessageTime();
+                
+                this.createMessage(
+                    "Your goal, <b>" + goalTitle + "</b>, has been created. You must do <b>" + goalDurationH + " hours and " + goalDurationM + " minutes </b> of sessions to complete your goal.");
+                    //"New Goal: " + goalTitle + " Created. Duration: " +
+                    //goalDurationH + " H and " + goalDurationM + " M");
                 let newGoal = new Goal(goalTitle, goalDurationH * 60 + goalDurationM);
                 this.eventList.push(newGoal);
                 this.goalsList.push(newGoal);
@@ -114,9 +125,15 @@ class chatBox {
             if (sessionDuration < 0 || sessionDuration>60) {
                 alert("Sessions can only be between 0 and 60 minutes long.");
             } else {
+
+                companionTalking(); 
+                this.addMessageTime();
+
                 this.createMessage(
-                    "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
-                    " min. Relative Goal: " + sessionGoal.title
+                    "Your session, <b>" + sessionTitle + "</b>, has been set for <b>" + sessionDuration + " minutes</b> under your goal called <b>" + sessionGoal.title + "</b>."
+
+                   // "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
+                   // " min. Relative Goal: " + sessionGoal.title
                 );
 
                 let newSession = new Session(sessionTitle, sessionDuration, sessionGoal);
@@ -127,9 +144,6 @@ class chatBox {
                 sessionButton.disabled = false;
                 this.hideAll();
 
-                const startButton = document.getElementById("startStop");
-                const skipButton = document.getElementById("skip");
-
                 if (skipButton.disabled) {
                     skipButton.disabled = false;
                     startButton.disabled = false;
@@ -138,13 +152,20 @@ class chatBox {
                 //update timer
                 skipTime();
                 updateTimeSession(sessionDuration);
-                startStop();
+                //startStop();
+
+                this.createMessage(
+                    "To start your session, please press the <b>play</b> button beside the timer."
+                );
 
                 //update left box
                 document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
                 document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
             }
         });
+
+        
+        
 
         breakAddBtn.addEventListener('click', () => {
             let breakFormInfo = $('.chatBox__break form').serializeArray();
@@ -154,19 +175,57 @@ class chatBox {
             if (breakDuration < 0) {
                 alert("Time input should be greater than 0.");
             } else {
-                this.createMessage(
-                    "Break Time set to " + breakDuration
-                );
-                breakButton.disabled = false;
-                this.hideAll();
+                if (confirmSkipBreak()) {
+                    companionTalking(); 
+                    this.addMessageTime();
+                    this.createMessage(
+                        "Your break has started and will last for <b>" + breakDuration + " minutes</b>."
+                    );
+                    breakButton.disabled = false;
+                    this.hideAll();
 
-                //update time
-                if (confirmSkip()){
-                    updateTimeBreak(breakDuration);
-                    startStop();
+                    //update time
+                    
+                        updateTimeBreak(breakDuration);
+                        startStop();
+                    
+                    if (skipButton.disabled) {
+                        skipButton.disabled = false;
+                        startButton.disabled = false;
+                    }
+
+                    this.createBreakMsg(this.breakState);
+                    this.breakState = (this.breakState+1)%3;
+
+                    
                 }
+
             }
         });
+    }
+
+    createBreakMsg(breakState) {
+
+        switch (breakState) {
+            //cat video
+            case 0: 
+                this.createMessage("Need a laugh? Watch this funny cat video on your break!");
+                this.createMessage("<iframe width=\"100%\" src=\"https://www.youtube.com/embed/ByH9LuSILxU\"> </iframe>");
+                break;
+
+            //breathing/meditation video
+            case 1: 
+                this.createMessage("Need to relax? Watch this mini meditation video!");
+                this.createMessage("<iframe width=\"100%\" src=\"https://www.youtube.com/embed/cEqZthCaMpo\"> </iframe>");
+                break;
+
+            //stretching video
+            case 2:
+                this.createMessage("Take a break and stretch! Watch this short video about stretching at your desk!");
+                this.createMessage("<iframe width=\"100%\" src=\"https://www.youtube.com/embed/KBaSGF6kYqw\"> </iframe>");
+                break;
+        }
+
     }
 
     updateGoalSelection(goal) {
@@ -182,6 +241,17 @@ class chatBox {
         let msgBox = document.querySelector(".chatBox__msgBox");
         let message = document.createElement('p');
         message.innerHTML = text;
+        msgBox.appendChild(message);
+        // Scroll Down with Chat
+        $(".chatBox").stop().animate({ scrollTop: $(".chatBox")[0].scrollHeight }, 1000);
+    }
+
+    addMessageTime() {
+        let msgBox = document.querySelector(".chatBox__msgBox");
+        let message = document.createElement('div');
+        message.className = 'chatMsgDate';
+        let currTime = new Date(); 
+        message.innerHTML = currTime.toString().slice(0, 24);; 
         msgBox.appendChild(message);
         // Scroll Down with Chat
         $(".chatBox").stop().animate({ scrollTop: $(".chatBox")[0].scrollHeight }, 1000);
@@ -221,9 +291,7 @@ $(".chatBox__break form").submit(function (e) {
 
 const timer = document.querySelector("#timer h1");
 let timerSessionState = document.querySelector('.timerSessionState h2');
-let timerBreakState = document.querySelector('.timerBreakState h2');
 let TSSoverlayEffect = document.querySelector('.TSSoverlay');
-let TBSoverlayEffect = document.querySelector('.TBSoverlay');
 let initialSec = 20 * 60;   //intially at 20 min.
 let breakSecond = 5 * 60;   //initially at 5 min.
 let seconds = initialSec; //take same initial 20 seconds.
@@ -270,12 +338,8 @@ function scale(number, inMin, inMax, outMin, outMax) {
 
 //Function will be called repeatedly until a pause or skip button is pressed or time is 0.
 function startTimer() {
-    if (!isOnBreak) {
-        let widthRange = scale(initialSec - seconds, 0, initialSec, 0, 100);
-        TSSoverlayEffect.style.width = widthRange + "%";
-    } else {
-        TBSoverlayEffect.style.width = scale(breakSecond - seconds, 0, breakSecond, 0, 100) + "%";
-    }
+	let widthRange = isOnBreak ? scale(breakSecond - seconds, 0, breakSecond, 0, 100) : scale(initialSec - seconds, 0, initialSec, 0, 100);
+	TSSoverlayEffect.style.width = widthRange + "%";
     seconds--;
     displayTime(seconds);
     document.querySelector("#taskButton").disabled = true; // disable session button while timer is running
@@ -307,13 +371,9 @@ function skipTime() {
     isOnBreak ? isOnBreak = false : isOnBreak = true; //checks if it comes another task or another break.
     isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
     if (isOnBreak) {
-        timerBreakState.style.color = 'black';
-        timerSessionState.style.color = 'rgba(128, 128, 128, 0.434)';
-        TSSoverlayEffect.style.width = "0%";
+        timerSessionState.innerHTML = "On Break";
     } else {
-        timerBreakState.style.color = 'rgba(128, 128, 128, 0.434)';
-        timerSessionState.style.color = 'black';
-        TBSoverlayEffect.style.width = "0%";
+        timerSessionState.innerHTML = "Working";
     }
     displayTime(0);
     statusTimer = "started";
@@ -331,7 +391,17 @@ function displayTime(second) {
 }
 
 function confirmSkip() {
-    if (confirm("Are you sure you want to skip?")) {
+    if (confirm("Your remaining progress time will not be saved. Are you sure you want to skip?")) {
+        skipTime();
+        return true;
+    } else {
+        //Uncomment this if you want to pause after canceling skip.
+        // startStop();
+    }
+}
+
+function confirmSkipBreak() {
+    if (confirm("Your remaining progress time will not be saved. Are you sure you want to start a new break?")) {
         skipTime();
         document.querySelector("#taskButton").disabled = false;
         return true;
