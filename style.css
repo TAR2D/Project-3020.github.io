@@ -298,6 +298,7 @@ main {
 	overflow-y: scroll;
     padding: 2%;
     border-radius: 10px;
+	background-color: white;
 }
 
 .buttonsBox {
@@ -306,6 +307,7 @@ main {
     border-radius: 6px;
     width: 90%;
     height: 10%;
+	background-color: white;
     /* background-color: rgb(238, 238, 238); */
 }
 
@@ -487,16 +489,16 @@ button:disabled {
     height: 25%;
 }
 
-.currentState .timerBreakState, .currentState .timerSessionState {
+.currentState .timerSessionState {
     position: relative;
     display: flex;
     align-items: center;
-    width: 40%;
+    width: 90%;
     height: 80%;
 
     font-family: var(--ff-TimerFont);
     font-weight: bold;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 2px solid white;
     background-color: white;
 }
@@ -511,10 +513,13 @@ button:disabled {
     border: none;
 }
 
-.TSSoverlay, .TBSoverlay {
+.TSSoverlay {
     width:0%;
     height: 100%;
     background-color: rgb(172, 172, 172);
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-color:rgb(164, 206, 169);
 }
 
 .timerSessionState h2{
