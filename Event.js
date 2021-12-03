@@ -16,22 +16,11 @@ class Goal extends Event{
 
     addSession(session) {
         let sessionDuration = Number(session.duration);
+        let totalDurationOfSessions = this.calculateDurationOfSessions();
 
-        /*  some logic to avoid confusion:
-            say we have a goal k and k.duration = 2.
-            we create new session called j associated with k where j.duration = 1.
-            then, in this case, k.duration stays the same since j.duration < k.duration.
-            now let's create another session called h also associated with k where h.duration = 3.
-            as a result, we have that k.duration = (k.duration - j.duration) + h.duration = (2-1)+3 = 4
-        */
-       console.log('goal dur: ' + this.duration);
-       console.log('total dur of sessions: ' + this.calculateDurationOfSessions());
-       console.log('session dur: ' + sessionDuration); //FIX BUG!!
-
-        if((this.duration - this.calculateDurationOfSessions()) < sessionDuration) {
-            this.duration = ((this.duration - this.calculateDurationOfSessions()) + sessionDuration);
+        if((this.duration - totalDurationOfSessions) < sessionDuration) {
+            this.duration = totalDurationOfSessions + sessionDuration;
         }
-        // else: sessionDuration < this.duration, so we don't update goal's duration
 
         this.listOfSession.push(session);
     }

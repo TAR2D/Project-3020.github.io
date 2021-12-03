@@ -141,7 +141,7 @@ class chatBox {
                 this.eventList.push(newSession);
                 this.sessionList.push(newSession);
                 
-                sessionButton.disabled = false;
+                sessionButton.disabled = true;
                 this.hideAll();
 
                 if (skipButton.disabled) {
@@ -150,7 +150,7 @@ class chatBox {
                 }
 
                 //update timer
-                skipTime();
+                // skipTime();
                 updateTimeSession(sessionDuration);
                 //startStop();
 
@@ -163,9 +163,6 @@ class chatBox {
                 document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
             }
         });
-
-        
-        
 
         breakAddBtn.addEventListener('click', () => {
             let breakFormInfo = $('.chatBox__break form').serializeArray();
@@ -196,10 +193,7 @@ class chatBox {
 
                     this.createBreakMsg(this.breakState);
                     this.breakState = (this.breakState+1)%3;
-
-                    
                 }
-
             }
         });
     }
@@ -348,7 +342,6 @@ function startTimer() {
         seconds = 0;
         alarm();
         skipTime();
-        document.querySelector("#taskButton").disabled = false;
     }
 }
 
@@ -379,6 +372,7 @@ function skipTime() {
     statusTimer = "started";
     startStop();
     timer.contentEditable = "true";
+    document.querySelector("#taskButton").disabled = false; // enable session button again when time is skipped
 }
 
 // Function to display the time
@@ -403,7 +397,6 @@ function confirmSkip() {
 function confirmSkipBreak() {
     if (confirm("Your remaining progress time will not be saved. Are you sure you want to start a new break?")) {
         skipTime();
-        document.querySelector("#taskButton").disabled = false;
         return true;
     } else {
         //Uncomment this if you want to pause after canceling skip.
@@ -518,7 +511,8 @@ function updateGoalProgress(currGoal, goalIndex) {
 }
 
 function updateTaskList(currGoal, currGoalIndex, sessionsList) {
-    let listItem, currSession, sessionID, lastSession;
+    let listItem, currSession, sessionID;
+
     let goalSessions = currGoal.getListOfSessions();      // grab array of sessions associated with current goal
 
     for (let i = 0; i < goalSessions.length; i++) {  // go through array of sessions
@@ -535,7 +529,6 @@ function updateTaskList(currGoal, currGoalIndex, sessionsList) {
                 + i + '">' + convertToTimeFormat(currSession.elapsedTime, currSession.duration) + '</li>';
             sessionsList.insertBefore(listItem, sessionsList.childNodes[goalSessions.length-1]);
         }
-        // update every list item here i think...
     }
     setUpSummary('goaltimespent', 'Time spent on goal:', currGoalIndex, Number(currGoal.calculateElapsedTime()), sessionsList);
     setUpSummary('goaltimeleft', 'Time remaining:', currGoalIndex, Number(currGoal.calculateTimeRemaining()), sessionsList);
