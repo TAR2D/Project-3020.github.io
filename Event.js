@@ -15,8 +15,23 @@ class Goal extends Event{
     }
 
     addSession(session) {
-        this.duration += session.duration;
+        let sessionDuration = Number(session.duration);
+        let totalDurationOfSessions = this.calculateDurationOfSessions();
+
+        if((this.duration - totalDurationOfSessions) < sessionDuration) {
+            this.duration = totalDurationOfSessions + sessionDuration;
+        }
+
         this.listOfSession.push(session);
+    }
+
+    calculateDurationOfSessions() {
+        let totalSessionsDuration = 0;
+
+        for(let i = 0; i < this.listOfSession.length; i++) {
+            totalSessionsDuration += Number(this.listOfSession[i].duration);
+        }
+        return totalSessionsDuration;
     }
 
     calculateElapsedTime() {
