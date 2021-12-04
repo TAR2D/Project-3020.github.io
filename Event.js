@@ -10,7 +10,7 @@ class Goal extends Event{
     constructor(title = "Default", duration = 0) {
         super(title, duration);
         this.listOfSession = [];
-        this.elapsedTime = 0;  // in minutes
+        this.elapsedTime = 0;  // in seconds
         this.completed = false;
     }
 
@@ -40,6 +40,7 @@ class Goal extends Event{
         for(let session of this.listOfSession) {
             timeSpentOnGoal += session.elapsedTime;
         }
+        console.log("elapsed time: " + timeSpentOnGoal);
         this.elapsedTime = timeSpentOnGoal;
         return this.elapsedTime;
     }
@@ -61,18 +62,27 @@ class Session extends Event {
 
     constructor(title = "Default", duration = 0, goal) {
         super(title, duration);
-        this.elapsedTime = 0; // in minutes
+        this.elapsedTime = 0; // in seconds
         this.goal = goal;
     }
 
-    updateSession(minsSpentOnSession) { 
-        this.elapsedTime += minsSpentOnSession;
+    updateSession(secsSpentOnSession) { 
+        this.elapsedTime += secsSpentOnSession;
         
         if(this.elapsedTime > this.duration) {
             this.elapsedTime = this.duration;
             this.completed = true;
         }
     }
+
+    incrementElapsedTime() {
+        if(this.elapsedTime < this.duration)
+            this.elapsedTime++;
+    }
+
+   ifComplete() {
+       return this.elapsedTime >= this.duration;
+   }
 }
 
 class Break extends Event {
