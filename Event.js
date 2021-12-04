@@ -40,7 +40,6 @@ class Goal extends Event{
         for(let session of this.listOfSession) {
             timeSpentOnGoal += session.elapsedTime;
         }
-        console.log("elapsed time: " + timeSpentOnGoal);
         this.elapsedTime = timeSpentOnGoal;
         return this.elapsedTime;
     }
