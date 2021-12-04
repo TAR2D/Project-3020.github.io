@@ -31,7 +31,6 @@ class chatBox {
 
         this.breakState = 0;
 
-        this.currentGoalInProgress = null;      // current goal user is working on
         this.currentSessionInProgress = null;   // current session user is working on
     }
 
@@ -143,12 +142,6 @@ class chatBox {
                 sessionGoal.addSession(newSession);
                 this.eventList.push(newSession);
                 this.sessionList.push(newSession);
-
-                // if(goalIndex !== 0) // if 'Default' goal is chosen(which is at index 0), then the user is not working on a goal
-                //     this.currentGoalInProgress = null;
-                // else
-                    this.currentGoalInProgress = sessionGoal;
-                
                 this.currentSessionInProgress = newSession;
                 
                 sessionButton.disabled = true;
@@ -346,7 +339,8 @@ function startTimer() {
 	TSSoverlayEffect.style.width = widthRange + "%";
     seconds--;
     displayTime(seconds);
-    cb.currentSessionInProgress.incrementElapsedTime();
+    if(!isOnBreak)
+        cb.currentSessionInProgress.incrementElapsedTime();
     if (seconds == 0 || seconds < 1) {  //time runs out
         seconds = 0;
         alarm();

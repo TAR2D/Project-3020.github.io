@@ -62,6 +62,7 @@ class Session extends Event {
     constructor(title = "Default", duration = 0, goal) {
         super(title, duration);
         this.elapsedTime = 0; // in seconds
+        this.completed = false;
         this.goal = goal;
     }
 
