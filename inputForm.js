@@ -29,7 +29,9 @@ class chatBox {
         this.updateGoalSelection(defaultGoal);
         this.sessionList.push(this.goalsList[0]);
 
-        this.breakState = 0; 
+        this.breakState = 0;
+
+        this.currentSessionInProgress = null;   // current session user is working on
     }
 
     display() {
@@ -102,7 +104,7 @@ class chatBox {
                     "Your goal, <b>" + goalTitle + "</b>, has been created. You must do <b>" + goalDurationH + " hours and " + goalDurationM + " minutes </b> of sessions to complete your goal.");
                     //"New Goal: " + goalTitle + " Created. Duration: " +
                     //goalDurationH + " H and " + goalDurationM + " M");
-                let newGoal = new Goal(goalTitle, goalDurationH * 60 + goalDurationM);
+                let newGoal = new Goal(goalTitle, 60*(goalDurationH * 60 + goalDurationM));
                 this.eventList.push(newGoal);
                 this.goalsList.push(newGoal);
 
@@ -117,10 +119,10 @@ class chatBox {
         sessionAddBtn.addEventListener('click', () => {
             let sessionFormInfo = $('.chatBox__startSession form').serializeArray();
             let sessionGoalElement = document.querySelector('.chatBox__startSession select');
-
+            let goalIndex = sessionGoalElement[sessionGoalElement.selectedIndex].id;
             let sessionTitle = sessionFormInfo[0].value;
-            let sessionDuration = sessionFormInfo[1].value;
-            let sessionGoal = this.goalsList[sessionGoalElement[sessionGoalElement.selectedIndex].id];
+            let sessionDuration = Number(sessionFormInfo[1].value);
+            let sessionGoal = this.goalsList[goalIndex];
 
             if (sessionDuration < 0 || sessionDuration>60) {
                 alert("Sessions can only be between 0 and 60 minutes long.");
@@ -136,10 +138,11 @@ class chatBox {
                    // " min. Relative Goal: " + sessionGoal.title
                 );
 
-                let newSession = new Session(sessionTitle, sessionDuration, sessionGoal);
+                let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal);
                 sessionGoal.addSession(newSession);
                 this.eventList.push(newSession);
                 this.sessionList.push(newSession);
+                this.currentSessionInProgress = newSession;
                 
                 sessionButton.disabled = true;
                 this.hideAll();
@@ -336,8 +339,8 @@ function startTimer() {
 	TSSoverlayEffect.style.width = widthRange + "%";
     seconds--;
     displayTime(seconds);
-    document.querySelector("#taskButton").disabled = true; // disable session button while timer is running
-
+    if(!isOnBreak)
+        cb.currentSessionInProgress.incrementElapsedTime();
     if (seconds == 0 || seconds < 1) {  //time runs out
         seconds = 0;
         alarm();
@@ -351,6 +354,7 @@ function startStop() {
         interval = window.setInterval(startTimer, 1000);
         document.querySelector("#startStop i").className = "fas fa-pause";
         statusTimer = "started";
+        document.querySelector("#taskButton").disabled = true; // disable session button while timer is running
         timer.contentEditable = "false";
     } else {
         window.clearInterval(interval);
@@ -412,6 +416,7 @@ function alarm(){
         alarmSound.play();
     }
 }
+
 // -------------- End of Timer Code -------------- //
 
 // ---- Start of Goal Page Code ---- //
@@ -433,19 +438,19 @@ function createRandomData() {
     let randomGoalNames = ["COMP 3380", "COMP 2080", "MATH 1700", "COMP 3020", "MATH 1300"];
     let randomSessionNames = [["Assignment 1", "Test 1", "Assignment 2"], ["Test 1", "Quiz 2"],
     ["Assignment 1", "Assignment 2"], ["Work on web application :)"], ["Test 1"]];
-    let randomGoalDuration = [60, 230, 65, 100, 300];
-    let randomSessionDurations = [[25, 20, 15], [160, 70], [5, 60], [100], [300]];
-    let randomSessionElapsedTime = [[13, 14, 15], [160, 50], [5, 0], [100], [0]];
+    let randomGoalDuration = [60, 60, 65, 40, 40];
+    let randomSessionDurations = [[25, 28, 35], [37, 20], [20, 60], [40], [35]];
+    let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 0], [40], [0]];
     let numGoals = 5, numSessions;
     let newGoal, newSession;
 
     for (let i = 0; i < numGoals; i++) {
-        newGoal = new Goal(randomGoalNames[i], randomGoalDuration[i]);
+        newGoal = new Goal(randomGoalNames[i], 60*randomGoalDuration[i]);
 
         numSessions = randomSessionNames[i].length;
         for (let j = 0; j < numSessions; j++) {
-            newSession = new Session(randomSessionNames[i][j], randomSessionDurations[i][j], newGoal);
-            newSession.updateSession(randomSessionElapsedTime[i][j]);
+            newSession = new Session(randomSessionNames[i][j], 60*randomSessionDurations[i][j], newGoal);
+            newSession.updateSession(60*randomSessionElapsedTime[i][j]);
             newGoal.addSession(newSession);
         }
 
@@ -476,9 +481,7 @@ function setUpGoals() {
 
             // create goal label
             goalButtonID = 'goalbutton' + i;
-            goalDiv.innerHTML = '<input class="goal-button" id="' + goalButtonID + '" type="checkbox"></input>'; 
-            
-            // create goal label
+            goalDiv.innerHTML = '<input class="goal-button" id="' + goalButtonID + '" type="checkbox"></input>';
             goalDiv.innerHTML += '<label class="goal-label" for="' + goalButtonID + '"><div class="goalname"><p>'
                 + currGoal.title + '</p></div>' + '<div class="goalprogress" id="goalprogress' + i + '"></div></label>';
             
@@ -495,7 +498,7 @@ function setUpGoals() {
         // check if list of sessions for each goal needs to be updated with new values
         sessionsList = document.getElementById(sessionID);   // get list of sessions for current goal
         updateTaskList(currGoal, i, sessionsList);
-        updateGoalProgress(currGoal, i);
+        updateGoalProgress(currGoal, i);                    // update progress values
     }
 }
 
@@ -511,7 +514,7 @@ function updateGoalProgress(currGoal, goalIndex) {
 }
 
 function updateTaskList(currGoal, currGoalIndex, sessionsList) {
-    let listItem, currSession, sessionID;
+    let listItem, currSession, sessionID, sessionProgress;
 
     let goalSessions = currGoal.getListOfSessions();      // grab array of sessions associated with current goal
 
@@ -519,7 +522,7 @@ function updateTaskList(currGoal, currGoalIndex, sessionsList) {
         sessionID = 'goal' + currGoalIndex + 'session' + i;
         currSession = document.getElementById(sessionID);
 
-        if (!currSession) {                          // only create new task if it hasn't been created
+        if (!currSession) {                                // only create new task if it hasn't been created
             currSession = goalSessions[i];
             listItem = document.createElement("li");      // create list item for new task
             listItem.id = sessionID;
@@ -529,6 +532,10 @@ function updateTaskList(currGoal, currGoalIndex, sessionsList) {
                 + i + '">' + convertToTimeFormat(currSession.elapsedTime, currSession.duration) + '</li>';
             sessionsList.insertBefore(listItem, sessionsList.childNodes[goalSessions.length-1]);
         }
+        else {
+            sessionProgress = document.getElementById(sessionID + 'progress' + i);
+            sessionProgress.innerHTML = convertToTimeFormat(goalSessions[i].elapsedTime, goalSessions[i].duration);
+        }
     }
     setUpSummary('goaltimespent', 'Time spent on goal:', currGoalIndex, Number(currGoal.calculateElapsedTime()), sessionsList);
     setUpSummary('goaltimeleft', 'Time remaining:', currGoalIndex, Number(currGoal.calculateTimeRemaining()), sessionsList);
@@ -536,7 +543,7 @@ function updateTaskList(currGoal, currGoalIndex, sessionsList) {
 }
 
 function setUpSummary(summaryType, message, currGoalIndex, time, dropDownList) {
-    let timeToDisplay = convertMinToFormat(time);
+    let timeToDisplay = convertSecToFormat(time);
     let listItem = document.getElementById(summaryType + currGoalIndex);
 
     if (!listItem) {    // create list item if it doesn't exist
@@ -557,34 +564,11 @@ function getGoalProgress(goal) {
 
 // takes two times given in minutes and turns it into the format '0:16:00/0:25:00'
 function convertToTimeFormat(elapsedTime, totalTime) {
-    return convertMinToFormat(elapsedTime) + '/' + convertMinToFormat(totalTime);
+    return convertSecToFormat(elapsedTime) + '/' + convertSecToFormat(totalTime);
 }
 
-// takes minutes and converts it to right format (ex: 16 becomes 00:16:00)
-function convertMinToFormat(origTimeInMinutes) {
-    let hours, mins;
-
-    hours = Math.floor(origTimeInMinutes / 60);
-
-    if (hours > 0) {
-        mins = Math.abs(Math.round((hours - origTimeInMinutes / 60) * 60));
-        mins = addZero(mins);
-        hours = addZero(hours);
-    }
-    else {
-        hours = '00';
-        mins = addZero(origTimeInMinutes);
-    }
-
-    return hours + ':' + mins + ':' + '00'; // TO-DO: implement specifying seconds
-}
-
-// adds extra zero to val if val < 10 (ex: '7' turns into '07')
-function addZero(val) {
-    var result = val;
-
-    if (val < 10) {
-        result = '0' + val;
-    }
-    return result;
+function convertSecToFormat(timeInSecs) {
+    let date = new Date(0);
+    date.setSeconds(timeInSecs);
+    return date.toISOString().substr(11, 8);
 }
