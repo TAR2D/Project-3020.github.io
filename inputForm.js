@@ -411,7 +411,7 @@ function confirmSkipBreak() {
 function alarm(){
     let alarmSound = new Audio('alarm.mp3');  // play alarm (source: https://freesound.org/people/kwahmah_02/sounds/250629/)
     alarmSound.load();
-    alarmSound.volume = document.getElementById("volumeSlider").value;   //set volume of the alarm.
+    alarmSound.volume = document.getElementById("volumeSlider").value/100;   //set volume of the alarm.
     if (document.getElementById("toggleSound").checked){ //checks settings.
         alarmSound.play();
     }
