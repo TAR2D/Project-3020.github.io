@@ -26,6 +26,11 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+b {
+    font-weight: bold;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -261,9 +266,17 @@ main {
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
     margin-bottom: 4px;
 }
+
+.chatMsgDate { 
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    font-family: var(--ff-TimerFont);
+}
+
 /* 
 .goalForm {
     border: 1px solid red;
@@ -913,6 +926,7 @@ button:disabled {
     width: 98%;
     height: 88%;
     color: black;
+    margin-top: 1%;
 	flex-direction: column;
 	overflow-y: scroll;
 }
@@ -932,7 +946,6 @@ button:disabled {
     font-size: large;
     justify-content: space-between; 
     padding: 1%;
-    margin-bottom: 1%;
     cursor: pointer;
     border: 2px solid black;
     border-top-color: rgb(95, 94, 94);
