@@ -267,7 +267,7 @@ main {
 
 
 .chatBox__msgBox {
-    float: right;
+    float: left;
     width: 90%;
     height: fit-content;
     display: flex;
@@ -1283,9 +1283,10 @@ h5 {
 }
 
 .chatBox__createGoal , .chatBox__startSession, .chatBox__break{
+    float: right;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
     background-color: rgb(240, 240, 240);
     font-family: var(--ff-TimerFont);
     font-weight: bold;
@@ -1472,7 +1473,7 @@ h5 {
     padding: 8px 12px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
     color: black;
     font-family: var(--ff-TimerFont);
     float: right;
