@@ -10,13 +10,28 @@ class Goal extends Event{
     constructor(title = "Default", duration = 0) {
         super(title, duration);
         this.listOfSession = [];
-        this.elapsedTime = 0;  // in minutes
+        this.elapsedTime = 0;  // in seconds
         this.completed = false;
     }
 
     addSession(session) {
-        this.duration += session.duration;
+        let sessionDuration = Number(session.duration);
+        let totalDurationOfSessions = this.calculateDurationOfSessions();
+
+        if((this.duration - totalDurationOfSessions) < sessionDuration) {
+            this.duration = totalDurationOfSessions + sessionDuration;
+        }
+
         this.listOfSession.push(session);
+    }
+
+    calculateDurationOfSessions() {
+        let totalSessionsDuration = 0;
+
+        for(let i = 0; i < this.listOfSession.length; i++) {
+            totalSessionsDuration += Number(this.listOfSession[i].duration);
+        }
+        return totalSessionsDuration;
     }
 
     calculateElapsedTime() {
@@ -46,18 +61,28 @@ class Session extends Event {
 
     constructor(title = "Default", duration = 0, goal) {
         super(title, duration);
-        this.elapsedTime = 0; // in minutes
+        this.elapsedTime = 0; // in seconds
+        this.completed = false;
         this.goal = goal;
     }
 
-    updateSession(minsSpentOnSession) { 
-        this.elapsedTime += minsSpentOnSession;
+    updateSession(secsSpentOnSession) { 
+        this.elapsedTime += secsSpentOnSession;
         
         if(this.elapsedTime > this.duration) {
             this.elapsedTime = this.duration;
             this.completed = true;
         }
     }
+
+    incrementElapsedTime() {
+        if(this.elapsedTime < this.duration)
+            this.elapsedTime++;
+    }
+
+   ifComplete() {
+       return this.elapsedTime >= this.duration;
+   }
 }
 
 class Break extends Event {

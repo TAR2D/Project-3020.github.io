@@ -26,6 +26,11 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+b {
+    font-weight: bold;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -261,9 +266,17 @@ main {
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
     margin-bottom: 4px;
 }
+
+.chatMsgDate { 
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    font-family: var(--ff-TimerFont);
+}
+
 /* 
 .goalForm {
     border: 1px solid red;
@@ -298,6 +311,7 @@ main {
 	overflow-y: scroll;
     padding: 2%;
     border-radius: 10px;
+	background-color: white;
 }
 
 .buttonsBox {
@@ -306,6 +320,7 @@ main {
     border-radius: 6px;
     width: 90%;
     height: 10%;
+	background-color: white;
     /* background-color: rgb(238, 238, 238); */
 }
 
@@ -487,16 +502,16 @@ button:disabled {
     height: 25%;
 }
 
-.currentState .timerBreakState, .currentState .timerSessionState {
+.currentState .timerSessionState {
     position: relative;
     display: flex;
     align-items: center;
-    width: 40%;
+    width: 90%;
     height: 80%;
 
     font-family: var(--ff-TimerFont);
     font-weight: bold;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 2px solid white;
     background-color: white;
 }
@@ -511,10 +526,13 @@ button:disabled {
     border: none;
 }
 
-.TSSoverlay, .TBSoverlay {
+.TSSoverlay {
     width:0%;
     height: 100%;
     background-color: rgb(172, 172, 172);
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-color:rgb(164, 206, 169);
 }
 
 .timerSessionState h2{
@@ -906,38 +924,62 @@ button:disabled {
 /* for body of goals page */
 .goalsBody {
     width: 98%;
-    height: 85%;
+    height: 88%;
     color: black;
+    margin-top: 1%;
 	flex-direction: column;
 	overflow-y: scroll;
 }
 
 /* for body of goals page */
 .goalsBody .goal{
+    height: auto;
+    width: 100%;
+    margin: 1%;
     margin-bottom: 4%;
 }
 
 /* for individual goal headers which includes the goal name and arrow down symbol */
-.goalsBody label {
+.goal-label  {
     display: flex;
-    justify-content: space-between;
+    width: 98%;
     font-size: large;
-    width: 100%;
+    justify-content: space-between; 
+    padding: 1%;
     cursor: pointer;
-    padding: 0 2% 1% 2%;
+    border: 2px solid black;
+    border-top-color: rgb(95, 94, 94);
+    border-left-color: rgb(95, 94, 94);
+    border-radius: 5px;
+}
+
+/* change colour when hovering and clicking on goal label */
+.goal-label:hover {
+    background-color:rgb(209, 209, 209);
+}
+
+.goalsBody input:checked ~ label {
+    background-color: rgb(209, 209, 209);
+}
+
+/* for goal progress and goal percentage in goal label */
+.goalprogress {
+    display: flex;
+    color: black;
+    vertical-align: middle;
+    font-size: medium;
 }
 
 /* for entire list of tasks for a goal on goals page*/
 .goalsBody ul {
     display: none;
-    width: 90%;
-    justify-content:center;
+    width: 98%;
+    justify-content: center;
     background-color: var(--c-chatBubble);
     padding: 2%;
-    margin-left: 2%;
-    outline-color: black;
-    outline-width: 2px;
-    outline-style: inset;
+    margin-top: 0px;
+    border: 2px solid black;
+    border-top: 0px;
     font-size: medium;
     border-radius: 1px 1px 5px 5px;
 }
@@ -955,7 +997,7 @@ button:disabled {
 }
 
 .goalsBody input:checked ~ ul{
-    display: block; /* shows task list when goal header is clicked */
+    display: block; /* shows task list when goal label is clicked */
 }
 
 .goalsBody input {
@@ -968,27 +1010,19 @@ button:disabled {
     background-color: var(--c-chatBubble);
     height: 100%;
     border-radius: 5px;
-    z-index: 2; /* bring to front */
 }
 
 /* outline of the progress bar (darker block) */
 .progressbar-container {
-    width: 90%;
-    margin-left: 2%;
-    outline-style: inset;
+    display: block;
+    justify-self: center;
+    width: 98%;
+    height: 18px;
+    outline-style: solid;
     outline-color: black;
     outline-width: 2px;
     border-radius: 5px;
     background-color: rgb(95, 95, 95);
-    display: relative;
-    z-index: 1;
-}
- 
-/* for the progress bar and the progress percentage*/
-.progress-container {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
 }
 
 /* adds dashed line in task lists */
