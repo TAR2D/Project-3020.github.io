@@ -260,23 +260,7 @@ function renderWeeklyChart(daysOfWeek) {
         type: 'bar',
         data: {
           labels: daysOfWeek,
-          datasets: [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [1, 0, 1, 1, 2,2, 1],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [2, 2, 3, 1, 2,1, 3],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [0, 2, 1, 3, 4,2, 2],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [2, 2, 0, 2, 0,2, 0],
-          }],
+          datasets: weeklyChartData,
         },
       options: {
           title: {
@@ -325,23 +309,7 @@ function renderDailyChart() {
         type: 'bar',
         data: {
           labels: ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
-          datasets: [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [null, null, null, null, null, null, null, null, null, null, 30, 50, null, 10,null,  40, 10,0, 0],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [null, null, null, null, null, null, null, null, null, null,20, 10, 15, 15, 30,20, 10],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [null, null, null, null, null, null, null, null, null, null,0, 0, 15, 0, 10,20, 10],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [null, null, null, null, null, null, null, null, null, null,0, 0, 0, 0, 10,20, 15],
-          }],
+          datasets: dailyChartData,
         },
       options: {
           title: {
@@ -391,23 +359,7 @@ function renderMonthlyChart(daysOfMonth) {
         type: 'bar',
         data: {
           labels: daysOfMonth,
-          datasets: [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [1, 0, 1, 1, 2,2, 1],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [2, 2, 3, 1, 2,1, 3],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [0, 2, 1, 3, 4,2, 2],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [2, 2, 0, 2, 0,2, 0],
-          }],
+          datasets: monthlyChartData,
         },
       options: {
           title: {

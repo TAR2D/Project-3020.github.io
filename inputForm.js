@@ -506,3 +506,84 @@ function addZero(val) {
     }
     return result;
 }
+
+// -------------- Start of Trends Code -------------- //
+
+/*
+
+
+
+
+*/
+
+let dailyChartData = [{
+    label: 'Goal 1',
+    backgroundColor: "#caf270",
+    data: [null, null, null, null, null, null, null, null, null, null, 30, 50, null, 10,null,  0, 10,0, 0],
+  }, {
+    label: 'Goal 2',
+    backgroundColor: "#45c490",
+    data: [null, null, null, null, null, null, null, null, null, null,20, 10, 15, 15, 30,20, 10],
+  }, {
+    label: 'Goal 3',
+    backgroundColor: "#008d93",
+    data: [null, null, null, null, null, null, null, null, null, null,0, 0, 15, 0, 10,20, 10],
+  }, {
+    label: 'Goal 4',
+    backgroundColor: "#2e5468",
+    data: [null, null, null, null, null, null, null, null, null, null,0, 0, 0, 0, 10,20, 15],
+  }]; 
+
+
+let weeklyChartData = [{
+            label: 'Goal 1',
+            backgroundColor: "#caf270",
+            data: [1, 0, 1, 1, 2,2, 1],
+          }, {
+            label: 'Goal 2',
+            backgroundColor: "#45c490",
+            data: [2, 2, 3, 1, 2,1, 3],
+          }, {
+            label: 'Goal 3',
+            backgroundColor: "#008d93",
+            data: [0, 2, 1, 3, 4,2, 2],
+          }, {
+            label: 'Goal 4',
+            backgroundColor: "#2e5468",
+            data: [2, 2, 0, 2, 0,2, 0],
+          }]; 
+          
+let monthlyChartData = [{
+    label: 'Goal 1',
+    backgroundColor: "#caf270",
+    data: [1, 0, 1, 1, 2,2, 1],
+  }, {
+    label: 'Goal 2',
+    backgroundColor: "#45c490",
+    data: [2, 2, 3, 1, 2,1, 3],
+  }, {
+    label: 'Goal 3',
+    backgroundColor: "#008d93",
+    data: [0, 2, 1, 3, 4,2, 2],
+  }, {
+    label: 'Goal 4',
+    backgroundColor: "#2e5468",
+    data: [2, 2, 0, 2, 0,2, 0],
+  }]; 
+
+function updateDailyChart(currGoal) {
+
+    let currTime = currGoal.calculateElapsedTime();
+    let newData = [];
+    
+    let colour = randomColor();
+    let title = currGoal.getTitle();
+    dailyChartData.push({label: title, backgroundColor: colour, data: newData});
+    renderDailyChart();
+}
+
+function randomColor() { 
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    let colorCode = "#" + randomColor;
+    return colorCode; 
+}
