@@ -1135,7 +1135,14 @@ button:disabled {
 
 }
 
-
+.currency {
+    vertical-align: middle;
+    font: inherit;
+    padding: 1%;
+    border-radius: 5px;
+    display: flex;
+    background-color: var(--b-navigationBar);
+}
 
 
 /* Display none for all child element excent main menu as default */
