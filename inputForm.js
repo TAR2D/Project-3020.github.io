@@ -137,8 +137,9 @@ class chatBox {
                    // "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
                    // " min. Relative Goal: " + sessionGoal.title
                 );
-
-                let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal);
+                
+                let currDate = new Date(); 
+                let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal, currDate);
                 sessionGoal.addSession(newSession);
                 this.eventList.push(newSession);
                 this.sessionList.push(newSession);
@@ -440,7 +441,9 @@ function createRandomData() {
     ["Assignment 1", "Assignment 2"], ["Work on web application :)"], ["Test 1"]];
     let randomGoalDuration = [60, 60, 65, 40, 40];
     let randomSessionDurations = [[25, 28, 35], [37, 20], [20, 60], [40], [35]];
-    let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 0], [40], [0]];
+    let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 5], [40], [5]];
+    //Date(year, month, date, hour) 
+    let randomDates = [[new Date(2021, 10, 10, 13), new Date(2021,11,9,14), new Date(2021,11,8,14)], [new Date(2021,11,7,14), new Date(2021,11,6,14)], [new Date(2021,11,5,14), new Date(2021,11,4,14)], [new Date(2021,11,3,14)], [new Date(2021,11,2,14)]];
     let numGoals = 5, numSessions;
     let newGoal, newSession;
 
@@ -449,7 +452,8 @@ function createRandomData() {
 
         numSessions = randomSessionNames[i].length;
         for (let j = 0; j < numSessions; j++) {
-            newSession = new Session(randomSessionNames[i][j], 60*randomSessionDurations[i][j], newGoal);
+            today.setHours(Math.floor(Math.random()*24)); 
+            newSession = new Session(randomSessionNames[i][j], 60*randomSessionDurations[i][j], newGoal, randomDates[i][j]);
             newSession.updateSession(60*randomSessionElapsedTime[i][j]);
             newGoal.addSession(newSession);
         }
@@ -586,81 +590,125 @@ function addZero(val) {
 
 // -------------- Start of Trends Code -------------- //
 
-/*
-
-
-
-
-*/
-
-let dailyChartData = [{
-    label: 'Goal 1',
-    backgroundColor: "#caf270",
-    data: [null, null, null, null, null, null, null, null, null, null, 30, 50, null, 10,null,  0, 10,0, 0],
-  }, {
-    label: 'Goal 2',
-    backgroundColor: "#45c490",
-    data: [null, null, null, null, null, null, null, null, null, null,20, 10, 15, 15, 30,20, 10],
-  }, {
-    label: 'Goal 3',
-    backgroundColor: "#008d93",
-    data: [null, null, null, null, null, null, null, null, null, null,0, 0, 15, 0, 10,20, 10],
-  }, {
-    label: 'Goal 4',
-    backgroundColor: "#2e5468",
-    data: [null, null, null, null, null, null, null, null, null, null,0, 0, 0, 0, 10,20, 15],
-  }]; 
-
-
-let weeklyChartData = [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [1, 0, 1, 1, 2,2, 1],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [2, 2, 3, 1, 2,1, 3],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [0, 2, 1, 3, 4,2, 2],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [2, 2, 0, 2, 0,2, 0],
-          }]; 
+let dailyChartData = []; 
+  
+let weeklyChartData = []; 
           
-let monthlyChartData = [{
-    label: 'Goal 1',
-    backgroundColor: "#caf270",
-    data: [1, 0, 1, 1, 2,2, 1],
-  }, {
-    label: 'Goal 2',
-    backgroundColor: "#45c490",
-    data: [2, 2, 3, 1, 2,1, 3],
-  }, {
-    label: 'Goal 3',
-    backgroundColor: "#008d93",
-    data: [0, 2, 1, 3, 4,2, 2],
-  }, {
-    label: 'Goal 4',
-    backgroundColor: "#2e5468",
-    data: [2, 2, 0, 2, 0,2, 0],
-  }]; 
+let monthlyChartData = []; 
+  
+  
+  function updateDailyChart() {
+  
+    let goals = cb.goalsList;
+    let totalStudyTime = 0;
+    let count = 0;
 
-function updateDailyChart(currGoal) {
+    dailyChartData = [];
 
-    let currTime = currGoal.calculateElapsedTime();
-    let newData = [];
+    goals.forEach(element => {
+        let color = element.color;
+        let title = element.title;
+        let sessions = element.listOfSession; 
+        let hoursArray = new Array(24); 
+        sessions.forEach(session => {
+            if(session.date.getDate() == currDate.getDate() && session.date.getMonth() == currDate.getMonth() && session.date.getYear() == currDate.getYear()) {
+                hoursArray[session.date.getHours()] = session.elapsedTime/60; 
+                totalStudyTime+=session.elapsedTime/60;
+                count++;
+            }
+        });
+        
+        dailyChartData.push({label: title, backgroundColor: color, data: hoursArray});
+        
+    });
+
+    if(count!=0)
+        updateSummaryBox(totalStudyTime, totalStudyTime/count, "daily");
+    else 
+        updateSummaryBox(totalStudyTime, 0, "daily");
+  }
+
+function updateMonthlyChart() {
+  
+    let goals = cb.goalsList;
     
-    let colour = randomColor();
-    let title = currGoal.getTitle();
-    dailyChartData.push({label: title, backgroundColor: colour, data: newData});
-    renderDailyChart();
+    let daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+    let totalStudyTime = 0;
+    let count = 0;
+
+    monthlyChartData = [];
+
+    goals.forEach(element => {
+        let color = element.color;
+        let title = element.title;
+        let sessions = element.listOfSession; 
+        let monthArray = new Array(daysInMonth[currMonth.getMonth() - 1]); 
+         
+        sessions.forEach(session => {
+            if(session.date.getMonth() == currMonth.getMonth() && session.date.getYear() == currMonth.getYear()) {
+                monthArray[session.date.getDate()-1] = ((session.elapsedTime/60)/60); 
+                totalStudyTime+=((session.elapsedTime/60)/60); 
+                count++;
+            }
+        });
+        
+        monthlyChartData.push({label: title, backgroundColor: color, data: monthArray});
+    });
+
+    if(count!=0)
+        updateSummaryBox(totalStudyTime, totalStudyTime/count, "monthly");
+    else 
+        updateSummaryBox(totalStudyTime, 0, "monthly");
 }
 
-function randomColor() { 
-    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    let colorCode = "#" + randomColor;
-    return colorCode; 
+
+function updateWeeklyChart() {
+  
+    let goals = cb.goalsList;
+    let totalStudyTime = 0;
+    let count = 0;
+
+    weeklyChartData = [];
+
+    goals.forEach(element => {
+        let title = element.title;
+        let sessions = element.listOfSession; 
+        let color = element.color;
+        let weekArray = new Array(7);
+
+        var tempDateMax = new Date();
+        tempDateMax = setDate(tempDateMax, currWeek.getDate(), currWeek.getMonth(), currWeek.getFullYear());
+        tempDateMax.setDate(tempDateMax.getDate()+7);
+
+        sessions.forEach(session => {
+            if(session.date >= currWeek && session.date <= tempDateMax) {
+                weekArray[session.date.getDay()] = ((session.elapsedTime/60)/60); 
+                totalStudyTime+=((session.elapsedTime/60)/60); 
+                count++;
+            }
+        });
+        
+        weeklyChartData.push({label: title, backgroundColor: color, data: weekArray});
+    });
+
+    if(count!=0)
+        updateSummaryBox(totalStudyTime, totalStudyTime/count, "weekly");
+    else 
+        updateSummaryBox(totalStudyTime, 0, "weekly");
+
+}
+
+function updateSummaryBox(totalStudyTime, avgStudyTime, state) {
+    var totalStudyTimeTxt = document.getElementById('summaryBox').rows[0].cells[1];
+    var avgStudyTimeTxt = document.getElementById('summaryBox').rows[1].cells[1];
+
+    if(state!="daily") {
+        totalStudyTimeTxt.innerHTML = Math.floor(totalStudyTime) + " hours and " + Math.floor((totalStudyTime - Math.floor(totalStudyTime))*60) + " minutes";
+        avgStudyTimeTxt.innerHTML = Math.floor(avgStudyTime) + " hours and " + Math.floor((avgStudyTime - Math.floor(avgStudyTime))*60) + " minutes";
+    } else {
+        var avgStudyTimeLabel = document.getElementById('summaryBox').rows[1].cells[0];
+        avgStudyTimeLabel.innerHTML = "Average Hourly Study Time:"; 
+        totalStudyTimeTxt.innerHTML = Math.floor(totalStudyTime) + " minutes";
+        avgStudyTimeTxt.innerHTML = Math.floor(avgStudyTime) + " minutes";
+    }
 }

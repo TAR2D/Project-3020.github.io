@@ -47,13 +47,14 @@ function showWeeklyChart(){
     updateDateText(currWeek);
 
     //get array of the past 7 days 
-    var daysOfWeek = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDay());
+    var daysOfWeek = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
 
     //destroy and rerender the chart
     if(myChart) {
         myChart.destroy();
     }
 
+    updateWeeklyChart();
     myChart = renderWeeklyChart(daysOfWeek);
 }
 
@@ -74,6 +75,7 @@ function showDailyChart(){
         myChart.destroy();
     }
 
+    updateDailyChart();
     myChart = renderDailyChart();
 }
 
@@ -97,6 +99,7 @@ function showMonthlyChart(){
         myChart.destroy();
     }
 
+    updateMonthlyChart();
     myChart = renderMonthlyChart(daysOfMonth); 
 }
 
@@ -105,6 +108,8 @@ function setDate(dateObj, date, month, year) {
   dateObj.setDate(date); 
   dateObj.setMonth(month);
   dateObj.setFullYear(year);
+
+  return dateObj; 
 }
 
 //change colour of inactive tabs 
@@ -159,7 +164,10 @@ function clickPrev() {
         updateDateText(currWeek);
   
         myChart.data.labels = dateLabels; 
-        myChart.update();
+
+        updateWeeklyChart();
+        myChart.destroy();
+        myChart = renderWeeklyChart(dateLabels); 
 
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() - 1);
@@ -167,11 +175,18 @@ function clickPrev() {
         updateDateText(currMonth);
 
         myChart.data.labels = dateLabels; 
-        myChart.update();
+        updateMonthlyChart();
+        myChart.destroy();
+        myChart = renderMonthlyChart(dateLabels); 
 
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() - 1); 
         updateDateText(currDate);
+
+        updateDailyChart();
+        myChart.destroy();
+        myChart = renderDailyChart(); 
+
     }
 }
 
@@ -185,12 +200,15 @@ function clickNext() {
         updateDateText(currWeek);
   
         myChart.data.labels = dateLabels; 
-        myChart.update();
+
+        updateWeeklyChart();
+        myChart.destroy();
+        myChart = renderWeeklyChart(dateLabels); 
 
         var tempDate = new Date();
         tempDate.setDate(tempDate.getDate()-7);
 
-        if(currWeek >= tempDate) {
+        if(currWeek.getMonth() >= tempDate.getMonth() && currWeek.getFullYear() >= tempDate.getFullYear() && currWeek.getDate() >= tempDate.getDate()) {
           nextButton.disabled = true; 
         }
 
@@ -200,9 +218,12 @@ function clickNext() {
         updateDateText(currMonth);
 
         myChart.data.labels = dateLabels; 
-        myChart.update();
 
-        if(currMonth >= today) {
+        updateMonthlyChart();
+        myChart.destroy();
+        myChart = renderMonthlyChart(dateLabels); 
+
+        if(currMonth.getMonth() >= today.getMonth() || currMonth.getFullYear() > today.getFullYear()) {
           nextButton.disabled = true; 
         }
 
@@ -210,7 +231,11 @@ function clickNext() {
         currDate.setDate(currDate.getDate() + 1); 
         updateDateText(currDate);
 
-        if(currDate >= today) {
+        updateDailyChart();
+        myChart.destroy();
+        myChart = renderDailyChart(); 
+
+        if(currDate.getMonth() >= today.getMonth() && currDate.getFullYear() >= today.getFullYear() && currDate.getDate() >= today.getDate()) {
           nextButton.disabled = true; 
         }
     }
@@ -281,7 +306,7 @@ function renderWeeklyChart(daysOfWeek) {
               },
               scaleLabel: {
                   display: true,
-                  labelString: "Day of the Week"
+                  labelString: "Last 7 Days"
               }
             }],
             yAxes: [{
