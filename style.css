@@ -614,7 +614,6 @@ button:disabled {
     justify-content: center;
     object-fit: contain;
 
-    /* background-image: url(images/companion-bg.jpg); */
     background-image: url(images/companion-bg-1.jpg);
     background-position: center;
     background-size: cover;
@@ -1107,6 +1106,9 @@ button:disabled {
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .inventory__categoryTitle {
@@ -1147,7 +1149,16 @@ button:disabled {
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
+    object-fit: contain;
+}
 
+/* clothing and gear pictures */
+.inventory__item img {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    object-fit: contain;
+    overflow: hidden;
 }
 
 .currency {
