@@ -438,7 +438,7 @@ function createRandomData() {
     let randomGoalNames = ["COMP 3380", "COMP 2080", "MATH 1700", "COMP 3020", "MATH 1300"];
     let randomSessionNames = [["Assignment 1", "Test 1", "Assignment 2"], ["Test 1", "Quiz 2"],
     ["Assignment 1", "Assignment 2"], ["Work on web application :)"], ["Test 1"]];
-    let randomGoalDuration = [60, 60, 65, 40, 40];
+    let randomGoalDuration = [60, 60, 65, 40, 157];
     let randomSessionDurations = [[25, 28, 35], [37, 20], [20, 60], [40], [35]];
     let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 0], [40], [0]];
     let numGoals = 5, numSessions;

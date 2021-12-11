@@ -614,7 +614,7 @@ button:disabled {
     justify-content: center;
     object-fit: contain;
 
-    background-image: url(images/companion-bg.jpg);
+    background-image: url(images/companion-bg-1.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -935,7 +935,7 @@ button:disabled {
     padding: 2%;
 }
 
-/* for body of goals page */
+/* for entire body of goals page */
 .goalsBody {
     width: 98%;
     height: 88%;
@@ -945,7 +945,7 @@ button:disabled {
 	overflow-y: scroll;
 }
 
-/* for body of goals page */
+/* for each goal on goal page */
 .goalsBody .goal{
     height: auto;
     width: 100%;
@@ -984,7 +984,7 @@ button:disabled {
     font-size: medium;
 }
 
-/* for entire list of tasks for a goal on goals page*/
+/* for entire list of sessions for a goal on goals page*/
 .goalsBody ul {
     display: none;
     width: 98%;
@@ -998,7 +998,7 @@ button:disabled {
     border-radius: 1px 1px 5px 5px;
 }
 
-/* for individual task rows for a goal's task list*/
+/* for individual sessions in a goal's sessions list*/
 .goalsBody li {
     display: flex;
     font-size: medium;
@@ -1018,7 +1018,7 @@ button:disabled {
     display: none; /* gets rid of checkbox for input element*/
 }
 
-/* the bar that represents the actual progress (lighter block) */
+/* the bar that represents the actual progress (blue block) */
 .progressbar {
     display: flex;
     background-color: var(--c-chatBubble);
@@ -1106,6 +1106,9 @@ button:disabled {
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .inventory__categoryTitle {
@@ -1146,10 +1149,28 @@ button:disabled {
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
-
+    object-fit: contain;
 }
 
+/* clothing and gear pictures */
+.inventory__item img {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    object-fit: contain;
+    overflow: hidden;
+}
 
+.currency {
+    vertical-align: middle;
+    font-family: var(--ff-TimerFont);
+    font: inherit;
+    padding: 1%;
+    border-radius: 5px;
+    font-size: medium;
+    display: flex;
+    background-color: var(--b-navigationBar);
+}
 
 
 /* Display none for all child element excent main menu as default */
