@@ -614,7 +614,8 @@ button:disabled {
     justify-content: center;
     object-fit: contain;
 
-    background-image: url(images/companion-bg.jpg);
+    /* background-image: url(images/companion-bg.jpg); */
+    background-image: url(images/companion-bg-1.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -1151,9 +1152,11 @@ button:disabled {
 
 .currency {
     vertical-align: middle;
+    font-family: var(--ff-TimerFont);
     font: inherit;
     padding: 1%;
     border-radius: 5px;
+    font-size: medium;
     display: flex;
     background-color: var(--b-navigationBar);
 }
