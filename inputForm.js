@@ -137,8 +137,9 @@ class chatBox {
                    // "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
                    // " min. Relative Goal: " + sessionGoal.title
                 );
-
-                let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal);
+                
+                let currDate = new Date(); 
+                let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal, currDate);
                 sessionGoal.addSession(newSession);
                 this.eventList.push(newSession);
                 this.sessionList.push(newSession);
@@ -440,7 +441,9 @@ function createRandomData() {
     ["Assignment 1", "Assignment 2"], ["Work on web application :)"], ["Test 1"]];
     let randomGoalDuration = [60, 60, 65, 40, 157];
     let randomSessionDurations = [[25, 28, 35], [37, 20], [20, 60], [40], [35]];
-    let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 0], [40], [0]];
+    let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 5], [40], [5]];
+    //Date(year, month, date, hour) 
+    let randomDates = [[new Date(2021, 10, 10, 13), new Date(2021,11,9,12), new Date(2021,11,9,16)], [new Date(2021,11,9,16), new Date(2021,11,6,9)], [new Date(2021,11,5,20), new Date(2021,11,4,18)], [new Date(2021,11,10,14)], [new Date(2021,11,2,16)]];
     let numGoals = 5, numSessions;
     let newGoal, newSession;
 
@@ -449,7 +452,8 @@ function createRandomData() {
 
         numSessions = randomSessionNames[i].length;
         for (let j = 0; j < numSessions; j++) {
-            newSession = new Session(randomSessionNames[i][j], 60*randomSessionDurations[i][j], newGoal);
+            today.setHours(Math.floor(Math.random()*24)); 
+            newSession = new Session(randomSessionNames[i][j], 60*randomSessionDurations[i][j], newGoal, randomDates[i][j]);
             newSession.updateSession(60*randomSessionElapsedTime[i][j]);
             newGoal.addSession(newSession);
         }
@@ -571,4 +575,142 @@ function convertSecToFormat(timeInSecs) {
     let date = new Date(0);
     date.setSeconds(timeInSecs);
     return date.toISOString().substr(11, 8);
+}
+
+
+// adds extra zero to val if val < 10 (ex: '7' turns into '07')
+function addZero(val) {
+    var result = val;
+
+    if (val < 10) {
+        result = '0' + val;
+    }
+    return result;
+}
+
+// -------------- Start of Trends Code -------------- //
+
+let dailyChartData = []; 
+let weeklyChartData = []; 
+let monthlyChartData = []; 
+  
+function updateDailyChart() {
+
+    let goals = cb.goalsList;
+    let totalStudyTime = 0;
+    let count = 0;
+
+    dailyChartData = [];    //empty the chart data 
+
+    goals.forEach(element => {                      
+        let sessions = element.listOfSession;      //get the goal's list of sessions 
+        let hoursArray = new Array(24);            //each element of the array represents an hour of the day
+
+        //add sessions to the chart if the session's date is the same as the date being viewed on the chart
+        sessions.forEach(session => {                
+            if(session.date.getDate() == currDate.getDate() && session.date.getMonth() == currDate.getMonth() && session.date.getYear() == currDate.getYear()) {
+                hoursArray[session.date.getHours()] = (((session.elapsedTime/60)/60)).toFixed(2);     //assign the session's elapsed time to the associated hour in the array
+                totalStudyTime+=(session.elapsedTime/60);
+                count++;
+            }
+        });
+    
+        //add goal to the chart 
+        dailyChartData.push({label: element.title, backgroundColor: element.color, data: hoursArray}); 
+        
+    });
+
+    //check for divide by zero error and update the summary box
+    if(count!=0)
+        updateSummaryBox(totalStudyTime, totalStudyTime/count, "daily");
+    else 
+        updateSummaryBox(totalStudyTime, 0, "daily");
+}
+
+function updateMonthlyChart() {
+  
+    let goals = cb.goalsList;
+    
+    let daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+    let totalStudyTime = 0;
+    let count = 0;
+
+    monthlyChartData = [];  //empty the chart data 
+
+    goals.forEach(element => {
+        let sessions = element.listOfSession;                                   //get the goal's list of sessions 
+        let monthArray = new Array(daysInMonth[currMonth.getMonth() - 1]);      //each element of the array represents a day of the month
+         
+        //add sessions to the chart if the session's month is the same as the month being viewed on the chart
+        sessions.forEach(session => {
+            if(session.date.getMonth() == currMonth.getMonth() && session.date.getYear() == currMonth.getYear()) {
+                monthArray[session.date.getDate()-1] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to the associated date in the array
+                totalStudyTime+=((session.elapsedTime/60)/60);
+                count++;
+            }
+        });
+        
+        //add goal to the chart 
+        monthlyChartData.push({label: element.title, backgroundColor: element.color, data: monthArray});
+    });
+
+    //check for divide by zero error and update the summary box
+    if(count!=0)
+        updateSummaryBox(totalStudyTime, totalStudyTime/count, "monthly");
+    else 
+        updateSummaryBox(totalStudyTime, 0, "monthly");
+}
+
+
+function updateWeeklyChart() {
+  
+    let goals = cb.goalsList;
+    let totalStudyTime = 0;
+    let count = 0;
+
+    weeklyChartData = [];   //empty the chart data 
+
+    goals.forEach(element => {
+        let sessions = element.listOfSession;   //get the goal's list of sessions 
+        let weekArray = new Array(7);           //each element of the array represents a day of the week
+
+        //create a temporary date to compare against and check if the session's date is in the right week
+        var tempDateMax = new Date();
+        tempDateMax = setDate(tempDateMax, currWeek.getDate(), currWeek.getMonth(), currWeek.getFullYear());
+        tempDateMax.setDate(tempDateMax.getDate()+7);
+
+        //add sessions to the chart if the session's date is within the week being viewed on the chart
+        sessions.forEach(session => {
+            if(session.date >= currWeek && session.date <= tempDateMax) {
+                weekArray[session.date.getDay()] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to the associated day of the week in the array
+                totalStudyTime+=((session.elapsedTime/60)/60); 
+                count++;
+            }
+        });
+        
+        //add goal to the chart 
+        weeklyChartData.push({label: element.title, backgroundColor: element.color, data: weekArray});
+    });
+
+    //check for divide by zero error and update the summary box
+    if(count!=0)
+        updateSummaryBox(totalStudyTime, totalStudyTime/count, "weekly");
+    else 
+        updateSummaryBox(totalStudyTime, 0, "weekly");
+
+}
+
+function updateSummaryBox(totalStudyTime, avgStudyTime, state) {
+    var totalStudyTimeTxt = document.getElementById('summaryBox').rows[0].cells[1];
+    var avgStudyTimeTxt = document.getElementById('summaryBox').rows[1].cells[1];
+
+    if(state!="daily") {
+        totalStudyTimeTxt.innerHTML = Math.floor(totalStudyTime) + " hours and " + Math.floor((totalStudyTime - Math.floor(totalStudyTime))*60) + " minutes";
+        avgStudyTimeTxt.innerHTML = Math.floor(avgStudyTime) + " hours and " + Math.floor((avgStudyTime - Math.floor(avgStudyTime))*60) + " minutes";
+    } else {
+        var avgStudyTimeLabel = document.getElementById('summaryBox').rows[1].cells[0];
+        avgStudyTimeLabel.innerHTML = "Average Hourly Study Time:"; 
+        totalStudyTimeTxt.innerHTML = Math.floor(totalStudyTime) + " minutes";
+        avgStudyTimeTxt.innerHTML = Math.floor(avgStudyTime) + " minutes";
+    }
 }
