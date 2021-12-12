@@ -26,6 +26,11 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+b {
+    font-weight: bold;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -77,7 +82,7 @@ a:visited {
     --bg-sectionB: rgb(97, 97, 97);
     --c-sectionB: white;
 
-    --bg-mainMenu: white;
+    --bg-mainMenu: transparent;
     --b-mainMenu: transparent;
 
     --c-button: rgba(128, 128, 128, 0.5); 
@@ -88,6 +93,10 @@ a:visited {
     --b-SectionBDisplay: transparent;
 
 	--c-chatBubble: rgb(165, 206, 230);
+
+	--inventoryBoxes: rgb(141, 141, 141);
+
+	--accentColor-first: rgb(255, 255, 255);
 	
     --ff-TimerFont : 'Roboto', sans-serif;
     --b-TimerBox: transparent;
@@ -95,11 +104,13 @@ a:visited {
 
 body {
     /* Centring the elements */
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
     color: white;
     background-color: var(--bg-background);
 }
+
+/* NAVIGATION BAR STYLING */
 
 .navBar {
     /* maximum height of NavBar */
@@ -107,6 +118,7 @@ body {
 
     display: flex;
     border-bottom: 4px solid var(--b-navigationBar);
+    margin: 0 auto;
 }
 
 .navBar__sectionA {
@@ -138,6 +150,7 @@ body {
     padding:10px 12px;
     border-radius: 4px;
     cursor: pointer;
+	font-family: var(--ff-TimerFont);
 }
 
 .navBar__sectionA h3 {
@@ -164,11 +177,6 @@ body {
     flex-direction: row;
 }
 
-.navBar__item--shop {
-    display: flex;
-    flex-direction: row;
-}
-
 .navBar__item--inventory {
     display: flex;
     flex-direction: row;
@@ -184,9 +192,16 @@ body {
     flex-direction: row;
 }
 
+.navBar__item--goals {
+    display: flex;
+    flex-direction: row;
+}
+
+/* MAIN ITEMS STYLING */
+
 main {
     /* maximum height of main */
-    height: 590px;
+    height: 610px;
 }
 
 .main__items {
@@ -211,6 +226,8 @@ main {
     border: 4px solid var(--b-mainMenu);
 
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* left and right box */
@@ -220,37 +237,102 @@ main {
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
     align-content: space-evenly;
 }
 
+.rightBox {
+    justify-content: flex-end;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track { 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: whitesmoke;
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: whitesmoke; 
+  }
+
+
+.chatBox__msgBox {
+    float: left;
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.chatMsgDate { 
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    font-family: var(--ff-TimerFont);
+}
+
+/* 
+.goalForm {
+    border: 1px solid red;
+    color: black;
+    width: 80%;
+    height: 30%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goalFormTimer {
+    width: 15%;
+    height: 20%;
+}
+
+.goalForm label{
+    margin-top: 5px;
+}
+
+.submitFormButton {
+    margin-top: 5px;
+} */
+
 /* chat box (within right box) */
 .chatBox {
+    margin-top: 1%;
     width: 90%;
-    height: 82.5%;
-	display: flex;
-	flex-direction: column;
-    border: 1px dotted rgba(128, 128, 128, 0.4);
-	margin-right: 2.5%;
+    height: 86%;
+    border: 3px solid rgb(172, 172, 172);
 	overflow-y: scroll;
-	justify-content: flex-end;
-	align-items: flex-start;
+    padding: 2%;
+    border-radius: 10px;
+	background-color: white;
 }
 
 .buttonsBox {
+    border:3px solid rgb(172, 172, 172);
+    padding: 2%;
+    border-radius: 6px;
     width: 90%;
-    height: 7.5%;
-	margin-right: 2.5%;
-    border: 1px dotted rgba(128, 128, 128, 0.4);
-}
-
-.timerBox, .companionBox {
-    margin-left: 2.5%;
+    height: 10%;
+	background-color: white;
+    /* background-color: rgb(238, 238, 238); */
 }
 
 /* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
-.createTask, .createGoal, .startBreak {
+/* .createTask, .createGoal, .startBreak {
     display: none;
 	position: relative;
 	font-family: 'Varela Round';
@@ -260,8 +342,16 @@ main {
 	border: 2px solid var(--c-chatBubble);
 	border-radius: 15px;
 	padding: 15px;
-	text-align: center;
+	text-align: left;
 	margin-left: 15px;
+} */
+
+.welcome {
+    display: block;
+}
+
+.createTask, .createGoal, .startBreak {
+    display: none;
 }
 
 /* Little arrow for the chat bubble styling */
@@ -292,16 +382,21 @@ main {
 
 #gname, #tname {
     width: 100%;
+	margin-top: 2%;
 }
 
-.createGoal button, .startBreak button, .createTask button {
+/* .createGoal button, .startBreak button, .createTask button {
     height: auto;
     width: auto;
     font-size: x-small;
     background-color: var(--c-button); 
     border-radius: 5px;
     color: var(--c-buttonText);
-    cursor: pointer; /* Pointer/hand icon */
+    cursor: pointer; /* Pointer/hand icon
+} */
+
+.breakDurationField {
+    margin-top: 10%;
 }
 
 .breakDurationField {
@@ -309,7 +404,7 @@ main {
 }
 
 /* Chat buttons */
-.btn-group {
+.chat-btn-group {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -321,13 +416,19 @@ main {
     background-color: var(--c-buttonHover);
 }
 
+.btn-group {
+    height: 100%;
+}
+
 .btn-group button {
     cursor: pointer;
-    height: 80%;
-    width: 32%;
-    background-color: var(--c-button); 
+    height: 100%;
+    width: 32.4%;
+    background-color: rgb(194, 194, 194);
+    border: 1.5px solid rgb(172, 172, 172);
     border-radius: 5px;
-    color: var(--c-buttonText);
+    color: rgb(65, 65, 65);
+    font-weight: bold;
     cursor: pointer; /* Pointer/hand icon */
 }
     
@@ -340,7 +441,8 @@ main {
 
 /* Add a background color on hover */
 .btn-group button:hover {
-    background-color: var(--c-buttonHover);
+    background-color: rgb(220, 220, 220);
+    color: rgb(65, 65, 65);
 }
 
 /* Clear floats (clearfix hack) */
@@ -350,27 +452,37 @@ main {
     display: table;
 }
 
+/* Disabled button */ 
+button:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 /* left box */
 .timerBox {
-    width: 90%;
-    height: 35%;
+    width: 100%;
+    height: 42%;
 
     /* Alignment of timer in centre */
     display: flex;
     flex-wrap: wrap;
 
-   /* border: 1px dotted var(--b-TimerBox);*/
-    border: 1px dotted transparent;
+    font-family: var(--ff-TimerFont);
 }
 
 /* Styling the timer */
 
 #timer {
     color: black;
-    width: 80%;
-    height: 57%;
-    margin-top: 1%;
-    background-color: rgba(128, 128, 128, 0.4);
+    width: 76%;
+    height: 63%;
+    margin-top: 0.9%;
+    margin-right: 1%;
+    background-color: rgb(172, 172, 172);
     border-radius: 4px;
 }
 
@@ -379,10 +491,10 @@ main {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 75%;
+    height: 70%;
 
     font-family: var(--ff-TimerFont);
-    font-size: 5.6em;
+    font-size: 6.5em;
     font-weight: bold;
 }
 
@@ -390,19 +502,19 @@ main {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: 25%;
+    height: 30%;
 }
 
-.currentState .timerBreakState, .currentState .timerSessionState {
+.currentState .timerSessionState {
     position: relative;
     display: flex;
     align-items: center;
-    width: 40%;
+    width: 90%;
     height: 80%;
 
     font-family: var(--ff-TimerFont);
     font-weight: bold;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 2px solid white;
     background-color: white;
 }
@@ -417,10 +529,13 @@ main {
     border: none;
 }
 
-.TSSoverlay, .TBSoverlay {
+.TSSoverlay {
     width:0%;
     height: 100%;
-    background-color: rgba(128, 128, 128, 0.466);
+    background-color: rgb(172, 172, 172);
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-color:rgb(164, 206, 169);
 }
 
 .timerSessionState h2{
@@ -431,12 +546,12 @@ main {
 
 .timerBreakState h2 {
     font-size: 1em;
-    color: var(--b-navigationBar);
+    color: rgb(172, 172, 172);
 }
 
 .timerBtngrp {
-    width: 20%;
-    height: 60%;
+    width: 23%;
+    height: 66%;
 
     display: flex;
     flex-wrap: wrap;
@@ -450,6 +565,11 @@ main {
     font-size: 2em;
     border-radius: 3px;
     border: transparent;
+    background-color: rgb(172, 172, 172);
+}
+
+.timerBtngrp #skip {
+    font-size: 2.3em;
 }
 
 #startStop:hover , #skip:hover{
@@ -458,9 +578,9 @@ main {
 
 .timerContent {
     width: 99%;
-    height: 38%;
-    margin-bottom: 2%;
-    background-color: rgba(128, 128, 128, 0.26);
+    height: fit-content;
+    margin-top: 1%;
+    background-color: rgb(172, 172, 172);
     border-radius: 4px;
 }
 
@@ -472,44 +592,82 @@ main {
 }
 
 .currentGoal, .currentTask {
-    margin-top: 1%;
-    margin-left: 2%;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.currentTask {
+    padding-bottom: 13px;
 }
 
 .companionBox {
-    width: 90%;
+    position: relative;
+    width: 99%;
+    margin-right: 1%;
+    margin-top: 0.5%;
     height: 55%;
-
+    border: 4px solid rgb(172, 172, 172);
+    border-radius: 6px;
     /* Alignment of companion in centre */
     display: flex;
     align-items: center;
     justify-content: center;
     object-fit: contain;
 
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    background-image: url(images/companion-bg-1.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 .companion {
     max-height:100%;
     overflow: hidden;
+    position: relative;
+
+    top: 65px;
+}
+
+/* Page Header for each page (includes title and back button) */
+.page__header {
+	height: 8%;
+	align-items: center;
+	display: flex;
+	color: black;
+	font-family: var(--ff-TimerFont);
+	padding: 5px;
+	border-radius: 5px;
+	background-color: var(--accentColor-first);
+}
+.page__header__title {
+	font-weight: 700;
+	font-size: 30px;
+	margin: auto;
+}
+.page__backButton {
+	display:flex;
+	flex-direction: row;
+	font-size: 36px;
+	color: black;
+	background-color: var(--bg-mainMenu);
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
 }
 
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
-    text-align: left;
-    color: black;
-    padding: 10px;
     position: relative;
 
     display: flex;
 }
 
-.trends__chart, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
-    width: 75%; 
+.trends__chart, .trends__summaryTitle, .trends__summaryBox, .trendsBar, .trends__dateNavBar {
+    font-family: var(--ff-TimerFont);
+    width: 93%; 
 }
 
-.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryBox {
+.trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryTitle, .trends__summaryBox {
     margin: auto;
 }
 
@@ -518,7 +676,7 @@ main {
 }
 
 .trends__chart {
-    height: 60%; 
+    height: 55%; 
 }
 
 .trendsBar {
@@ -532,47 +690,364 @@ main {
     align-items: center;
 }
 
-.trendsBar__item--daily, .trendsBar__item--monthly {
+.trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
     display: flex;
     padding:10px 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 5px 0 0 5px; 
+    margin: 5px 0 0 7px; 
+    background-color: var(--bg-sectionB);
+}
+
+.trendsBar__item--daily, .trendsBar__item--monthly {
     background-color: var(--bg-sectionB);
 }
 
 .trendsBar__item--weekly {
-    display: flex;
-    padding:10px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px 0 0 5px; 
     background-color: black;
 }
-
 
 .trends__dateNavBar {
     height: 7.5%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .trends__currDate {
     margin: 5px 5px; 
     color: black;
-    text-align: center;
     white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .trends__summaryBox { 
-    height: 15%; 
+    height: 12.5%; 
+    Overflow-y:scroll;
 }
 
-.trends__chart--weekly {
+.trends__summaryTitle { 
+    font-size: 120%;
+    background-color: #546a76;
+    color: white;
+    padding: 5px 0px 5px 8px;
+}
+
+.trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
     width:100%;
     height:100%;
     display: flex;
-    
+}
+
+#summaryBox { 
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+}
+
+#summaryBox td, #summaryBox th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#summaryBox tr:nth-child(even){background-color: #f2f2f2;}
+  
+#summaryBox tr:hover {background-color: #ddd;}
+
+#prevButton, #nextButton{
+    width: 15%;
+}
+
+/* Stying the Settings page */ 
+
+.settings__item {
+    height: 90%;
+    width: 80%;
+
+    margin: auto;
+    display: relative;
+    justify-content: left;
+    align-items: center;
+
+    border-radius: 25px;
+    background-color:rgb(187, 187, 187);
+}
+
+.settings__item--account, .settings__item--notification, .settings__item--advance {
+    height: 30%;
+    width: 75%;
+    margin-top: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    display: relative;
+    justify-content: center;
+
+}
+
+#account, #notification, #advance{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    text-decoration: underline grey;
+    display: flex;
+    position: relative;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.account__settings, .notification__settings, .advance__settings {
+    height: 30%;
+    width: 70%;
+    margin-top: 5px;
+    margin: auto;
+    margin-top: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.account__settings--profile{height: 30%;
+    width: 90%;
+    height: 60%;
+}
+
+.account__text{
+    height: 90%;
+    width: 70%;
+    margin: auto;
+    padding: 2%;
+}
+
+#username{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+}
+
+#change__user{
+    font-size: 1em;
+    margin-top: 2%;
+    margin-left: 5%;
+    color: #ffffff;
+}
+
+
+#sound, #volume, #dark__mode, #about{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #141516;
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.fa-info-circle{
+    position: absolute;
+    margin-left: 63%;  }
+
+.switchWraper, .slideContainer {
+    position: absolute;
+    margin-left: 58%;    
+}
+
+.slideContainer{
+    position: absolute;
+    margin-left: 40%; 
+}
+
+
+/* Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  /* Finish styling of Settings */
+
+/* Display none for all child element excent main menu as default */
+.trends__chart >:not(:first-child) {
+    display: none;
+}
+
+/* Styling for Goals page*/
+.goalsBody {
+    font-family: 'Varela Round';
+    padding: 2%;
+}
+
+/* for entire body of goals page */
+.goalsBody {
+    width: 98%;
+    height: 88%;
+    color: black;
+    margin-top: 1%;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+/* for each goal on goal page */
+.goalsBody .goal{
+    height: auto;
+    width: 100%;
+    margin: 1%;
+    margin-bottom: 4%;
+}
+
+/* for individual goal headers which includes the goal name and arrow down symbol */
+.goal-label  {
+    display: flex;
+    width: 98%;
+    font-size: large;
+    justify-content: space-between; 
+    padding: 1%;
+    cursor: pointer;
+    border: 2px solid black;
+    border-top-color: rgb(95, 94, 94);
+    border-left-color: rgb(95, 94, 94);
+    border-radius: 5px;
+}
+
+/* change colour when hovering and clicking on goal label */
+.goal-label:hover {
+    background-color:rgb(209, 209, 209);
+}
+
+.goalsBody input:checked ~ label {
+    background-color: rgb(209, 209, 209);
+}
+
+/* for goal progress and goal percentage in goal label */
+.goalprogress {
+    display: flex;
+    color: black;
+    vertical-align: middle;
+    font-size: medium;
+}
+
+/* for entire list of sessions for a goal on goals page*/
+.goalsBody ul {
+    display: none;
+    width: 98%;
+    justify-content: center;
+    background-color: var(--c-chatBubble);
+    padding: 2%;
+    margin-top: 0px;
+    border: 2px solid black;
+    border-top: 0px;
+    font-size: medium;
+    border-radius: 1px 1px 5px 5px;
+}
+
+/* for individual sessions in a goal's sessions list*/
+.goalsBody li {
+    display: flex;
+    font-size: medium;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.timeval {
+    direction: rtl; /* pushes task duration to the right hand side of task row */
+}
+
+.goalsBody input:checked ~ ul{
+    display: block; /* shows task list when goal label is clicked */
+}
+
+.goalsBody input {
+    display: none; /* gets rid of checkbox for input element*/
+}
+
+/* the bar that represents the actual progress (blue block) */
+.progressbar {
+    display: flex;
+    background-color: var(--c-chatBubble);
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* outline of the progress bar (darker block) */
+.progressbar-container {
+    display: block;
+    justify-self: center;
+    width: 98%;
+    height: 18px;
+    outline-style: solid;
+    outline-color: black;
+    outline-width: 2px;
+    border-radius: 5px;
+    background-color: rgb(95, 95, 95);
+}
+
+/* adds dashed line in task lists */
+.goaltimespent {
+    border-top: 2px;
+    border-style: dashed;
+    padding-top: 2%;
+    margin-top: 2%;
+}
+
+/* .main__item--shop {
 }
 
 .trends__chart--daily {
@@ -594,15 +1069,109 @@ main {
     display: none;
 }
 
-
-/* .main__item--shop {
+/* --------------- STYLING THE INVENTORY PAGE ------------------ */
+.inventory__page {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 92%;
+	padding: 5px;
+	background-color: var(--bg-mainMenu);
+	font-weight: 500;
 }
 
-.main__item--inventory {
+.inventory__headline {
+	width: 100%;
+	height: 3%;
+	font-family: var(--ff-TimerFont);
+	font-size: large;
+	margin-left: 10px;
+	color: black;
+	margin-top: 2px;
 }
 
-.main__item--settings {
-} */
+.inventory__featureBar {
+	height: 45%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+	justify-content: space-between;
+}
+
+.inventory__featureItem {
+	width: 49%;
+	height: 100%;
+	border-style: solid;
+	border-width: 5px;
+	border-color: var(--inventoryBoxes);
+	border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.inventory__categoryTitle {
+	height: 3%;
+	width: 100%;
+	font-family: var(--ff-TimerFont);
+	font-size: large;
+	margin-left: 10px;
+	color: black;
+	font-size: 14px;
+}
+
+.inventory__categories {
+	height: 55%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 5px;
+	background-color: var(--bg-mainMenu);
+	justify-content: space-between;
+}
+
+.inventory__list {
+	height: 43%;
+	justify-items: left;
+	background-color: var(--bg-mainMenu);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
+.inventory__item {
+	height: 100%;
+	width: 32%;
+	background-color: var(--bg-mainMenu);
+	border-style: solid;
+	border-width: 5px;
+	border-color: var(--inventoryBoxes);
+	border-radius: 5px;
+    object-fit: contain;
+}
+
+/* clothing and gear pictures */
+.inventory__item img {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+.currency {
+    vertical-align: middle;
+    font-family: var(--ff-TimerFont);
+    font: inherit;
+    padding: 1%;
+    border-radius: 5px;
+    font-size: medium;
+    display: flex;
+    background-color: var(--b-navigationBar);
+}
+
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
@@ -704,4 +1273,236 @@ main {
 .main__items h3 {
     color: black;
     font-size: 2em;
+}
+
+h5 {
+    color: black;
+}
+
+.chatBox__createGoal, .chatBox__startSession, .chatBox__break{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    border:1px solid rgba(128, 128, 128, 0.5);
+    padding: 2%;
+}
+
+.chatBox__createGoal {
+    height: 180px;
+}
+
+.chatBox__createGoal, .chatBox__startSession, .chatBox__break{
+    color: black;
+}
+
+.chatBox__createGoal form, .chatBox__startSession form, .chatBox__break form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.chatBox__createGoal , .chatBox__startSession, .chatBox__break{
+    float: right;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: rgb(240, 240, 240);
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+}
+
+.chatBox__createGoal label, .chatBox__startSession label, .chatBox__break label{
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.goalFormTitle, .sessionFormTitle{
+    display: flex;
+    width: 100%;
+    height: 28.5%;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    padding-bottom: 8px;
+}
+
+.goalFormTitle {
+    height: 24%;
+}
+
+.goalFormDuration {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    padding-bottom: 10px;
+}
+.goalDurationH , .goalDurationM{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goalFormTitle input , .sessionFormTitle input{
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 4px;
+    height: 100%;
+}
+
+.goalFormTitle input , .sessionFormTitle input{
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.goalDurationH input, .goalDurationH label, .sessionFormTimer input, .sessionFormTimer label{
+    width: 60%;
+}
+
+.goalDurationH input, .goalDurationM input, .sessionFormTimer input, .breakFormTimer input{
+    height: 60%;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+}
+
+.goalDurationH {
+    border-right: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.goalDurationM input, .goalDurationM label{
+    width: 60%;
+}
+
+.createGoalBtngrp input, .createGoalBtngrp button, .startSessionBtnGrp input, .startSessionBtnGrp button {
+    width: 40%;
+}
+
+.createGoalBtngrp, .startSessionBtnGrp, .breakBtnGrp {
+    width: 60%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.createGoalBtngrp button, .startSessionBtnGrp button, .breakBtnGrp button {
+    color: red;
+}
+
+.createGoalBtngrp button, .createGoalBtngrp input , .startSessionBtnGrp input, .startSessionBtnGrp button , .goalRelatedSession select, .breakBtnGrp button, .breakBtnGrp input{
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    background-color: white;
+    height: 100%;
+    border-radius: 5px;
+}
+
+
+.createGoalBtngrp button:hover, .createGoalBtngrp input:hover, .startSessionBtnGrp input:hover, .startSessionBtnGrp button:hover , .breakBtnGrp input:hover, .breakBtnGrp button:hover {
+    background-color: whitesmoke;
+}
+
+.chatBox__startSession{
+    height: 200px;
+}
+
+.sessionFormTimer {
+    height: 35%;
+}
+
+.startSessionBtnGrp {
+    height: 35%;
+}
+
+#goalFormSubmit ,#sessionFormSubmit, #breakFormSubmit{
+    font-weight: bold;
+    font-family: var(--ff-TimerFont);
+    color: rgba(0, 0, 0, 0.7);
+}
+.sessionFormTimer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.sessionFormTimer label {
+    width: 40%;
+}
+
+.goalRelatedSession {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    height: 35%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.goalRelatedSession select {
+    width: 70%;
+    height: 60%;
+}
+
+.goalRelatedSession label {
+    width: 20%;
+}
+
+.startSessionBtnGrp {
+    padding-top: 10px;
+    padding-bottom: 6px;
+}
+
+.chatBox__break {
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.breakFormTimer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50%;
+    width: 90%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.breakBtnGrp {
+    padding-top: 5px;
+    padding-bottom: 2px;
+    height: 40%;
+}
+
+.breakBtnGrp button, .breakBtnGrp input {
+    width: 40%;
+}
+
+
+.chatBox__createGoal, .chatBox__startSession, .chatBox__break {
+    display: none;
+}
+
+.chatBox p {
+    margin: 4px 0;
+    background-color: rgb(216, 216, 216);
+    width: fit-content;
+    padding: 8px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    color: black;
+    font-family: var(--ff-TimerFont);
+    float: right;
+}
+
+.sessionFormTitle {
+    height: 30%;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
 }

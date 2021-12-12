@@ -15,65 +15,65 @@ let appName = document.querySelector(".navBar__sectionA h3");
 
 let mainMenu = document.querySelector(".main__items");
 let sectionB = document.querySelector(".navBar__sectionB");
-var state = 100000;
+var state = 10000;
 
-appName.onclick = function() {
-    if(state !== 100000) {
+// used by the appName and backButton buttons
+function returnHome() {
+	if(state !== 10000) {
         mainMenuDisplay.style.display = "flex";
         appName.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(0);
-        state = 100000;
+        state = 10000;
     }
 };
 
+appName.onclick = function() {
+    returnHome();
+};
+
+// selecting every page__backButton element and giving it the returnHome onclick functionality.
+document.querySelectorAll(".page__backButton").forEach(item => item.addEventListener("click", () => {
+	returnHome();
+}));
+
 goalsButton.onclick = function () {
-    if(state !== 010000) {
+    if(state !== 01000) {
         goalsDisplay.style.display = "block";
         goalsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(1);
-        state = 010000;
+        state = 01000;
     }
 };
 
 reportButton.onclick = function () {
-    if(state !== 001000) {
+    if(state !== 00100) {
         reportDisplay.style.display = "block";
         reportButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
         hideTabsExcept(2);
-        state = 001000;
-    }
-};
-
-shopButton.onclick = function () {
-    if(state !== 000100) {
-        shopDisplay.style.display = "block";
-        shopButton.style.backgroundColor = "black";
-        document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(3);
-        state = 000100;
+        state = 00100;
     }
 };
 
 inventoryButton.onclick = function () {
-    if(state !== 000010) {
+    if(state !== 00010) {
         inventoryDisplay.style.display = "block";
         inventoryButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(4);
-        state = 000010;
+        hideTabsExcept(3);
+        state = 00010;
     }
 };
 
 settingsButton.onclick = function () {
-    if(state !== 000000) {
+    if(state !== 00001) {
         settingsDisplay.style.display = "block";
         settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
-        hideTabsExcept(5);
-        state = 000000;
+        hideTabsExcept(4);
+        state = 00001;
     }
 };
 

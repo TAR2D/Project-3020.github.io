@@ -1,23 +1,25 @@
 // chat.js
 // contains all the chat functionalities
 
+let welcomeBubble = document.getElementById("welcome");
+
 //Show createTask and hide createGoal and startBreak
 function createTask(){
 	makeVisible("createTask", ["createGoal", "startBreak"]);
 }
   
-  //Show createGoal and hide createTask and startBreak
+//Show createGoal and hide createTask and startBreak
 function createGoal(){
 	makeVisible("createGoal", ["createTask", "startBreak"]);
 }
   
-  //Show startBreak and hide createGoal and createTask
+//Show startBreak and hide createGoal and createTask
 function startBreak(){
 	makeVisible("startBreak", ["createTask", "createGoal"]);
 }
   
 //Will make an element visible. Parameter:(Id of the element)
-function makeVisible( name, list){
+function makeVisible(name, list){
 	//hide every element given in the list
 	let temp;
 	for (var i = 0; i < list.length; i++){ 
@@ -33,7 +35,7 @@ function makeVisible( name, list){
 	  	el.style.display = "none";
 }
 
-  // getStyle will test the style that's active on an element 'el'.
+// getStyle will test the style that's active on an element 'el'.
 function getStyle(el, name) {
 	if ( document.defaultView && document.defaultView.getComputedStyle )
 	{
@@ -44,16 +46,4 @@ function getStyle(el, name) {
 	else if ( el.currentStyle )
 		return el.currentStyle[name];
 	return null;
-}
-
-//Add goal name to left box.
-function updateGoal(){
-    let gName = document.getElementById("gname").value;
-    document.getElementById("currGoal").innerHTML = "Current Goal: " + gName;
-}
-
-//Add task name to left box.
-function updateTask(){
-    let tName = document.getElementById("tname").value;
-    document.getElementById("currentTask").innerHTML = "Current Task: " + tName;
 }

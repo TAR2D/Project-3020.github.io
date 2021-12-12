@@ -40,21 +40,21 @@ function showWeeklyChart(){
     currChart.id = "weeklyChart";
     changeActiveTab(1);
     weeklyTab.style.backgroundColor = "black";
+    nextButton.disabled = true; 
     
     //set the current week to today's week
-    currWeek.setDate(today.getDate() - 6);
-    currWeek.setFullYear(today.getFullYear());
-    currWeek.setMonth(today.getMonth());
+    setDate(currWeek, today.getDate() - 6, today.getMonth(), today.getFullYear());
     updateDateText(currWeek);
 
     //get array of the past 7 days 
-    var daysOfWeek = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDay());
+    var daysOfWeek = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
 
     //destroy and rerender the chart
     if(myChart) {
         myChart.destroy();
     }
 
+    updateWeeklyChart();
     myChart = renderWeeklyChart(daysOfWeek);
 }
 
@@ -64,16 +64,18 @@ function showDailyChart(){
     currChart.id = "dailyChart";
     changeActiveTab(0);
     dailyTab.style.backgroundColor = "black";
+    nextButton.disabled = true; 
 
     //set the current date to today's date
     updateDateText(today);
-    currDate.setDate(today.getDate());
+    setDate(currDate, today.getDate(), today.getMonth(), today.getFullYear());
 
     //destroy and rerender the chart
     if(myChart) {
         myChart.destroy();
     }
 
+    updateDailyChart();
     myChart = renderDailyChart();
 }
 
@@ -83,9 +85,10 @@ function showMonthlyChart(){
     currChart.id = "monthlyChart";
     changeActiveTab(2);
     monthlyTab.style.backgroundColor = "black";
+    nextButton.disabled = true; 
 
     //set the current month to today's month
-    currMonth.setMonth(today.getMonth());
+    setDate(currMonth, today.getDate(), today.getMonth(), today.getFullYear());
     updateDateText(today);
 
     //get array of the every day in the month
@@ -96,7 +99,17 @@ function showMonthlyChart(){
         myChart.destroy();
     }
 
+    updateMonthlyChart();
     myChart = renderMonthlyChart(daysOfMonth); 
+}
+
+//set a given date object with the given month, date, and year
+function setDate(dateObj, date, month, year) {
+  dateObj.setDate(date); 
+  dateObj.setMonth(month);
+  dateObj.setFullYear(year);
+
+  return dateObj; 
 }
 
 //change colour of inactive tabs 
@@ -142,13 +155,19 @@ function getDaysInWeek(year, month, day) {
 function clickPrev() {
     var dateLabels; 
     
+    //re-enable next button
+    nextButton.disabled = false; 
+
     if(currChart.id === "weeklyChart") {
         currWeek.setDate(currWeek.getDate() - 7); 
         dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
         updateDateText(currWeek);
   
         myChart.data.labels = dateLabels; 
-        myChart.update();
+
+        updateWeeklyChart();
+        myChart.destroy();
+        myChart = renderWeeklyChart(dateLabels); 
 
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() - 1);
@@ -156,11 +175,18 @@ function clickPrev() {
         updateDateText(currMonth);
 
         myChart.data.labels = dateLabels; 
-        myChart.update();
+        updateMonthlyChart();
+        myChart.destroy();
+        myChart = renderMonthlyChart(dateLabels); 
 
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() - 1); 
         updateDateText(currDate);
+
+        updateDailyChart();
+        myChart.destroy();
+        myChart = renderDailyChart(); 
+
     }
 }
 
@@ -174,7 +200,17 @@ function clickNext() {
         updateDateText(currWeek);
   
         myChart.data.labels = dateLabels; 
-        myChart.update();
+
+        updateWeeklyChart();
+        myChart.destroy();
+        myChart = renderWeeklyChart(dateLabels); 
+
+        var tempDate = new Date();
+        tempDate.setDate(tempDate.getDate()-7);
+
+        if(currWeek.getMonth() >= tempDate.getMonth() && currWeek.getFullYear() >= tempDate.getFullYear() && currWeek.getDate() >= tempDate.getDate()) {
+          nextButton.disabled = true; 
+        }
 
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() + 1);
@@ -182,11 +218,26 @@ function clickNext() {
         updateDateText(currMonth);
 
         myChart.data.labels = dateLabels; 
-        myChart.update();
+
+        updateMonthlyChart();
+        myChart.destroy();
+        myChart = renderMonthlyChart(dateLabels); 
+
+        if(currMonth.getMonth() >= today.getMonth() || currMonth.getFullYear() > today.getFullYear()) {
+          nextButton.disabled = true; 
+        }
 
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() + 1); 
         updateDateText(currDate);
+
+        updateDailyChart();
+        myChart.destroy();
+        myChart = renderDailyChart(); 
+
+        if(currDate.getMonth() >= today.getMonth() && currDate.getFullYear() >= today.getFullYear() && currDate.getDate() >= today.getDate()) {
+          nextButton.disabled = true; 
+        }
     }
 }
 
@@ -234,23 +285,7 @@ function renderWeeklyChart(daysOfWeek) {
         type: 'bar',
         data: {
           labels: daysOfWeek,
-          datasets: [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [1, 0, 5, 3, 2,2, 1],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }],
+          datasets: weeklyChartData,
         },
       options: {
           title: {
@@ -271,7 +306,7 @@ function renderWeeklyChart(daysOfWeek) {
               },
               scaleLabel: {
                   display: true,
-                  labelString: "Day of the Week"
+                  labelString: "Last 7 Days"
               }
             }],
             yAxes: [{
@@ -299,23 +334,7 @@ function renderDailyChart() {
         type: 'bar',
         data: {
           labels: ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
-          datasets: [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [1, 0, 5, 3, 2,2, 1],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }],
+          datasets: dailyChartData,
         },
       options: {
           title: {
@@ -365,23 +384,7 @@ function renderMonthlyChart(daysOfMonth) {
         type: 'bar',
         data: {
           labels: daysOfMonth,
-          datasets: [{
-            label: 'Goal 1',
-            backgroundColor: "#caf270",
-            data: [1, 0, 5, 3, 2,2, 1],
-          }, {
-            label: 'Goal 2',
-            backgroundColor: "#45c490",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }, {
-            label: 'Goal 3',
-            backgroundColor: "#008d93",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }, {
-            label: 'Goal 4',
-            backgroundColor: "#2e5468",
-            data: [2, 2, 5, 5, 3,2, 1],
-          }],
+          datasets: monthlyChartData,
         },
       options: {
           title: {
