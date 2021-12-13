@@ -675,7 +675,7 @@ function updateWeeklyChart() {
                 if(session.date.getDate() == today.getDate() && session.date.getMonth() == today.getMonth() && session.date.getFullYear == today.getFullYear) {
                     weekArray[6] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to today's date in the array
                 } else {
-                    weekArray[session.date.getDay()] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to the associated day of the week in the array
+                    weekArray[7 - (tempDateMax.getDate() - session.date.getDate())] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to the associated day of the week in the array
                 }
 
                 totalStudyTime+=((session.elapsedTime/60)/60); 
