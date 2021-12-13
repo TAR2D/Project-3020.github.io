@@ -64,15 +64,15 @@
                             </div>
                         </div>
                         <div class="timerBtngrp">
-                            <button id="startStop" onclick="startStop();" disabled><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="confirmSkip();" disabled><i class="fas fa-step-forward"></i></button>
+                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
-                                <h4 id="currGoal">Current Goal:</h4>
+                                <h4 id="currGoal">Current Goal: N/A</h4>
                             </div>
                             <div class="currentTask">
-                                <h4 id="currSession">Current Session:</h4>
+                                <h4 id="currSession">Current Session: N/A</h4>
                             </div>
                         </div>
                     </div> <!-- Closing TimerBox -->
@@ -129,7 +129,7 @@
                                     </select>
                                 </div>
                                 <div class="startSessionBtnGrp">
-                                <input type="submit" value="Set" id="sessionFormSubmit">
+                                <input type="submit" value="Start" id="sessionFormSubmit">
                                 <button type="button"><i class="fas fa-times"></i></button>
                                 </div>
                             </form>
@@ -154,8 +154,8 @@
                     <div class="buttonsBox">
                         <div class="btn-group">
                             <button id="goalButton">Add Goal</button>
-                            <button id="taskButton">Set Session</button>
-                            <button id="breakButton">Start a Break</button>
+                            <button id="taskButton">Start a New Session</button>
+                            <button id="breakButton">Start a New Break</button>
                         </div>
                     </div>
 
