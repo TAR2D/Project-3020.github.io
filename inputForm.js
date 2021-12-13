@@ -577,17 +577,6 @@ function convertSecToFormat(timeInSecs) {
     return date.toISOString().substr(11, 8);
 }
 
-
-// adds extra zero to val if val < 10 (ex: '7' turns into '07')
-function addZero(val) {
-    var result = val;
-
-    if (val < 10) {
-        result = '0' + val;
-    }
-    return result;
-}
-
 // -------------- Start of Trends Code -------------- //
 
 let dailyChartData = []; 
