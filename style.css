@@ -962,8 +962,6 @@ button:disabled {
     padding: 1%;
     cursor: pointer;
     border: 2px solid black;
-    border-top-color: rgb(95, 94, 94);
-    border-left-color: rgb(95, 94, 94);
     border-radius: 5px;
 }
 
@@ -1077,6 +1075,7 @@ button:disabled {
 	height: 92%;
 	padding: 5px;
 	background-color: var(--bg-mainMenu);
+    font-family: var(--ff-TimerFont);
 	font-weight: 500;
 }
 
@@ -1114,7 +1113,6 @@ button:disabled {
 .inventory__categoryTitle {
 	height: 3%;
 	width: 100%;
-	font-family: var(--ff-TimerFont);
 	font-size: large;
 	margin-left: 10px;
 	color: black;
@@ -1144,34 +1142,36 @@ button:disabled {
 .inventory__item {
 	height: 100%;
 	width: 32%;
-	background-color: var(--bg-mainMenu);
 	border-style: solid;
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
-    object-fit: contain;
-}
-
-/* clothing and gear pictures */
-.inventory__item img {
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    object-fit: contain;
-    overflow: hidden;
+    color: black;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .currency {
+    display: flex;
     vertical-align: middle;
-    font-family: var(--ff-TimerFont);
-    font: inherit;
+    font-weight: bold;
     padding: 1%;
     border-radius: 5px;
-    font-size: medium;
-    display: flex;
     background-color: var(--b-navigationBar);
 }
 
+.cost{
+    display: flex;
+    color: black;
+    border-radius: 5px;
+    width: max-content;
+    padding: 1%;
+    margin: 2%;
+    float: right;
+    font-size: smaller;
+    background-color: rgb(187, 187, 187);
+}
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
@@ -1319,7 +1319,7 @@ h5 {
 
 .goalFormTitle, .sessionFormTitle{
     display: flex;
-    width: 100%;
+    width: 90%;
     height: 28.5%;
     align-items: center;
     justify-content: space-evenly;
@@ -1332,12 +1332,13 @@ h5 {
 }
 
 .goalFormDuration {
-    width: 100%;
+    width: 90%;
     height: 30%;
     display: flex;
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
     padding-bottom: 10px;
 }
+
 .goalDurationH , .goalDurationM{
     display: flex;
     flex-direction: column;
@@ -1367,6 +1368,10 @@ h5 {
     color: rgba(0, 0, 0, 0.6);
     font-weight: bold;
     font-family: var(--ff-TimerFont);
+}
+
+.breakFormTimer input {
+    width: 68%;
 }
 
 .goalDurationH {
@@ -1400,17 +1405,12 @@ h5 {
     border-radius: 5px;
 }
 
-
 .createGoalBtngrp button:hover, .createGoalBtngrp input:hover, .startSessionBtnGrp input:hover, .startSessionBtnGrp button:hover , .breakBtnGrp input:hover, .breakBtnGrp button:hover {
     background-color: whitesmoke;
 }
 
 .chatBox__startSession{
     height: 200px;
-}
-
-.sessionFormTimer {
-    height: 35%;
 }
 
 .startSessionBtnGrp {
@@ -1422,15 +1422,31 @@ h5 {
     font-family: var(--ff-TimerFont);
     color: rgba(0, 0, 0, 0.7);
 }
+
+.sessionFormTitle label, .sessionFormTimer label{
+    width: 30%;
+}
+
+.goalRelatedSession label {
+    width: 20%;
+}
+
+.sessionFormTitle input, .sessionFormTimer input {
+    width: 70%;
+} 
+
+.goalRelatedSession select{ 
+    height: 60%;
+    width: 80%;
+}
+
 .sessionFormTimer {
+    height: 35%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-}
-
-.sessionFormTimer label {
-    width: 40%;
 }
 
 .goalRelatedSession {
@@ -1438,18 +1454,9 @@ h5 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 85%;
+    width: 90%;
     height: 35%;
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-}
-
-.goalRelatedSession select {
-    width: 70%;
-    height: 60%;
-}
-
-.goalRelatedSession label {
-    width: 20%;
 }
 
 .startSessionBtnGrp {
