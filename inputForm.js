@@ -171,7 +171,7 @@ class chatBox {
                         breakButton.disabled = false; 
 
                     //update timer
-                    // skipTime();
+                    //skipTime();
                     updateTimeSession(sessionDuration);
                     startStop("restart");     //automatically start timer (if timer is already running, restart and play the timer)
 
@@ -304,7 +304,7 @@ $(".chatBox__break form").submit(function (e) {
 });
 
 // -------------- Start of Timer Code -------------- //
-
+const TBBtext = document.querySelector('.TBBtext');
 const timer = document.querySelector("#timer h1");
 let timerSessionState = document.querySelector('.timerSessionState h2');
 let TSSoverlayEffect = document.querySelector('.TSSoverlay');
@@ -375,7 +375,8 @@ function startTimer() {
 
 function updateProgressBar() {
     let widthRange = isOnBreak ? scale(breakSecond - seconds, 0, breakSecond, 0, 100) : scale(initialSec - seconds, 0, initialSec, 0, 100);
-	TSSoverlayEffect.style.width = widthRange + "%";
+	isOnBreak ? TBBtext.innerHTML = "Break" : TBBtext.innerHTML = "Session"
+    TSSoverlayEffect.style.width = widthRange + "%";
 }
 
 function startStop(desiredState) {
@@ -439,22 +440,30 @@ function displayTime(second) {
 }
 
 function confirmSkip() {
-    if (confirm("Your remaining progress time will not be saved. Are you sure you want to skip?")) {
-        skipTime();
-        return true;
+    if (document.getElementById("toggleAlert").checked) {
+        if (confirm("Your remaining progress time will not be saved. Are you sure you want to skip?")) {
+            skipTime();
+            return true;
+        } else {
+            //Uncomment this if you want to pause after canceling skip.
+            // startStop();
+        }
     } else {
-        //Uncomment this if you want to pause after canceling skip.
-        // startStop();
+        skipTime();
     }
 }
 
 function confirmSkipBreak() {
-    if (confirm("Your remaining progress time will not be saved. Are you sure you want to start a new break?")) {
-        skipTime();
-        return true;
+    if (document.getElementById("toggleAlert").checked) {
+        if (confirm("Your remaining progress time will not be saved. Are you sure you want to start a new break?")) {
+            skipTime();
+            return true;
+        } else {
+            //Uncomment this if you want to pause after canceling skip.
+            // startStop();
+        }
     } else {
-        //Uncomment this if you want to pause after canceling skip.
-        // startStop();
+        skipTime();
     }
 }
 
