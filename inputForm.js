@@ -175,10 +175,6 @@ class chatBox {
                     updateTimeSession(sessionDuration);
                     startStop("restart");     //automatically start timer (if timer is already running, restart and play the timer)
 
-                    this.createMessage(
-                        "To start your session, please press the <b>play</b> button beside the timer."
-                    );
-
                     //update left box
                     document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
                     document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
