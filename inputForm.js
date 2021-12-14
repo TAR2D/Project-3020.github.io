@@ -432,6 +432,7 @@ function skipTime() {
 
 // Function to display the time
 function displayTime(second) {
+    updateProgressBar();
     const min = Math.floor(second / 60);
     const sec = Math.floor(second % 60);
     timer.innerHTML = `
@@ -468,7 +469,11 @@ function confirmSkipBreak() {
 }
 
 function confirmNewSession() {
-    return (confirm("Your current session will be overwritten if you continue. Are you sure you want to start a new session?"));
+    if (document.getElementById("toggleAlert").checked) {
+        return (confirm("Your current session will be overwritten if you continue. Are you sure you want to start a new session?"));
+    } else {
+        return true;
+    }
 }
 
 function alarm(){
