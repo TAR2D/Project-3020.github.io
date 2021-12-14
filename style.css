@@ -614,7 +614,7 @@ button:disabled {
     justify-content: center;
     object-fit: contain;
 
-    background-image: url(images/companion-bg.jpg);
+    background-image: url(images/companion-bg-1.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -935,7 +935,7 @@ button:disabled {
     padding: 2%;
 }
 
-/* for body of goals page */
+/* for entire body of goals page */
 .goalsBody {
     width: 98%;
     height: 88%;
@@ -945,7 +945,7 @@ button:disabled {
 	overflow-y: scroll;
 }
 
-/* for body of goals page */
+/* for each goal on goal page */
 .goalsBody .goal{
     height: auto;
     width: 100%;
@@ -962,8 +962,6 @@ button:disabled {
     padding: 1%;
     cursor: pointer;
     border: 2px solid black;
-    border-top-color: rgb(95, 94, 94);
-    border-left-color: rgb(95, 94, 94);
     border-radius: 5px;
 }
 
@@ -984,7 +982,7 @@ button:disabled {
     font-size: medium;
 }
 
-/* for entire list of tasks for a goal on goals page*/
+/* for entire list of sessions for a goal on goals page*/
 .goalsBody ul {
     display: none;
     width: 98%;
@@ -998,7 +996,7 @@ button:disabled {
     border-radius: 1px 1px 5px 5px;
 }
 
-/* for individual task rows for a goal's task list*/
+/* for individual sessions in a goal's sessions list*/
 .goalsBody li {
     display: flex;
     font-size: medium;
@@ -1018,7 +1016,7 @@ button:disabled {
     display: none; /* gets rid of checkbox for input element*/
 }
 
-/* the bar that represents the actual progress (lighter block) */
+/* the bar that represents the actual progress (blue block) */
 .progressbar {
     display: flex;
     background-color: var(--c-chatBubble);
@@ -1077,6 +1075,7 @@ button:disabled {
 	height: 92%;
 	padding: 5px;
 	background-color: var(--bg-mainMenu);
+    font-family: var(--ff-TimerFont);
 	font-weight: 500;
 }
 
@@ -1106,12 +1105,14 @@ button:disabled {
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .inventory__categoryTitle {
 	height: 3%;
 	width: 100%;
-	font-family: var(--ff-TimerFont);
 	font-size: large;
 	margin-left: 10px;
 	color: black;
@@ -1141,16 +1142,36 @@ button:disabled {
 .inventory__item {
 	height: 100%;
 	width: 32%;
-	background-color: var(--bg-mainMenu);
 	border-style: solid;
 	border-width: 5px;
 	border-color: var(--inventoryBoxes);
 	border-radius: 5px;
-
+    color: black;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
+.currency {
+    display: flex;
+    vertical-align: middle;
+    font-weight: bold;
+    padding: 1%;
+    border-radius: 5px;
+    background-color: var(--b-navigationBar);
+}
 
-
+.cost{
+    display: flex;
+    color: black;
+    border-radius: 5px;
+    width: max-content;
+    padding: 1%;
+    margin: 2%;
+    float: right;
+    font-size: smaller;
+    background-color: rgb(187, 187, 187);
+}
 
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
@@ -1298,7 +1319,7 @@ h5 {
 
 .goalFormTitle, .sessionFormTitle{
     display: flex;
-    width: 100%;
+    width: 90%;
     height: 28.5%;
     align-items: center;
     justify-content: space-evenly;
@@ -1311,12 +1332,13 @@ h5 {
 }
 
 .goalFormDuration {
-    width: 100%;
+    width: 90%;
     height: 30%;
     display: flex;
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
     padding-bottom: 10px;
 }
+
 .goalDurationH , .goalDurationM{
     display: flex;
     flex-direction: column;
@@ -1346,6 +1368,10 @@ h5 {
     color: rgba(0, 0, 0, 0.6);
     font-weight: bold;
     font-family: var(--ff-TimerFont);
+}
+
+.breakFormTimer input {
+    width: 68%;
 }
 
 .goalDurationH {
@@ -1379,17 +1405,12 @@ h5 {
     border-radius: 5px;
 }
 
-
 .createGoalBtngrp button:hover, .createGoalBtngrp input:hover, .startSessionBtnGrp input:hover, .startSessionBtnGrp button:hover , .breakBtnGrp input:hover, .breakBtnGrp button:hover {
     background-color: whitesmoke;
 }
 
 .chatBox__startSession{
     height: 200px;
-}
-
-.sessionFormTimer {
-    height: 35%;
 }
 
 .startSessionBtnGrp {
@@ -1401,15 +1422,26 @@ h5 {
     font-family: var(--ff-TimerFont);
     color: rgba(0, 0, 0, 0.7);
 }
+
+.sessionFormTitle label, .sessionFormTimer label, .goalRelatedSession label {
+    width: 32%;
+}
+
+.sessionFormTitle input, .sessionFormTimer input, .goalRelatedSession select{
+    width: 68%;
+} 
+
+.goalRelatedSession select{ 
+    height: 60%;
+}
+
 .sessionFormTimer {
+    height: 35%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-}
-
-.sessionFormTimer label {
-    width: 40%;
 }
 
 .goalRelatedSession {
@@ -1417,18 +1449,9 @@ h5 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 85%;
+    width: 90%;
     height: 35%;
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-}
-
-.goalRelatedSession select {
-    width: 70%;
-    height: 60%;
-}
-
-.goalRelatedSession label {
-    width: 20%;
 }
 
 .startSessionBtnGrp {
