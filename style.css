@@ -1423,21 +1423,16 @@ h5 {
     color: rgba(0, 0, 0, 0.7);
 }
 
-.sessionFormTitle label, .sessionFormTimer label{
-    width: 30%;
+.sessionFormTitle label, .sessionFormTimer label, .goalRelatedSession label {
+    width: 32%;
 }
 
-.goalRelatedSession label {
-    width: 20%;
-}
-
-.sessionFormTitle input, .sessionFormTimer input {
-    width: 70%;
+.sessionFormTitle input, .sessionFormTimer input, .goalRelatedSession select{
+    width: 68%;
 } 
 
 .goalRelatedSession select{ 
     height: 60%;
-    width: 80%;
 }
 
 .sessionFormTimer {
