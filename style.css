@@ -1169,7 +1169,7 @@ button:disabled {
     width: max-content;
     padding: 1%;
     margin: 2%;
-    float: right;
+    float: left;
     font-size: smaller;
     background-color: rgb(187, 187, 187);
 }

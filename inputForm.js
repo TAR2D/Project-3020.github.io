@@ -108,10 +108,10 @@ class chatBox {
                 alert("Please enter a goal name.");
             }
             else if ((goalDurationM < 0 || goalDurationM > 60) && goalDurationH <= 0) { // if hours = 0 and value for minutes is not valid
-                alert("Please enter a value for Minutes between 1 and 60.");
+                alert("Please enter a value between 1 and 60 for Minutes.");
             }
             else if (goalDurationH <= 0 && goalDurationM <= 0) { // if minutes = 0 and hours = 0
-                alert("Please enter a value for Hour or Minutes greater than 0.");
+                alert("Please enter a value greater than 0 for Hour or Minutes.");
             }
             else {
                 let duplicate = false;  // check if goal name is a duplicate
@@ -153,7 +153,7 @@ class chatBox {
             let sessionGoal = this.goalsList[goalIndex];
 
             if (sessionDuration <= 0 || sessionDuration > 60) {
-                alert("Please enter a value for Minutes between 1 and 60.");
+                alert("Please enter a value between 1 and 60 for Minutes.");
             } else {
                 if(sessionTitle.length <= 0) {
                     sessionTitle = "No name";
