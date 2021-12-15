@@ -92,27 +92,43 @@ class chatBox {
             let goalDurationH = Number(goalFormInfo[1].value);
             let goalDurationM = Number(goalFormInfo[2].value);
 
-            if (goalDurationH < 0 || goalDurationM < 0) {
-                alert("Time input should be greater than 0.");
-            } else if(goalDurationM>=60) {
-                alert("Minutes should be less than 60.");
-            } else {
-                companionTalking(); 
-                this.addMessageTime();
-                
-                this.createMessage(
-                    "Your goal, <b>" + goalTitle + "</b>, has been created. You must do <b>" + goalDurationH + " hours and " + goalDurationM + " minutes </b> of sessions to complete your goal.");
-                    //"New Goal: " + goalTitle + " Created. Duration: " +
-                    //goalDurationH + " H and " + goalDurationM + " M");
-                let newGoal = new Goal(goalTitle, 60*(goalDurationH * 60 + goalDurationM));
-                this.eventList.push(newGoal);
-                this.goalsList.push(newGoal);
+            if(goalTitle.length <= 0) {
+                alert("Please enter a goal name.");
+            }
+            else if ((goalDurationM < 0 || goalDurationM > 60) && goalDurationH <= 0) { // if hours = 0 and value for minutes is not valid
+                alert("Please enter a value for Minutes between 1 and 60.");
+            }
+            else if (goalDurationH <= 0 && goalDurationM <= 0) { // if minutes = 0 and hours = 0
+                alert("Please enter a value for Hour or Minutes greater than 0.");
+            }
+            else {
+                let duplicate = false;  // check if goal name is a duplicate
+                for(let x of this.goalsList) {
+                    if(x.title === goalTitle) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if(duplicate) {
+                    alert('"' + goalTitle + '" is already taken. Please enter an unique goal name.');
+                } else {
+                    companionTalking(); 
+                    this.addMessageTime();
+                    
+                    this.createMessage(
+                        "Your goal, <b>" + goalTitle + "</b>, has been created. You must do <b>" + goalDurationH + " hours and " + goalDurationM + " minutes </b> of sessions to complete your goal.");
+                        //"New Goal: " + goalTitle + " Created. Duration: " +
+                        //goalDurationH + " H and " + goalDurationM + " M");
+                    let newGoal = new Goal(goalTitle, 60*(goalDurationH * 60 + goalDurationM));
+                    this.eventList.push(newGoal);
+                    this.goalsList.push(newGoal);
 
-                this.updateGoalSelection(newGoal);
+                    this.updateGoalSelection(newGoal);
 
-                goalButton.disabled = false;
-                //hide form after
-                this.hideAll();
+                    goalButton.disabled = false;
+                    //hide form after
+                    this.hideAll();
+                }
             }
         });
 
@@ -124,9 +140,12 @@ class chatBox {
             let sessionDuration = Number(sessionFormInfo[1].value);
             let sessionGoal = this.goalsList[goalIndex];
 
-            if (sessionDuration < 0 || sessionDuration>60) {
-                alert("Sessions can only be between 0 and 60 minutes long.");
+            if (sessionDuration <= 0 || sessionDuration > 60) {
+                alert("Please enter a value for Minutes between 1 and 60.");
             } else {
+                if(sessionTitle.length <= 0) {
+                    sessionTitle = "No name";
+                }
 
                 companionTalking(); 
                 this.addMessageTime();
@@ -173,8 +192,8 @@ class chatBox {
 
             let breakDuration = breakFormInfo[0].value;
 
-            if (breakDuration < 0) {
-                alert("Time input should be greater than 0.");
+            if (breakDuration <= 0) {
+                alert("Please enter a Minutes value greater than 0.");
             } else {
                 if (confirmSkipBreak()) {
                     companionTalking(); 
