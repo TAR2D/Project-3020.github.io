@@ -728,7 +728,7 @@ button:disabled {
 
 .trends__summaryBox { 
     height: 12.5%; 
-    Overflow-y:scroll;
+    /*Overflow-y:scroll; //uncomment if adding more summary data*/
 }
 
 .trends__summaryTitle { 

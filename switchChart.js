@@ -23,6 +23,12 @@ var currWeek = new Date();
 var currMonth= new Date(); 
 var currDate = new Date(); 
 
+//set date times to midnight
+today.setHours(0,0,0,0);
+currWeek.setHours(0,0,0,0); 
+currMonth.setHours(0,0,0,0); 
+currDate.setHours(0,0,0,0); 
+
 //load the weekly chart first by default
 trendsButton.addEventListener("click", showWeeklyChart);
 
