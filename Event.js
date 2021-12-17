@@ -12,6 +12,7 @@ class Goal extends Event{
         this.listOfSession = [];
         this.elapsedTime = 0;  // in seconds
         this.completed = false;
+        this.color = this.randomColor();
     }
 
     addSession(session) {
@@ -55,15 +56,22 @@ class Goal extends Event{
     getNumberOfSessions() {
         return this.listOfSession.length;
     }
+    
+    randomColor() { 
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let colorCode = "#" + randomColor;
+        return colorCode; 
+    }
 }
 
 class Session extends Event {
 
-    constructor(title = "Default", duration = 0, goal) {
+    constructor(title = "Default", duration = 0, goal, date) {
         super(title, duration);
         this.elapsedTime = 0; // in seconds
         this.completed = false;
         this.goal = goal;
+        this.date = date; 
     }
 
     updateSession(secsSpentOnSession) { 

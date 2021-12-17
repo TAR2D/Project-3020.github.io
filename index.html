@@ -64,15 +64,15 @@
                             </div>
                         </div>
                         <div class="timerBtngrp">
-                            <button id="startStop" onclick="startStop();" disabled><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="confirmSkip();" disabled><i class="fas fa-step-forward"></i></button>
+                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
-                                <h4 id="currGoal">Current Goal:</h4>
+                                <h4 id="currGoal">Current Goal: Default</h4>
                             </div>
                             <div class="currentTask">
-                                <h4 id="currSession">Current Session:</h4>
+                                <h4 id="currSession">Current Session: Default</h4>
                             </div>
                         </div>
                     </div> <!-- Closing TimerBox -->
@@ -129,7 +129,7 @@
                                     </select>
                                 </div>
                                 <div class="startSessionBtnGrp">
-                                <input type="submit" value="Add" id="sessionFormSubmit">
+                                <input type="submit" value="Start" id="sessionFormSubmit">
                                 <button type="button"><i class="fas fa-times"></i></button>
                                 </div>
                             </form>
@@ -154,11 +154,10 @@
                     <div class="buttonsBox">
                         <div class="btn-group">
                             <button id="goalButton">Add Goal</button>
-                            <button id="taskButton">Set Session</button>
-                            <button id="breakButton">Start a Break</button>
+                            <button id="taskButton">Start a New Session</button>
+                            <button id="breakButton">Start a New Break</button>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -168,11 +167,11 @@
             <div class="main__item main__item--goals">
                 <!-- Header (title and back button) -->
                 <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">home</span>
-					</button>
-					<div class="page__header__title">Goals</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+					<div class="page__header__title">Goals</div>
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">close</span>
+					</button>
 				</div>
                 <div class="goalsBody"></div>
             </div>
@@ -184,11 +183,11 @@
 
 				<!-- Header (title and back button) -->
                 <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">home</span>
-					</button>
-					<div class="page__header__title">Trends</div>
 					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+					<div class="page__header__title">Trends</div>
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">close</span>
+					</button>
 				</div>
 
                 <!-- DAILY, WEEKLY, MONTHLY BUTTONS -->
@@ -234,34 +233,62 @@
             <div class="main__item main__item--inventory">
                 <!-- Header (title and back button) -->
                 <div class="page__header">
-					<button class="page__backButton">
-						<span class="material-icons" style="color:black;">home</span>
-					</button>
+					<div class="currency">Your Coins: $1200</div>
 					<div class="page__header__title">Inventory</div>
-					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+					<div class="for-centering-title" style="width: 15%;"></div>
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">close</span>
+					</button>
 				</div>
+				<nav class="trendsBar">
+                    <ul id="trendsBarTabs" class="trendsBar__items">
+						<li id="myItemsTab" class="inventory__myItemsButton"><p>My Items</p></li>
+                        <li id="shopTab" class="inventory__shopButton"><p>Shop</p></li>
+                    </ul>
+                </nav>
                 <!-- Rest of page  -->
-				<div class="inventory__page">
+				<div class="inventory__page" id="inventory__shopTab">
+                     <!-- NOTE: feel free to add more tiles since there are extra pictures saved :) -->
 					<!-- first row of featured items (environments) -->
-					<div class = "inventory__headline">Environments</div>
-					<div class="inventory__featureBar">
-						<div class = "inventory__featureItem"></div>
-						<div class = "inventory__featureItem"></div>
+					<div class="inventory__featured">
+						<div class = "inventory__headline">
+							<h2 style="margin-left: 2%; line-height: 1.2em;">ENVIRONMENTS</h2>
+						</div>
+						<div class="inventory__featureBar">
+							<div class = "inventory__featureItem" style="background-image: url('./images/companion-bg-2.jpg');"><div class="cost">$200</div></div>
+							<div class = "inventory__featureItem" style="background-image: url('./images/companion-bg-3.jpg');"><div class="cost">$180</div></div>
+						</div>
 					</div>
 					<!-- subsequent rows of normal items we care less about -->
 					<div class="inventory__categories">
-						<div class="inventory__categoryTitle">Clothing</div>
-						<div class="inventory__list">
-							<div class="inventory__item"></div>
-							<div class="inventory__item"></div>
-							<div class="inventory__item"></div>
+						<div class="inventory__categoryTitle">
+							<h2 style="margin-left: 2%; line-height: 1.2em;">CLOTHING</h2>
 						</div>
-						<div class="inventory__categoryTitle">Gear</div>
 						<div class="inventory__list">
-							<div class="inventory__item"></div>
-							<div class="inventory__item"></div>
-							<div class="inventory__item"></div>
+							<div class="inventory__item" style="background-image: url('./images/companion-clothing-1.JPG');"><div class="cost">$60</div></div>
+                            <div class="inventory__item" style="background-image: url('./images/companion-clothing-2.JPG');"><div class="cost">$50</div></div>
+							<div class="inventory__item" style="background-image: url('./images/companion-clothing-3.JPG');"><div class="cost">$30</div></div>
 						</div>
+						<div class="inventory__categoryTitle">
+							<h2 style="margin-left: 2%; line-height: 1.2em;">FURNISHINGS</h2>
+						</div>
+						<div class="inventory__list">
+                            <div class="inventory__item" style="background-image: url('./images/companion-gear-1.jpg');"><div class="cost">$30</div></div>
+							<div class="inventory__item" style="background-image: url('./images/companion-gear-2.jpg');"><div class="cost">$50</div></div>
+							<div class="inventory__item" style="background-image: url('./images/companion-gear-3.jpg');"><div class="cost">$80</div></div>
+						</div>
+					</div>
+				</div>
+				<div class="inventory__page" id="inventory__ownedItemsTab">
+					<div class="inventory__list owned">
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-bg-1.jpg');"><div class="cost">EQUIPPED</div></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-clothing-4.JPG');"></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-gear-5.jpg');"></div>
+					</div>
+					<div class="inventory__list owned">
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-gear-8.jpg');"></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-clothing-6.JPG');"></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-clothing-5.JPG');"></div>
 					</div>
 				</div>
             </div>
@@ -270,12 +297,12 @@
             -->
             <div class="main__item main__item--settings">
                 <div class="page__header">
-                    <button class="page__backButton">
-                        <span class="material-icons" style="color:black;">home</span>
-                    </button>
-                    <div class="page__header__title">Settings</div>
-                    <div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
-                </div>
+					<div class="ignore_this_invisible_div (helps to center title)" style="width: 36px"></div>
+					<div class="page__header__title">Settings</div>
+					<button class="page__backButton">
+						<span class="material-icons" style="color:black;">close</span>
+					</button>
+				</div>
                 <div class="settings__item">
                     <!-- ACCOUNT SETTINGS -->
                     <div class="settings__item settings__item--account">
@@ -295,7 +322,7 @@
                             <p id="sound">Sound</p> 
                             <div class="switchWraper"> 
                                 <label class="switch">
-                                    <input id="toggleSound" type="checkbox">
+                                    <input id="toggleSound" type="checkbox" checked = true>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -322,9 +349,14 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="advance__settings advance__settings--about">
-                            <p id="about">About</p> 
-                            <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                        <div class="advance__settings advance__settings--alert">
+                            <p id="alert">Confirmation Alerts</p> 
+                            <div class="switchWraper"> 
+                                <label class="switch">
+                                    <input id="toggleAlert" type="checkbox" checked = true>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
                         </div>
                     </div>    
                 </div>
