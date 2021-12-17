@@ -795,6 +795,7 @@ button:disabled {
 /* Stying the Settings page */ 
 
 .settings__item {
+
     height: 90%;
     width: 70%;
     margin: auto;
@@ -827,7 +828,8 @@ button:disabled {
     display: flex;
 }
 
-.account__settings--profile{height: 30%;
+.account__settings--profile{
+    height: 30%;
     width: 90%;
     height: 60%;
 }
@@ -1235,7 +1237,7 @@ button:disabled {
     width: max-content;
     padding: 2%;
     margin: 2%;
-    float: right;
+    float: left;
     font-size: smaller;
     background-color: var(--accentColor-first);
 }
@@ -1385,7 +1387,8 @@ h5 {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: rgb(209, 209, 209);
+    background-color: rgb(240, 240, 240);
+    /* background-color: rgb(209, 209, 209); */
     font-family: var(--ff-TimerFont);
     font-weight: bold;
 }
