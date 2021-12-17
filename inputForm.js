@@ -213,8 +213,8 @@ class chatBox {
 
             let breakDuration = breakFormInfo[0].value;
 
-            if (breakDuration <= 0) {
-                alert("Please enter a Minutes value greater than 0.");
+            if (breakDuration <= 0 || breakDuration > 60) {
+                alert("Please enter a value between 1 and 60 for Minutes.");
             } else {
                 companionTalking(); 
                 this.addMessageTime();
