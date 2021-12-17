@@ -844,7 +844,7 @@ button:disabled {
 }
 
 #username{
-    font-size: large;
+    font-size: x-large;
     margin-top: 3%;
     font-weight:var(--ff-TimerFont);
     color: #141516;
@@ -860,7 +860,7 @@ button:disabled {
 }
 
 #sound, #volume, #dark__mode, #alert{
-    font-size: 1.5em;
+    font-size: x-large;
     font-weight:var(--c-chatBubble);
     color: #141516;
 }
