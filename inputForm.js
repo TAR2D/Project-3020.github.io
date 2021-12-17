@@ -27,12 +27,17 @@ class chatBox {
         let defaultGoal = new Goal();
         this.goalsList.push(defaultGoal);
         this.updateGoalSelection(defaultGoal);
-        this.sessionList.push(this.goalsList[0]);
 
         this.breakState = 0;
-        this.mode = 0;      //0 = none, 1 = session, 2 = break 
+        this.firstSession = true;
 
-        this.currentSessionInProgress = null;   // current session user is working on
+        //set first session to the default session
+        let currDate = new Date(); 
+        let newSession = new Session("Default", 60*20, this.goalsList[0], currDate);
+        defaultGoal.addSession(newSession);
+        this.eventList.push(newSession);
+        this.sessionList.push(newSession);
+        this.currentSessionInProgress = newSession;  // current session user is working on
     }
 
     display() {
@@ -139,7 +144,7 @@ class chatBox {
             if (sessionDuration < 0 || sessionDuration>60) {
                 alert("Sessions can only be between 0 and 60 minutes long.");
             } else {
-                if((!isOnBreak && confirmNewSession()) || isOnBreak) {
+                if(this.firstSession || (confirmNewSession())) {
                     companionTalking(); 
                     this.addMessageTime();
 
@@ -178,6 +183,8 @@ class chatBox {
                     //update left box
                     document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
                     document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
+
+                    this.firstSession = false;
                 }
             }
         });
