@@ -315,13 +315,15 @@ class chatBox {
 
     updateMsgColour() {
         let messages = document.getElementById("mainChatBox").getElementsByTagName("P");
-        let max = 240;  
-        let min = 180;  // newest message will always be this colour
+        let max = 255;  
+        let min = 180; 
         let msgClr = max;
 
-        for(let i = messages.length - 1 ; i >= 0; i--) {
-            messages[i].style.backgroundColor = "rgb(" + msgClr + "," + msgClr + "," + msgClr + ")";
-            msgClr = min + (i/messages.length) * (max-min);
+        for(let i = 0; i < messages.length; i++) {
+            // experiment with this to get diff colours
+            messages[i].style.backgroundColor = "rgb(" + (msgClr + 8) + "," + (msgClr + 26) + "," + (msgClr +  28) + ")";
+            // messages[i].style.backgroundColor = "rgb(" + msgClr + "," + msgClr + "," + msgClr + ")";
+            msgClr = max - (i/messages.length) * (max-min);
             console.log(i + " " + msgClr); //debugging
         }
     }
