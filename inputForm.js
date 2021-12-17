@@ -27,12 +27,17 @@ class chatBox {
         let defaultGoal = new Goal();
         this.goalsList.push(defaultGoal);
         this.updateGoalSelection(defaultGoal);
-        this.sessionList.push(this.goalsList[0]);
 
         this.breakState = 0;
-        this.mode = 0;      //0 = none, 1 = session, 2 = break 
+        this.firstSession = true;
 
-        this.currentSessionInProgress = null;   // current session user is working on
+        //set first session to the default session
+        let currDate = new Date(); 
+        let newSession = new Session("Default", 60*20, this.goalsList[0], currDate);
+        defaultGoal.addSession(newSession);
+        this.eventList.push(newSession);
+        this.sessionList.push(newSession);
+        this.currentSessionInProgress = newSession;  // current session user is working on
     }
 
     display() {
@@ -111,7 +116,7 @@ class chatBox {
                 alert("Please enter a value between 1 and 60 for Minutes.");
             }
             else if (goalDurationH <= 0 && goalDurationM <= 0) { // if minutes = 0 and hours = 0
-                alert("Please enter a value greater than 0 for Hour or Minutes.");
+                alert("Please enter a value greater than 0 for Hours or Minutes.");
             }
             else {
                 let duplicate = false;  // check if goal name is a duplicate
@@ -157,8 +162,8 @@ class chatBox {
             } else {
                 if(sessionTitle.length <= 0) {
                     sessionTitle = "No name";
-                }
-                if((!isOnBreak && confirmNewSession()) || isOnBreak) {
+                }  
+                if(this.firstSession || (confirmNewSession())) {
                     companionTalking(); 
                     this.addMessageTime();
 
@@ -197,6 +202,8 @@ class chatBox {
                     //update left box
                     document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
                     document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
+
+                    this.firstSession = false;
                 }
             }
         });
@@ -277,6 +284,7 @@ class chatBox {
         let message = document.createElement('p');
         message.innerHTML = text;
         msgBox.appendChild(message);
+        this.updateMsgColour();
         // Scroll Down with Chat
         $(".chatBox").stop().animate({ scrollTop: $(".chatBox")[0].scrollHeight }, 1000);
     }
@@ -286,7 +294,7 @@ class chatBox {
         let message = document.createElement('div');
         message.className = 'chatMsgDate';
         let currTime = new Date(); 
-        message.innerHTML = currTime.toString().slice(0, 24);; 
+        message.innerHTML = currTime.toString().slice(0, 24); 
         msgBox.appendChild(message);
         // Scroll Down with Chat
         $(".chatBox").stop().animate({ scrollTop: $(".chatBox")[0].scrollHeight }, 1000);
@@ -303,6 +311,19 @@ class chatBox {
         goalForm.style.display = "none";
         sessionForm.style.display = "none";
         breakForm.style.display = "none";
+    }
+
+    updateMsgColour() {
+        let messages = document.getElementById("mainChatBox").getElementsByTagName("P");
+        let max = 240;  
+        let min = 180;  // newest message will always be this colour
+        let msgClr = max;
+
+        for(let i = messages.length - 1 ; i >= 0; i--) {
+            messages[i].style.backgroundColor = "rgb(" + msgClr + "," + msgClr + "," + msgClr + ")";
+            msgClr = min + (i/messages.length) * (max-min);
+            console.log(i + " " + msgClr); //debugging
+        }
     }
 }
 

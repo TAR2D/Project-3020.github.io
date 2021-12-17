@@ -23,6 +23,12 @@ var currWeek = new Date();
 var currMonth= new Date(); 
 var currDate = new Date(); 
 
+//set date times to midnight
+today.setHours(0,0,0,0);
+currWeek.setHours(0,0,0,0); 
+currMonth.setHours(0,0,0,0); 
+currDate.setHours(0,0,0,0); 
+
 //load the weekly chart first by default
 trendsButton.addEventListener("click", showWeeklyChart);
 
@@ -427,12 +433,27 @@ function renderMonthlyChart(daysOfMonth) {
       });
 }
 
+// ------------------   INVENTORY PAGE   -------------------------
 
+// tab button elements
+let myItemsTab = document.getElementById("myItemsTab");
+let shopTab = document.getElementById("shopTab");
 
+let myItemsPage = document.getElementById("inventory__ownedItemsTab");
+let shopPage = document.getElementById("inventory__shopTab");
 
-  
-  
+myItemsTab.onclick = function() {
+	console.log("WE ARE HERE");
+	myItemsTab.style.backgroundColor = "black";
+	shopTab.style.backgroundColor = "rgb(97, 97, 97)";
+	myItemsPage.style.display = "flex";
+	shopPage.style.display = "none";
+}
 
-  
-  
-  
+shopTab.onclick = function() {
+	console.log("WE ARE THERE");
+	myItemsTab.style.backgroundColor = "rgb(97, 97, 97)";
+	shopTab.style.backgroundColor = "black";
+	myItemsPage.style.display = "none";
+	shopPage.style.display = "flex";
+}

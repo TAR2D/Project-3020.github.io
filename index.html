@@ -69,10 +69,10 @@
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
-                                <h4 id="currGoal">Current Goal: N/A</h4>
+                                <h4 id="currGoal">Current Goal: Default</h4>
                             </div>
                             <div class="currentTask">
-                                <h4 id="currSession">Current Session: N/A</h4>
+                                <h4 id="currSession">Current Session: Default</h4>
                             </div>
                         </div>
                     </div> <!-- Closing TimerBox -->
@@ -82,9 +82,9 @@
                 </div>
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
-                    <div class="chatBox" >
+                    <div class="chatBox">
                         <!-- Message Box -->
-                        <div class="chatBox__msgBox"></div>
+                        <div class="chatBox__msgBox" id="mainChatBox"></div>
                         <!-- 
                             Chat Box Forms 
                         -->
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="goalFormDuration">
                                     <div class="goalDurationH">
-                                        <label for="goalDuration">Hour:</label>
+                                        <label for="goalDuration">Hours:</label>
                                         <input type="number" name="goalDHours" value="10">
                                     </div>
                                     <div class="goalDurationM">
@@ -117,7 +117,7 @@
                             <form action="" method="get">
                                 <div class="sessionFormTitle">
                                     <label for="sessionTitle">Session:</label>
-                                    <input type="text" placeholder="Type name here..." name="sessionTitle">
+                                    <input type="text" placeholder="Type name here..." name="sessionTitle" value="Default">
                                 </div>
                                 <div class="sessionFormTimer">
                                         <label for="sessionFTimer">Minutes:</label>
@@ -233,35 +233,62 @@
             <div class="main__item main__item--inventory">
                 <!-- Header (title and back button) -->
                 <div class="page__header">
-                    <div class="currency">$1200</div>
+					<div class="currency">Your Coins: $1200</div>
 					<div class="page__header__title">Inventory</div>
+					<div class="for-centering-title" style="width: 15%;"></div>
 					<button class="page__backButton">
 						<span class="material-icons" style="color:black;">close</span>
 					</button>
 				</div>
+				<nav class="trendsBar">
+                    <ul id="trendsBarTabs" class="trendsBar__items">
+						<li id="myItemsTab" class="inventory__myItemsButton"><p>My Items</p></li>
+                        <li id="shopTab" class="inventory__shopButton"><p>Shop</p></li>
+                    </ul>
+                </nav>
                 <!-- Rest of page  -->
-				<div class="inventory__page">
+				<div class="inventory__page" id="inventory__shopTab">
                      <!-- NOTE: feel free to add more tiles since there are extra pictures saved :) -->
 					<!-- first row of featured items (environments) -->
-					<div class = "inventory__headline">Environments</div>
-					<div class="inventory__featureBar">
-						<div class = "inventory__featureItem" style="background-image: url('./images/companion-bg-2.jpg');"><div class="cost">$200</div></div>
-						<div class = "inventory__featureItem" style="background-image: url('./images/companion-bg-3.jpg');"><div class="cost">$180</div></div>
+					<div class="inventory__featured">
+						<div class = "inventory__headline">
+							<h2 style="margin-left: 2%; line-height: 1.2em;">ENVIRONMENTS</h2>
+						</div>
+						<div class="inventory__featureBar">
+							<div class = "inventory__featureItem" style="background-image: url('./images/companion-bg-2.jpg');"><div class="cost">$200</div></div>
+							<div class = "inventory__featureItem" style="background-image: url('./images/companion-bg-3.jpg');"><div class="cost">$180</div></div>
+						</div>
 					</div>
 					<!-- subsequent rows of normal items we care less about -->
 					<div class="inventory__categories">
-						<div class="inventory__categoryTitle">Clothing</div>
+						<div class="inventory__categoryTitle">
+							<h2 style="margin-left: 2%; line-height: 1.2em;">CLOTHING</h2>
+						</div>
 						<div class="inventory__list">
 							<div class="inventory__item" style="background-image: url('./images/companion-clothing-1.JPG');"><div class="cost">$60</div></div>
                             <div class="inventory__item" style="background-image: url('./images/companion-clothing-2.JPG');"><div class="cost">$50</div></div>
 							<div class="inventory__item" style="background-image: url('./images/companion-clothing-3.JPG');"><div class="cost">$30</div></div>
 						</div>
-						<div class="inventory__categoryTitle">Gear</div>
+						<div class="inventory__categoryTitle">
+							<h2 style="margin-left: 2%; line-height: 1.2em;">FURNISHINGS</h2>
+						</div>
 						<div class="inventory__list">
                             <div class="inventory__item" style="background-image: url('./images/companion-gear-1.jpg');"><div class="cost">$30</div></div>
 							<div class="inventory__item" style="background-image: url('./images/companion-gear-2.jpg');"><div class="cost">$50</div></div>
 							<div class="inventory__item" style="background-image: url('./images/companion-gear-3.jpg');"><div class="cost">$80</div></div>
 						</div>
+					</div>
+				</div>
+				<div class="inventory__page" id="inventory__ownedItemsTab">
+					<div class="inventory__list owned">
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-bg-1.jpg');"><div class="cost">EQUIPPED</div></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-clothing-4.JPG');"></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-gear-5.jpg');"></div>
+					</div>
+					<div class="inventory__list owned">
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-gear-8.jpg');"></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-clothing-6.JPG');"></div>
+						<div class="inventory__item ownedItem" style="background-image: url('./images/companion-clothing-5.JPG');"></div>
 					</div>
 				</div>
             </div>
@@ -322,8 +349,8 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="advance__settings advance__settings--about">
-                            <p id="about">Alerts</p> 
+                        <div class="advance__settings advance__settings--alert">
+                            <p id="alert">Confirmation Alerts</p> 
                             <div class="switchWraper"> 
                                 <label class="switch">
                                     <input id="toggleAlert" type="checkbox" checked = true>
