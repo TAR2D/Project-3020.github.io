@@ -1219,13 +1219,16 @@ button:disabled {
 .cost{
     display: flex;
     color: black;
-    border-radius: var(--borderRadiusUniversal);
+    border-radius: 4px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
     width: max-content;
-    padding: 1%;
+    padding: 2%;
     margin: 2%;
     float: right;
     font-size: smaller;
-    background-color: rgb(187, 187, 187);
+    background-color: var(--accentColor-first);
 }
 
 /* Display none for all child element excent main menu as default */
