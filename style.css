@@ -766,6 +766,7 @@ button:disabled {
 /* Stying the Settings page */ 
 
 .settings__item {
+
     height: 90%;
     width: 80%;
 
@@ -785,7 +786,6 @@ button:disabled {
     border: 2px solid rgb(0, 0, 0);
     display: relative;
     justify-content: center;
-
 }
 
 #account, #notification, #advance{
@@ -803,7 +803,6 @@ button:disabled {
 .account__settings, .notification__settings, .advance__settings {
     height: 30%;
     width: 70%;
-    margin-top: 5px;
     margin: auto;
     margin-top: 5px;
     position: relative;
@@ -811,7 +810,8 @@ button:disabled {
     align-items: center;
 }
 
-.account__settings--profile{height: 30%;
+.account__settings--profile{
+    height: 30%;
     width: 90%;
     height: 60%;
 }
