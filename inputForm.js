@@ -112,7 +112,7 @@ class chatBox {
             if(goalTitle.length <= 0) {
                 alert("Please enter a goal name.");
             }
-            else if ((goalDurationM < 0 || goalDurationM > 60) && goalDurationH <= 0) { // if hours = 0 and value for minutes is not valid
+            else if ((goalDurationM < 0 || goalDurationM > 60)) { // if hours = 0 and value for minutes is not valid
                 alert("Please enter a value between 1 and 60 for Minutes.");
             }
             else if (goalDurationH <= 0 && goalDurationM <= 0) { // if minutes = 0 and hours = 0
