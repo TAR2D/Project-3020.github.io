@@ -769,48 +769,35 @@ button:disabled {
 
 .settings__item {
     height: 90%;
-    width: 80%;
-
+    width: 70%;
     margin: auto;
-    display: relative;
-    justify-content: left;
-    align-items: center;
-
     border-radius: 25px;
-    background-color:rgb(187, 187, 187);
 }
 
 .settings__item--account, .settings__item--notification, .settings__item--advance {
     height: 30%;
-    width: 75%;
-    margin-top: 5px;
-    border: 2px solid rgb(0, 0, 0);
-    display: relative;
-    justify-content: center;
-
+    width: 100%;
+    margin-top: 2%;
+    background-color:rgb(166, 175, 171);
 }
 
 #account, #notification, #advance{
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.7em;
+    font-weight:var(--bg-sectionA);
     color: #141516;
     text-decoration: underline grey;
-    display: flex;
-    position: relative;
     justify-content: left;
-    margin-top: 5px;
-    margin-left: 10px;
+    margin-top: 2%;
+    margin-left: 3%;
 }
 
 .account__settings, .notification__settings, .advance__settings {
-    height: 30%;
+    height: 25%;
     width: 70%;
-    margin-top: 5px;
-    margin: auto;
-    margin-top: 5px;
+    margin-left: 10%;
+    margin-top: 3%;
     position: relative;
     display: flex;
-    align-items: center;
 }
 
 .account__settings--profile{height: 30%;
@@ -826,41 +813,36 @@ button:disabled {
 }
 
 #username{
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.4em;
+    margin-top: 3%;
+    font-weight:var(--ff-TimerFont);
     color: #141516;
 }
 
 #change__user{
     font-size: 1em;
+    text-decoration: underline rgb(134, 134, 134);
     margin-top: 2%;
-    margin-left: 5%;
-    color: #ffffff;
+    margin-left: 2%;
+    color: #555555;
 }
 
 
-#sound, #volume, #dark__mode, #about{
+#sound, #volume, #dark__mode, #alert{
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight:var(--c-chatBubble);
     color: #141516;
-    display: flex;
-    justify-content: left;
-    margin-top: 5px;
-    margin-left: 10px;
 }
-
-.fa-info-circle{
-    position: absolute;
-    margin-left: 63%;  }
 
 .switchWraper, .slideContainer {
     position: absolute;
-    margin-left: 58%;    
+    margin-left: 90%;    
 }
 
 .slideContainer{
-    position: absolute;
-    margin-left: 40%; 
+    display: flex;
+    align-content: center;
+    margin-left:80%; 
 }
 
 
@@ -870,6 +852,7 @@ button:disabled {
     display: inline-block;
     width: 60px;
     height: 34px;
+
 }
   
   .switch input { 
@@ -888,6 +871,7 @@ button:disabled {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
+
 }
   
   .slider:before {
@@ -905,11 +889,9 @@ button:disabled {
   input:checked + .slider {
     background-color: #2196F3;
 }
-  
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
 }
-  
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
