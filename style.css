@@ -795,7 +795,7 @@ button:disabled {
 /* Stying the Settings page */ 
 
 .settings__item {
-
+    font-family: var(--ff-TimerFont);
     height: 90%;
     width: 70%;
     margin: auto;
@@ -806,17 +806,19 @@ button:disabled {
     height: 30%;
     width: 100%;
     margin-top: 2%;
-    background-color:rgb(166, 175, 171);
+    background-color: var(--c-button);
+    padding: 1%;
 }
 
-#account, #notification, #advance{
-    font-size: 1.7em;
+#account, #notification, #advance {
+    font-size: x-large;
     font-weight:var(--bg-sectionA);
     color: #141516;
-    text-decoration: underline grey;
+    border-bottom: 2px solid rgb(117, 117, 117, 0.4);
     justify-content: left;
     margin-top: 2%;
     margin-left: 3%;
+    width: 95%;
 }
 
 .account__settings, .notification__settings, .advance__settings {
@@ -842,20 +844,20 @@ button:disabled {
 }
 
 #username{
-    font-size: 1.4em;
+    font-size: large;
     margin-top: 3%;
     font-weight:var(--ff-TimerFont);
     color: #141516;
 }
 
 #change__user{
-    font-size: 1em;
-    text-decoration: underline rgb(134, 134, 134);
+    font-size: medium;
+    text-decoration: underline rgb(117, 117, 117);
     margin-top: 2%;
     margin-left: 2%;
     color: #555555;
+    cursor: pointer;
 }
-
 
 #sound, #volume, #dark__mode, #alert{
     font-size: 1.5em;
@@ -945,7 +947,7 @@ button:disabled {
 
 /* Styling for Goals page*/
 .goalsBody {
-    font-family: 'Varela Round';
+    font-family: var(--ff-TimerFont);
     padding: 2%;
 }
 
