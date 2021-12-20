@@ -102,6 +102,9 @@ a:visited {
     --b-TimerBox: transparent;
 
 	--borderRadiusUniversal: 8px;
+
+    --bg-datePicker: rgba(128, 128, 128); 
+    --c-datePickerNumbers: black; 
 }
 
 body {
@@ -781,6 +784,11 @@ button:disabled {
     text-align: center;
     font-size: 120%;
     font-weight: bold;
+}
+
+#dateGroup { 
+    display: flex;
+    align-items: center;
 }
 
 .trends__summaryBox { 
@@ -1656,6 +1664,199 @@ h5 {
     border-bottom: 1px solid rgba(128, 128, 128, 0.4);
 }
 
+
+  /* The Close Button */
+  .close {
+    color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  div.ui-datepicker{
+    font-size:100%;
+   }
+
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+/* The actual popup (appears on bottom) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 230px;
+    background-color: var(--bg-datePicker);
+    color: var(--c-datePickerNumbers);
+    text-align: center;
+    border-radius: var(--borderRadiusUniversal);
+    padding: 8px 8px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 1vw;
+    margin-left: -120px;
+}
+  
+#datepicker{
+    display:inline-block;
+    width: 100%;
+    margin:0 auto;
+}
+
+.ui-datepicker {
+    width: 100%;
+    height: 100%;
+    margin: 5px auto 0;
+    font: 12pt;
+    font-family:var(--ff-TimerFont);
+}
+
+.ui-datepicker table {
+    width: 100%;
+}
+
+/* date selector bar */
+.ui-datepicker-header {
+    background: rgb(93, 93, 93);
+    color: white;
+    font-family:var(--ff-TimerFont);
+    margin-bottom: 15px;
+    padding-top: 5px;
+}
+
+/* date selector text */
+.ui-datepicker-title {
+    text-align: center;
+    font-size: 15px;
+    padding-bottom:5px;
+}
+
+/*-----prev/next icons------*/
+.ui-datepicker-prev {
+    float: left;
+    cursor: pointer;
+    background-position: center -30px;
+}
+
+.ui-datepicker-next {
+    float: right;
+    cursor: pointer;
+    background-position: center 0px;
+}
+
+.ui-datepicker-prev span,
+.ui-datepicker-next span {
+  background-image: none !important;
+}
+
+.ui-datepicker-prev:before,
+.ui-datepicker-next:before {
+  font-family: FontAwesome;
+  position: relative; 
+}
+
+.ui-datepicker-prev span.ui-icon,
+.ui-datepicker-next span.ui-icon {
+    width: 0; 
+    height: 16px;
+    display: block;
+    text-indent: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+.ui-datepicker-prev:before {
+  content: "\f060";
+}
+
+.ui-datepicker-next:before {
+  content: "\f061";
+}
+/*-----end of prev/next icons------*/
+
+.ui-datepicker thead {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #bbb;
+}
+
+/* calendar weekday headers */
+.ui-datepicker th {
+    background-color:var(--bg-datePicker);
+    text-transform: capitalize;
+    font-size: 12pt;
+    color: white;
+}
+
+.ui-datepicker tbody td {
+    padding: 0;
+    /*border-right: 1px solid #808080;*/
+}
+
+.ui-datepicker tbody td:last-child {
+    border-right: 0px;
+}
+
+.ui-datepicker tbody tr {
+    border-bottom: 1px solid #bbb;
+}
+
+.ui-datepicker tbody tr:last-child {
+    border-bottom: 0px;
+}
+
+.ui-datepicker a {
+    text-decoration: none;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    color: black;
+}
+
+.ui-datepicker-calendar .ui-state-default {
+      background: linear-gradient(#999999, #737373);
+      color:var(--c-datePickerNumbers);
+      height:30px;
+      width:100%;
+
+}
+
+/*colour on hover*/
+.ui-datepicker-calendar .ui-state-hover {
+    background: var(--accentColor-first);
+    color: #000000;
+}
+
+/*when date is selected*/
+.ui-datepicker-calendar .ui-state-active {
+    background: var(--accentColor-first);
+    color: var(--c-datePickerNumbers);
+    border: 1px solid #000000;
+    position: relative;
+    margin: -1px;
+}
+
+/*unselectable dates*/
+.ui-datepicker-unselectable .ui-state-default {
+    background: #bfbfbf;
+    color: #000;
+    opacity: 0.65;
+    cursor:not-allowed;
+}
 .main__item--inventory .trendsBar__items {
     border: 2px solid black;   
 }
