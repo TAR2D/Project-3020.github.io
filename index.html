@@ -66,8 +66,8 @@
                             </div>
                         </div>
                         <div class="timerBtngrp">
-                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                            <button id="startStop" onclick="startStop();"><span class="startStop-tooltip">Play or pause the timer</span><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><span class="skip-tooltip">Skip the current session or break</span><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
@@ -145,8 +145,8 @@
                                         <input type="number" name="breakFTimer" value="5">
                                 </div>
                                 <div class="breakBtnGrp">
-                                <input type="submit" value="Start" id="breakFormSubmit">
-                                <button type="button"><i class="fas fa-times"></i></button>
+                                    <input type="submit" value="Start" id="breakFormSubmit">
+                                    <button type="button"><i class="fas fa-times"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -327,7 +327,7 @@
                     <div class="settings__item settings__item--account">
                         <p id="account">Account</p>
                         <div class="account__settings account__settings--profile">
-                            <span><i class="fas fa-user-circle fa-5x"></i></span>
+                            <span><i class="fas fa-user-circle fa-5x" style="color: black;" ></i></span>
                             <div class="account__text">
                                 <h1 id="username">"User name"</h1> 
                                 <h2 id="change__user">Not you? Change user</h2>

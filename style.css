@@ -328,6 +328,10 @@ body {
     /* background-color: rgb(238, 238, 238); */
 }
 
+.chatBox button, #sessionFormSubmit, #breakFormSubmit, #goalFormSubmit {
+    cursor: pointer;
+}
+
 /* These are our chat bubbles - they appear when you click any of the chat input buttons.
     (display: none; because it wont be showed initially.) */
 /* .createTask, .createGoal, .startBreak {
@@ -1861,3 +1865,26 @@ h5 {
     border: 2px solid black;   
 }
 
+.startStop-tooltip, .skip-tooltip {
+    visibility: hidden;
+    width: max-content;
+    background-color:rgb(233, 233, 233);
+    color: black;
+    text-align: center;
+    padding: 6px;
+    border-radius: var(--borderRadiusUniversal);
+    border: 1px solid rgb(97, 97, 97);
+   
+    position: absolute;
+    z-index: 1;
+    margin-left: 58px;
+    font-size: large;
+}
+
+#startStop:hover .startStop-tooltip {
+    visibility: visible;
+}
+
+#skip:hover .skip-tooltip {
+    visibility: visible;
+}
