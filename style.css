@@ -1727,13 +1727,11 @@ h5 {
 
 /* date selector bar */
 .ui-datepicker-header {
-    background: #546a76;
+    background: rgb(93, 93, 93);
     color: white;
     font-family:var(--ff-TimerFont);
-    border-width: 1px 0 0 0;
-    border-style: solid;
-    border-color: #111;
-    margin-bottom: 1px;
+    margin-bottom: 15px;
+    padding-top: 5px;
 }
 
 /* date selector text */
