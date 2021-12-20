@@ -437,6 +437,10 @@ function startStop(desiredState) {
             breakButton.disabled = true;
 
         timer.contentEditable = "false";
+
+        //count initial default session as the first session if user hits play
+        cb.firstSession = false; 
+
     //change timer from started to stopped
     } else {
         window.clearInterval(interval); 
