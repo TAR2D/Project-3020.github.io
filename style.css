@@ -281,7 +281,7 @@ main {
 .chatMsgDate { 
     display: flex;
     flex-wrap: wrap;
-    color: rgba(245, 245, 245, 0.4);
+    color: rgba(245, 245, 245, 0.7);
     font-size: 0.8em;
     font-family: var(--ff-TimerFont);
 }
@@ -422,7 +422,7 @@ main {
     height: 100%;
     display: flex;
     justify-content: space-between;
-    color: rgba(245, 245, 245, 0.4);
+    color: rgba(245, 245, 245, 0.8);
     font-family: var(--ff-TimerFont);
     font-weight: bold;
 }
@@ -439,7 +439,7 @@ main {
 }
 
 .addBtn label, .startANewBtn label {
-    height: 35%;
+    height: 25%;
 }
 
 .addBtn button, .SABgrp {
@@ -596,6 +596,7 @@ button:disabled {
     border-radius: var(--borderRadiusUniversal);
     border: transparent;
     background-color: rgb(172, 172, 172);
+    cursor: pointer;
 }
 
 .timerBtngrp #skip {
@@ -684,6 +685,10 @@ button:disabled {
 	border-radius: 6px;
 }
 
+.page__backButton:hover {
+    background-color: rgb(226, 226, 226);
+}
+
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
@@ -723,7 +728,7 @@ button:disabled {
 .trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
     display: flex;
     padding:10px 12px;
-    border-radius: 4px;
+    border-radius: var(--borderRadiusUniversal);
     cursor: pointer;
     margin: 5px 0 0 7px; 
     background-color: var(--bg-sectionB);
@@ -783,6 +788,10 @@ button:disabled {
     border: 1px solid #ddd;
     padding: 8px;
 }
+
+#summaryBox tr td:not(:first-child) {
+    column-width: 10em;
+}
   
 #summaryBox tr:nth-child(even){background-color: #f2f2f2;}
   
@@ -795,6 +804,7 @@ button:disabled {
 /* Stying the Settings page */ 
 
 .settings__item {
+    font-family: var(--ff-TimerFont);
     height: 90%;
     width: 70%;
     margin: auto;
@@ -805,17 +815,19 @@ button:disabled {
     height: 30%;
     width: 100%;
     margin-top: 2%;
-    background-color:rgb(166, 175, 171);
+    background-color: var(--c-button);
+    padding: 1%;
 }
 
-#account, #notification, #advance{
-    font-size: 1.7em;
+#account, #notification, #advance {
+    font-size: x-large;
     font-weight:var(--bg-sectionA);
     color: #141516;
-    text-decoration: underline grey;
+    border-bottom: 2px solid rgb(117, 117, 117, 0.4);
     justify-content: left;
     margin-top: 2%;
     margin-left: 3%;
+    width: 95%;
 }
 
 .account__settings, .notification__settings, .advance__settings {
@@ -827,7 +839,8 @@ button:disabled {
     display: flex;
 }
 
-.account__settings--profile{height: 30%;
+.account__settings--profile{
+    height: 30%;
     width: 90%;
     height: 60%;
 }
@@ -840,23 +853,23 @@ button:disabled {
 }
 
 #username{
-    font-size: 1.4em;
+    font-size: x-large;
     margin-top: 3%;
     font-weight:var(--ff-TimerFont);
     color: #141516;
 }
 
 #change__user{
-    font-size: 1em;
-    text-decoration: underline rgb(134, 134, 134);
+    font-size: medium;
+    text-decoration: underline rgb(117, 117, 117);
     margin-top: 2%;
     margin-left: 2%;
     color: #555555;
+    cursor: pointer;
 }
 
-
 #sound, #volume, #dark__mode, #alert{
-    font-size: 1.5em;
+    font-size: x-large;
     font-weight:var(--c-chatBubble);
     color: #141516;
 }
@@ -943,7 +956,7 @@ button:disabled {
 
 /* Styling for Goals page*/
 .goalsBody {
-    font-family: 'Varela Round';
+    font-family: var(--ff-TimerFont);
     padding: 2%;
 }
 
@@ -991,7 +1004,7 @@ button:disabled {
     display: flex;
     color: black;
     vertical-align: middle;
-    font-size: medium;
+    font-size: large;
 }
 
 /* for entire list of sessions for a goal on goals page*/
@@ -1235,7 +1248,7 @@ button:disabled {
     width: max-content;
     padding: 2%;
     margin: 2%;
-    float: right;
+    float: left;
     font-size: smaller;
     background-color: var(--accentColor-first);
 }
@@ -1385,7 +1398,8 @@ h5 {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: rgb(209, 209, 209);
+    background-color: rgb(240, 240, 240);
+    /* background-color: rgb(209, 209, 209); */
     font-family: var(--ff-TimerFont);
     font-weight: bold;
 }

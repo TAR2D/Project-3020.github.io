@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="#">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Focus Friend</title>
     <link rel="stylesheet" href="style.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
     <script src="https://malsup.github.io/jquery.form.js"></script> 
     <!-- Chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 </head >
 
@@ -31,7 +30,7 @@
         <nav class="navBar">
 
             <!-- App Name -->
-            <div class="navBar__sectionA"><h3>"WhatsMyName?"</h3></li></div>
+            <div class="navBar__sectionA"><h3>Focus Friend</h3></li></div>
 
             <!-- Navigation Bar Items -->
             <ul class="navBar__sectionB">
@@ -82,9 +81,9 @@
                 </div>
                 <div class="rightBox">
                     <!-- CHAT, SUGGESTIONS, OTHER BUTTONS -->
-                    <div class="chatBox" >
+                    <div class="chatBox">
                         <!-- Message Box -->
-                        <div class="chatBox__msgBox"></div>
+                        <div class="chatBox__msgBox" id="mainChatBox"></div>
                         <!-- 
                             Chat Box Forms 
                         -->
@@ -93,11 +92,11 @@
                             <form action="" method="get">
                                 <div class="goalFormTitle">
                                     <label for="goalTitle">Goal:</label>
-                                    <input type="text" placeholder="Type here.." name="goalTitle" value="Default">
+                                    <input type="text" placeholder="Type name here..." name="goalTitle">
                                 </div>
                                 <div class="goalFormDuration">
                                     <div class="goalDurationH">
-                                        <label for="goalDuration">Hour:</label>
+                                        <label for="goalDuration">Hours:</label>
                                         <input type="number" name="goalDHours" value="10">
                                     </div>
                                     <div class="goalDurationM">
@@ -117,7 +116,7 @@
                             <form action="" method="get">
                                 <div class="sessionFormTitle">
                                     <label for="sessionTitle">Session:</label>
-                                    <input type="text" placeholder="Type here.." name="goalTitle" value="Default">
+                                    <input type="text" placeholder="Type name here..." name="sessionTitle" value="Default">
                                 </div>
                                 <div class="sessionFormTimer">
                                         <label for="sessionFTimer">Minutes:</label>
@@ -316,7 +315,7 @@
                     <div class="settings__item settings__item--account">
                         <p id="account">Account</p>
                         <div class="account__settings account__settings--profile">
-                            <i class="fas fa-user-circle fa-5x"></i>
+                            <span><i class="fas fa-user-circle fa-5x"></i></span>
                             <div class="account__text">
                                 <h1 id="username">"User name"</h1> 
                                 <h2 id="change__user">Not you? Change user</h2>
@@ -342,7 +341,7 @@
                                 <input type="range" min="1" max="100" value="50" id="volumeSlider">
                                 <i class="fa fa-volume-up fa-1x"></i>
                             </div>
-
+                            <div></div>
                         </div>
                     </div> 
                     <!-- ADVANCE SETTINGS -->
@@ -371,7 +370,6 @@
             </div> 
         </div>
     </main>
-    <script src="timer.js"></script>
 	<script src="chat.js"></script>
     <script src="companion.js"></script>
     <script src="switchTab.js"></script>
