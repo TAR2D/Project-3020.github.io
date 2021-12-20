@@ -20,6 +20,7 @@
     <script src="https://malsup.github.io/jquery.form.js"></script> 
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head >
@@ -211,15 +212,16 @@
                 <!-- CHART DATE NAV BUTTONS -->
                 <div class="trends__dateNavBar btn-group">
                     <button id="prevButton"><p>Prev</p></button>
-                    <p id="date" class="trends__currDate">"Insert Date Here"</p>
-                    <div class="popup" onclick="myFunction()">
-                        <button type="button" id="datePickerButton"><i class="fa fa-calendar"></i></button>
-                            <span class="popuptext" id="myPopup">
-                                <span class="close">&times;</span>
-                                <div id="datepicker"></div>
-                            </span>
+                    <div id="dateGroup">
+                        <p id="date" class="trends__currDate">"Insert Date Here"</p>
+                        <div class="popup">
+                            <button type="button" id="datePickerButton" onclick="toggleCalendar()"><i class="fa fa-calendar"></i></button>
+                                <span class="popuptext" id="myPopup"> 
+                                    <span class="close" onclick="toggleCalendar()">&times;</span>
+                                    <div id="datepicker"></div>
+                                </span>
+                        </div>
                     </div>
-                    
                     <button id="nextButton"><p>Next</p></button>
                 </div>
                 
