@@ -728,7 +728,7 @@ button:disabled {
 .trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
     display: flex;
     padding:10px 12px;
-    border-radius: 4px;
+    border-radius: var(--borderRadiusUniversal);
     cursor: pointer;
     margin: 5px 0 0 7px; 
     background-color: var(--bg-sectionB);
@@ -787,6 +787,10 @@ button:disabled {
 #summaryBox td, #summaryBox th {
     border: 1px solid #ddd;
     padding: 8px;
+}
+
+#summaryBox tr td:not(:first-child) {
+    column-width: 10em;
 }
   
 #summaryBox tr:nth-child(even){background-color: #f2f2f2;}
