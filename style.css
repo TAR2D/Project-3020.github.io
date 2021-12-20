@@ -783,6 +783,10 @@ button:disabled {
     border: 1px solid #ddd;
     padding: 8px;
 }
+
+#summaryBox tr td:not(:first-child) {
+    column-width: 10em;
+}
   
 #summaryBox tr:nth-child(even){background-color: #f2f2f2;}
   
