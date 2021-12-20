@@ -315,14 +315,16 @@ class chatBox {
 
     updateMsgColour() {
         let messages = document.getElementById("mainChatBox").getElementsByTagName("P");
-        let max = 240;  
-        let min = 180;  // newest message will always be this colour
+        let max = 255;  
+        let min = 205;
         let msgClr = max;
 
-        for(let i = messages.length - 1 ; i >= 0; i--) {
-            messages[i].style.backgroundColor = "rgb(" + msgClr + "," + msgClr + "," + msgClr + ")";
-            msgClr = min + (i/messages.length) * (max-min);
-            console.log(i + " " + msgClr); //debugging
+        for(let i = 0; i < messages.length; i++) {
+            // experiment with this to get diff colours
+            // messages[i].style.backgroundColor = "rgb(" + (msgClr - 30) + "," + (msgClr - 4) + "," + (msgClr - 2) + ")"; // blue-ish
+            messages[i].style.backgroundColor = "rgb(" + (msgClr - 5) + "," + (msgClr - 5) + "," + (msgClr - 5) + ")"; // grey
+            msgClr = max - (i/messages.length) * (max-min);
+            // console.log(i + " " + msgClr); //debugging
         }
     }
 }
@@ -680,8 +682,25 @@ function convertToTimeFormat(elapsedTime, totalTime) {
 
 function convertSecToFormat(timeInSecs) {
     let date = new Date(0);
-    date.setSeconds(timeInSecs);
-    return date.toISOString().substr(11, 8);
+    let secsIn24hrs = 60*60*24;
+    let formattedStr = "";
+
+    if(timeInSecs < secsIn24hrs) {    // less than 24 hours
+        date.setSeconds(timeInSecs);
+        formattedStr = date.toISOString().substr(11, 8);
+    }
+    else {  // greater than or equal to 24 hours
+        let remainder = timeInSecs - secsIn24hrs;
+        let fullDays = 1;
+        while(remainder > secsIn24hrs) {
+            fullDays++;
+            remainder -= secsIn24hrs;
+        }
+        date.setSeconds(remainder);
+        formattedStr = date.toISOString().substr(11, 8);
+        formattedStr = ((fullDays * 24) + parseInt(formattedStr.substr(0, 2))) + formattedStr.substr(2, 6);
+    }
+    return formattedStr;
 }
 
 // -------------- Start of Trends Code -------------- //

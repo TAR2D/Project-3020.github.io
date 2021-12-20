@@ -204,18 +204,12 @@ body {
 
 /* MAIN ITEMS STYLING */
 
-main {
-    /* maximum height of main */
-    height: 610px;
-}
-
 .main__items {
-    height: 98%;
     width: 100%;
     /* centring elements inside main items */
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 /* Styling main menu */
@@ -224,12 +218,11 @@ main {
 
     background-color: var(--bg-mainMenu);
 
-    height: 96%;
+    /* height: 96%; */
     width: 100%;
 
     border-radius: var(--borderRadiusUniversal);
     border: 4px solid var(--b-mainMenu);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,7 +277,7 @@ main {
 .chatMsgDate { 
     display: flex;
     flex-wrap: wrap;
-    color: rgba(245, 245, 245, 0.4);
+    color: rgba(245, 245, 245, 0.7);
     font-size: 0.8em;
     font-family: var(--ff-TimerFont);
 }
@@ -425,7 +418,7 @@ main {
     height: 100%;
     display: flex;
     justify-content: space-between;
-    color: rgba(245, 245, 245, 0.4);
+    color: rgba(245, 245, 245, 0.8);
     font-family: var(--ff-TimerFont);
     font-weight: bold;
 }
@@ -442,7 +435,7 @@ main {
 }
 
 .addBtn label, .startANewBtn label {
-    height: 35%;
+    height: 25%;
 }
 
 .addBtn button, .SABgrp {
@@ -599,6 +592,7 @@ button:disabled {
     border-radius: var(--borderRadiusUniversal);
     border: transparent;
     background-color: rgb(172, 172, 172);
+    cursor: pointer;
 }
 
 .timerBtngrp #skip {
@@ -662,14 +656,17 @@ button:disabled {
 
 /* Page Header for each page (includes title and back button) */
 .page__header {
-	height: 8%;
+	height: 60px;
 	align-items: center;
 	display: flex;
 	color: black;
 	font-family: var(--ff-TimerFont);
 	padding: 5px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 10px;
 	border-radius: 4px;
-	background-color: white;
+	border-bottom: 1px solid rgb(214, 214, 214);
 }
 .page__header__title {
 	font-weight: 700;
@@ -679,19 +676,25 @@ button:disabled {
 .page__backButton {
 	display:flex;
 	flex-direction: row;
-	font-size: 36px;
-	color: black;
+	font-size: 30px;
+	color: grey;
 	background-color: var(--bg-mainMenu);
 	cursor: pointer;
 	text-align: center;
 	border-radius: 6px;
+    border: none;
+    /* margin-right: 15px; */
+}
+
+.page__backButton:hover {
+    background-color: rgb(226, 226, 226);
+    color: rgb(78, 78, 78);
 }
 
 /* Stying the Trends page */ 
 .main__item .main__item--report {
     vertical-align: top;
     position: relative;
-
     display: flex;
 }
 
@@ -701,18 +704,20 @@ button:disabled {
 }
 
 .trends__chart, .trendsBar, .trends__dateNavBar, .trends__summaryTitle, .trends__summaryBox {
-    margin: auto;
+    margin: 0 auto;
 }
 
 .trends__chart, .trends__summaryBox {
-    border: 1px dotted rgba(128, 128, 128, 0.4);
+    /* border: 1px dotted rgba(128, 128, 128, 0.4); */
 }
 
 .trends__chart {
     height: 55%; 
+    margin-bottom: 25px;
 }
 
 .trendsBar {
+    padding: 5px 0;
     display: flex;
     justify-content: right;
 }
@@ -721,15 +726,29 @@ button:disabled {
     color: var(--c-sectionA);
     display: flex;
     align-items: center;
+    border-radius: 10px;
+    border: 2px solid black;
 }
 
 .trendsBar__item--daily, .trendsBar__item--monthly,.trendsBar__item--weekly {
     display: flex;
     padding:10px 12px;
-    border-radius: var(--borderRadiusUniversal);
+    /* border-radius: var(--borderRadiusUniversal); */
     cursor: pointer;
-    margin: 5px 0 0 7px; 
+    /* margin: 5px 0 0 7px;  */
     background-color: var(--bg-sectionB);
+}
+
+.trendsBar__item--daily {
+    border-top-left-radius: var(--borderRadiusUniversal);
+    border-bottom-left-radius: var(--borderRadiusUniversal);
+    border-right: 2px solid black;
+}
+
+.trendsBar__item--monthly {
+    border-top-right-radius: var(--borderRadiusUniversal);
+    border-bottom-right-radius: var(--borderRadiusUniversal);
+    border-left: 2px solid black;
 }
 
 .trendsBar__item--daily, .trendsBar__item--monthly {
@@ -743,9 +762,18 @@ button:disabled {
 .trends__dateNavBar {
     height: 7.5%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-around; */
     align-items: center;
     margin-top: 10px;
+    margin-bottom: 5px;
+}
+.trends__dateNavBar button{
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 2px solid black;
+    cursor: pointer;
 }
 
 .trends__currDate {
@@ -770,9 +798,11 @@ button:disabled {
 
 .trends__summaryTitle { 
     font-size: 120%;
-    background-color: #546a76;
+    background-color: rgb(93, 93, 93);
     color: white;
     padding: 5px 0px 5px 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
@@ -790,10 +820,12 @@ button:disabled {
 #summaryBox td, #summaryBox th {
     border: 1px solid #ddd;
     padding: 8px;
+    background-color: white;
 }
 
 #summaryBox tr td:not(:first-child) {
     column-width: 10em;
+    font-weight: bold;
 }
   
 #summaryBox tr:nth-child(even){background-color: #f2f2f2;}
@@ -801,7 +833,8 @@ button:disabled {
 #summaryBox tr:hover {background-color: #ddd;}
 
 #prevButton, #nextButton{
-    width: 15%;
+    width: 55px;
+    height: 35px;
 }
 
 /* Stying the Settings page */ 
@@ -811,22 +844,25 @@ button:disabled {
     height: 90%;
     width: 70%;
     margin: auto;
-    border-radius: 25px;
 }
 
 .settings__item--account, .settings__item--notification, .settings__item--advance {
     height: 30%;
     width: 100%;
     margin-top: 2%;
-    background-color: var(--c-button);
     padding: 1%;
+}
+
+.settings__item:not(:last-child) {
+    border-bottom: 1px solid rgb(165, 164, 164);
 }
 
 #account, #notification, #advance {
     font-size: x-large;
     font-weight:var(--bg-sectionA);
     color: #141516;
-    border-bottom: 2px solid rgb(117, 117, 117, 0.4);
+    font-weight: bold;
+    text-decoration: underline;
     justify-content: left;
     margin-top: 2%;
     margin-left: 3%;
@@ -840,7 +876,11 @@ button:disabled {
     margin-top: 3%;
     position: relative;
     display: flex;
+    
+    border-radius: 10px;
+    padding: 2px 4px;
 }
+
 
 .account__settings--profile{
     height: 30%;
@@ -1007,7 +1047,7 @@ button:disabled {
     display: flex;
     color: black;
     vertical-align: middle;
-    font-size: medium;
+    font-size: large;
 }
 
 /* for entire list of sessions for a goal on goals page*/
@@ -1159,7 +1199,7 @@ button:disabled {
 }
 
 .inventory__categories {
-	height: 55%;
+	height: 50%;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -1183,7 +1223,7 @@ button:disabled {
 	height: 100%;
 	width: 32%;
 	border-style: solid;
-	border-width: 5px;
+	border-width: 1px;
 	border-color: var(--inventoryBoxes);
 	border-radius: var(--borderRadiusUniversal);
     color: black;
@@ -1222,21 +1262,27 @@ button:disabled {
 .inventory__myItemsButton, .inventory__shopButton {
 	display: flex;
     padding:10px 12px;
-    border-radius: var(--borderRadiusUniversal);
+    /* border-radius: var(--borderRadiusUniversal); */
     cursor: pointer;
-    margin: 5px 0 0 7px; 
     background-color: var(--bg-sectionB);
 }
 
 .inventory__myItemsButton {
 	background-color: black;
+    border-top-left-radius: var(--borderRadiusUniversal) ;
+    border-bottom-left-radius: var(--borderRadiusUniversal) ;
+}
+
+.inventory__shopButton {
+    border-top-right-radius: var(--borderRadiusUniversal) ;
+    border-bottom-right-radius: var(--borderRadiusUniversal) ;
 }
 
 .currency {
     display: flex;
     vertical-align: middle;
     font-weight: bold;
-    padding: 1%;
+    padding: 10px;
     border-radius: var(--borderRadiusUniversal);
     background-color: var(--b-navigationBar);
 }
@@ -1259,13 +1305,28 @@ button:disabled {
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
     display: none;
-    height: 96%;
+    
     width: 100%;
 
     background-color: var(--bg-SectionBDisplay);
     border: 4px solid var(--b-SectionBDisplay);
 
     border-radius: var(--borderRadiusUniversal);
+}
+
+.main__item--menu {
+    height: 610px;
+}
+
+.main__item--goals {
+    height: fit-content;
+}
+.main__item--inventory, .main__item--settings {
+    height: 650px;
+}   
+
+.main__item--report {
+    height: 800px;
 }
 
 /* Maximum width of app will be 720px */
@@ -1328,7 +1389,7 @@ button:disabled {
     }
 
     .leftBox .companionBox {
-        height: 60%;
+        height: 58%;
     }
 
 
@@ -1768,3 +1829,7 @@ h5 {
     opacity: 0.65;
     cursor:not-allowed;
 }
+.main__item--inventory .trendsBar__items {
+    border: 2px solid black;   
+}
+
