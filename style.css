@@ -1738,9 +1738,10 @@ h5 {
 .ui-datepicker-title {
     text-align: center;
     font-size: 15px;
-
+    padding-bottom:5px;
 }
 
+/*-----prev/next icons------*/
 .ui-datepicker-prev {
     float: left;
     cursor: pointer;
@@ -1753,9 +1754,38 @@ h5 {
     background-position: center 0px;
 }
 
+.ui-datepicker-prev span,
+.ui-datepicker-next span {
+  background-image: none !important;
+}
+
+.ui-datepicker-prev:before,
+.ui-datepicker-next:before {
+  font-family: FontAwesome;
+  position: relative; 
+}
+
+.ui-datepicker-prev span.ui-icon,
+.ui-datepicker-next span.ui-icon {
+    width: 0; 
+    height: 16px;
+    display: block;
+    text-indent: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+.ui-datepicker-prev:before {
+  content: "\f060";
+}
+
+.ui-datepicker-next:before {
+  content: "\f061";
+}
+/*-----end of prev/next icons------*/
+
 .ui-datepicker thead {
     background-color: #f7f7f7;
-
     border-bottom: 1px solid #bbb;
 }
 
