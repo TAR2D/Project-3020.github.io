@@ -685,11 +685,11 @@ function convertSecToFormat(timeInSecs) {
     let secsIn24hrs = 60*60*24;
     let formattedStr = "";
 
-    if(timeInSecs < secsIn24hrs) {    // less than or equal to 24 hours
+    if(timeInSecs < secsIn24hrs) {    // less than equal to 24 hours
         date.setSeconds(timeInSecs);
         formattedStr = date.toISOString().substr(11, 8);
     }
-    else {  // greater than 24 hours
+    else {  // greater than or equal to 24 hours
         let remainder = timeInSecs - secsIn24hrs;
         let fullDays = 1;
         while(remainder > secsIn24hrs) {
