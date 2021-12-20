@@ -1875,10 +1875,8 @@ h5 {
     border-radius: var(--borderRadiusUniversal);
     border: 1px solid rgb(97, 97, 97);
    
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    /* top: -5px; */
     margin-left: 58px;
     font-size: large;
 }
