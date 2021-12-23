@@ -27,11 +27,17 @@ class chatBox {
         let defaultGoal = new Goal();
         this.goalsList.push(defaultGoal);
         this.updateGoalSelection(defaultGoal);
-        this.sessionList.push(this.goalsList[0]);
 
         this.breakState = 0;
+        this.firstSession = true;
 
-        this.currentSessionInProgress = null;   // current session user is working on
+        //set first session to the default session
+        let currDate = new Date(); 
+        let newSession = new Session("Default", 60*20, this.goalsList[0], currDate);
+        defaultGoal.addSession(newSession);
+        this.eventList.push(newSession);
+        this.sessionList.push(newSession);
+        this.currentSessionInProgress = newSession;  // current session user is working on
     }
 
     display() {
@@ -46,20 +52,29 @@ class chatBox {
 
         window.addEventListener('load', () => {
             this.addMessageTime();
-            this.createMessage("Welcome! To get started, please set your first session. You can do that by clicking the <b>Set Session</b> button below!");
+            this.createMessage("Hi there! I'm your Focus Friend and I'm here to help you stay on track.");
+            this.createMessage("<b>Start a session</b> when you need to focus and you'll earn points to unlock items in your <b>inventory</b>!");
+            this.createMessage("If you want to track your data, <b>add goals</b> that you can work towards!");
+            this.createMessage("...and remember, take regular <b>breaks</b>!");
         })
 
         goalButton.addEventListener('click', () => {
             this.changeState(goalForm);
             goalButton.disabled = true;
-            breakButton.disabled = false;
-            sessionButton.disabled = false;
+
+            if(!(breakButton.disabled && statusTimer == "started" && isOnBreak))
+                breakButton.disabled = false;
+            if(!(sessionButton.disabled && statusTimer == "started" && !isOnBreak))
+                sessionButton.disabled = false;
         });
 
         sessionButton.addEventListener('click', () => {
             this.changeState(sessionForm);
             goalButton.disabled = false;
-            breakButton.disabled = false;
+
+            if(!(breakButton.disabled && statusTimer == "started" && isOnBreak))
+                breakButton.disabled = false;
+                
             sessionButton.disabled = true;
         });
 
@@ -67,7 +82,9 @@ class chatBox {
             this.changeState(breakForm);
             goalButton.disabled = false;
             breakButton.disabled = true;
-            sessionButton.disabled = false;
+
+            if(!(sessionButton.disabled && statusTimer == "started" && !isOnBreak))
+                sessionButton.disabled = false;
         });
 
         goalCancelBtn.addEventListener('click', () => {
@@ -92,27 +109,43 @@ class chatBox {
             let goalDurationH = Number(goalFormInfo[1].value);
             let goalDurationM = Number(goalFormInfo[2].value);
 
-            if (goalDurationH < 0 || goalDurationM < 0) {
-                alert("Time input should be greater than 0.");
-            } else if(goalDurationM>=60) {
-                alert("Minutes should be less than 60.");
-            } else {
-                companionTalking(); 
-                this.addMessageTime();
-                
-                this.createMessage(
-                    "Your goal, <b>" + goalTitle + "</b>, has been created. You must do <b>" + goalDurationH + " hours and " + goalDurationM + " minutes </b> of sessions to complete your goal.");
-                    //"New Goal: " + goalTitle + " Created. Duration: " +
-                    //goalDurationH + " H and " + goalDurationM + " M");
-                let newGoal = new Goal(goalTitle, 60*(goalDurationH * 60 + goalDurationM));
-                this.eventList.push(newGoal);
-                this.goalsList.push(newGoal);
+            if(goalTitle.length <= 0) {
+                alert("Please enter a goal name.");
+            }
+            else if ((goalDurationM < 0 || goalDurationM > 60)) { // if hours = 0 and value for minutes is not valid
+                alert("Please enter a value between 1 and 60 for Minutes.");
+            }
+            else if (goalDurationH <= 0 && goalDurationM <= 0) { // if minutes = 0 and hours = 0
+                alert("Please enter a value greater than 0 for Hours or Minutes.");
+            }
+            else {
+                let duplicate = false;  // check if goal name is a duplicate
+                for(let x of this.goalsList) {
+                    if(x.title === goalTitle) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if(duplicate) {
+                    alert('"' + goalTitle + '" is already taken. Please enter an unique goal name.');
+                } else {
+                    companionTalking(); 
+                    this.addMessageTime();
+                    
+                    this.createMessage(
+                        "Your goal, <b>" + goalTitle + "</b>, has been created. You must do <b>" + goalDurationH + " hours and " + goalDurationM + " minutes </b> of sessions to complete your goal.");
+                        //"New Goal: " + goalTitle + " Created. Duration: " +
+                        //goalDurationH + " H and " + goalDurationM + " M");
+                    let newGoal = new Goal(goalTitle, 60*(goalDurationH * 60 + goalDurationM));
+                    this.eventList.push(newGoal);
+                    this.goalsList.push(newGoal);
 
-                this.updateGoalSelection(newGoal);
+                    this.updateGoalSelection(newGoal);
 
-                goalButton.disabled = false;
-                //hide form after
-                this.hideAll();
+                    goalButton.disabled = false;
+                    //hide form after
+                    this.hideAll();
+                }
             }
         });
 
@@ -124,47 +157,54 @@ class chatBox {
             let sessionDuration = Number(sessionFormInfo[1].value);
             let sessionGoal = this.goalsList[goalIndex];
 
-            if (sessionDuration < 0 || sessionDuration>60) {
-                alert("Sessions can only be between 0 and 60 minutes long.");
+            if (sessionDuration <= 0 || sessionDuration > 60) {
+                alert("Please enter a value between 1 and 60 for Minutes.");
             } else {
+                if(sessionTitle.length <= 0) {
+                    sessionTitle = "No name";
+                }  
+                if(this.firstSession || (confirmNewSession())) {
+                    companionTalking(); 
+                    this.addMessageTime();
 
-                companionTalking(); 
-                this.addMessageTime();
+                    this.createMessage(
+                        "Your session, <b>" + sessionTitle + "</b>, has been set for <b>" + sessionDuration + " minutes</b> under your goal called <b>" + sessionGoal.title + "</b>."
 
-                this.createMessage(
-                    "Your session, <b>" + sessionTitle + "</b>, has been set for <b>" + sessionDuration + " minutes</b> under your goal called <b>" + sessionGoal.title + "</b>."
+                    // "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
+                    // " min. Relative Goal: " + sessionGoal.title
+                    );
+                    
+                    let currDate = new Date(); 
+                    let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal, currDate);
+                    sessionGoal.addSession(newSession);
+                    this.eventList.push(newSession);
+                    this.sessionList.push(newSession);
+                    this.currentSessionInProgress = newSession;
+                    
+                    sessionButton.disabled = true;
+                    this.hideAll();
 
-                   // "New Session: " + sessionTitle + " created. Duration: " + sessionDuration +
-                   // " min. Relative Goal: " + sessionGoal.title
-                );
-                
-                let currDate = new Date(); 
-                let newSession = new Session(sessionTitle, 60*sessionDuration, sessionGoal, currDate);
-                sessionGoal.addSession(newSession);
-                this.eventList.push(newSession);
-                this.sessionList.push(newSession);
-                this.currentSessionInProgress = newSession;
-                
-                sessionButton.disabled = true;
-                this.hideAll();
+                    TSSoverlayEffect.style.width = "0%"; //reset progress bar
 
-                if (skipButton.disabled) {
-                    skipButton.disabled = false;
-                    startButton.disabled = false;
+                    if (skipButton.disabled) {
+                        skipButton.disabled = false;
+                        startButton.disabled = false;
+                    }
+
+                    if(breakButton.disabled)
+                        breakButton.disabled = false; 
+
+                    //update timer
+                    //skipTime();
+                    updateTimeSession(sessionDuration);
+                    startStop("restart");     //automatically start timer (if timer is already running, restart and play the timer)
+
+                    //update left box
+                    document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
+                    document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
+
+                    this.firstSession = false;
                 }
-
-                //update timer
-                // skipTime();
-                updateTimeSession(sessionDuration);
-                //startStop();
-
-                this.createMessage(
-                    "To start your session, please press the <b>play</b> button beside the timer."
-                );
-
-                //update left box
-                document.getElementById("currGoal").innerHTML = "Current Goal: "+sessionGoal.title;
-                document.getElementById("currSession").innerHTML = "Current Session: " + sessionTitle;
             }
         });
 
@@ -173,31 +213,35 @@ class chatBox {
 
             let breakDuration = breakFormInfo[0].value;
 
-            if (breakDuration < 0) {
-                alert("Time input should be greater than 0.");
+            if (breakDuration <= 0 || breakDuration > 60) {
+                alert("Please enter a value between 1 and 60 for Minutes.");
             } else {
-                if (confirmSkipBreak()) {
-                    companionTalking(); 
-                    this.addMessageTime();
-                    this.createMessage(
-                        "Your break has started and will last for <b>" + breakDuration + " minutes</b>."
-                    );
-                    breakButton.disabled = false;
-                    this.hideAll();
+                companionTalking(); 
+                this.addMessageTime();
+                this.createMessage(
+                    "Your break has started and will last for <b>" + breakDuration + " minutes</b>."
+                );
+                breakButton.disabled = false;
+                this.hideAll();
 
-                    //update time
-                    
-                        updateTimeBreak(breakDuration);
-                        startStop();
-                    
-                    if (skipButton.disabled) {
-                        skipButton.disabled = false;
-                        startButton.disabled = false;
-                    }
+                TSSoverlayEffect.style.width = "0%"; //reset progress bar
 
-                    this.createBreakMsg(this.breakState);
-                    this.breakState = (this.breakState+1)%3;
+                //update time
+                (seconds != 0) ? savedSec = seconds : savedSec = initialSec; //save current pgoress time
+                updateTimeBreak(breakDuration);
+                startStop("restart");            //automatically start timer (if timer is already running, restart and play the timer)
+                
+                if (skipButton.disabled) {
+                    skipButton.disabled = false;
+                    startButton.disabled = false;
                 }
+
+                if(sessionButton.disabled)
+                    sessionButton.disabled = false; 
+
+                this.createBreakMsg(this.breakState);
+                this.breakState = (this.breakState+1)%3;
+                
             }
         });
     }
@@ -240,6 +284,7 @@ class chatBox {
         let message = document.createElement('p');
         message.innerHTML = text;
         msgBox.appendChild(message);
+        this.updateMsgColour();
         // Scroll Down with Chat
         $(".chatBox").stop().animate({ scrollTop: $(".chatBox")[0].scrollHeight }, 1000);
     }
@@ -249,7 +294,7 @@ class chatBox {
         let message = document.createElement('div');
         message.className = 'chatMsgDate';
         let currTime = new Date(); 
-        message.innerHTML = currTime.toString().slice(0, 24);; 
+        message.innerHTML = currTime.toString().slice(0, 24); 
         msgBox.appendChild(message);
         // Scroll Down with Chat
         $(".chatBox").stop().animate({ scrollTop: $(".chatBox")[0].scrollHeight }, 1000);
@@ -266,6 +311,21 @@ class chatBox {
         goalForm.style.display = "none";
         sessionForm.style.display = "none";
         breakForm.style.display = "none";
+    }
+
+    updateMsgColour() {
+        let messages = document.getElementById("mainChatBox").getElementsByTagName("P");
+        let max = 255;  
+        let min = 205;
+        let msgClr = max;
+
+        for(let i = 0; i < messages.length; i++) {
+            // experiment with this to get diff colours
+            // messages[i].style.backgroundColor = "rgb(" + (msgClr - 30) + "," + (msgClr - 4) + "," + (msgClr - 2) + ")"; // blue-ish
+            messages[i].style.backgroundColor = "rgb(" + (msgClr - 5) + "," + (msgClr - 5) + "," + (msgClr - 5) + ")"; // grey
+            msgClr = max - (i/messages.length) * (max-min);
+            // console.log(i + " " + msgClr); //debugging
+        }
     }
 }
 
@@ -286,7 +346,7 @@ $(".chatBox__break form").submit(function (e) {
 });
 
 // -------------- Start of Timer Code -------------- //
-
+const TBBtext = document.querySelector('.TBBtext');
 const timer = document.querySelector("#timer h1");
 let timerSessionState = document.querySelector('.timerSessionState h2');
 let TSSoverlayEffect = document.querySelector('.TSSoverlay');
@@ -295,6 +355,7 @@ let breakSecond = 5 * 60;   //initially at 5 min.
 let seconds = initialSec; //take same initial 20 seconds.
 let statusTimer = "stopped";  //initially it will be paused
 let isOnBreak = false;        //it will be on task when first opened.
+let savedSec = initialSec;    //keep track of the last time set
 
 let interval = null;
 displayTime(seconds);
@@ -310,9 +371,14 @@ function updateTimeEntered() {
     } else if (newMin < 0 || newSec < 0 || newMin > 60 || newSec > 60) {
         alert("The numbers should be from 0 to 60.");
     } else {
-        seconds = newMin * 60 + newSec;  //calculate seconds
-        isOnBreak ? breakSecond = seconds : initialSec = seconds;
+        //if timer hasn't been changed, don't do anything
+        if(seconds != newMin * 60 + newSec) {
+            TSSoverlayEffect.style.width = "0%"; //reset progress bar
+            seconds = newMin * 60 + newSec;  //calculate seconds
+            isOnBreak ? breakSecond = seconds : initialSec = seconds;
+        }
     }
+    savedSec = seconds;
     displayTime(seconds);
 }
 
@@ -336,12 +402,12 @@ function scale(number, inMin, inMax, outMin, outMax) {
 
 //Function will be called repeatedly until a pause or skip button is pressed or time is 0.
 function startTimer() {
-	let widthRange = isOnBreak ? scale(breakSecond - seconds, 0, breakSecond, 0, 100) : scale(initialSec - seconds, 0, initialSec, 0, 100);
-	TSSoverlayEffect.style.width = widthRange + "%";
+	updateProgressBar();
     seconds--;
     displayTime(seconds);
     if(!isOnBreak)
-        cb.currentSessionInProgress.incrementElapsedTime();
+        if(cb.currentSessionInProgress)
+            cb.currentSessionInProgress.incrementElapsedTime();
     if (seconds == 0 || seconds < 1) {  //time runs out
         seconds = 0;
         alarm();
@@ -349,39 +415,70 @@ function startTimer() {
     }
 }
 
-function startStop() {
-    if (statusTimer === "stopped") {
+function updateProgressBar() {
+    let widthRange = isOnBreak ? scale(breakSecond - seconds, 0, breakSecond, 0, 100) : scale(initialSec - seconds, 0, initialSec, 0, 100);
+	isOnBreak ? TBBtext.innerHTML = "Break" : TBBtext.innerHTML = "Session"
+    TSSoverlayEffect.style.width = widthRange + "%";
+}
+
+function startStop(desiredState) {
+    //change timer from stopped to started
+    if (statusTimer === "stopped" || desiredState === "restart") {    
+        //if timer was already running, restart the interval to prevent it from increasing 
+        if(desiredState === "restart")
+            window.clearInterval(interval); 
         //Start the timer (by calling the setInterval() function)
         interval = window.setInterval(startTimer, 1000);
         document.querySelector("#startStop i").className = "fas fa-pause";
         statusTimer = "started";
-        document.querySelector("#taskButton").disabled = true; // disable session button while timer is running
+        if(!isOnBreak)
+            document.querySelector("#taskButton").disabled = true; // disable session button while timer is running
+        else
+            breakButton.disabled = true;
+
         timer.contentEditable = "false";
+
+        //count initial default session as the first session if user hits play
+        cb.firstSession = false; 
+
+    //change timer from started to stopped
     } else {
-        window.clearInterval(interval);
+        window.clearInterval(interval); 
         document.querySelector("#startStop i").className = "fas fa-play";
         statusTimer = "stopped";
+        if(!isOnBreak)  
+            document.querySelector("#taskButton").disabled = false; // re-enable session button if timer is paused
+        else
+            breakButton.disabled = false;
+
+        timer.contentEditable = "true";     //allow user to edit timer if paused
     }
 }
 
 function skipTime() {
     TSSoverlayEffect.style.width = "0%";
     isOnBreak ? isOnBreak = false : isOnBreak = true; //checks if it comes another task or another break.
-    isOnBreak ? (seconds = breakSecond) : (seconds = initialSec); //if it is a break then chances time to break time.
+
     if (isOnBreak) {
+        (seconds != 0) ? savedSec = seconds : savedSec = initialSec;     //save progress on session so user can return to it after break is done
+        seconds = breakSecond; 
         timerSessionState.innerHTML = "On Break";
+        document.querySelector("#taskButton").disabled = false; // enable session button again when time is skipped
     } else {
+        seconds = savedSec;     //if break is done, return user to previous session progress 
         timerSessionState.innerHTML = "Working";
+        breakButton.disabled = false;
     }
-    displayTime(0);
+    displayTime(seconds);
+    updateProgressBar();
     statusTimer = "started";
     startStop();
     timer.contentEditable = "true";
-    document.querySelector("#taskButton").disabled = false; // enable session button again when time is skipped
 }
 
 // Function to display the time
 function displayTime(second) {
+    updateProgressBar();
     const min = Math.floor(second / 60);
     const sec = Math.floor(second % 60);
     timer.innerHTML = `
@@ -390,22 +487,38 @@ function displayTime(second) {
 }
 
 function confirmSkip() {
-    if (confirm("Your remaining progress time will not be saved. Are you sure you want to skip?")) {
-        skipTime();
-        return true;
+    if (document.getElementById("toggleAlert").checked) {
+        if (confirm("Your remaining progress time will not be saved. Are you sure you want to skip?")) {
+            skipTime();
+            return true;
+        } else {
+            //Uncomment this if you want to pause after canceling skip.
+            // startStop();
+        }
     } else {
-        //Uncomment this if you want to pause after canceling skip.
-        // startStop();
+        skipTime();
     }
 }
 
 function confirmSkipBreak() {
-    if (confirm("Your remaining progress time will not be saved. Are you sure you want to start a new break?")) {
-        skipTime();
-        return true;
+    if (document.getElementById("toggleAlert").checked) {
+        if (confirm("Your remaining progress time will not be saved. Are you sure you want to start a new break?")) {
+            skipTime();
+            return true;
+        } else {
+            //Uncomment this if you want to pause after canceling skip.
+            // startStop();
+        }
     } else {
-        //Uncomment this if you want to pause after canceling skip.
-        // startStop();
+        skipTime();
+    }
+}
+
+function confirmNewSession() {
+    if (document.getElementById("toggleAlert").checked) {
+        return (confirm("Your current session will be overwritten if you continue. Are you sure you want to start a new session?"));
+    } else {
+        return true;
     }
 }
 
@@ -443,7 +556,7 @@ function createRandomData() {
     let randomSessionDurations = [[25, 28, 35], [37, 20], [20, 60], [40], [35]];
     let randomSessionElapsedTime = [[13, 18, 35], [37, 18], [20, 5], [40], [5]];
     //Date(year, month, date, hour) 
-    let randomDates = [[new Date(2021, 10, 10, 13), new Date(2021,11,9,12), new Date(2021,11,9,16)], [new Date(2021,11,9,16), new Date(2021,11,6,9)], [new Date(2021,11,5,20), new Date(2021,11,4,18)], [new Date(2021,11,10,14)], [new Date(2021,11,2,16)]];
+    let randomDates = [[new Date(2021, 10, 10, 13), new Date(2021,10,10,13), new Date(2021,11,9,16)], [new Date(2021,11,9,14), new Date(2021,11,6,9)], [new Date(2021,11,5,20), new Date(2021,11,4,18)], [new Date(2021,11,10,14)], [new Date(2021,11,2,16)]];
     let numGoals = 5, numSessions;
     let newGoal, newSession;
 
@@ -573,19 +686,25 @@ function convertToTimeFormat(elapsedTime, totalTime) {
 
 function convertSecToFormat(timeInSecs) {
     let date = new Date(0);
-    date.setSeconds(timeInSecs);
-    return date.toISOString().substr(11, 8);
-}
+    let secsIn24hrs = 60*60*24;
+    let formattedStr = "";
 
-
-// adds extra zero to val if val < 10 (ex: '7' turns into '07')
-function addZero(val) {
-    var result = val;
-
-    if (val < 10) {
-        result = '0' + val;
+    if(timeInSecs < secsIn24hrs) {    // less than 24 hours
+        date.setSeconds(timeInSecs);
+        formattedStr = date.toISOString().substr(11, 8);
     }
-    return result;
+    else {  // greater than or equal to 24 hours
+        let remainder = timeInSecs - secsIn24hrs;
+        let fullDays = 1;
+        while(remainder > secsIn24hrs) {
+            fullDays++;
+            remainder -= secsIn24hrs;
+        }
+        date.setSeconds(remainder);
+        formattedStr = date.toISOString().substr(11, 8);
+        formattedStr = ((fullDays * 24) + parseInt(formattedStr.substr(0, 2))) + formattedStr.substr(2, 6);
+    }
+    return formattedStr;
 }
 
 // -------------- Start of Trends Code -------------- //
@@ -593,7 +712,50 @@ function addZero(val) {
 let dailyChartData = []; 
 let weeklyChartData = []; 
 let monthlyChartData = []; 
-  
+
+let datePicker = document.querySelector("#trends--datePicker");
+
+$("#datepicker").datepicker({ 
+    maxDate: 0, 
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    
+    onSelect: function(value, date) { 
+        var month = value.toString().substr(0, 2) - 1; 
+        var date = value.toString().substr(3, 2); 
+        var year = value.toString().substr(6, 4); 
+
+        if(currChart.id == "weeklyChart") {
+            currWeek = new Date(year,month,date);
+            datePicker_Weekly();
+        }
+        else if(currChart.id == "dailyChart") {
+            currDate = new Date(year,month,date);
+            datePicker_Daily();
+        }
+        else if(currChart.id == "monthlyChart") {
+            currMonth = new Date(year,month,date);
+            datePicker_Monthly();
+        }
+    } 
+});
+
+var btn = document.getElementById("datePickerButton");
+var span = document.getElementsByClassName("close")[0];
+var popup = document.getElementById("myPopup");
+
+function toggleCalendar() {
+    if(popup.style.visibility == "hidden") {
+        popup.style.visibility = "visible";
+    } else
+        popup.style.visibility = "hidden";
+}
+
+function hideCalendar() {
+    popup.style.visibility = "hidden";
+}
+
 function updateDailyChart() {
 
     let goals = cb.goalsList;
@@ -605,18 +767,31 @@ function updateDailyChart() {
     goals.forEach(element => {                      
         let sessions = element.listOfSession;      //get the goal's list of sessions 
         let hoursArray = new Array(24);            //each element of the array represents an hour of the day
+        let numSessions = 0; 
 
         //add sessions to the chart if the session's date is the same as the date being viewed on the chart
         sessions.forEach(session => {                
             if(session.date.getDate() == currDate.getDate() && session.date.getMonth() == currDate.getMonth() && session.date.getYear() == currDate.getYear()) {
-                hoursArray[session.date.getHours()] = (((session.elapsedTime/60)/60)).toFixed(2);     //assign the session's elapsed time to the associated hour in the array
+                let currTime = parseFloat(hoursArray[session.date.getHours()]);
+                let sessionElapsedtime = parseFloat((((session.elapsedTime/60)/60)).toFixed(2));
+
+                if(sessionElapsedtime > 0)
+                    if(currTime)
+                        hoursArray[session.date.getHours()] = currTime + sessionElapsedtime;     //assign the session's elapsed time to the associated hour in the array
+                    else {
+                        hoursArray[session.date.getHours()] = sessionElapsedtime; 
+                        count++;
+                        numSessions++;
+                    }
+
                 totalStudyTime+=(session.elapsedTime/60);
-                count++;
+                
             }
         });
     
-        //add goal to the chart 
-        dailyChartData.push({label: element.title, backgroundColor: element.color, data: hoursArray}); 
+        if(numSessions > 0)
+            //add goal to the chart 
+            dailyChartData.push({label: element.title, backgroundColor: element.color, data: hoursArray}); 
         
     });
 
@@ -624,7 +799,7 @@ function updateDailyChart() {
     if(count!=0)
         updateSummaryBox(totalStudyTime, totalStudyTime/count, "daily");
     else 
-        updateSummaryBox(totalStudyTime, 0, "daily");
+        updateSummaryBox(totalStudyTime, 0, "noData");
 }
 
 function updateMonthlyChart() {
@@ -640,25 +815,37 @@ function updateMonthlyChart() {
     goals.forEach(element => {
         let sessions = element.listOfSession;                                   //get the goal's list of sessions 
         let monthArray = new Array(daysInMonth[currMonth.getMonth() - 1]);      //each element of the array represents a day of the month
-         
+        let numSessions = 0; 
+
         //add sessions to the chart if the session's month is the same as the month being viewed on the chart
         sessions.forEach(session => {
             if(session.date.getMonth() == currMonth.getMonth() && session.date.getYear() == currMonth.getYear()) {
-                monthArray[session.date.getDate()-1] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to the associated date in the array
-                totalStudyTime+=((session.elapsedTime/60)/60);
-                count++;
+                let currTime = parseFloat(monthArray[session.date.getDate()-1]);
+                let sessionElapsedtime = parseFloat((session.elapsedTime/60)/60);
+
+                if(sessionElapsedtime > 0)
+                    if(currTime)
+                        monthArray[session.date.getDate()-1] = currTime + sessionElapsedtime; 
+                    else {
+                        monthArray[session.date.getDate()-1] = sessionElapsedtime;   //assign the session's elapsed time to the associated date in the array
+                        count++;
+                        numSessions++;
+                    }
+                    
+                totalStudyTime+=sessionElapsedtime;
             }
         });
         
         //add goal to the chart 
-        monthlyChartData.push({label: element.title, backgroundColor: element.color, data: monthArray});
+        if(numSessions > 0)
+            monthlyChartData.push({label: element.title, backgroundColor: element.color, data: monthArray});
     });
 
     //check for divide by zero error and update the summary box
     if(count!=0)
         updateSummaryBox(totalStudyTime, totalStudyTime/count, "monthly");
     else 
-        updateSummaryBox(totalStudyTime, 0, "monthly");
+        updateSummaryBox(totalStudyTime, 0, "noData");
 }
 
 
@@ -667,12 +854,14 @@ function updateWeeklyChart() {
     let goals = cb.goalsList;
     let totalStudyTime = 0;
     let count = 0;
+    let today = new Date();
 
     weeklyChartData = [];   //empty the chart data 
 
     goals.forEach(element => {
         let sessions = element.listOfSession;   //get the goal's list of sessions 
         let weekArray = new Array(7);           //each element of the array represents a day of the week
+        let numSessions = 0;
 
         //create a temporary date to compare against and check if the session's date is in the right week
         var tempDateMax = new Date();
@@ -682,21 +871,33 @@ function updateWeeklyChart() {
         //add sessions to the chart if the session's date is within the week being viewed on the chart
         sessions.forEach(session => {
             if(session.date >= currWeek && session.date <= tempDateMax) {
-                weekArray[session.date.getDay()] = (((session.elapsedTime/60)/60)).toFixed(2);   //assign the session's elapsed time to the associated day of the week in the array
+                let elementNum = 7 - (tempDateMax.getDate() - session.date.getDate()); 
+                let currTime = parseFloat(weekArray[elementNum]);
+                let sessionElapsedtime = parseFloat(((session.elapsedTime/60)/60).toFixed(2));
+
+                if(sessionElapsedtime > 0)
+                    if(currTime)
+                        weekArray[elementNum] = currTime + sessionElapsedtime;   //assign the session's elapsed time to the associated day of the week in the array
+                    else {
+                        weekArray[elementNum] = sessionElapsedtime;
+                        count++;
+                        numSessions++;
+                    }
+
                 totalStudyTime+=((session.elapsedTime/60)/60); 
-                count++;
             }
         });
         
         //add goal to the chart 
-        weeklyChartData.push({label: element.title, backgroundColor: element.color, data: weekArray});
+        if(numSessions>0)
+            weeklyChartData.push({label: element.title, backgroundColor: element.color, data: weekArray});
     });
 
     //check for divide by zero error and update the summary box
     if(count!=0)
         updateSummaryBox(totalStudyTime, totalStudyTime/count, "weekly");
     else 
-        updateSummaryBox(totalStudyTime, 0, "weekly");
+        updateSummaryBox(totalStudyTime, 0, "noData");
 
 }
 
@@ -704,13 +905,16 @@ function updateSummaryBox(totalStudyTime, avgStudyTime, state) {
     var totalStudyTimeTxt = document.getElementById('summaryBox').rows[0].cells[1];
     var avgStudyTimeTxt = document.getElementById('summaryBox').rows[1].cells[1];
 
-    if(state!="daily") {
+    if(state == "weekly" || state == "monthly") {
         totalStudyTimeTxt.innerHTML = Math.floor(totalStudyTime) + " hours and " + Math.floor((totalStudyTime - Math.floor(totalStudyTime))*60) + " minutes";
         avgStudyTimeTxt.innerHTML = Math.floor(avgStudyTime) + " hours and " + Math.floor((avgStudyTime - Math.floor(avgStudyTime))*60) + " minutes";
-    } else {
+    } else if(state == "daily"){
         var avgStudyTimeLabel = document.getElementById('summaryBox').rows[1].cells[0];
         avgStudyTimeLabel.innerHTML = "Average Hourly Study Time:"; 
         totalStudyTimeTxt.innerHTML = Math.floor(totalStudyTime) + " minutes";
         avgStudyTimeTxt.innerHTML = Math.floor(avgStudyTime) + " minutes";
+    } else {
+        totalStudyTimeTxt.innerHTML = "No data available.";
+        avgStudyTimeTxt.innerHTML = "No data available.";
     }
 }
