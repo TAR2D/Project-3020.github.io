@@ -96,7 +96,7 @@ a:visited {
 
 	--inventoryBoxes: rgb(141, 141, 141);
 
-	--accentColor-first: rgb(140, 202, 89);
+	--accentColor-first: rgb(164, 206, 169);
 	
     --ff-TimerFont : 'Roboto', sans-serif;
     --b-TimerBox: transparent;
@@ -150,7 +150,7 @@ body {
     justify-content: flex-end;
 }
 
-.navBar__sectionA h3 , .navBar__item{
+.navBar__sectionA h3 , .navBar__item {
     /* Adding Style to elements of NavBar*/
     /* border: 1px solid grey; */
     padding:10px 12px;
@@ -466,7 +466,7 @@ body {
     cursor: pointer;
     /* height: 100%; */
     /* width: 32.4%; */
-    background-color: rgb(200, 200, 200);
+    background-color: var(--accentColor-first);
     /* border: 1px solid green; */
     border: 1.5px solid rgb(149, 149, 149);
     border-radius: var(--borderRadiusUniversal);
@@ -478,7 +478,7 @@ body {
 
 /* Add a background color on hover */
 .btn-group button:hover {
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(155, 243, 165);
     color: rgb(65, 65, 65);
 }
 
@@ -1481,7 +1481,7 @@ h5 {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: rgb(240, 240, 240);
+    background-color: var(--accentColor-first);
     /* background-color: rgb(209, 209, 209); */
     font-family: var(--ff-TimerFont);
     font-weight: bold;
@@ -1580,7 +1580,7 @@ h5 {
 }
 
 .createGoalBtngrp button:hover, .createGoalBtngrp input:hover, .startSessionBtnGrp input:hover, .startSessionBtnGrp button:hover , .breakBtnGrp input:hover, .breakBtnGrp button:hover {
-    background-color: whitesmoke;
+    background-color: rgb(168, 247, 177);
 }
 
 .chatBox__startSession{
