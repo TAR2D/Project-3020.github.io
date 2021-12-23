@@ -806,8 +806,8 @@ button:disabled {
     background-color: rgb(93, 93, 93);
     color: white;
     padding: 5px 0px 5px 8px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: var(--borderRadiusUniversal);
+    border-top-right-radius:  var(--borderRadiusUniversal);
 }
 
 .trends__chart--weekly, .trends__chart--daily, .trends__chart--monthly {
@@ -1160,6 +1160,7 @@ button:disabled {
 	padding: 5px;
 	background-color: var(--bg-mainMenu);
 	justify-content: space-between;
+    vertical-align: baseline;
 }
 
 .inventory__headline {
@@ -1186,7 +1187,7 @@ button:disabled {
 	width: 49%;
 	height: 100%;
 	border-style: solid;
-	border-width: 5px;
+	border-width: 1px;
 	border-color: var(--inventoryBoxes);
 	border-radius: var(--borderRadiusUniversal);
     background-size: cover;
@@ -1892,6 +1893,7 @@ h5 {
     position: absolute;
     z-index: 1;
     margin-left: 58px;
+    font: var(--ff-TimerFont);
     font-size: large;
 }
 
