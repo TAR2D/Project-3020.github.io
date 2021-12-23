@@ -1983,7 +1983,7 @@ h5 {
     border: 1px solid rgba(0, 0, 0, 0.4);
     width: 180px;
     height: 150px;
-    border-radius: 5px;
+    border-radius: var(--borderRadiusUniversal);
     cursor: pointer;
     margin: 10px 15px;
     box-shadow: 0px 0px 15px -8px #5decff;
@@ -2019,6 +2019,7 @@ h5 {
     font-family: var(--ff-TimerFont);
     font-weight: bold;
     font-size: 1.25em;
+    margin-left: 20px;
 }
 
 .featureTitle span, .shopTitle span {
