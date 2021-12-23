@@ -450,21 +450,19 @@ function renderMonthlyChart(daysOfMonth) {
 let myItemsTab = document.getElementById("myItemsTab");
 let shopTab = document.getElementById("shopTab");
 
-let myItemsPage = document.getElementById("inventory__ownedItemsTab");
-let shopPage = document.getElementById("inventory__shopTab");
+let myItemsPage = document.querySelector(".myItems");
+let shopPage = document.querySelector(".shopItems");
 
 myItemsTab.onclick = function() {
-	console.log("WE ARE HERE");
 	myItemsTab.style.backgroundColor = "black";
 	shopTab.style.backgroundColor = "rgb(97, 97, 97)";
-	myItemsPage.style.display = "flex";
+	myItemsPage.style.display = "block";
 	shopPage.style.display = "none";
 }
 
 shopTab.onclick = function() {
-	console.log("WE ARE THERE");
 	myItemsTab.style.backgroundColor = "rgb(97, 97, 97)";
 	shopTab.style.backgroundColor = "black";
 	myItemsPage.style.display = "none";
-	shopPage.style.display = "flex";
+	shopPage.style.display = "block";
 }
