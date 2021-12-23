@@ -307,7 +307,7 @@ function renderWeeklyChart(daysOfWeek) {
       options: {
           title: {
               display: true,
-              text: 'Weekly Study Hours'
+              text: 'Weekly Focus Hours'
           },
           tooltips: {
             displayColors: true,
@@ -334,7 +334,7 @@ function renderWeeklyChart(daysOfWeek) {
               type: 'linear',
               scaleLabel: {
                 display: true,
-                labelString: "Study Hours"
+                labelString: "Focus Hours"
                 }
             }]
           },
@@ -356,7 +356,7 @@ function renderDailyChart() {
       options: {
           title: {
               display: true,
-              text: 'Daily Study Hours'
+              text: 'Daily Focus Hours'
           },
           tooltips: {
             displayColors: true,
@@ -384,7 +384,7 @@ function renderDailyChart() {
               type: 'linear',
               scaleLabel: {
                 display: true,
-                labelString: "Study Minutes"
+                labelString: "Focus Minutes"
               }
             }]
           },
@@ -406,7 +406,7 @@ function renderMonthlyChart(daysOfMonth) {
       options: {
           title: {
               display: true,
-              text: 'Monthly Study Hours'
+              text: 'Monthly Focus Hours'
           },
           tooltips: {
             displayColors: true,
@@ -433,7 +433,7 @@ function renderMonthlyChart(daysOfMonth) {
               type: 'linear',
               scaleLabel: {
                 display: true,
-                labelString: "Study Hours"
+                labelString: "Focus Hours"
               }
             }]
           },

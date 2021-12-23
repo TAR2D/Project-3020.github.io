@@ -2088,3 +2088,7 @@ h5 {
     background-color: var(--accentColor-first);
     padding: 2%;
 }
+
+#calendar {
+    padding: 5px;
+}
