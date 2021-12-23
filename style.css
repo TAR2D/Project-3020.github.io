@@ -96,7 +96,7 @@ a:visited {
 
 	--inventoryBoxes: rgb(141, 141, 141);
 
-	--accentColor-first: rgb(164, 206, 169);
+	--accentColor-first: rgb(140, 202, 89);
 	
     --ff-TimerFont : 'Roboto', sans-serif;
     --b-TimerBox: transparent;
@@ -466,7 +466,7 @@ body {
     cursor: pointer;
     /* height: 100%; */
     /* width: 32.4%; */
-    background-color: var(--accentColor-first);
+    background-color: rgb(200, 200, 200);
     /* border: 1px solid green; */
     border: 1.5px solid rgb(149, 149, 149);
     border-radius: var(--borderRadiusUniversal);
@@ -478,8 +478,8 @@ body {
 
 /* Add a background color on hover */
 .btn-group button:hover {
-    background-color: rgb(167, 241, 176);
-    color: rgb(29, 29, 29);
+    background-color: rgb(233, 233, 233);
+    color: rgb(65, 65, 65);
 }
 
 
@@ -1342,7 +1342,7 @@ button:disabled {
     height: 650px;
 }   
 .main__item--inventory {
-    height: 750px;
+    height: fit-content;
 }
 .main__item--report {
     height: 800px;
@@ -1481,7 +1481,7 @@ h5 {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: var(--accentColor-first);
+    background-color: rgb(240, 240, 240);
     /* background-color: rgb(209, 209, 209); */
     font-family: var(--ff-TimerFont);
     font-weight: bold;
@@ -1951,7 +1951,6 @@ h5 {
     height: 36%;
     padding: 2%;
     /* border: 1px solid red; */
-    overflow-x: scroll;
     margin-bottom: 2%;
 }
 
@@ -1965,8 +1964,8 @@ h5 {
 
 .featureItem {
     border: 1px solid transparent;
-    width: 38%;
-    height: 90%;
+    width: 300px;
+    height: 150px;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0px 0px 15px -8px #5decff;
@@ -1982,8 +1981,8 @@ h5 {
 
 .shopItem {
     border: 1px solid rgba(0, 0, 0, 0.4);
-    width: 28%;
-    height: 45%;
+    width: 180px;
+    height: 150px;
     border-radius: 5px;
     cursor: pointer;
     margin: 10px 15px;
@@ -1991,9 +1990,7 @@ h5 {
 }
 
 .featureItem:hover {
-    width: 38%;
-    height: 92%;
-    box-shadow: 0px 0px 15px -16px #5decff;
+    border: 2px solid rgb(0, 204, 255);
 }
 
 .myItems__feature img{
@@ -2031,10 +2028,8 @@ h5 {
 
 .myItems__feature, .shopItems__feature  {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    flex-direction: column;
 } 
 
 .shopItems__general, .myItems__general {
@@ -2069,4 +2064,32 @@ h5 {
 
 .bg6 {
     background-color: rgba(135, 207, 235, 0.644);
+}
+
+.featureItem, .shopItem {
+    position: relative;
+}
+
+
+
+.priceTag, .priceTagEq {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(65, 65, 65);
+    font-family: var(--ff-TimerFont);
+    font-weight: bold;
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    margin-top: 4px;
+    margin-left: 6px;
+    top: 0;
+    background-color: rgb(211, 211, 211);
+}
+
+.priceTagEq {
+    width: 70px;
+    color: #255bf1b6;
+    background-color: rgba(255, 255, 255, 0.424);
 }
