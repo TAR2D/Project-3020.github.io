@@ -2104,3 +2104,7 @@ h5 {
 .darkmode__warning:hover .darkmode-tooltip {
     visibility: visible;
 }
+
+#calendar {
+    padding: 5px;
+}
