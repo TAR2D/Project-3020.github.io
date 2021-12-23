@@ -437,6 +437,10 @@ function startStop(desiredState) {
             breakButton.disabled = true;
 
         timer.contentEditable = "false";
+
+        //count initial default session as the first session if user hits play
+        cb.firstSession = false; 
+
     //change timer from started to stopped
     } else {
         window.clearInterval(interval); 
@@ -708,7 +712,50 @@ function convertSecToFormat(timeInSecs) {
 let dailyChartData = []; 
 let weeklyChartData = []; 
 let monthlyChartData = []; 
-  
+
+let datePicker = document.querySelector("#trends--datePicker");
+
+$("#datepicker").datepicker({ 
+    maxDate: 0, 
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    
+    onSelect: function(value, date) { 
+        var month = value.toString().substr(0, 2) - 1; 
+        var date = value.toString().substr(3, 2); 
+        var year = value.toString().substr(6, 4); 
+
+        if(currChart.id == "weeklyChart") {
+            currWeek = new Date(year,month,date);
+            datePicker_Weekly();
+        }
+        else if(currChart.id == "dailyChart") {
+            currDate = new Date(year,month,date);
+            datePicker_Daily();
+        }
+        else if(currChart.id == "monthlyChart") {
+            currMonth = new Date(year,month,date);
+            datePicker_Monthly();
+        }
+    } 
+});
+
+var btn = document.getElementById("datePickerButton");
+var span = document.getElementsByClassName("close")[0];
+var popup = document.getElementById("myPopup");
+
+function toggleCalendar() {
+    if(popup.style.visibility == "hidden") {
+        popup.style.visibility = "visible";
+    } else
+        popup.style.visibility = "hidden";
+}
+
+function hideCalendar() {
+    popup.style.visibility = "hidden";
+}
+
 function updateDailyChart() {
 
     let goals = cb.goalsList;

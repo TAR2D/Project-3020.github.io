@@ -12,7 +12,7 @@ let settingsDisplay = document.querySelector(".main__item--settings");
 let goalsDisplay = document.querySelector(".main__item--goals");
 
 let appName = document.querySelector(".navBar__sectionA h3");
-
+let navBar = document.querySelector(".navBar");
 let mainMenu = document.querySelector(".main__items");
 let sectionB = document.querySelector(".navBar__sectionB");
 var state = 10000;
@@ -20,6 +20,7 @@ var state = 10000;
 // used by the appName and backButton buttons
 function returnHome() {
 	if(state !== 10000) {
+        navBar.style.marginBottom = "0%";
         mainMenuDisplay.style.display = "flex";
         appName.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
@@ -39,6 +40,7 @@ document.querySelectorAll(".page__backButton").forEach(item => item.addEventList
 
 goalsButton.onclick = function () {
     if(state !== 01000) {
+        navBar.style.marginBottom = "1.5%";
         goalsDisplay.style.display = "block";
         goalsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
@@ -49,6 +51,7 @@ goalsButton.onclick = function () {
 
 reportButton.onclick = function () {
     if(state !== 00100) {
+        navBar.style.marginBottom = "1.5%";
         reportDisplay.style.display = "block";
         reportButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
@@ -59,6 +62,7 @@ reportButton.onclick = function () {
 
 inventoryButton.onclick = function () {
     if(state !== 00010) {
+        navBar.style.marginBottom = "1.5%";
         inventoryDisplay.style.display = "block";
         inventoryButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
@@ -69,6 +73,7 @@ inventoryButton.onclick = function () {
 
 settingsButton.onclick = function () {
     if(state !== 00001) {
+        navBar.style.marginBottom = "1.5%";
         settingsDisplay.style.display = "block";
         settingsButton.style.backgroundColor = "black";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.735)";
