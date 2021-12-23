@@ -874,6 +874,10 @@ button:disabled {
     width: 95%;
 }
 
+#account, #dark__mode {
+    display:flex;
+}
+
 .account__settings, .notification__settings, .advance__settings {
     height: 25%;
     width: 70%;
@@ -1307,16 +1311,20 @@ button:disabled {
     background-color: var(--accentColor-first);
 }
 
-.inventory__warning {
+.inventory__warning, .account__warning, .darkmode__warning {
 	display:flex;
 	flex-direction: row;
 	font-size: 30px;
-	color: rgb(204, 54, 54);
+	color: rgb(170, 66, 66);
 	background-color: var(--bg-mainMenu);
 	cursor: pointer;
 	text-align: center;
 	border-radius: 6px;
     border: none;
+}
+
+.account__warning, .darkmode__warning {
+    font-size: 25px;
 }
 
 /* Display none for all child element excent main menu as default */
@@ -1907,7 +1915,7 @@ h5 {
 
 /* Tooltip for inventory incomplete page warning */
 
-.incomplete-tooltip {
+.incomplete-tooltip, .darkmode-tooltip, .account-tooltip {
 	visibility: hidden;
     width: max-content;
     background-color:rgb(233, 233, 233);
@@ -1919,7 +1927,7 @@ h5 {
    
     position: absolute;
     z-index: 1;
-    margin-left: 58px;
+    margin-left: 38px;
     font-size: large;
 }
 
@@ -2087,6 +2095,14 @@ h5 {
     border-radius: var(--borderRadiusUniversal);
     background-color: var(--accentColor-first);
     padding: 2%;
+}
+
+.account__warning:hover .account-tooltip {
+    visibility: visible;
+}
+
+.darkmode__warning:hover .darkmode-tooltip {
+    visibility: visible;
 }
 
 #calendar {
