@@ -20,6 +20,9 @@
     <script src="https://malsup.github.io/jquery.form.js"></script> 
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head >
 
 <body>
@@ -63,8 +66,8 @@
                             </div>
                         </div>
                         <div class="timerBtngrp">
-                            <button id="startStop" onclick="startStop();"><i class="fas fa-play"></i></button>
-                            <button id="skip" onclick="skipTime();"><i class="fas fa-step-forward"></i></button>
+                            <button id="startStop" onclick="startStop();"><span class="startStop-tooltip">Play or pause the timer</span><i class="fas fa-play"></i></button>
+                            <button id="skip" onclick="skipTime();"><span class="skip-tooltip">Skip the current session or break</span><i class="fas fa-step-forward"></i></button>
                         </div><!-- Closing TimerBtn Group -->
                         <div class="timerContent">
                             <div class="currentGoal">
@@ -142,8 +145,8 @@
                                         <input type="number" name="breakFTimer" value="5">
                                 </div>
                                 <div class="breakBtnGrp">
-                                <input type="submit" value="Start" id="breakFormSubmit">
-                                <button type="button"><i class="fas fa-times"></i></button>
+                                    <input type="submit" value="Start" id="breakFormSubmit">
+                                    <button type="button"><i class="fas fa-times"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -207,12 +210,21 @@
                 </nav>
 
                 <!-- CHART DATE NAV BUTTONS -->
-                <div class="trends__dateNavBar">
+                <div class="trends__dateNavBar btn-group">
                     <button id="prevButton"><i class="fas fa-arrow-left"></i></button>
-                    <p id="date" class="trends__currDate">"Insert Date Here"</p>
+                    <div id="dateGroup">
+                        <p id="date" class="trends__currDate">"Insert Date Here"</p>
+                        <div class="popup">
+                            <button type="button" id="datePickerButton" onclick="toggleCalendar()"><i class="fa fa-calendar"></i></button>
+                                <span class="popuptext" id="myPopup"> 
+                                    <span class="close" onclick="toggleCalendar()">&times;</span>
+                                    <div id="datepicker"></div>
+                                </span>
+                        </div>
+                    </div>
                     <button id="nextButton"><i class="fas fa-arrow-right"></i></button>
                 </div>
-
+    
                 <!-- CHART -->
                 <div id="trendsCharts" class="trends__chart">
                     <canvas id="weeklyChart" class="trends__chart--curr" ></canvas>
@@ -315,7 +327,7 @@
                     <div class="settings__item settings__item--account">
                         <p id="account">Account</p>
                         <div class="account__settings account__settings--profile">
-                            <span><i class="fas fa-user-circle fa-5x"></i></span>
+                            <span><i class="fas fa-user-circle fa-5x" style="color: black;" ></i></span>
                             <div class="account__text">
                                 <h1 id="username">"User name"</h1> 
                                 <h2 id="change__user">Not you? Change user</h2>

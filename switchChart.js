@@ -42,6 +42,9 @@ nextButton.addEventListener("click", clickNext);
 
 //Show weekly chart
 function showWeeklyChart(){
+    hideCalendar();
+    $('#datepicker').datepicker("setDate", today);
+
     //update styling
     currChart.id = "weeklyChart";
     changeActiveTab(1);
@@ -66,6 +69,9 @@ function showWeeklyChart(){
 
 //Show daily chart
 function showDailyChart(){
+    hideCalendar();
+    $('#datepicker').datepicker("setDate", today);
+
     //update styling
     currChart.id = "dailyChart";
     changeActiveTab(0);
@@ -87,6 +93,9 @@ function showDailyChart(){
 
 //Show monthly chart
 function showMonthlyChart(){
+    hideCalendar();
+    $('#datepicker').datepicker("setDate", today);
+
     //update styling
     currChart.id = "monthlyChart";
     changeActiveTab(2);
@@ -157,94 +166,96 @@ function getDaysInWeek(year, month, day) {
     return days;
 }
 
+function datePicker_Weekly() {
+  var dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
+  updateDateText(currWeek);
+
+  myChart.data.labels = dateLabels; 
+
+  updateWeeklyChart();
+  myChart.destroy();
+  myChart = renderWeeklyChart(dateLabels); 
+
+  var tempDate = new Date();
+  tempDate.setDate(tempDate.getDate()-7);
+
+  if(currWeek.getMonth() >= tempDate.getMonth() && currWeek.getFullYear() >= tempDate.getFullYear() && currWeek.getDate() > tempDate.getDate()) {
+    nextButton.disabled = true; 
+  } else
+    nextButton.disabled = false; 
+}
+
+function datePicker_Daily() {
+  updateDateText(currDate);
+
+  updateDailyChart();
+  myChart.destroy();
+  myChart = renderDailyChart(); 
+
+  if(currDate.getMonth() >= today.getMonth() && currDate.getFullYear() >= today.getFullYear() && currDate.getDate() >= today.getDate()) {
+    nextButton.disabled = true; 
+  } else
+    nextButton.disabled = false; 
+}
+
+function datePicker_Monthly() {
+  var dateLabels = getDaysInMonth(currMonth.getFullYear(), currMonth.getMonth());
+  updateDateText(currMonth);
+
+  myChart.data.labels = dateLabels; 
+
+  updateMonthlyChart();
+  myChart.destroy();
+  myChart = renderMonthlyChart(dateLabels); 
+
+  if(currMonth.getMonth()+1 > today.getMonth() && currMonth.getFullYear() >= today.getFullYear()) {
+    nextButton.disabled = true; 
+  } else
+    nextButton.disabled = false; 
+}
+
 //update chart when prev button is clicked 
 function clickPrev() {
-    var dateLabels; 
+    
     
     //re-enable next button
     nextButton.disabled = false; 
 
     if(currChart.id === "weeklyChart") {
         currWeek.setDate(currWeek.getDate() - 7); 
-        dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
-        updateDateText(currWeek);
-  
-        myChart.data.labels = dateLabels; 
-
-        updateWeeklyChart();
-        myChart.destroy();
-        myChart = renderWeeklyChart(dateLabels); 
+        datePicker_Weekly();
+        $('#datepicker').datepicker("setDate", currWeek);
 
     } else if (currChart.id === "monthlyChart") {
         currMonth.setMonth(currMonth.getMonth() - 1);
-        dateLabels = getDaysInMonth(currMonth.getFullYear(), currMonth.getMonth());
-        updateDateText(currMonth);
-
-        myChart.data.labels = dateLabels; 
-        updateMonthlyChart();
-        myChart.destroy();
-        myChart = renderMonthlyChart(dateLabels); 
+        datePicker_Monthly();
+        $('#datepicker').datepicker("setDate", currMonth);
 
     } else if (currChart.id === "dailyChart") {
         currDate.setDate(currDate.getDate() - 1); 
-        updateDateText(currDate);
-
-        updateDailyChart();
-        myChart.destroy();
-        myChart = renderDailyChart(); 
+        datePicker_Daily();
+        $('#datepicker').datepicker("setDate", currDate);
 
     }
 }
 
 //update chart when next button is clicked 
 function clickNext() {
-    var dateLabels; 
-    
-    if(currChart.id === "weeklyChart") {
-        currWeek.setDate(currWeek.getDate() + 7); 
-        dateLabels = getDaysInWeek(currWeek.getFullYear(), currWeek.getMonth(), currWeek.getDate());
-        updateDateText(currWeek);
-  
-        myChart.data.labels = dateLabels; 
+  if(currChart.id === "weeklyChart") {
+      currWeek.setDate(currWeek.getDate() + 7); 
+      datePicker_Weekly();
+      $('#datepicker').datepicker("setDate", currWeek);
 
-        updateWeeklyChart();
-        myChart.destroy();
-        myChart = renderWeeklyChart(dateLabels); 
+  } else if (currChart.id === "monthlyChart") {
+      currMonth.setMonth(currMonth.getMonth() + 1);
+      datePicker_Monthly();
+      $('#datepicker').datepicker("setDate", currMonth);
 
-        var tempDate = new Date();
-        tempDate.setDate(tempDate.getDate()-7);
-
-        if(currWeek.getMonth() >= tempDate.getMonth() && currWeek.getFullYear() >= tempDate.getFullYear() && currWeek.getDate() >= tempDate.getDate()) {
-          nextButton.disabled = true; 
-        }
-
-    } else if (currChart.id === "monthlyChart") {
-        currMonth.setMonth(currMonth.getMonth() + 1);
-        dateLabels = getDaysInMonth(currMonth.getFullYear(), currMonth.getMonth());
-        updateDateText(currMonth);
-
-        myChart.data.labels = dateLabels; 
-
-        updateMonthlyChart();
-        myChart.destroy();
-        myChart = renderMonthlyChart(dateLabels); 
-
-        if(currMonth.getMonth() >= today.getMonth() || currMonth.getFullYear() > today.getFullYear()) {
-          nextButton.disabled = true; 
-        }
-
-    } else if (currChart.id === "dailyChart") {
-        currDate.setDate(currDate.getDate() + 1); 
-        updateDateText(currDate);
-
-        updateDailyChart();
-        myChart.destroy();
-        myChart = renderDailyChart(); 
-
-        if(currDate.getMonth() >= today.getMonth() && currDate.getFullYear() >= today.getFullYear() && currDate.getDate() >= today.getDate()) {
-          nextButton.disabled = true; 
-        }
-    }
+  } else if (currChart.id === "dailyChart") {
+      currDate.setDate(currDate.getDate() + 1); 
+      datePicker_Daily();
+      $('#datepicker').datepicker("setDate", currDate);
+  }
 }
 
 //update date text between prev and next buttons
