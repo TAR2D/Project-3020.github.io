@@ -62,18 +62,21 @@ class chatBox {
             this.changeState(goalForm);
             goalButton.disabled = true;
 
-            if(!(breakButton.disabled && statusTimer == "started" && isOnBreak))
+            if(!(breakButton.disabled && statusTimer == "started" && isOnBreak)) {
                 breakButton.disabled = false;
-            if(!(sessionButton.disabled && statusTimer == "started" && !isOnBreak))
+            }
+            if(!(sessionButton.disabled && statusTimer == "started" && !isOnBreak)) {
                 sessionButton.disabled = false;
+            }
         });
 
         sessionButton.addEventListener('click', () => {
             this.changeState(sessionForm);
             goalButton.disabled = false;
 
-            if(!(breakButton.disabled && statusTimer == "started" && isOnBreak))
+            if(!(breakButton.disabled && statusTimer == "started" && isOnBreak)) {
                 breakButton.disabled = false;
+            }
                 
             sessionButton.disabled = true;
         });
@@ -83,8 +86,9 @@ class chatBox {
             goalButton.disabled = false;
             breakButton.disabled = true;
 
-            if(!(sessionButton.disabled && statusTimer == "started" && !isOnBreak))
+            if(!(sessionButton.disabled && statusTimer == "started" && !isOnBreak)) {
                 sessionButton.disabled = false;
+            }
         });
 
         goalCancelBtn.addEventListener('click', () => {
@@ -236,8 +240,9 @@ class chatBox {
                     startButton.disabled = false;
                 }
 
-                if(sessionButton.disabled)
+                if(sessionButton.disabled) {
                     sessionButton.disabled = false; 
+                }
 
                 this.createBreakMsg(this.breakState);
                 this.breakState = (this.breakState+1)%3;
@@ -405,9 +410,11 @@ function startTimer() {
 	updateProgressBar();
     seconds--;
     displayTime(seconds);
-    if(!isOnBreak)
-        if(cb.currentSessionInProgress)
+    if(!isOnBreak) {
+        if(cb.currentSessionInProgress) {
             cb.currentSessionInProgress.incrementElapsedTime();
+        }
+    }
     if (seconds == 0 || seconds < 1) {  //time runs out
         seconds = 0;
         alarm();
@@ -417,7 +424,7 @@ function startTimer() {
 
 function updateProgressBar() {
     let widthRange = isOnBreak ? scale(breakSecond - seconds, 0, breakSecond, 0, 100) : scale(initialSec - seconds, 0, initialSec, 0, 100);
-	isOnBreak ? TBBtext.innerHTML = "Break" : TBBtext.innerHTML = "Session"
+	isOnBreak ? TBBtext.innerHTML = "Break" : TBBtext.innerHTML = "Session";
     TSSoverlayEffect.style.width = widthRange + "%";
 }
 
@@ -789,8 +796,8 @@ function updateDailyChart() {
             }
         });
     
+        //add goal to the chart 
         if(numSessions > 0)
-            //add goal to the chart 
             dailyChartData.push({label: element.title, backgroundColor: element.color, data: hoursArray}); 
         
     });
