@@ -1306,6 +1306,18 @@ button:disabled {
     background-color: var(--accentColor-first);
 }
 
+.inventory__warning {
+	display:flex;
+	flex-direction: row;
+	font-size: 30px;
+	color: rgb(204, 54, 54);
+	background-color: var(--bg-mainMenu);
+	cursor: pointer;
+	text-align: center;
+	border-radius: 6px;
+    border: none;
+}
+
 /* Display none for all child element excent main menu as default */
 .main__items >:not(:first-child) {
     display: none;
@@ -1889,6 +1901,28 @@ h5 {
 
 #skip:hover .skip-tooltip {
     visibility: visible;
+}
+
+/* Tooltip for inventory incomplete page warning */
+
+.incomplete-tooltip {
+	visibility: hidden;
+    width: max-content;
+    background-color:rgb(233, 233, 233);
+    color: black;
+    text-align: center;
+    padding: 6px;
+    border-radius: var(--borderRadiusUniversal);
+    border: 1px solid rgb(97, 97, 97);
+   
+    position: absolute;
+    z-index: 1;
+    margin-left: 58px;
+    font-size: large;
+}
+
+.inventory__warning:hover .incomplete-tooltip {
+	visibility: visible;
 }
 
 .allItems {
