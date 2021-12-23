@@ -1963,10 +1963,10 @@ h5 {
 }
 
 .featureItem {
-    border: 1px solid transparent;
+    border: 1px solid rgba(0, 0, 0, 0.4);    
     width: 300px;
     height: 150px;
-    border-radius: 5px;
+    border-radius: var(--borderRadiusUniversal);
     cursor: pointer;
     box-shadow: 0px 0px 15px -8px #5decff;
 }
@@ -1983,27 +1983,28 @@ h5 {
     border: 1px solid rgba(0, 0, 0, 0.4);
     width: 180px;
     height: 150px;
-    border-radius: 5px;
+    border-radius: var(--borderRadiusUniversal);
     cursor: pointer;
     margin: 10px 15px;
-    box-shadow: 0px 0px 15px -8px #ff0000;
+    box-shadow: 0px 0px 15px -8px #5decff;
 }
 
-.featureItem:hover {
+.featureItem:hover, .shopItem:hover {
     border: 2px solid rgb(0, 204, 255);
 }
 
 .myItems__feature img{
     width: 100%;
     height: 100%;
-    padding: 4px 6px; 
-    border-radius: 5px;
+    /* padding: 1%; */
+    border-radius: var(--borderRadiusUniversal);
+    box-shadow: 0px 0px 15px -8px #5decff;
 }
 
 .shopItem img {
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: var(--borderRadiusUniversal);
 }
 
 /* .shopItem:hover {
@@ -2014,10 +2015,11 @@ h5 {
 } */
 
 .featureTitle, .shopTitle {
-    color: rgb(124, 124, 124);
+    color: black;
     font-family: var(--ff-TimerFont);
     font-weight: bold;
     font-size: 1.25em;
+    margin-left: 20px;
 }
 
 .featureTitle span, .shopTitle span {
@@ -2043,7 +2045,7 @@ h5 {
     pointer-events: none;
 }
 
-.bg1 {
+/* .bg1 {
     background-color: #2195f32c;
 }
 .bg2 {
@@ -2064,13 +2066,11 @@ h5 {
 
 .bg6 {
     background-color: rgba(135, 207, 235, 0.644);
-}
+} */
 
 .featureItem, .shopItem {
     position: relative;
 }
-
-
 
 .priceTag, .priceTagEq {
     display: flex;
@@ -2080,16 +2080,11 @@ h5 {
     font-family: var(--ff-TimerFont);
     font-weight: bold;
     position: absolute;
-    width: 40px;
-    height: 20px;
-    margin-top: 4px;
-    margin-left: 6px;
-    top: 0;
-    background-color: rgb(211, 211, 211);
-}
-
-.priceTagEq {
-    width: 70px;
-    color: #255bf1b6;
-    background-color: rgba(255, 255, 255, 0.424);
+    margin-top: 3%;
+    margin-left: 3%;
+    top: 1%;
+    left: 1%;
+    border-radius: var(--borderRadiusUniversal);
+    background-color: var(--accentColor-first);
+    padding: 2%;
 }
