@@ -324,7 +324,7 @@ function renderWeeklyChart(daysOfWeek) {
               },
               scaleLabel: {
                   display: true,
-                  labelString: "Last 7 Days"
+                  labelString: "Day of the Week"
               }
             }],
             yAxes: [{
