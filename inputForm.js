@@ -112,6 +112,9 @@ class chatBox {
             if(goalTitle.length <= 0) {
                 alert("Please enter a goal name.");
             }
+            else if(goalTitle.length > 18) {
+                alert("Please enter a goal name with a maximum of 18 characters.");
+            }
             else if ((goalDurationM < 0 || goalDurationM > 60)) { // if hours = 0 and value for minutes is not valid
                 alert("Please enter a value between 1 and 60 for Minutes.");
             }
@@ -159,10 +162,14 @@ class chatBox {
 
             if (sessionDuration <= 0 || sessionDuration > 60) {
                 alert("Please enter a value between 1 and 60 for Minutes.");
+            }
+            else if(sessionTitle.length > 16) {
+                alert("Please enter a session name with a maximum of 16 characters.");
             } else {
                 if(sessionTitle.length <= 0) {
                     sessionTitle = "No name";
-                }  
+                }
+
                 if(this.firstSession || (confirmNewSession())) {
                     companionTalking(); 
                     this.addMessageTime();
