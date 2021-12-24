@@ -307,7 +307,8 @@ function renderWeeklyChart(daysOfWeek) {
       options: {
           title: {
               display: true,
-              text: 'Weekly Focus Hours'
+              text: 'Weekly Focus Hours',
+              fontSize: 15
           },
           tooltips: {
             displayColors: true,
@@ -356,7 +357,8 @@ function renderDailyChart() {
       options: {
           title: {
               display: true,
-              text: 'Daily Focus Hours'
+              text: 'Daily Focus Hours',
+              fontSize: 15
           },
           tooltips: {
             displayColors: true,
@@ -406,7 +408,8 @@ function renderMonthlyChart(daysOfMonth) {
       options: {
           title: {
               display: true,
-              text: 'Monthly Focus Hours'
+              text: 'Monthly Focus Hours',
+              fontSize: 15
           },
           tooltips: {
             displayColors: true,
